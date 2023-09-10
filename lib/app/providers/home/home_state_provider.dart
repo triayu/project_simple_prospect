@@ -1,21 +1,13 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/models/banner_intro_model.dart';
+final homeProvider = ChangeNotifierProvider((ref) => HomeNotifier());
 
-class CarouselState {
-  final int id;
+class HomeNotifier with ChangeNotifier {
+  int activeIndex = 0;
 
-  CarouselState(this.id);
+  void setNavigation(int index) {
+    activeIndex = index;
+    notifyListeners();
+  }
 }
-
-// final carouselStateProvider = StateNotifierProvider<CarouselNotifier, CarouselState>(
-//   (ref) => CarouselNotifier(),
-// );
-
-// class CarouselNotifier extends StateNotifier<CarouselState> {
-//   CarouselNotifier() : super(CarouselState(0));
-
-//   void setBanner(BannerIntroModel banner) {
-//     state = CarouselState(banner.id);
-//   }
-// }

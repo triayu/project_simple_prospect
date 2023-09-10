@@ -1,166 +1,260 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-class Dashboard_view extends StatelessWidget {
-  const Dashboard_view({super.key});
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lazyui/lazyui.dart' hide Gfont;
+import 'package:riverpod_example/app/constants/color_constants.dart';
+import 'package:riverpod_example/app/core/text_theme.dart';
+
+class DashBoardView extends ConsumerWidget {
+  const DashBoardView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      Stack(
-        children: [
-          Container(
-            height: 140,
-            width: double.infinity,
-            color: Colors.white,
-          ),
-          Column(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Column(
+      children: [
+        // // HEADER
+        Container(
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(border: Br.only(['b'], color: Colors.black.withOpacity(0.1))),
+          child: Row(
+            mainAxisAlignment: Maa.spaceBetween,
             children: [
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Flexible(
+                flex: 1,
+                child: Col(
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Halo, Selamat datang Yono',
-                          style: TextStyle(color: Colors.black, fontSize: 16),
-                        ),
-                        Text(
-                          'Good Morning',
-                          style: TextStyle(color: Colors.grey, fontSize: 14),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 50),
-                      alignment: Alignment.topRight,
-                      child: Icon(
-                        Icons.notifications_active,
-                        color: Colors.blue,
-                        size: 20,
+                    Text(
+                      'Halo Selamat Datang Rayen',
+                      style: Gfont.fs(22).copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
+                      maxLines: 1,
+                      overflow: Tof.ellipsis,
                     ),
-                    Container(
-                      margin: EdgeInsets.only(right: 10),
-                      alignment: Alignment.topRight,
-                      height: 30,
-                      width: 30,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(image: AssetImage('poto.jpg')),
-                          borderRadius: BorderRadius.circular(50),
-                          border: Border.all(color: Colors.black, style: BorderStyle.solid, width: 2)),
+                    Text(
+                      'Good Morning',
+                      style: Gfont.fs(12),
+                      maxLines: 1,
+                      overflow: Tof.ellipsis,
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 3,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  height: 50,
-                  width: double.infinity,
-                  decoration:
-                      BoxDecoration(color: Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(30)),
-                  child: TextField(
-                    cursorHeight: 20,
-                    autofocus: false,
-                    decoration: InputDecoration(
-                      hintText: 'Search',
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black, width: 3),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
+              SizedBox(width: 10),
+              Row(
+                children: [
+                  Container(
+                    padding: Ei.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: Br.circle,
+                      color: Colors.black.withOpacity(0.5),
+                    ),
+                    child: Icon(
+                      La.bell,
+                      color: Colors.white,
+                      size: 25,
                     ),
                   ),
-                ),
+                  SizedBox(width: 10),
+                  Container(
+                    padding: Ei.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: Br.circle,
+                      color: Colors.black.withOpacity(0.5),
+                    ),
+                    child: Icon(
+                      La.user,
+                      color: Colors.white,
+                      size: 25,
+                    ),
+                  ),
+                ],
               ),
-
-              // CarouselSlider(
-              //   options: CarouselOptions(),
-              //   items: [1, 2, 3, 4, 5].map((i) {
-              //     return Builder(
-              //       builder: (BuildContext context) {
-              //         return Container(
-              //             width: MediaQuery.of(context).size.width,
-              //             margin: EdgeInsets.symmetric(horizontal: 5),
-              //             decoration: BoxDecoration(color: Colors.blue),
-              //             child: Image.asset("img/gambar1.png"));
-              //       },
-              //     );
-              //   }).toList(),
-              // ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  'Data Prospect Terbaru',
-                  style: TextStyle(
-                      color: const Color.fromARGB(255, 39, 36, 36), fontSize: 15, fontWeight: FontWeight.bold),
-                ),
-              ),
-              // *PENTING*
-              SizedBox(
-                height: 100,
-                child: ListView.separated(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.all(5),
-                    itemBuilder: ((context, index) {
-                      List<String> tittle = [
-                        'Test1 ',
-                        'Test2',
-                        'Test 3',
-                        'Test 4',
-                        'Test 5',
-                      ];
-                      return Row(
-                        children: [
-                          Container(
-                              padding: EdgeInsets.all(30),
-                              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: Colors.black)),
-                              child: Text(tittle[index])),
-                        ],
-                      );
-                    }),
-                    separatorBuilder: (context, index) {
-                      return SizedBox(width: 10);
-                    },
-                    itemCount: 8),
-              ),
-              // Container(
-              //   margin: EdgeInsets.all(5),
-              //   child: SizedBox(
-              //     width: MediaQuery.of(context).size.width,
-              //     child: ElevatedButton(
-              //       style: ButtonStyle(
-              //           backgroundColor: MaterialStateProperty.all(
-              //               Color.fromARGB(255, 0, 0, 0))),
-              //       onPressed: () {
-              //         Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //               // builder: (context) => ContactView()),
-              //               builder: (context) => FormView()),
-              //         );
-              //       },
-              //       child: Text(
-              //         "Masuk",
-              //         style: TextStyle(fontSize: 15, color: Colors.white),
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ],
-          )
-        ],
-      )
-    ]);
+          ),
+        ),
+
+        // SLIDER
+        Expanded(
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            padding: Ei.sym(v: 20),
+            child: Col(
+              children: [
+                Padding(
+                  padding: Ei.only(h: 20, b: 10, t: 10),
+                  child: Text(
+                    'Goals',
+                    style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                CarouselSlider(
+                  options: CarouselOptions(viewportFraction: 0.9, height: 200),
+                  items: [1, 2, 3, 4, 5].map((i) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: EdgeInsets.symmetric(horizontal: 5.0),
+                            decoration: BoxDecoration(
+                              // Random Color
+                              borderRadius: BorderRadius.circular(10),
+                              color: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
+                            ),
+                            child: Stack(
+                              children: [
+                                Poslign(
+                                  alignment: Alignment.center,
+                                  child: RichText(
+                                    textAlign: Ta.center,
+                                    strutStyle: StrutStyle(fontSize: 50.0),
+                                    text: TextSpan(
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: '0',
+                                          style: Gfont.fs(65).copyWith(color: Colors.white),
+                                        ),
+                                        TextSpan(
+                                          text: ' / ',
+                                          style: Gfont.fs(50).copyWith(color: Colors.white),
+                                        ),
+                                        TextSpan(
+                                          text: '0',
+                                          style: Gfont.fs(35).copyWith(color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Poslign(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Textr(
+                                      'Task $i',
+                                      margin: Ei.all(10),
+                                      style: Gfont.fs(20).copyWith(color: Colors.white),
+                                    ))
+                              ],
+                            ));
+                      },
+                    );
+                  }).toList(),
+                ),
+
+                // Event Terupdate
+                Padding(
+                  padding: Ei.only(h: 20, b: 10, t: 20),
+                  child: Text(
+                    'Event Terupdate',
+                    style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(
+                  height: 100,
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    padding: Ei.all(10),
+                    separatorBuilder: (context, index) => SizedBox(width: 15),
+                    itemCount: 3,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                          padding: Ei.all(10),
+                          decoration: BoxDecoration(
+                              color: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Row(
+                            mainAxisAlignment: Maa.spaceBetween,
+                            children: [
+                              Container(
+                                padding: Ei.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Task $index',
+                                      style: Gfont.fs(22).copyWith(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Col(
+                                children: [
+                                  Text(
+                                    'Tanggal $index',
+                                    style: Gfont.fs(16).copyWith(color: Colors.white),
+                                  ),
+                                  Text(
+                                    'Meeting $index',
+                                    style: Gfont.fs(24).copyWith(color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ));
+                    },
+                  ),
+                ),
+
+                // Task Terupdate
+                Col(
+                  children: [
+                    Padding(
+                      padding: Ei.only(h: 20, b: 10, t: 20),
+                      child: Text(
+                        'Task Terupdate',
+                        style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    ListView.separated(
+                        padding: Ei.sym(h: 10),
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: Offset(0, 1), // changes position of shadow
+                              ),
+                            ]),
+                            child: ListTile(
+                              dense: true,
+                              tileColor: Colors.white,
+                              style: ListTileStyle.list,
+                              title: Text(
+                                'Task $index',
+                                style: Gfont.fs(20),
+                              ),
+                              subtitle: Text('Meeting $index'),
+                              trailing: Column(
+                                children: [
+                                  Text('23 '),
+                                  Text('Jan'),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return SizedBox(height: 10);
+                        },
+                        itemCount: 4),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
   }
 }

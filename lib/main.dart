@@ -1,27 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:riverpod_example/app/constants/color_constants.dart';
 import 'package:riverpod_example/app/core/theme.dart';
-import 'package:riverpod_example/app/data/local/intro_storage.dart';
 import 'package:riverpod_example/app/data/local/shared_preferences.dart';
 import 'package:riverpod_example/app/modules/home/home_view.dart';
-import 'package:riverpod_example/app/onboarding/onboarding_one.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:riverpod_example/app/modules/login/login_view.dart';
+import 'package:riverpod_example/app/onboarding/onboarding_view.dart';
+
+import 'app/data/local/intro_storage.dart';
 
 void main() async {
+  // Initialize WidgetsFlutterBinding
   WidgetsFlutterBinding.ensureInitialized();
-  LazyUi.config(radius: 7.0, theme: AppTheme.light);
+
+  // Initialize LazyUi
+  LazyUi.config(
+      textStyle: TextStyle(fontSize: 18.0, color: ColorConstants.textPrimaryColor), radius: 7.0, theme: AppTheme.light);
 
   // Initialize SharedPreferencesHelper
   await SharedPreferencesHelper.instance.init();
 
-  // Retrieve the boolean value from SharedPreferences
-  bool isIntroBannerShown = await SharedPreferencesHelper.instance.getBool('introBannerShown') ?? false;
+  // Check if intro banner is shown
+  bool isIntroBannerShown = await IntroBanner.checkShowBanner();
 
   runApp(ProviderScope(
       child: MyApp(
     isShow: isIntroBannerShown,
   )));
+
+  // Prevent the application for sreen rotation
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 }
 
 class MyApp extends StatelessWidget {
@@ -31,7 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Riverpod Example',
+      title: 'Simple Prospect',
       theme: appTheme,
       debugShowCheckedModeBanner: false,
       builder: (BuildContext context, Widget? widget) {
@@ -44,7 +54,7 @@ class MyApp extends StatelessWidget {
           child: LzToastOverlay(child: widget),
         );
       },
-      home: isShow ? HomeView() : OnboardingOne(),
+      home: LoginView(),
     );
   }
 }
