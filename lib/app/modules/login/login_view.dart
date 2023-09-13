@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:riverpod_example/app/modules/register/register_view.dart';
+
+import '../register/register_view.dart';
+
 
 final authProvider = StateNotifierProvider<AuthController, bool>((ref) {
   return AuthController();
@@ -50,11 +52,10 @@ class LoginView extends ConsumerWidget {
                   ),
                 ),
                 Container(
-                  width: 300,
-                  margin: EdgeInsets.only(top: 20),
+                  margin: Ei.only(t: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.blue, width: 2),
+                    border: Border.all(color: Colors.blue, width: 1),
                   ),
                   child: LzForm.input(
                     label: 'Username',
@@ -62,11 +63,10 @@ class LoginView extends ConsumerWidget {
                   ),
                 ),
                 Container(
-                  width: 300,
-                  margin: EdgeInsets.only(top: 20),
+                  margin: Ei.only(t: 20, b: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.blue, width: 2),
+                    border: Border.all(color: Colors.blue, width: 1),
                   ),
                   child: LzForm.input(
                     label: 'Password',
@@ -88,7 +88,6 @@ class LoginView extends ConsumerWidget {
                   gradient: true,
                   color: null,
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 120),
-                
                   radius: 25.0,
                 ),
                 if (isAuthenticated)

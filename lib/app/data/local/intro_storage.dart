@@ -1,13 +1,15 @@
-import 'package:riverpod_example/app/data/local/shared_preferences.dart';
+import 'shared_preferences.dart';
 
 class IntroBanner {
-  static Future<bool> setIntro(bool value) async {
-    final _prefs = await SharedPreferencesHelper.instance;
-    return await _prefs.setBool('introBannerShown', value);
-  }
-
-  static Future<bool> getIntro() async {
-    final _pref = await SharedPreferencesHelper.instance;
-    return await _pref.getBool('introBannerShown');
+  static Future<bool> checkShowBanner() async {
+    // Cek apakah banner sudah pernah ditampilkan
+    bool previouslyShown = await prefs.getBool('showBanner') ?? false;
+    if (!previouslyShown) {
+      // Tampilkan banner
+      await prefs.setBool('showBanner', true);
+      return true;
+    } else {
+      return false;
+    }
   }
 }

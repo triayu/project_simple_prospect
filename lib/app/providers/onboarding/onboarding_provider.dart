@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_example/app/data/models/banner_intro_model.dart';
+
+import '../../data/models/banner_intro_model.dart';
 
 class CarouselStateNotifier extends StateNotifier<BannerIntroModel> {
   CarouselStateNotifier() : super(BannerIntroModel());

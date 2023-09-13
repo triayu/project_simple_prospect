@@ -2,14 +2,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:riverpod_example/app/constants/color_constants.dart';
-import 'package:riverpod_example/app/data/models/banner_intro_model.dart';
-import 'package:riverpod_example/app/providers/onboarding/onboarding_provider.dart';
+
+import '../constants/color_constants.dart';
+import '../data/models/banner_intro_model.dart';
 
 import '../modules/login/login_view.dart';
+import '../providers/onboarding/onboarding_provider.dart';
 
-class OnboardingOne extends ConsumerWidget {
-  const OnboardingOne({Key? key});
+class OnboardingView extends ConsumerWidget {
+  const OnboardingView({Key? key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -17,7 +18,7 @@ class OnboardingOne extends ConsumerWidget {
     final notifier = ref.watch(carouselStateProvider.notifier);
 
     final List<BannerIntroModel> banners = [
-      BannerIntroModel(id: 0, image: 'logo.png', description: ''),
+      BannerIntroModel(id: 0, image: 'logo.png', description: 'Halo Selamat Datang Di Simple Prospect'),
       BannerIntroModel(
           id: 1,
           image: 'onboarding1.png',
@@ -42,34 +43,37 @@ class OnboardingOne extends ConsumerWidget {
             CarouselSlider(
               options: CarouselOptions(
                   height: 400.0,
-                  viewportFraction: 1
-                  ,
+                  viewportFraction: 1,
                   onPageChanged: (index, reason) {
                     notifier.setBanner(banners[index]);
                   }),
               items: banners.map((i) {
-                print(i.description);
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Column(
-                      children: [
-                        LzImage(
-                          i.image,
-                          width: 250,
-                          height: 250,
-                        ),
-                        Text(
-                          i.description ?? '',
-                        )
-                      ],
-                    );
-                  },
+                return Column(
+                  mainAxisAlignment: Maa.center,
+                  crossAxisAlignment: Caa.center,
+                  children: [
+                    LzImage(
+                      i.image,
+                      width: 250,
+                      height: 250,
+                    ),
+                    Textr(
+                      i.description ?? '',
+                      textAlign: Ta.center,
+                      padding: Ei.sym(h: 10),
+                      style: Gfont.black.copyWith(
+                        fontSize: 24,
+                        color: ColorConstants.textPrimaryColor,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
                 );
               }).toList(),
             ),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: Caa.center,
+              mainAxisAlignment: Maa.center,
               children: List.generate(banners.length, (i) {
                 return Container(
                   width: 8,
@@ -85,26 +89,21 @@ class OnboardingOne extends ConsumerWidget {
               }),
             ),
             ref.watch(carouselStateProvider).id == 2
-                ? Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => LoginView(),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorConstants.secondaryColor,
-                      ),
-                      child: Text(
-                        'Next',
-                        style: TextStyle(
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ),
+                ? SizedBox(
+                    width: screenWidth * 0.8,
+                    child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: LzButton(
+                          text: 'Mulai',
+                          onTap: (state) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginView(),
+                              ),
+                            );
+                          },
+                        )),
                   )
                 : Container(),
           ],

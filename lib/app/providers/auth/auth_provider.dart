@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:riverpod_example/app/utils/fetch/fetch.dart';
+import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 
 import '../../data/api/api.dart';
 

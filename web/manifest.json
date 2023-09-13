@@ -1,6 +1,6 @@
 {
-    "name": "riverpod_example",
-    "short_name": "riverpod_example",
+    "name": "simple_prospect",
+    "short_name": "simple_prospect",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

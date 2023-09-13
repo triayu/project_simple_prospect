@@ -1,6 +1,6 @@
 library api;
 
-import 'package:riverpod_example/app/utils/fetch/fetch.dart';
+import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 
 part 'auth_api.dart';
 part 'todo_api.dart';
