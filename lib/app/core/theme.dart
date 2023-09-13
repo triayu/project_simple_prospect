@@ -17,3 +17,4 @@ ThemeData appTheme = ThemeData(
     titleSmall: gfont,
   ),
 );
+
