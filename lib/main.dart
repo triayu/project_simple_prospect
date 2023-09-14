@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/modules/home/home_view.dart';
-import 'package:simple_prospect/app/onboarding/onboarding_view.dart';
+import 'package:simple_prospect/app/modules/onboarding/onboarding_view.dart';
 
 import 'app/constants/color_constants.dart';
 import 'app/core/theme.dart';

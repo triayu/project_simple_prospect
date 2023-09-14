@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 
-import '../constants/color_constants.dart';
-import '../data/models/banner_intro_model.dart';
+import '../../constants/color_constants.dart';
+import '../../data/models/banner_intro_model.dart';
 
-import '../modules/login/login_view.dart';
-import '../providers/onboarding/onboarding_provider.dart';
+import '../login/login_view.dart';
+import '../../providers/onboarding/onboarding_provider.dart';
 
 class OnboardingView extends ConsumerWidget {
   const OnboardingView({Key? key});

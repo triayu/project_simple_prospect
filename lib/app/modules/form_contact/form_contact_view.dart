@@ -11,7 +11,8 @@ class FormContactView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBar(
-          title: 'Form Contact View',
+          title: 'Form Contact',
+          canBack: true,
         ),
         body: LzFormList(
           style: LzFormStyle(),

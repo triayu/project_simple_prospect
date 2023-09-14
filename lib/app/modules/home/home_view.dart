@@ -49,18 +49,7 @@ class HomeView extends ConsumerWidget {
 
                 return IgnorePointer(
                   ignoring: !isActive,
-                  child: AnimatedOpacity(
-                    duration: 250.ms,
-                    opacity: isActive ? 1 : 0,
-                    child: Navigator(
-                      onGenerateRoute: (RouteSettings settings) {
-                        return MaterialPageRoute(
-                          builder: (_) => homes[state.activeIndex],
-                          settings: settings,
-                        );
-                      },
-                    ),
-                  ),
+                  child: AnimatedOpacity(duration: 250.ms, opacity: isActive ? 1 : 0, child: homes[state.activeIndex]),
                 );
               }),
             );

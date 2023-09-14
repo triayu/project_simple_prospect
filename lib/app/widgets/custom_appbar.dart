@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lazyui/lazyui.dart';
 
 import '../constants/color_constants.dart';
 
@@ -32,6 +33,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    logg(canBack);
+
     return AppBar(
       iconTheme: IconThemeData(color: ColorConstants.primaryColor),
       backgroundColor: backgroundColor ?? ColorConstants.secondaryColor,
@@ -54,7 +57,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   onPressed: () {
                     if (onBack != null) {
                       onBack!();
-                    } else {}
+                    } else {
+                      Navigator.pop(context);
+                    }
                   },
                   icon: Icon(Icons.arrow_back, color: titleAndIconColor ?? Colors.black)),
       actions: actions,
