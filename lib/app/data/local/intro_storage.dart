@@ -1,6 +1,6 @@
 import 'shared_preferences.dart';
 
-class IntroBanner {
+class IntroBannerStorage {
   static Future<bool> checkShowBanner() async {
     // Cek apakah banner sudah pernah ditampilkan
     bool previouslyShown = await prefs.getBool('showBanner') ?? false;

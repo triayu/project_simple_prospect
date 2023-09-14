@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-
+import 'package:simple_prospect/app/modules/home/home_view.dart';
+import 'package:simple_prospect/app/onboarding/onboarding_view.dart';
 
 import 'app/constants/color_constants.dart';
 import 'app/core/theme.dart';
@@ -22,7 +23,7 @@ void main() async {
   await SharedPreferencesHelper.instance.init();
 
   // Check if intro banner is shown
-  bool isIntroBannerShown = await IntroBanner.checkShowBanner();
+  bool isIntroBannerShown = await IntroBannerStorage.checkShowBanner();
 
   runApp(ProviderScope(
       child: MyApp(
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
           child: LzToastOverlay(child: widget),
         );
       },
-      home: LoginView(),
+      home: isShow ? OnboardingView() : HomeView(),
     );
   }
 }
