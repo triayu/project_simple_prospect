@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 
+import '../../constants/color_constants.dart';
 import '../register/register_view.dart';
-
 
 final authProvider = StateNotifierProvider<AuthController, bool>((ref) {
   return AuthController();
@@ -46,7 +46,7 @@ class LoginView extends ConsumerWidget {
                 Text(
                   'Login',
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: ColorConstants.primaryColor,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
@@ -55,7 +55,7 @@ class LoginView extends ConsumerWidget {
                   margin: Ei.only(t: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.blue, width: 1),
+                    border: Border.all(color: ColorConstants.primaryColor, width: 1),
                   ),
                   child: LzForm.input(
                     label: 'Username',
@@ -66,7 +66,7 @@ class LoginView extends ConsumerWidget {
                   margin: Ei.only(t: 20, b: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.blue, width: 1),
+                    border: Border.all(color: ColorConstants.primaryColor, width: 1),
                   ),
                   child: LzForm.input(
                     label: 'Password',
@@ -93,7 +93,7 @@ class LoginView extends ConsumerWidget {
                 if (isAuthenticated)
                   Text(
                     'Anda berhasil login!',
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(color: ColorConstants.primaryColor),
                   ),
               ],
             ),

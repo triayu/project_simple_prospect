@@ -4,6 +4,8 @@ import 'package:lazyui/config/font.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 
+import '../form/form_contact_view.dart';
+
 class ContactView extends ConsumerWidget {
   const ContactView({Key? key}) : super(key: key);
 
@@ -41,8 +43,10 @@ class ContactView extends ConsumerWidget {
               ),
             ),
 
-            InkTouch(
+            InkWell(
               onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
+
                 // Navigator.of(context).push(MaterialPageRoute(builder: (context) => FormContactView()));
               },
               child: Container(
@@ -64,7 +68,7 @@ class ContactView extends ConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Ti.aB),
+                    Icon(Ti.textCaption),
                     Text('Form Input'),
                     Icon(
                       Ti.chevronRight,
@@ -138,12 +142,103 @@ class ContactView extends ConsumerWidget {
           child: Container(
             width: 60,
             height: 60,
-            margin: Ei.only(b: 10, r: 10),
+            margin: EdgeInsets.only(bottom: 10, right: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               color: ColorConstants.primaryColor,
             ),
-            child: Icon(Icons.menu_open_rounded, color: Colors.white, size: 35),
+            child: IconButton(
+              icon: Icon(
+                Icons.menu_open_rounded,
+                color: Colors.white,
+                size: 35,
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Dialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      backgroundColor: Colors.transparent,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.white,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            // Baris pertama
+                            Container(
+                              margin: Ei.only(t: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Icon(Icons.message, color: ColorConstants.primaryColor, size: 30),
+                                      Text("Mass message",
+                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Icon(Icons.book_rounded, color: ColorConstants.primaryColor, size: 30),
+                                      Text("Import to excel",
+                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Icon(Icons.contact_mail, color: ColorConstants.primaryColor, size: 30),
+                                      Text("Export contact",
+                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // Icon baris kedua
+                            Container(
+                              padding: Ei.only(t: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Icon(Icons.message, color: ColorConstants.primaryColor, size: 30),
+                                      Text("Import from phonebook",
+                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Icon(Icons.contact_mail, color: ColorConstants.primaryColor, size: 30),
+                                      Text("Scan business card",
+                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            SizedBox(height: 20),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Tutup"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ),
         )
       ],

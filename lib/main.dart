@@ -9,7 +9,6 @@ import 'app/constants/color_constants.dart';
 import 'app/core/theme.dart';
 import 'app/data/local/intro_storage.dart';
 import 'app/data/local/shared_preferences.dart';
-import 'app/modules/login/login_view.dart';
 
 void main() async {
   // Initialize WidgetsFlutterBinding

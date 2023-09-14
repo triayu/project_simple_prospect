@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/modules/home/widgets/drawer_widget.dart';
+import 'package:simple_prospect/app/modules/home/widgets/wi_dashboard/drawer_widget.dart';
 import '../../constants/color_constants.dart';
 import '../../providers/home/home_state_provider.dart';
 import '../../widgets/custom_appbar.dart';
@@ -10,42 +10,20 @@ import 'dashboard_view.dart';
 import 'event_view.dart';
 import 'task_view.dart';
 
-final appBarControllerProvider = Provider<AppBarController>((ref) {
-  return AppBarController();
-});
-
-class AppBarController {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
-  void openDrawer() {
-    scaffoldKey.currentState?.openDrawer();
-  }
-}
-
-final drawerControllerProvider = Provider<DrawerController>((ref) {
-  return DrawerController();
-});
-
-class DrawerController {
-  final List<String> titles = ['Home', 'Prospect Group', 'Rating', 'Support/Feedbacks'];
-}
-
 class HomeView extends ConsumerWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(homeProvider.notifier);
-    final appBarController = ref.watch(appBarControllerProvider);
 
     List<Widget> homes = [DashBoardView(), ContactView(), EventView(), TaskView()];
-    List<IconData> icon = [Ti.home, Ti.addressBook, Ti.calendar, Ti.clipboard];
+    List<IconData> icon = [Ti.home, Ti.addressBook, Ti.calendar, Ti.list];
     List<String> title = ['Home', 'Contact', 'Event', 'Task'];
 
     logg(notifier.activeIndex);
 
     return Scaffold(
-      key: appBarController.scaffoldKey,
       appBar: ref.watch(homeProvider).activeIndex != 0
           ? CustomAppBar(
               title: title[notifier.activeIndex],
@@ -54,7 +32,7 @@ class HomeView extends ConsumerWidget {
                   return IconButton(
                     icon: Icon(Icons.menu),
                     onPressed: () {
-                      appBarController.openDrawer();
+                      ;
                     },
                   );
                 },
