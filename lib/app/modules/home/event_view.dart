@@ -24,27 +24,23 @@ class EventView extends ConsumerWidget {
                     style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
+                Spacer(),
                 Container(
                   height: 30,
                   width: 70,
-                  margin: Ei.only(b: 10, r: 10, t: 10, l: 170),
+                  margin: EdgeInsets.only(bottom: 10, right: 10, top: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: ColorConstants.primaryColor,
                   ),
                   child: Row(
                     children: [
-                      InkResponse(
-                        onTap: () {
-                          // Nav
-                        },
-                        child: Container(
-                          padding: Ei.only(l: 3),
-                          child: Icon(
-                            Ti.plus,
-                            size: 15,
-                            color: ColorConstants.secondaryColor,
-                          ),
+                      Container(
+                        padding: EdgeInsets.only(left: 3),
+                        child: Icon(
+                          Ti.plus,
+                          size: 15,
+                          color: ColorConstants.secondaryColor,
                         ),
                       ),
                       Text(

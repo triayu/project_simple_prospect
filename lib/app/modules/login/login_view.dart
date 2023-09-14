@@ -52,7 +52,7 @@ class LoginView extends ConsumerWidget {
                   ),
                 ),
                 Container(
-                  margin: Ei.only(t: 20),
+                  margin: Ei.only(t: 20, l: 20, r: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: ColorConstants.primaryColor, width: 1),
@@ -63,7 +63,7 @@ class LoginView extends ConsumerWidget {
                   ),
                 ),
                 Container(
-                  margin: Ei.only(t: 20, b: 20),
+                  margin: Ei.all(20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: ColorConstants.primaryColor, width: 1),

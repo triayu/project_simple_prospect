@@ -62,8 +62,8 @@ class OnboardingView extends ConsumerWidget {
                       textAlign: Ta.center,
                       padding: Ei.sym(h: 10),
                       style: Gfont.black.copyWith(
-                        fontSize: 24,
-                        color: ColorConstants.textPrimaryColor,
+                        fontSize: 18,
+                        color: ColorConstants.secondaryColor,
                         fontWeight: FontWeight.w500,
                       ),
                     )
@@ -92,18 +92,22 @@ class OnboardingView extends ConsumerWidget {
                 ? SizedBox(
                     width: screenWidth * 0.8,
                     child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: LzButton(
-                          text: 'Mulai',
-                          onTap: (state) {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginView(),
-                              ),
-                            );
-                          },
-                        )),
+                      padding: const EdgeInsets.all(16.0),
+                      child: LzButton(
+                        text: 'Mulai',
+                        onTap: (state) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginView(),
+                            ),
+                          );
+                        },
+                        textColor: ColorConstants.primaryColor,
+                        radius: 30.0,
+                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      ),
+                    ),
                   )
                 : Container(),
           ],

@@ -16,7 +16,7 @@ class DashBoardView extends ConsumerWidget {
       children: [
         // // HEADER
         Container(
-          padding: Ei.only(h: 20, b: 10, t: 15),
+          padding: Ei.only(h: 20, b: 5, t: 15),
           decoration: BoxDecoration(border: Br.only(['b'], color: Colors.black.withOpacity(0.1))),
           child: Row(
             mainAxisAlignment: Maa.spaceBetween,
@@ -71,11 +71,11 @@ class DashBoardView extends ConsumerWidget {
         Expanded(
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            padding: Ei.sym(v: 20),
+            padding: Ei.sym(v: 10),
             child: Col(
               children: [
                 Padding(
-                  padding: Ei.only(h: 20, b: 10, t: 10),
+                  padding: Ei.only(h: 20, b: 10),
                   child: Text(
                     'Goals',
                     style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
@@ -133,20 +133,20 @@ class DashBoardView extends ConsumerWidget {
                   }).toList(),
                 ),
 
-                // Event Terupdate
+                // EVENT TERUPDATE
                 Padding(
-                  padding: Ei.only(h: 20, b: 10, t: 20),
+                  padding: Ei.only(h: 20, b: 10, t: 10),
                   child: Text(
                     'Event Terupdate',
                     style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(
-                  height: 100,
+                  height: 90,
                   child: ListView.separated(
                     shrinkWrap: true,
-                    padding: Ei.all(10),
-                    separatorBuilder: (context, index) => SizedBox(width: 15),
+                    padding: Ei.only(h: 10, b: 5),
+                    separatorBuilder: (context, index) => SizedBox(width: 10),
                     itemCount: 3,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
@@ -192,11 +192,11 @@ class DashBoardView extends ConsumerWidget {
                     },
                   ),
                 ),
-
+                // TASK TERUPDATE
                 Col(
                   children: [
                     Padding(
-                      padding: Ei.only(h: 20, b: 10, t: 20),
+                      padding: Ei.only(h: 20, b: 10, t: 10),
                       child: Text(
                         'Task Terupdate',
                         style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
@@ -227,7 +227,28 @@ class DashBoardView extends ConsumerWidget {
                                 'Hasil Meeting $index',
                                 style: Gfont.fs(16),
                               ),
-                              subtitle: Text('Contact $index'),
+                              subtitle: Row(
+                                children: [
+                                  Text('Contact $index'),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color: ColorConstants.textSecondaryColor..withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Text(
+                                      'Reminder : 23/09/2023 04.00 PM',
+                                      style: TextStyle(
+                                        fontSize: 8,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                               trailing: Column(
                                 children: [
                                   Text('23', style: TextStyle(fontSize: 10)),

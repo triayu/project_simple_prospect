@@ -176,29 +176,29 @@ class ContactView extends ConsumerWidget {
                             children: [
                               // Baris pertama
                               Container(
-                                margin: Ei.only(t: 20),
+                                margin: Ei.only(t: 30),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Column(
                                       children: [
-                                        Icon(Icons.message, color: ColorConstants.primaryColor, size: 30),
+                                        Icon(Ti.messageCheck, color: ColorConstants.primaryColor, size: 35),
                                         Text("Mass message",
-                                            style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
+                                            style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
                                       ],
                                     ),
                                     Column(
                                       children: [
-                                        Icon(Icons.book_rounded, color: ColorConstants.primaryColor, size: 30),
+                                        Icon(Ti.fileSpreadsheet, color: ColorConstants.primaryColor, size: 35),
                                         Text("Import to excel",
-                                            style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
+                                            style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
                                       ],
                                     ),
                                     Column(
                                       children: [
-                                        Icon(Icons.contact_mail, color: ColorConstants.primaryColor, size: 30),
+                                        Icon(Ti.deviceMobileCheck, color: ColorConstants.primaryColor, size: 35),
                                         Text("Export contact",
-                                            style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
+                                            style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
                                       ],
                                     ),
                                   ],
@@ -206,22 +206,22 @@ class ContactView extends ConsumerWidget {
                               ),
                               // Icon baris kedua
                               Container(
-                                padding: Ei.only(t: 10),
+                                padding: Ei.only(t: 20),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Column(
                                       children: [
-                                        Icon(Icons.message, color: ColorConstants.primaryColor, size: 30),
+                                        Icon(Ti.addressBook, color: ColorConstants.primaryColor, size: 35),
                                         Text("Import from phonebook",
-                                            style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
+                                            style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
                                       ],
                                     ),
                                     Column(
                                       children: [
-                                        Icon(Icons.contact_mail, color: ColorConstants.primaryColor, size: 30),
+                                        Icon(Ti.barcode, color: ColorConstants.primaryColor, size: 35),
                                         Text("Scan business card",
-                                            style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
+                                            style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
                                       ],
                                     ),
                                   ],
