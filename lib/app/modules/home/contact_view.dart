@@ -188,7 +188,7 @@ class ContactView extends ConsumerWidget {
                             children: [
                               // Baris pertama
                               Container(
-                                margin: Ei.only(t: 30),
+                                margin: Ei.only(t: 30, b: 10),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
