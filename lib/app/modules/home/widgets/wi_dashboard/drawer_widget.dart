@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/modules/isi_drawer/prospect/prospect.dart';
 
 import '../../../../constants/color_constants.dart';
 
@@ -47,9 +48,10 @@ class WiDrawer extends StatelessWidget {
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 5,
+                itemCount: 6,
                 itemBuilder: (context, index) {
                   List<String> titles = [
+                    'Prospect',
                     'Tutorial',
                     'Subscription',
                     'Refferals',
@@ -57,11 +59,12 @@ class WiDrawer extends StatelessWidget {
                     'Message Template'
                   ];
                   List<IconData> icons = [
-                    Icons.video_label,
+                    Ti.usersGroup,
+                    Ti.brandYoutube,
                     Icons.follow_the_signs,
                     Icons.code,
                     Icons.feedback,
-                    Icons.message
+                    Ti.messageCircle
                   ];
 
                   return ListTile(
@@ -76,16 +79,22 @@ class WiDrawer extends StatelessWidget {
                     onTap: () {
                       switch (index) {
                         case 0:
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => DashBoardView()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ProspectView()));
                           break;
                         case 1:
-                          // Navigasi ke halaman Prospect Group
+                          // Navigasi tutorial
                           break;
                         case 2:
-                          // Navigasi ke halaman Rating
+                          // Navigasi ke subscription
                           break;
                         case 3:
-                          // Navigasi ke halaman Support/Feedbacks
+                          // Navigasi ke refferals
+                          break;
+                        case 4:
+                          // Navigasi ke provide Feedback
+                          break;
+                        case 5:
+                          // Navigasi ke message
                           break;
                       }
                     },

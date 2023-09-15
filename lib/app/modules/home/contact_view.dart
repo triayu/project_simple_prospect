@@ -124,9 +124,21 @@ class ContactView extends ConsumerWidget {
                               width: 40,
                               height: 40,
                             ),
-                            title: Text(
-                              'Name $index',
-                              style: Gfont.fs(16),
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Name lengkap $index',
+                                  style: Gfont.fs(16),
+                                ),
+                                Text(
+                                  'Company - - -',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         );
@@ -206,7 +218,7 @@ class ContactView extends ConsumerWidget {
                               ),
                               // Icon baris kedua
                               Container(
-                                padding: Ei.only(t: 20),
+                                padding: Ei.only(t: 20, b: 30),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
@@ -228,13 +240,13 @@ class ContactView extends ConsumerWidget {
                                 ),
                               ),
 
-                              SizedBox(height: 20),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text("Tutup"),
-                              ),
+                              // SizedBox(height: 20),
+                              // ElevatedButton(
+                              //   onPressed: () {
+                              //     Navigator.of(context).pop();
+                              //   },
+                              //   child: Text("Tutup"),
+                              // ),
                             ],
                           ),
                         ),

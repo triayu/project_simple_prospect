@@ -86,7 +86,7 @@ class TaskView extends ConsumerWidget {
                     tileColor: Colors.white,
                     style: ListTileStyle.list,
                     title: Text(
-                      'Desc Event $index',
+                      'Desc Task $index',
                       style: TextStyle(
                         color: ColorConstants.primaryColor,
                         fontWeight: FontWeight.bold,
@@ -125,54 +125,73 @@ class TaskView extends ConsumerWidget {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(
-                          icon: Icon(
-                            Ti.trash,
+                        Container(
+                          height: 30,
+                          width: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
                             color: Colors.red,
                           ),
-                          onPressed: () {},
+                          child: IconButton(
+                            icon: Icon(
+                              Ti.trash,
+                              color: Colors.white,
+                              size: 15,
+                            ),
+                            onPressed: () {},
+                          ),
                         ),
-                        IconButton(
-                          icon: Icon(
-                            Ti.edit,
+                        SizedBox(width: 10),
+                        Container(
+                          height: 30,
+                          width: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
                             color: Colors.green,
                           ),
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                String editContact = 'Name $index';
-                                return AlertDialog(
-                                  title: Text('Edit Contact'),
-                                  content: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      TextField(
-                                        decoration: InputDecoration(labelText: 'Name'),
-                                        onChanged: (value) {
-                                          editContact = value;
+                          child: IconButton(
+                            icon: Icon(
+                              Ti.edit,
+                              color: Colors.white,
+                              size: 15,
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  String editContact = 'Name $index';
+                                  return AlertDialog(
+                                    title: Text('Edit Contact'),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextField(
+                                          decoration: InputDecoration(labelText: 'Name'),
+                                          onChanged: (value) {
+                                            editContact = value;
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
                                         },
+                                        child: Text('Save'),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Cancel'),
                                       ),
                                     ],
-                                  ),
-                                  actions: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Save'),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Cancel'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ),
                       ],
                     ),

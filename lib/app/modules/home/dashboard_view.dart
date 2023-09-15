@@ -47,7 +47,7 @@ class DashBoardView extends ConsumerWidget {
                   Container(
                     padding: Ei.all(5),
                     child: Icon(
-                      Ti.bellRingingFilled,
+                      Ti.bellFilled,
                       color: ColorConstants.primaryColor,
                       size: 25,
                     ),
@@ -209,6 +209,7 @@ class DashBoardView extends ConsumerWidget {
                         itemBuilder: (context, index) {
                           return Container(
                             decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
                               color: Colors.white,
                               boxShadow: [
                                 BoxShadow(
@@ -236,14 +237,14 @@ class DashBoardView extends ConsumerWidget {
                                   Container(
                                     padding: EdgeInsets.all(8),
                                     decoration: BoxDecoration(
-                                      color: ColorConstants.textSecondaryColor..withOpacity(0.2),
+                                      color: ColorConstants.event2.withOpacity(0.10),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     child: Text(
                                       'Reminder : 23/09/2023 04.00 PM',
                                       style: TextStyle(
                                         fontSize: 8,
-                                        color: Colors.white,
+                                        color: ColorConstants.textPrimaryColor,
                                       ),
                                     ),
                                   ),

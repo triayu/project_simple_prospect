@@ -4,6 +4,8 @@ import 'package:lazyui/config/font.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 
+import '../form_event/form_event.dart';
+
 class EventView extends ConsumerWidget {
   const EventView({Key? key}) : super(key: key);
 
@@ -25,32 +27,42 @@ class EventView extends ConsumerWidget {
                   ),
                 ),
                 Spacer(),
-                Container(
-                  height: 30,
-                  width: 70,
-                  margin: EdgeInsets.only(bottom: 10, right: 10, top: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: ColorConstants.primaryColor,
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 3),
-                        child: Icon(
-                          Ti.plus,
-                          size: 15,
-                          color: ColorConstants.secondaryColor,
-                        ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FormEvent(),
                       ),
-                      Text(
-                        'Add Event',
-                        style: TextStyle(
-                          color: ColorConstants.secondaryColor,
-                          fontSize: 10,
+                    );
+                  },
+                  child: Container(
+                    height: 30,
+                    width: 70,
+                    margin: EdgeInsets.only(bottom: 10, right: 10, top: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: ColorConstants.primaryColor,
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 3),
+                          child: Icon(
+                            Ti.plus,
+                            size: 15,
+                            color: ColorConstants.secondaryColor,
+                          ),
                         ),
-                      ),
-                    ],
+                        Text(
+                          'Add Event',
+                          style: TextStyle(
+                            color: ColorConstants.secondaryColor,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -80,63 +92,84 @@ class EventView extends ConsumerWidget {
                     dense: true,
                     tileColor: Colors.white,
                     style: ListTileStyle.list,
-                    title: Text('Desc Event $index',
-                        style: TextStyle(
-                          color: ColorConstants.primaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        )),
+                    title: Text(
+                      'Desc Event $index',
+                      style: TextStyle(
+                        color: ColorConstants.primaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(
-                          icon: Icon(
-                            Ti.trash,
+                        Container(
+                          height: 30,
+                          width: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
                             color: Colors.red,
                           ),
-                          onPressed: () {},
+                          child: IconButton(
+                            icon: Icon(
+                              Ti.trash,
+                              color: Colors.white,
+                              size: 15,
+                            ),
+                            onPressed: () {},
+                          ),
                         ),
-                        IconButton(
-                          icon: Icon(
-                            Ti.edit,
+                        SizedBox(width: 10),
+                        Container(
+                          height: 30,
+                          width: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
                             color: Colors.green,
                           ),
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                String editContact = 'Name $index';
-                                return AlertDialog(
-                                  title: Text('Edit Contact'),
-                                  content: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      TextField(
-                                        decoration: InputDecoration(labelText: 'Name'),
-                                        onChanged: (value) {
-                                          editContact = value;
+                          child: IconButton(
+                            icon: Icon(
+                              Ti.edit,
+                              color: Colors.white,
+                              size: 15,
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  String editContact = 'Name $index';
+                                  return AlertDialog(
+                                    title: Text('Edit Contact'),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextField(
+                                          decoration: InputDecoration(labelText: 'Name'),
+                                          onChanged: (value) {
+                                            editContact = value;
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
                                         },
+                                        child: Text('Save'),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Cancel'),
                                       ),
                                     ],
-                                  ),
-                                  actions: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Save'),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Cancel'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ),
                       ],
                     ),

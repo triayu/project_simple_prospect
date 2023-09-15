@@ -30,9 +30,9 @@ class HomeView extends ConsumerWidget {
               leading: Builder(
                 builder: (BuildContext context) {
                   return IconButton(
-                    icon: Icon(Icons.menu),
+                    icon: Icon(Ti.alignJustified),
                     onPressed: () {
-                      ;
+                      Scaffold.of(context).openDrawer();
                     },
                   );
                 },
@@ -82,7 +82,7 @@ class HomeView extends ConsumerWidget {
                         Icon(
                           icon[i],
                           size: 25,
-                          color: state.activeIndex == i ? Colors.black87 : Colors.black45,
+                          color: state.activeIndex == i ? ColorConstants.primaryColor : Colors.black45,
                         ),
                         Text(
                           title[i],
