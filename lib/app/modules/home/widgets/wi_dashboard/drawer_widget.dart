@@ -3,6 +3,7 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/modules/isi_drawer/prospect/prospect.dart';
 
 import '../../../../constants/color_constants.dart';
+import '../../../tutorial/tutorial_view.dart';
 
 class WiDrawer extends StatelessWidget {
   const WiDrawer({super.key});
@@ -82,7 +83,7 @@ class WiDrawer extends StatelessWidget {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ProspectView()));
                           break;
                         case 1:
-                          // Navigasi tutorial
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => TutorialView()));
                           break;
                         case 2:
                           // Navigasi ke subscription

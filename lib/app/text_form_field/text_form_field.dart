@@ -50,7 +50,6 @@ class _TextFieldViewState extends State<TextFieldView> {
         //   Icons.text_format,
         // ),
         helperText: widget.helperText ?? '',
-
         hintStyle: TextStyle(
           fontSize: 10,
         ),

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,7 +6,21 @@ import 'package:lazyui/lazyui.dart' hide Gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 
 class DashBoardView extends ConsumerWidget {
-  const DashBoardView({super.key});
+  DashBoardView({super.key});
+
+  final List<Color> customColors = [
+    ColorConstants.bgcolor1,
+    ColorConstants.bgcolor2,
+    ColorConstants.bgcolor3,
+    ColorConstants.bgcolor1,
+    ColorConstants.bgcolor2,
+  ];
+
+  final List<Color> customColorsevent = [
+    ColorConstants.event1.withOpacity(0.5),
+    ColorConstants.event2.withOpacity(0.5),
+    ColorConstants.event3.withOpacity(0.5),
+  ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -52,13 +64,18 @@ class DashBoardView extends ConsumerWidget {
                       size: 25,
                     ),
                   ),
-                  Container(
-                    padding: Ei.all(5),
-                    child: LzImage(
-                      'poto.jpg',
-                      width: 50,
-                      height: 50,
-                      radius: 30,
+                  GestureDetector(
+                    onTap: () {
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileUserView()));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      child: LzImage(
+                        'poto.jpg',
+                        width: 50,
+                        height: 50,
+                        radius: 30,
+                      ),
                     ),
                   )
                 ],
@@ -72,13 +89,16 @@ class DashBoardView extends ConsumerWidget {
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             padding: Ei.sym(v: 10),
-            child: Col(
+            child: Column(
               children: [
-                Padding(
-                  padding: Ei.only(h: 20, b: 10),
-                  child: Text(
-                    'Goals',
-                    style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: Ei.only(h: 20, b: 10, t: 10),
+                    child: Text(
+                      'Goals',
+                      style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 CarouselSlider(
@@ -87,60 +107,67 @@ class DashBoardView extends ConsumerWidget {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(
-                              // Random Color
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
-                            ),
-                            child: Stack(
-                              children: [
-                                Poslign(
-                                  alignment: Alignment.center,
-                                  child: RichText(
-                                    textAlign: Ta.center,
-                                    strutStyle: StrutStyle(fontSize: 50.0),
-                                    text: TextSpan(
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: '0',
-                                          style: Gfont.fs(65).copyWith(color: Colors.white),
-                                        ),
-                                        TextSpan(
-                                          text: ' / ',
-                                          style: Gfont.fs(50).copyWith(color: Colors.white),
-                                        ),
-                                        TextSpan(
-                                          text: '0',
-                                          style: Gfont.fs(35).copyWith(color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.symmetric(horizontal: 5.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: customColors[i - 1],
+                          ),
+                          child: Stack(
+                            children: [
+                              Align(
+                                alignment: Alignment.center,
+                                child: RichText(
+                                  textAlign: TextAlign.center,
+                                  strutStyle: StrutStyle(fontSize: 50.0),
+                                  text: TextSpan(
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: '0',
+                                        style: Gfont.fs(65).copyWith(color: Colors.white),
+                                      ),
+                                      TextSpan(
+                                        text: ' / ',
+                                        style: Gfont.fs(50).copyWith(color: Colors.white),
+                                      ),
+                                      TextSpan(
+                                        text: '0',
+                                        style: Gfont.fs(35).copyWith(color: Colors.white),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Poslign(
-                                    alignment: Alignment.bottomLeft,
-                                    child: Textr(
-                                      'Prospect Booked $i',
-                                      margin: Ei.all(10),
-                                      style: Gfont.fs(20).copyWith(color: Colors.white),
-                                    ))
-                              ],
-                            ));
+                              ),
+                              Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Padding(
+                                  padding: Ei.only(l: 10, b: 10),
+                                  child: Text(
+                                    'Prospect Booked $i',
+                                    style: Gfont.fs(18).copyWith(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
                       },
                     );
                   }).toList(),
                 ),
 
                 // EVENT TERUPDATE
-                Padding(
-                  padding: Ei.only(h: 20, b: 10, t: 10),
-                  child: Text(
-                    'Event Terupdate',
-                    style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: Ei.only(h: 20, b: 10, t: 10),
+                    child: Text(
+                      'Event Terupdate',
+                      style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
+
                 SizedBox(
                   height: 90,
                   child: ListView.separated(
@@ -150,45 +177,49 @@ class DashBoardView extends ConsumerWidget {
                     itemCount: 3,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
+                      Color backgroundColor = customColorsevent[index % customColors.length];
+
                       return Container(
-                          padding: Ei.all(10),
-                          decoration: BoxDecoration(
-                              color: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Row(
-                            mainAxisAlignment: Maa.spaceBetween,
-                            children: [
-                              Container(
-                                padding: Ei.all(10),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.5),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'tanggal $index',
-                                      style: Gfont.fs(10).copyWith(color: Colors.white),
-                                    ),
-                                  ],
-                                ),
+                        padding: Ei.all(10),
+                        decoration: BoxDecoration(
+                          color: backgroundColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: Maa.spaceBetween,
+                          children: [
+                            Container(
+                              padding: Ei.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              SizedBox(width: 10),
-                              Col(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Waktu $index',
+                                    'tanggal $index',
                                     style: Gfont.fs(10).copyWith(color: Colors.white),
-                                  ),
-                                  Text(
-                                    'Meeting $index',
-                                    style: Gfont.fs(16).copyWith(color: Colors.white),
                                   ),
                                 ],
                               ),
-                            ],
-                          ));
+                            ),
+                            SizedBox(width: 10),
+                            Col(
+                              children: [
+                                Text(
+                                  'Waktu $index',
+                                  style: Gfont.fs(10).copyWith(color: Colors.white),
+                                ),
+                                Text(
+                                  'Meeting $index',
+                                  style: Gfont.fs(16).copyWith(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
                     },
                   ),
                 ),

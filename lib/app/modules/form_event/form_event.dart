@@ -99,12 +99,15 @@ class _FormEventState extends State<FormEvent> {
                     values["noteevent"]?.text = value;
                   },
                 ),
-                SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: onTap,
-                    child: Text("Submit"),
+                SizedBox(height: 15),
+                Container(
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: onTap,
+                      child: Text("Submit"),
+                    ),
                   ),
                 )
               ],

@@ -4,9 +4,9 @@ import 'package:lazyui/config/font.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 
-class TaskView extends ConsumerWidget {
-  const TaskView({Key? key}) : super(key: key);
-// PERLU DIUBAH
+class TutorialView extends ConsumerWidget {
+  const TutorialView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Col(
