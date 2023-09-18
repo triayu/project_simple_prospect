@@ -49,8 +49,6 @@ class ContactView extends ConsumerWidget {
                 InkWell(
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
-
-                    // Navigator.of(context).push(MaterialPageRoute(builder: (context) => FormContactView()));
                   },
                   child: Container(
                     height: 50,

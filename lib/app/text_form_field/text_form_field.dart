@@ -6,7 +6,7 @@ class TextFieldView extends StatefulWidget {
   final String? Function(String?)? validator;
   final String? helperText;
   final TextEditingController? controller;
-  final TextInputType? keyboard;
+  final TextInputType? keyboard; 
   final FocusNode? focusNode;
   final Function(String)? onChanged;
 

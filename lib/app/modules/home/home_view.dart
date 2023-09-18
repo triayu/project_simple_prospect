@@ -21,11 +21,34 @@ class HomeView extends ConsumerWidget {
     List<IconData> icon = [Ti.home, Ti.addressBook, Ti.calendar, Ti.list];
     List<String> title = ['Home', 'Contact', 'Event', 'Task'];
 
-    logg(notifier.activeIndex);
-
     return Scaffold(
       appBar: ref.watch(homeProvider).activeIndex != 0
           ? CustomAppBar(
+              actions: [
+                InkTouch(
+                  onTap: () {
+                    if (notifier.activeIndex == 1) {
+                      logg('Ini Action Contact');
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => CustomDialog(),
+                        ),
+                      );
+                    }
+
+                    if (notifier.activeIndex == 2) {
+                      logg('Ini Action Event');
+                    }
+                    if (notifier.activeIndex == 3) {
+                      logg('Ini Action Task');
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Icon(Ti.filterPlus),
+                  ),
+                )
+              ],
               title: title[notifier.activeIndex],
               leading: Builder(
                 builder: (BuildContext context) {

@@ -13,40 +13,41 @@ class WiDrawer extends StatelessWidget {
     return SafeArea(
       child: Drawer(
         width: context.width * 0.8,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 30),
-                width: 250,
-                height: 60,
-                decoration: BoxDecoration(
-                  color: ColorConstants.primaryColor,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    LzImage(
-                      'poto.jpg',
-                      radius: 50,
-                      size: 40,
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                      padding: EdgeInsets.only(right: 30),
-                      child: Text(
-                        'Tri Ayu Novitasari',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
+        child: Col(
+          children: [
+            //
+            Container(
+              margin: Ei.only(t: 30, l: 10),
+              width: 250,
+              height: 60,
+              decoration: BoxDecoration(
+                color: ColorConstants.primaryColor,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LzImage(
+                    'poto.jpg',
+                    radius: 50,
+                    size: 40,
+                  ),
+                  SizedBox(width: 10),
+                  Container(
+                    padding: EdgeInsets.only(right: 30),
+                    child: Text(
+                      'Tri Ayu Novitasari',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              ListView.builder(
+            ),
+            Expanded(
+              child: ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: 6,
@@ -102,8 +103,37 @@ class WiDrawer extends StatelessWidget {
                   );
                 },
               ),
-            ],
-          ),
+            ),
+            Container(
+              height: 70,
+              width: 170,
+              child: InkTouch(
+                margin: Ei.all(20),
+                padding: Ei.only(l: 20),
+                radius: BorderRadius.circular(10),
+                color: ColorConstants.textSecondaryColor,
+
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.exit_to_app,
+                      color: ColorConstants.primaryColor,
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      "LogOut",
+                      style: TextStyle(
+                        color: ColorConstants.primaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+                // onPressed: () {
+
+                // },
+              ),
+            )
+          ],
         ),
       ),
     );

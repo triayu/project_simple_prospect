@@ -41,8 +41,8 @@ dependencies:
   lazyui: ^0.4.8
   riverpod: ^2.3.6
   shared_preferences: ^2.2.0
-  syncfusion_flutter_calendar: ^23.1.36
   table_calendar: ^3.0.9
+  youtube_player_flutter: ^8.1.2
    
   
 
