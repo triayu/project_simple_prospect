@@ -5,7 +5,7 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../form_event/form_event.dart';
+import '../form/form_event/form_event.dart';
 
 class EventView extends ConsumerWidget {
   const EventView({Key? key}) : super(key: key);
@@ -17,10 +17,10 @@ class EventView extends ConsumerWidget {
         children: [
           // All Contact
           Container(
-            padding: EdgeInsets.all(10), 
+            padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.white, 
+              color: Colors.white,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
@@ -53,9 +53,7 @@ class EventView extends ConsumerWidget {
                   color: Colors.green,
                   shape: BoxShape.circle,
                 ),
-               
                 defaultTextStyle: TextStyle(fontSize: 12),
-              
                 todayTextStyle: TextStyle(fontSize: 14),
               ),
               headerStyle: HeaderStyle(
@@ -66,9 +64,7 @@ class EventView extends ConsumerWidget {
                 leftChevronIcon: Icon(Icons.chevron_left, color: Colors.black),
                 rightChevronIcon: Icon(Icons.chevron_right, color: Colors.black),
               ),
-              onDaySelected: (selectedDay, focusedDay) {
-                
-              },
+              onDaySelected: (selectedDay, focusedDay) {},
             ),
           ),
 
@@ -171,7 +167,41 @@ class EventView extends ConsumerWidget {
                             color: Colors.white,
                             size: 15,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                String editContact = 'Name $index';
+                                return AlertDialog(
+                                  title: Text('Apakah anda yakin untuk hapus?'),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [],
+                                  ),
+                                  actions: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: ColorConstants.primaryColor,
+                                      ),
+                                      child: Text('Hapus'),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: ColorConstants.primaryColor,
+                                      ),
+                                      child: Text('Batal'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                         ),
                       ),
                       SizedBox(width: 10),

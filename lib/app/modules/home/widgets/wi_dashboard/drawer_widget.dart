@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/modules/isi_drawer/prospect/prospect.dart';
+import 'package:simple_prospect/app/modules/isi_drawer/provide_feedback/feedback_view.dart';
 
 import '../../../../constants/color_constants.dart';
-import '../../../tutorial/tutorial_view.dart';
+import '../../../isi_drawer/tutorial/tutorial_view.dart';
 
 class WiDrawer extends StatelessWidget {
   const WiDrawer({super.key});
@@ -93,7 +94,7 @@ class WiDrawer extends StatelessWidget {
                           // Navigasi ke refferals
                           break;
                         case 4:
-                          // Navigasi ke provide Feedback
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackView()));
                           break;
                         case 5:
                           // Navigasi ke message

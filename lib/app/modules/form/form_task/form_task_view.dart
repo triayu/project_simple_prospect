@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 
-import '../../text_form_field/text_form_field.dart';
-import '../../validator/validator.dart';
+import '../../../text_form_field/text_form_field.dart';
+import '../../../validator/validator.dart';
+import '../timepicker.dart';
 
-class FormEvent extends StatefulWidget {
-  const FormEvent({Key? key}) : super(key: key);
+class FormTask extends StatefulWidget {
+  const FormTask({Key? key}) : super(key: key);
 
   @override
-  State<FormEvent> createState() => _FormEventState();
+  State<FormTask> createState() => _FormTaskState();
 }
 
-class _FormEventState extends State<FormEvent> {
+class _FormTaskState extends State<FormTask> {
   final _formState = GlobalKey<FormState>();
 
   Map<String, dynamic> values = {
     "title": TextEditingController(),
     "meetingwith": TextEditingController(),
     "meetingtype": TextEditingController(),
+    "starttime": '',
+    "endtime": '',
     "noteevent": TextEditingController(),
   };
 
@@ -32,12 +35,16 @@ class _FormEventState extends State<FormEvent> {
       String titleText = values["title"]?.text ?? '';
       String meetingwithtText = values["meetingwith"]?.text ?? '';
       String meetingtypeText = values["meetingtype"]?.text ?? '';
+      String starttime = values["starttimee"];
+      String endtime = values["endtime"];
       String noteeventText = values["noteevent"]?.text ?? '';
 
       listArray.add({
         'title': titleText,
         'meetingwith': meetingwithtText,
         'meetingtype': meetingtypeText,
+        'starttime': starttime,
+        'endtime': endtime,
         'noteevent': noteeventText,
       });
 
@@ -54,11 +61,26 @@ class _FormEventState extends State<FormEvent> {
     }
   }
 
+  String formatTimeOfDay(TimeOfDay timeOfDay) {
+    final now = DateTime.now();
+    final dateTime = DateTime(now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+    final formattedTime = TimeOfDay.fromDateTime(dateTime).format(context);
+
+    return formattedTime;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Event'),
+        title: Text(
+          'Add Task',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true, // Pusatkan judul
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -89,6 +111,14 @@ class _FormEventState extends State<FormEvent> {
                   validator: Validator.required,
                   onChanged: (value) {
                     values["meetingtype"]?.text = value;
+                  },
+                ),
+                TimePicker(
+                  label: "Start Time",
+                  value: TimeOfDay.now(),
+                  validator: Validator.required,
+                  onChanged: (p0) {
+                    values['startime'] = formatTimeOfDay(p0);
                   },
                 ),
                 TextFieldView(

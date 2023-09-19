@@ -35,18 +35,6 @@ class FormContactView extends StatelessWidget {
             ],
           ),
           Flexible(
-            child: LzForm.select(
-              label: 'Category',
-              hint: 'Select category',
-              // options: [
-              //   Option(value: 'option1', label: 'Option 1'),
-              //   Option(value: 'option2', label: 'Option 2'),
-              //   Option(value: 'option3', label: 'Option 3'),
-              // ],
-              labelStyle: LzFormLabelStyle(),
-            ),
-          ),
-          Flexible(
             child: LzForm.input(
               label: 'Email',
               hint: 'Your email address',
@@ -74,7 +62,18 @@ class FormContactView extends StatelessWidget {
               labelStyle: LzFormLabelStyle(),
             ),
           ),
-          // Tambahkan input fields lainnya jika diperlukan...
+          Flexible(
+            child: LzForm.select(
+              label: 'Category',
+              hint: 'Select category',
+              // options: [
+              //   Option(value: 'option1', label: 'Option 1'),
+              //   Option(value: 'option2', label: 'Option 2'),
+              //   Option(value: 'option3', label: 'Option 3'),
+              // ],
+              labelStyle: LzFormLabelStyle(),
+            ),
+          ),
         ],
       ),
     );

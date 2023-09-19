@@ -3,10 +3,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/config/font.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/modules/form/form_task/form_task_view.dart';
 
 class TaskView extends ConsumerWidget {
   const TaskView({Key? key}) : super(key: key);
-// PERLU DIUBAH
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Col(
@@ -25,37 +26,42 @@ class TaskView extends ConsumerWidget {
                   ),
                 ),
                 Spacer(),
-                Container(
-                  height: 30,
-                  width: 70,
-                  margin: Ei.only(b: 10, r: 10, t: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: ColorConstants.primaryColor,
-                  ),
-                  child: Row(
-                    children: [
-                      InkResponse(
-                        onTap: () {
-                          // Nav
-                        },
-                        child: Container(
-                          padding: Ei.only(l: 3),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FormTask(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 30,
+                    width: 70,
+                    margin: EdgeInsets.only(bottom: 10, right: 10, top: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: ColorConstants.primaryColor,
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 3),
                           child: Icon(
                             Ti.plus,
                             size: 15,
                             color: ColorConstants.secondaryColor,
                           ),
                         ),
-                      ),
-                      Text(
-                        'Add Task',
-                        style: TextStyle(
-                          color: ColorConstants.secondaryColor,
-                          fontSize: 10,
+                        Text(
+                          'Add Task',
+                          style: TextStyle(
+                            color: ColorConstants.secondaryColor,
+                            fontSize: 10,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -138,7 +144,41 @@ class TaskView extends ConsumerWidget {
                               color: Colors.white,
                               size: 15,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  String editContact = 'Name $index';
+                                  return AlertDialog(
+                                    title: Text('Apakah anda yakin untuk hapus?'),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [],
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: ColorConstants.primaryColor,
+                                        ),
+                                        child: Text('Hapus'),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: ColorConstants.primaryColor,
+                                        ),
+                                        child: Text('Batal'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
                           ),
                         ),
                         SizedBox(width: 10),

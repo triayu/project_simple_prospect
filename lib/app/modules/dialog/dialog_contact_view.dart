@@ -44,16 +44,16 @@ Future<void> showCustomDialog(BuildContext context) async {
         content: 'Isi konten dialog di sini.',
         positiveButtonText: 'OK',
         onPositivePressed: () {
-          // Tindakan yang diambil saat tombol OK ditekan
-          Navigator.of(context).pop(); // Menutup dialog
-          // Tambahkan kode Anda di sini...
+          
+          Navigator.of(context).pop(); 
+          
         },
       );
     },
   );
 }
 
-// Panggil dialog dengan kode Anda
+
 // if (notifier.activeIndex == 1) {
 //   logg('Ini Action Contact');
 //   showCustomDialog(context);
