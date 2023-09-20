@@ -4,6 +4,7 @@ import 'package:simple_prospect/app/modules/isi_drawer/prospect/prospect.dart';
 import 'package:simple_prospect/app/modules/isi_drawer/provide_feedback/feedback_view.dart';
 
 import '../../../../constants/color_constants.dart';
+import '../../../isi_drawer/message_template/message_template.dart';
 import '../../../isi_drawer/tutorial/tutorial_view.dart';
 
 class WiDrawer extends StatelessWidget {
@@ -97,7 +98,7 @@ class WiDrawer extends StatelessWidget {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackView()));
                           break;
                         case 5:
-                          // Navigasi ke message
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => MessageView()));
                           break;
                       }
                     },

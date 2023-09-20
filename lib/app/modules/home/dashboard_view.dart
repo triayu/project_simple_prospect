@@ -124,15 +124,15 @@ class DashBoardView extends ConsumerWidget {
                                     children: <TextSpan>[
                                       TextSpan(
                                         text: '0',
-                                        style: Gfont.fs(65).copyWith(color: Colors.white),
+                                        style: Gfont.fs(65).copyWith(color: ColorConstants.secondaryColor),
                                       ),
                                       TextSpan(
                                         text: ' / ',
-                                        style: Gfont.fs(50).copyWith(color: Colors.white),
+                                        style: Gfont.fs(50).copyWith(color: ColorConstants.secondaryColor),
                                       ),
                                       TextSpan(
                                         text: '0',
-                                        style: Gfont.fs(35).copyWith(color: Colors.white),
+                                        style: Gfont.fs(35).copyWith(color: ColorConstants.secondaryColor),
                                       ),
                                     ],
                                   ),
@@ -144,7 +144,7 @@ class DashBoardView extends ConsumerWidget {
                                   padding: Ei.only(l: 10, b: 10),
                                   child: Text(
                                     'Prospect Booked $i',
-                                    style: Gfont.fs(18).copyWith(color: Colors.white),
+                                    style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
                                   ),
                                 ),
                               ),
@@ -191,7 +191,7 @@ class DashBoardView extends ConsumerWidget {
                             Container(
                               padding: Ei.all(10),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.5),
+                                color: ColorConstants.secondaryColor.withOpacity(0.5),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Column(
@@ -199,7 +199,7 @@ class DashBoardView extends ConsumerWidget {
                                 children: [
                                   Text(
                                     'tanggal $index',
-                                    style: Gfont.fs(10).copyWith(color: Colors.white),
+                                    style: Gfont.fs(10).copyWith(color: ColorConstants.secondaryColor),
                                   ),
                                 ],
                               ),
@@ -209,11 +209,11 @@ class DashBoardView extends ConsumerWidget {
                               children: [
                                 Text(
                                   'Waktu $index',
-                                  style: Gfont.fs(10).copyWith(color: Colors.white),
+                                  style: Gfont.fs(10).copyWith(color: ColorConstants.secondaryColor),
                                 ),
                                 Text(
                                   'Meeting $index',
-                                  style: Gfont.fs(16).copyWith(color: Colors.white),
+                                  style: Gfont.fs(16).copyWith(color: ColorConstants.secondaryColor),
                                 ),
                               ],
                             ),
@@ -241,7 +241,7 @@ class DashBoardView extends ConsumerWidget {
                           return Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
+                              color: ColorConstants.secondaryColor,
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.1),
@@ -253,7 +253,7 @@ class DashBoardView extends ConsumerWidget {
                             ),
                             child: ListTile(
                               dense: true,
-                              tileColor: Colors.white,
+                              tileColor: ColorConstants.secondaryColor,
                               style: ListTileStyle.list,
                               title: Text(
                                 'Hasil Meeting $index',

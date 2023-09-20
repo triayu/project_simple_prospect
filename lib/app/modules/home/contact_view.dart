@@ -171,82 +171,68 @@ class ContactView extends ConsumerWidget {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return Dialog(
-                        shape: RoundedRectangleBorder(
+                      return Container(
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.white,
                         ),
-                        backgroundColor: Colors.transparent,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Colors.white,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              // Baris pertama
-                              Container(
-                                margin: Ei.only(t: 30, b: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Icon(Ti.messageCheck, color: ColorConstants.primaryColor, size: 35),
-                                        Text("Mass message",
-                                            style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Icon(Ti.fileSpreadsheet, color: ColorConstants.primaryColor, size: 35),
-                                        Text("Import to excel",
-                                            style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Icon(Ti.deviceMobileCheck, color: ColorConstants.primaryColor, size: 35),
-                                        Text("Export contact",
-                                            style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            // Baris pertama
+                            Container(
+                              margin: Ei.only(t: 30, b: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Icon(Ti.messageCheck, color: ColorConstants.primaryColor, size: 35),
+                                      Text("Mass message",
+                                          style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Icon(Ti.fileSpreadsheet, color: ColorConstants.primaryColor, size: 35),
+                                      Text("Import to excel",
+                                          style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Icon(Ti.deviceMobileCheck, color: ColorConstants.primaryColor, size: 35),
+                                      Text("Export contact",
+                                          style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
+                                    ],
+                                  ),
+                                ],
                               ),
-                              // Icon baris kedua
-                              Container(
-                                padding: Ei.only(t: 20, b: 30),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Icon(Ti.addressBook, color: ColorConstants.primaryColor, size: 35),
-                                        Text("Import from phonebook",
-                                            style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Icon(Ti.barcode, color: ColorConstants.primaryColor, size: 35),
-                                        Text("Scan business card",
-                                            style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                            ),
+                            // Icon baris kedua
+                            Container(
+                              padding: Ei.only(t: 20, b: 30),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Icon(Ti.addressBook, color: ColorConstants.primaryColor, size: 35),
+                                      Text("Import from phonebook",
+                                          style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Icon(Ti.barcode, color: ColorConstants.primaryColor, size: 35),
+                                      Text("Scan business card",
+                                          style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
+                                    ],
+                                  ),
+                                ],
                               ),
-
-                              // SizedBox(height: 20),
-                              // ElevatedButton(
-                              //   onPressed: () {
-                              //     Navigator.of(context).pop();
-                              //   },
-                              //   child: Text("Tutup"),
-                              // ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       );
                     },

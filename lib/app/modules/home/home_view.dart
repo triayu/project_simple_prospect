@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/modules/home/widgets/wi_dashboard/drawer_widget.dart';
+import 'package:simple_prospect/app/modules/isi_drawer/prospect/prospect.dart';
 import '../../constants/color_constants.dart';
 import '../../providers/home/home_state_provider.dart';
 import '../../widgets/custom_appbar.dart';
@@ -17,9 +18,9 @@ class HomeView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(homeProvider.notifier);
 
-    List<Widget> homes = [DashBoardView(), ContactView(), EventView(), TaskView()];
-    List<IconData> icon = [Ti.home, Ti.addressBook, Ti.calendar, Ti.list];
-    List<String> title = ['Home', 'Contact', 'Event', 'Task'];
+    List<Widget> homes = [DashBoardView(), ContactView(), ProspectView(), EventView(), TaskView()];
+    List<IconData> icon = [Ti.home, Ti.addressBook, Ti.aB, Ti.calendar, Ti.list];
+    List<String> title = ['Home', 'Contact', 'Prospect', 'Event', 'Task'];
 
     return Scaffold(
       appBar: ref.watch(homeProvider).activeIndex != 0
@@ -29,11 +30,11 @@ class HomeView extends ConsumerWidget {
                   onTap: () {
                     if (notifier.activeIndex == 1) {
                       logg('Ini Action Contact');
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => CustomDialog(),
-                        ),
-                      );
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder: (context) => CustomDialog() ,
+                      //   ),
+                      // );
                     }
 
                     if (notifier.activeIndex == 2) {
@@ -98,23 +99,31 @@ class HomeView extends ConsumerWidget {
                     onTap: () {
                       state.setNavigation(i);
                     },
-                    padding: Ei.all(20),
+                    padding: i == 2 ? Ei.all(10) : Ei.all(15),
                     color: ColorConstants.secondaryColor,
-                    child: Column(
-                      children: [
-                        Icon(
-                          icon[i],
-                          size: 25,
-                          color: state.activeIndex == i ? ColorConstants.primaryColor : Colors.black45,
-                        ),
-                        Text(
-                          title[i],
-                          style: Gfont.fs(12).copyWith(
-                            color: state.activeIndex == i ? Colors.black87 : Colors.black45,
+                    child: i == 2
+                        ? Container(
+                            // decoration: BoxDecoration(boxShadow: [BoxShadow(blurRadius: 0.3)]),
+                            child: LzImage(
+                            'logo.png',
+                            size: 5,
+                            fit: BoxFit.contain,
+                          ))
+                        : Column(
+                            children: [
+                              Icon(
+                                icon[i],
+                                size: 25,
+                                color: state.activeIndex == i ? ColorConstants.primaryColor : Colors.black45,
+                              ),
+                              Text(
+                                title[i],
+                                style: Gfont.fs(10).copyWith(
+                                  color: state.activeIndex == i ? Colors.black87 : Colors.black45,
+                                ),
+                              )
+                            ],
                           ),
-                        )
-                      ],
-                    ),
                   ),
                 );
               }),

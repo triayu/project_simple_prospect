@@ -16,11 +16,10 @@ class _FormTaskState extends State<FormTask> {
 
   Map<String, dynamic> values = {
     "title": TextEditingController(),
-    "meetingwith": TextEditingController(),
-    "meetingtype": TextEditingController(),
+    "note": TextEditingController(),
     "starttime": '',
     "endtime": '',
-    "noteevent": TextEditingController(),
+    "priority": TextEditingController(),
   };
 
   List<Map<String, String>> listArray = [];
@@ -33,19 +32,17 @@ class _FormTaskState extends State<FormTask> {
   void onTap() {
     if (_formState.currentState!.validate()) {
       String titleText = values["title"]?.text ?? '';
-      String meetingwithtText = values["meetingwith"]?.text ?? '';
-      String meetingtypeText = values["meetingtype"]?.text ?? '';
+      String notetText = values["note"]?.text ?? '';
       String starttime = values["starttimee"];
       String endtime = values["endtime"];
-      String noteeventText = values["noteevent"]?.text ?? '';
+      String priorityText = values["priority"]?.text ?? '';
 
       listArray.add({
         'title': titleText,
-        'meetingwith': meetingwithtText,
-        'meetingtype': meetingtypeText,
+        'note': notetText,
         'starttime': starttime,
         'endtime': endtime,
-        'noteevent': noteeventText,
+        'priority': priorityText,
       });
 
       _formState.currentState?.reset();
@@ -80,7 +77,7 @@ class _FormTaskState extends State<FormTask> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        centerTitle: true, // Pusatkan judul
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -98,15 +95,15 @@ class _FormTaskState extends State<FormTask> {
                   },
                 ),
                 TextFieldView(
-                  label: "Meeting With",
-                  value: values["meetingwith"]?.text ?? '',
+                  label: "Note",
+                  value: values["note"]?.text ?? '',
                   validator: Validator.required,
                   onChanged: (value) {
-                    values["meetingwith"]?.text = value;
+                    values["note"]?.text = value;
                   },
                 ),
                 TextFieldView(
-                  label: "Meeting Type",
+                  label: "Date",
                   value: values["meetingtype"]?.text ?? '',
                   validator: Validator.required,
                   onChanged: (value) {
@@ -122,11 +119,11 @@ class _FormTaskState extends State<FormTask> {
                   },
                 ),
                 TextFieldView(
-                  label: "Note Event ",
-                  value: values["noteevent"]?.text ?? '',
+                  label: "Priority ",
+                  value: values["priority"]?.text ?? '',
                   validator: Validator.required,
                   onChanged: (value) {
-                    values["noteevent"]?.text = value;
+                    values["priority"]?.text = value;
                   },
                 ),
                 SizedBox(height: 15),
