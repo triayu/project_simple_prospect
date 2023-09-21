@@ -13,31 +13,59 @@ class IsiPesanView extends ConsumerWidget {
       appBar: CustomAppBar(
         title: "Message",
       ),
-      body: Col(
+      body: Stack(
         children: [
-          Col(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Column(
             children: [
-              Container(
-                height: 40,
-                width: double.maxFinite,
-                decoration: BoxDecoration(border: Border.all(color: Colors.black12)),
-                child: Row(
+              Expanded(
+                child: Col(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: Ei.all(10),
-                      child: Text(
-                        'Kepada :',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black,
-                        ),
+                      // margin: Ei.only(b: 630),
+                      height: 40,
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(border: Border.all(color: Colors.black12)),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: Ei.all(10),
+                            child: Text(
+                              'Kepada :',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          Container(
+                            margin: Ei.only(r: 10),
+                            child: Icon(Icons.add_circle),
+                          ),
+                        ],
                       ),
                     ),
-                    Spacer(),
-                    Container(
-                      margin: Ei.only(r: 10),
-                      child: Icon(Ti.circlePlus),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: "Tulis pesan...",
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.send),
+                            onPressed: () {
+                              // Tambahkan logika
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

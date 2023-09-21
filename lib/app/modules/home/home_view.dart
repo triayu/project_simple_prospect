@@ -6,6 +6,8 @@ import 'package:simple_prospect/app/modules/isi_drawer/prospect/prospect.dart';
 import '../../constants/color_constants.dart';
 import '../../providers/home/home_state_provider.dart';
 import '../../widgets/custom_appbar.dart';
+import '../dialog/dialog_contact_view.dart';
+import '../dialog/dialog_task_view.dart';
 import 'contact_view.dart';
 import 'dashboard_view.dart';
 import 'event_view.dart';
@@ -30,18 +32,23 @@ class HomeView extends ConsumerWidget {
                   onTap: () {
                     if (notifier.activeIndex == 1) {
                       logg('Ini Action Contact');
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //     builder: (context) => CustomDialog() ,
-                      //   ),
-                      // );
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => DialogContactView(),
+                        ),
+                      );
                     }
 
-                    if (notifier.activeIndex == 2) {
+                    if (notifier.activeIndex == 4) {
                       logg('Ini Action Event');
                     }
-                    if (notifier.activeIndex == 3) {
+                    if (notifier.activeIndex == 5) {
                       logg('Ini Action Task');
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => DialogTaskView(),
+                        ),
+                      );
                     }
                   },
                   child: Padding(

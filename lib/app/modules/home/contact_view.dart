@@ -156,7 +156,7 @@ class ContactView extends ConsumerWidget {
             child: Container(
               width: 60,
               height: 60,
-              margin: EdgeInsets.only(bottom: 10, right: 10),
+              margin: Ei.only(b: 10, r: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 color: ColorConstants.primaryColor,
@@ -171,39 +171,38 @@ class ContactView extends ConsumerWidget {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return Container(
-                        decoration: BoxDecoration(
+                      return Dialog(
+                        shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.white,
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             // Baris pertama
                             Container(
-                              margin: Ei.only(t: 30, b: 10),
+                              margin: Ei.only(t: 40, b: 20),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Column(
                                     children: [
-                                      Icon(Ti.messageCheck, color: ColorConstants.primaryColor, size: 35),
+                                      Icon(Ti.messageCheck, color: ColorConstants.primaryColor, size: 30),
                                       Text("Mass message",
-                                          style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
+                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
                                     ],
                                   ),
                                   Column(
                                     children: [
-                                      Icon(Ti.fileSpreadsheet, color: ColorConstants.primaryColor, size: 35),
+                                      Icon(Ti.fileSpreadsheet, color: ColorConstants.primaryColor, size: 30),
                                       Text("Import to excel",
-                                          style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
+                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
                                     ],
                                   ),
                                   Column(
                                     children: [
-                                      Icon(Ti.deviceMobileCheck, color: ColorConstants.primaryColor, size: 35),
+                                      Icon(Ti.deviceMobileCheck, color: ColorConstants.primaryColor, size: 30),
                                       Text("Export contact",
-                                          style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
+                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
                                     ],
                                   ),
                                 ],
@@ -211,22 +210,22 @@ class ContactView extends ConsumerWidget {
                             ),
                             // Icon baris kedua
                             Container(
-                              padding: Ei.only(t: 20, b: 30),
+                              padding: Ei.only(t: 20, b: 40),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Column(
                                     children: [
-                                      Icon(Ti.addressBook, color: ColorConstants.primaryColor, size: 35),
+                                      Icon(Ti.addressBook, color: ColorConstants.primaryColor, size: 30),
                                       Text("Import from phonebook",
-                                          style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
+                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
                                     ],
                                   ),
                                   Column(
                                     children: [
-                                      Icon(Ti.barcode, color: ColorConstants.primaryColor, size: 35),
+                                      Icon(Ti.barcode, color: ColorConstants.primaryColor, size: 30),
                                       Text("Scan business card",
-                                          style: TextStyle(fontSize: 12, color: ColorConstants.primaryColor)),
+                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
                                     ],
                                   ),
                                 ],
