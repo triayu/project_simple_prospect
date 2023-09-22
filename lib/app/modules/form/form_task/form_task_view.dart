@@ -1,146 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-import '../../../text_form_field/text_form_field.dart';
-import '../../../validator/validator.dart';
-import '../timepicker.dart';
-
-class FormTask extends StatefulWidget {
+class FormTask extends StatelessWidget {
   const FormTask({Key? key}) : super(key: key);
 
   @override
-  State<FormTask> createState() => _FormTaskState();
-}
-
-class _FormTaskState extends State<FormTask> {
-  final _formState = GlobalKey<FormState>();
-
-  Map<String, dynamic> values = {
-    "title": TextEditingController(),
-    "note": TextEditingController(),
-    "starttime": '',
-    "endtime": '',
-    "priority": TextEditingController(),
-  };
-
-  List<Map<String, String>> listArray = [];
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  void onTap() {
-    if (_formState.currentState!.validate()) {
-      String titleText = values["title"]?.text ?? '';
-      String notetText = values["note"]?.text ?? '';
-      String starttime = values["starttimee"];
-      String endtime = values["endtime"];
-      String priorityText = values["priority"]?.text ?? '';
-
-      listArray.add({
-        'title': titleText,
-        'note': notetText,
-        'starttime': starttime,
-        'endtime': endtime,
-        'priority': priorityText,
-      });
-
-      _formState.currentState?.reset();
-
-      // Navigator.push(
-      //   context,
-      //   // MaterialPageRoute(
-      //   //   builder: (context) => NextPage(
-      //   //     values: listArray,
-      //   //   ),
-      //   // ),
-      // );
-    }
-  }
-
-  String formatTimeOfDay(TimeOfDay timeOfDay) {
-    final now = DateTime.now();
-    final dateTime = DateTime(now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
-    final formattedTime = TimeOfDay.fromDateTime(dateTime).format(context);
-
-    return formattedTime;
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final key = GlobalKey(), bottomKey = GlobalKey();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Add Task',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
+      appBar: CustomAppBar(
+        title: 'Form Contact',
+        canBack: true,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.only(right: 20, left: 20, bottom: 10, top: 10),
-          child: Form(
-            key: _formState,
-            child: Column(
-              children: [
-                TextFieldView(
-                  label: "Title",
-                  value: values["title"]?.text ?? '',
-                  validator: Validator.required,
-                  onChanged: (value) {
-                    values["title"]?.text = value;
-                  },
-                ),
-                TextFieldView(
-                  label: "Note",
-                  value: values["note"]?.text ?? '',
-                  validator: Validator.required,
-                  onChanged: (value) {
-                    values["note"]?.text = value;
-                  },
-                ),
-                TextFieldView(
-                  label: "Date",
-                  value: values["meetingtype"]?.text ?? '',
-                  validator: Validator.required,
-                  onChanged: (value) {
-                    values["meetingtype"]?.text = value;
-                  },
-                ),
-                TimePicker(
-                  label: "Start Time",
-                  value: TimeOfDay.now(),
-                  validator: Validator.required,
-                  onChanged: (p0) {
-                    values['startime'] = formatTimeOfDay(p0);
-                  },
-                ),
-                TextFieldView(
-                  label: "Priority ",
-                  value: values["priority"]?.text ?? '',
-                  validator: Validator.required,
-                  onChanged: (value) {
-                    values["priority"]?.text = value;
-                  },
-                ),
-                SizedBox(height: 15),
-                Container(
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: onTap,
-                      child: Text("Submit"),
-                    ),
-                  ),
-                )
-              ],
+      body: LzFormList(
+        style: LzFormStyle(),
+        children: [
+          Flexible(
+            child: LzForm.input(
+              label: 'Title',
+              hint: 'Enter your title',
+              labelStyle: LzFormLabelStyle(),
             ),
           ),
-        ),
+          Flexible(
+            child: LzForm.input(
+              label: 'Note',
+              hint: 'Enter your note',
+              labelStyle: LzFormLabelStyle(),
+            ),
+          ),
+          Flexible(
+            child: LzForm.input(
+              label: 'Date',
+              hint: 'Enter date',
+              labelStyle: LzFormLabelStyle(),
+            ),
+          ),
+          Row(
+            children: [
+              Flexible(
+                child: LzForm.input(
+                  label: 'Start Time',
+                  hint: 'Enter start time',
+                  labelStyle: LzFormLabelStyle(),
+                ),
+              ),
+              SizedBox(width: 10),
+              Flexible(
+                child: LzForm.input(
+                  label: 'End Time',
+                  hint: 'Enter end time',
+                  labelStyle: LzFormLabelStyle(),
+                ),
+              ),
+            ],
+          ),
+          Flexible(
+            child: InkWell(
+              onTap: () {
+                final options = ['Low', 'Medium', 'Hight'].options();
+                DropX.show(bottomKey, options: options);
+              },
+              child: LzForm.select(
+                label: 'Priority',
+                hint: 'Select Priority',
+                labelStyle: LzFormLabelStyle(),
+              ),
+            ),
+          ),
+          Flexible(
+            child: LzForm.input(
+              label: 'Set Time Reminder',
+              hint: 'Enter set time reminder',
+              labelStyle: LzFormLabelStyle(),
+            ),
+          ),
+          Flexible(
+            child: ElevatedButton(
+              onPressed: () {
+                // Aksi
+              },
+              child: Text('Submit'),
+            ),
+          ),
+        ],
       ),
     );
   }

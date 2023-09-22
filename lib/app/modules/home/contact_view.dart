@@ -4,6 +4,7 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 
 import '../form/form_contact/form_contact_view.dart';
+import '../isi_drawer/message_template/isi_pesan_view.dart';
 
 class ContactView extends ConsumerWidget {
   const ContactView({Key? key}) : super(key: key);
@@ -184,12 +185,24 @@ class ContactView extends ConsumerWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Column(
-                                    children: [
-                                      Icon(Ti.messageCheck, color: ColorConstants.primaryColor, size: 30),
-                                      Text("Mass message",
-                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
-                                    ],
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => IsiPesanView(),
+                                        ),
+                                      );
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Icon(Ti.messageCheck, color: ColorConstants.primaryColor, size: 30),
+                                        Text(
+                                          "Mass message",
+                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   Column(
                                     children: [

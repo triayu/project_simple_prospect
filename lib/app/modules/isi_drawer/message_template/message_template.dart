@@ -16,7 +16,6 @@ class MessageView extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          // Wrap your content with a Column
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

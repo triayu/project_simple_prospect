@@ -94,7 +94,7 @@ class TaskView extends ConsumerWidget {
                     title: Text(
                       'Desc Task $index',
                       style: TextStyle(
-                        color: ColorConstants.primaryColor,
+                        color: ColorConstants.textPrimaryColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
@@ -132,16 +132,10 @@ class TaskView extends ConsumerWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Container(
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.red,
-                          ),
                           child: IconButton(
                             icon: Icon(
                               Ti.trash,
-                              color: Colors.white,
+                              color: Colors.red,
                               size: 15,
                             ),
                             onPressed: () {
@@ -181,19 +175,12 @@ class TaskView extends ConsumerWidget {
                             },
                           ),
                         ),
-                        SizedBox(width: 10),
                         Container(
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.green,
-                          ),
                           child: IconButton(
                             icon: Icon(
                               Ti.edit,
-                              color: Colors.white,
-                              size: 15,
+                              color: Colors.green,
+                              size: 20,
                             ),
                             onPressed: () {
                               showDialog(

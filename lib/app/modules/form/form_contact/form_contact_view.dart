@@ -75,7 +75,15 @@ class FormContactView extends StatelessWidget {
                 labelStyle: LzFormLabelStyle(),
               ),
             ),
-          )
+          ),
+          Flexible(
+            child: ElevatedButton(
+              onPressed: () {
+                // Aksi
+              },
+              child: Text('Submit'),
+            ),
+          ),
         ],
       ),
     );

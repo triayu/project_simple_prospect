@@ -22,7 +22,6 @@ class IsiPesanView extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      // margin: Ei.only(b: 630),
                       height: 40,
                       width: double.maxFinite,
                       decoration: BoxDecoration(border: Border.all(color: Colors.black12)),

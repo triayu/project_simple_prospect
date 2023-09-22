@@ -5,6 +5,8 @@ import 'package:lazyui/config/font.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 
+import '../profile/profile_view.dart';
+
 class DashBoardView extends ConsumerWidget {
   DashBoardView({super.key});
 
@@ -66,7 +68,7 @@ class DashBoardView extends ConsumerWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileUserView()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileView()));
                     },
                     child: Container(
                       padding: EdgeInsets.all(5),
