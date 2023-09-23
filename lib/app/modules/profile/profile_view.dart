@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/modules/home/event_view.dart';
+import 'package:simple_prospect/app/modules/home/task_view.dart';
+import 'package:simple_prospect/app/modules/profile/edit_profile_view.dart';
 
 import '../../widgets/custom_appbar.dart';
 
@@ -37,70 +40,121 @@ class ProfileView extends ConsumerWidget {
                 children: [
                   Column(
                     children: [
-                      Positioned(
-                          top: -70,
-                          left: 30,
-                          right: 20,
-                          bottom: 50,
-                          child: Container(
-                            margin: Ei.only(v: 30),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                border: Border.all(color: ColorConstants.secondaryColor, width: 2)),
-                            child: LzImage(
+                      Container(
+                        margin: Ei.only(t: 20),
+                        child: Column(
+                          children: [
+                            LzImage(
                               "poto.jpg",
-                              radius: 50,
+                              size: 150,
+                              radius: 100,
                             ),
-                          )),
+                            SizedBox(height: 10),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfileView()));
+                              },
+                              child: Text(
+                                'Edit Profile',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
 
                       // Informasi profil
                       Container(
-                        padding: Ei.only(t: 10),
-                        color: ColorConstants.secondaryColor,
+                        margin: Ei.only(t: 30),
+                        padding: Ei.only(t: 20),
+                        decoration: BoxDecoration(
+                          color: ColorConstants.secondaryColor,
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                        ),
                         width: double.infinity,
-                        height: 600,
+                        height: 500,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                // Tambahkan aksi
-                              },
-                              child: Text('Edit Profile'),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              height: 40,
-                              width: double.infinity,
-                              color: Color.fromARGB(108, 235, 235, 235),
-                            ),
                             Text(
-                              'Nama Pengguna',
+                              'Tri Ayu Novitasari',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 8),
-                            Row(
-                              children: [
-                                Text(
-                                  'Email: user@example.com',
-                                  style: TextStyle(fontSize: 16),
+                            Container(
+                              padding: Ei.sym(h: 10, v: 10),
+                              child: Text(
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  fontSize: 18,
                                 ),
-                                // Icon(Ti.arrowNarrowRight)
-                              ],
+                              ),
+                            ),
+                            Container(
+                              margin: Ei.only(t: 10),
+                              height: 40,
+                              width: double.infinity,
+                              color: ColorConstants.textSecondaryColor.withOpacity(0.5),
                             ),
                             SizedBox(height: 8),
-                            Text(
-                              'Nomor Telepon: +1234567890',
-                              style: TextStyle(fontSize: 16),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => TaskView()));
+                              },
+                              child: Row(
+                                children: [
+                                  Container(
+                                    padding: Ei.only(t: 10, l: 10),
+                                    child: Text(
+                                      'My Task',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Icon(Icons.chevron_right,
+                                      size: 20), // Ganti "Ti.chevronRight" dengan "Icons.chevron_right"
+                                ],
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => EventView()));
+                              },
+                              child: Row(
+                                children: [
+                                  Container(
+                                    padding: Ei.only(t: 10, l: 10),
+                                    child: Text(
+                                      'Event',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Icon(Ti.chevronRight, size: 20),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  padding: Ei.only(t: 10, l: 10),
+                                  child: Text(
+                                    'Code Referal',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                                Spacer(),
+                                Icon(Ti.chevronRight, size: 20),
+                              ],
                             ),
                           ],
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ],

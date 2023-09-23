@@ -87,7 +87,7 @@ class LoginView extends ConsumerWidget {
                   type: ButtonType.primary,
                   gradient: true,
                   color: null,
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 120),
+                  padding: Ei.sym(v: 10, h: 120),
                   radius: 25.0,
                 ),
                 if (isAuthenticated)

@@ -40,9 +40,6 @@ class HomeView extends ConsumerWidget {
                     }
 
                     if (notifier.activeIndex == 4) {
-                      logg('Ini Action Event');
-                    }
-                    if (notifier.activeIndex == 5) {
                       logg('Ini Action Task');
                       Navigator.of(context).push(
                         MaterialPageRoute(

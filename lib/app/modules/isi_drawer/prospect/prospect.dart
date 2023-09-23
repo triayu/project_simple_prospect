@@ -8,9 +8,6 @@ class ProspectView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('PROSPECT'),
-      ),
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
