@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
+import '../../../constants/color_constants.dart';
+
 class FormTask extends StatelessWidget {
   const FormTask({Key? key}) : super(key: key);
 
@@ -20,22 +22,15 @@ class FormTask extends StatelessWidget {
             child: LzForm.input(
               label: 'Title',
               hint: 'Enter your title',
-              labelStyle: LzFormLabelStyle(),
             ),
           ),
-          Flexible(
-            child: LzForm.input(
-              label: 'Note',
-              hint: 'Enter your note',
-              labelStyle: LzFormLabelStyle(),
-            ),
+          LzForm.input(
+            label: 'Note',
+            hint: 'Enter your note',
           ),
-          Flexible(
-            child: LzForm.input(
-              label: 'Date',
-              hint: 'Enter date',
-              labelStyle: LzFormLabelStyle(),
-            ),
+          LzForm.input(
+            label: 'Date',
+            hint: 'Enter date',
           ),
           Row(
             children: [
@@ -43,7 +38,6 @@ class FormTask extends StatelessWidget {
                 child: LzForm.input(
                   label: 'Start Time',
                   hint: 'Enter start time',
-                  labelStyle: LzFormLabelStyle(),
                 ),
               ),
               SizedBox(width: 10),
@@ -51,37 +45,34 @@ class FormTask extends StatelessWidget {
                 child: LzForm.input(
                   label: 'End Time',
                   hint: 'Enter end time',
-                  labelStyle: LzFormLabelStyle(),
                 ),
               ),
             ],
           ),
-          Flexible(
-            child: InkWell(
-              onTap: () {
-                final options = ['Low', 'Medium', 'Hight'].options();
-                DropX.show(bottomKey, options: options);
-              },
-              child: LzForm.select(
-                label: 'Priority',
-                hint: 'Select Priority',
-                labelStyle: LzFormLabelStyle(),
-              ),
+          InkWell(
+            child: LzForm.select(
+              label: 'Priority',
+              hint: 'Select category',
+              options: List.generate(4, (i) {
+                return Option(option: 'test');
+              }),
             ),
           ),
           Flexible(
             child: LzForm.input(
               label: 'Set Time Reminder',
               hint: 'Enter set time reminder',
-              labelStyle: LzFormLabelStyle(),
             ),
           ),
           Flexible(
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ColorConstants.primaryColor,
+              ),
               onPressed: () {
-                // Aksi
+                // ...
               },
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
           ),
         ],

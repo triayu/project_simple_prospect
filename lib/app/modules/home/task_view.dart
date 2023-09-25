@@ -88,6 +88,7 @@ class TaskView extends ConsumerWidget {
                     ],
                   ),
                   child: ListTile(
+                    contentPadding: Ei.only(b: 15, h: 10),
                     dense: true,
                     tileColor: Colors.white,
                     style: ListTileStyle.list,
@@ -135,8 +136,8 @@ class TaskView extends ConsumerWidget {
                           child: IconButton(
                             icon: Icon(
                               Ti.trash,
-                              color: Colors.red,
-                              size: 15,
+                              color: ColorConstants.errorColor,
+                              size: 20,
                             ),
                             onPressed: () {
                               showDialog(
@@ -179,7 +180,7 @@ class TaskView extends ConsumerWidget {
                           child: IconButton(
                             icon: Icon(
                               Ti.edit,
-                              color: Colors.green,
+                              color: ColorConstants.successColor,
                               size: 20,
                             ),
                             onPressed: () {
@@ -202,12 +203,18 @@ class TaskView extends ConsumerWidget {
                                     ),
                                     actions: [
                                       ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: ColorConstants.primaryColor,
+                                        ),
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
                                         child: Text('Save'),
                                       ),
                                       ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: ColorConstants.primaryColor,
+                                        ),
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },

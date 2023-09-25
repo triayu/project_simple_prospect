@@ -1,164 +1,91 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/modules/home/event_view.dart';
-import 'package:simple_prospect/app/modules/home/task_view.dart';
-import 'package:simple_prospect/app/modules/profile/edit_profile_view.dart';
 
-import '../../widgets/custom_appbar.dart';
-
-class ProfileView extends ConsumerWidget {
-  ProfileView({Key? key}) : super(key: key);
+class ProfileView extends StatelessWidget {
+  const ProfileView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      appBar: AppBar(
+        title: Text('Profile'),
+        centerTitle: true,
+      ),
+      body: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
-          CustomAppBar(
-            backgroundColor: ColorConstants.primaryColor,
-            title: 'Profile',
-            canBack: true,
-            centerTitle: true,
-            actions: [
-              IconButton(
-                icon: Icon(Icons.notifications, color: ColorConstants.secondaryColor),
-                onPressed: () {
-                  // Tambahkan aksi
-                },
-              ),
-            ],
-          ),
-          Positioned(
-            top: 80,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: SingleChildScrollView(
-              child: Col(
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        margin: Ei.only(t: 20),
-                        child: Column(
-                          children: [
-                            LzImage(
-                              "poto.jpg",
-                              size: 150,
-                              radius: 100,
-                            ),
-                            SizedBox(height: 10),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfileView()));
-                              },
-                              child: Text(
-                                'Edit Profile',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
+          SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Stack(
+              children: [
+                Col(
+                  children: [
+                    // Foto
+                    Container(
+                      alignment: Alignment.bottomCenter,
+                      padding: Ei.only(b: 20, t: 40),
+                      child: LzImage(
+                        'poto.jpg',
+                        radius: 70,
+                        size: 130,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Tri Ayu Novitasari',
+                        textAlign: Ta.center,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
                       ),
+                    ),
+                    Container(
+                      padding: Ei.only(b: 20),
+                      alignment: Alignment.center,
+                      child: Text(
+                        '12340987',
+                        textAlign: Ta.center,
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
 
-                      // Informasi profil
-                      Container(
-                        margin: Ei.only(t: 30),
-                        padding: Ei.only(t: 20),
-                        decoration: BoxDecoration(
-                          color: ColorConstants.secondaryColor,
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                    Container(
+                      width: double.infinity,
+                      height: 50,
+                      padding: Ei.only(t: 10),
+                      margin: Ei.only(l: 20, r: 20),
+                      decoration: BoxDecoration(
+                        color: ColorConstants.secondaryColor,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.yellow.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: Container(
+                        padding: Ei.only(b: 10),
+                        margin: Ei.only(l: 20, r: 20),
+                        child: Text(
+                          'Verifikasi Data',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                          ),
                         ),
-                        width: double.infinity,
-                        height: 500,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Tri Ayu Novitasari',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Container(
-                              padding: Ei.sym(h: 10, v: 10),
-                              child: Text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: Ei.only(t: 10),
-                              height: 40,
-                              width: double.infinity,
-                              color: ColorConstants.textSecondaryColor.withOpacity(0.5),
-                            ),
-                            SizedBox(height: 8),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => TaskView()));
-                              },
-                              child: Row(
-                                children: [
-                                  Container(
-                                    padding: Ei.only(t: 10, l: 10),
-                                    child: Text(
-                                      'My Task',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Icon(Icons.chevron_right,
-                                      size: 20), // Ganti "Ti.chevronRight" dengan "Icons.chevron_right"
-                                ],
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => EventView()));
-                              },
-                              child: Row(
-                                children: [
-                                  Container(
-                                    padding: Ei.only(t: 10, l: 10),
-                                    child: Text(
-                                      'Event',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Icon(Ti.chevronRight, size: 20),
-                                ],
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  padding: Ei.only(t: 10, l: 10),
-                                  child: Text(
-                                    'Code Referal',
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                ),
-                                Spacer(),
-                                Icon(Ti.chevronRight, size: 20),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
           ),
         ],

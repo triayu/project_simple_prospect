@@ -10,8 +10,8 @@ class ColorConstants {
   static final bgcolor1 = Utils.hex('18046A');
   static final bgcolor2 = Utils.hex('007383');
   static final bgcolor3 = Utils.hex('45652D');
-  static final errorColor = Utils.hex('FF0000');
-  static final successColor = Utils.hex('00FF00');
+  static final errorColor = Utils.hex('B90202');
+  static final successColor = Utils.hex('3A6A1D');
   static final event1 = Utils.hex('B886C5');
   static final event2 = Utils.hex('0D4B3C');
   static final event3 = Utils.hex('3E2938');

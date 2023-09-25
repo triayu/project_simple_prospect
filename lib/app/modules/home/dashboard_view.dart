@@ -236,7 +236,9 @@ class DashBoardView extends ConsumerWidget {
                       ),
                     ),
                     ListView.separated(
-                        padding: Ei.sym(h: 10),
+                        padding: Ei.sym(
+                          h: 10,
+                        ),
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
@@ -254,6 +256,7 @@ class DashBoardView extends ConsumerWidget {
                               ],
                             ),
                             child: ListTile(
+                              contentPadding: Ei.all(10),
                               dense: true,
                               tileColor: ColorConstants.secondaryColor,
                               style: ListTileStyle.list,

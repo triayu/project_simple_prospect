@@ -32,20 +32,21 @@ class HomeView extends ConsumerWidget {
                   onTap: () {
                     if (notifier.activeIndex == 1) {
                       logg('Ini Action Contact');
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => DialogContactView(),
-                        ),
-                      );
+
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return DialogContactView();
+                          });
                     }
 
                     if (notifier.activeIndex == 4) {
                       logg('Ini Action Task');
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => DialogTaskView(),
-                        ),
-                      );
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return DialogTaskView();
+                          });
                     }
                   },
                   child: Padding(

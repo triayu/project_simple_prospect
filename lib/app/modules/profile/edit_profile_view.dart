@@ -122,6 +122,17 @@ class EditProfileView extends ConsumerWidget {
                                     obsecureToggle: true,
                                   ),
                                 ),
+                                Flexible(
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: ColorConstants.primaryColor,
+                                    ),
+                                    onPressed: () {
+                                      // ...
+                                    },
+                                    child: const Text('Submit'),
+                                  ),
+                                ),
                               ],
                             ),
                           ))

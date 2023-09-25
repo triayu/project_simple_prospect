@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
+import '../../../constants/color_constants.dart';
+
 class FormEvent extends StatelessWidget {
   const FormEvent({Key? key}) : super(key: key);
 
@@ -31,17 +33,14 @@ class FormEvent extends StatelessWidget {
               labelStyle: LzFormLabelStyle(),
             ),
           ),
-          Flexible(
-            child: InkWell(
-              onTap: () {
-                final options = ['Presentation', 'Follow Up', 'Call', 'Other'].options();
-                DropX.show(bottomKey, options: options);
-              },
-              child: LzForm.select(
-                label: 'Meeting Type',
-                hint: 'Select category',
-                labelStyle: LzFormLabelStyle(),
-              ),
+          InkWell(
+            child: LzForm.select(
+              label: 'Meeting Type',
+              hint: 'Select category',
+              options: List.generate(4, (i) {
+                return Option(option: 'test');
+              }),
+              labelStyle: LzFormLabelStyle(),
             ),
           ),
           Row(
@@ -86,10 +85,13 @@ class FormEvent extends StatelessWidget {
           ),
           Flexible(
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ColorConstants.primaryColor,
+              ),
               onPressed: () {
-                // Aksi
+                // ...
               },
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
           ),
         ],

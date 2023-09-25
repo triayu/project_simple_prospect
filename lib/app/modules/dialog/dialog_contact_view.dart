@@ -6,6 +6,7 @@ import 'package:simple_prospect/app/constants/color_constants.dart';
 class DialogContactView extends StatelessWidget {
   final String? title;
 
+
   const DialogContactView({super.key, this.title});
 
   @override
@@ -13,6 +14,7 @@ class DialogContactView extends StatelessWidget {
     return SimpleDialog(
       insetPadding: Ei.zero,
       backgroundColor: Colors.transparent,
+      
       children: [
         Card(
           shape: RoundedRectangleBorder(

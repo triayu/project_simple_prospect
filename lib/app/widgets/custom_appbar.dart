@@ -6,6 +6,7 @@ import '../constants/color_constants.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor, titleAndIconColor;
   final dynamic title;
+
   final double? spacing, elevation;
   final bool canBack, centerTitle;
   final Widget? leading;

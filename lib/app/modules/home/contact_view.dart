@@ -71,7 +71,7 @@ class ContactView extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Icon(Ti.textCaption),
-                        Text('Form Input'),
+                        Text('Tambah Kontak'),
                         Icon(
                           Ti.chevronRight,
                           color: Colors.black,
@@ -114,6 +114,7 @@ class ContactView extends ConsumerWidget {
                             ],
                           ),
                           child: ListTile(
+                            contentPadding: Ei.all(10),
                             dense: true,
                             tileColor: Colors.white,
                             style: ListTileStyle.list,

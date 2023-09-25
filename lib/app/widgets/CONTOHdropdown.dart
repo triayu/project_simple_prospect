@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 
-class DropdownView extends StatelessWidget {
-  const DropdownView({super.key});
+class ContohView extends StatelessWidget {
+  const ContohView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -83,9 +83,11 @@ class WiDrawer extends StatelessWidget {
                     onTap: () {
                       switch (index) {
                         case 0:
+                          Navigator.pop(context);
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ProspectView()));
                           break;
                         case 1:
+                          Navigator.pop(context);
                           Navigator.push(context, MaterialPageRoute(builder: (context) => TutorialView()));
                           break;
                         case 2:
@@ -95,9 +97,11 @@ class WiDrawer extends StatelessWidget {
                           // Navigasi ke refferals
                           break;
                         case 4:
+                          Navigator.pop(context);
                           Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackView()));
                           break;
                         case 5:
+                          Navigator.pop(context);
                           Navigator.push(context, MaterialPageRoute(builder: (context) => MessageView()));
                           break;
                       }

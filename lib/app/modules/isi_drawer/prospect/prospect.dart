@@ -28,7 +28,9 @@ class ProspectView extends ConsumerWidget {
                           ),
                         ),
                         ListView.separated(
-                          padding: Ei.sym(h: 10),
+                          padding: Ei.sym(
+                            h: 10,
+                          ),
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
@@ -53,6 +55,7 @@ class ProspectView extends ConsumerWidget {
                                 dense: true,
                                 tileColor: Colors.white,
                                 style: ListTileStyle.list,
+                                contentPadding: Ei.sym(h: 10, v: 10),
                                 leading: LzImage(
                                   imagePath,
                                   radius: 50,

@@ -66,7 +66,7 @@ class _DialogTaskViewState extends State<DialogTaskView> {
                           });
                         },
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 8),
+                          padding: EdgeInsets.symmetric(vertical: 3),
                           decoration: BoxDecoration(
                             border: selectedFilter == "Task"
                                 ? Border(bottom: BorderSide(color: ColorConstants.primaryColor, width: 2.0))

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
+import '../../../constants/color_constants.dart';
+
 class FormContactView extends StatelessWidget {
   const FormContactView({Key? key}) : super(key: key);
 
@@ -22,7 +24,6 @@ class FormContactView extends StatelessWidget {
                 child: LzForm.input(
                   label: 'First name',
                   hint: 'Enter first name',
-                  labelStyle: LzFormLabelStyle(),
                 ),
               ),
               SizedBox(width: 10),
@@ -30,7 +31,6 @@ class FormContactView extends StatelessWidget {
                 child: LzForm.input(
                   label: 'Last name',
                   hint: 'Enter last name',
-                  labelStyle: LzFormLabelStyle(),
                 ),
               ),
             ],
@@ -39,49 +39,41 @@ class FormContactView extends StatelessWidget {
             child: LzForm.input(
               label: 'Email',
               hint: 'Your email address',
-              labelStyle: LzFormLabelStyle(),
             ),
           ),
           Flexible(
             child: LzForm.input(
               label: 'Phone number',
               hint: 'Enter phone number',
-              labelStyle: LzFormLabelStyle(),
             ),
           ),
-          Flexible(
-            child: LzForm.input(
-              label: 'Work phone number',
-              hint: 'Enter work phone number',
-              labelStyle: LzFormLabelStyle(),
-            ),
+          LzForm.input(
+            label: 'Work phone number',
+            hint: 'Enter work phone number',
           ),
-          Flexible(
-            child: LzForm.input(
-              label: 'Home phone number',
-              hint: 'Enter home phone number',
-              labelStyle: LzFormLabelStyle(),
-            ),
+          LzForm.input(
+            label: 'Home phone number',
+            hint: 'Enter home phone number',
           ),
-          Flexible(
-            child: InkWell(
-              onTap: () {
-                final options = ['Prospect', 'Team', 'Clients', 'Other'].options();
-                DropX.show(bottomKey, options: options);
-              },
-              child: LzForm.select(
-                label: 'Category',
-                hint: 'Select category',
-                labelStyle: LzFormLabelStyle(),
-              ),
+          InkWell(
+            child: LzForm.select(
+              label: 'Category',
+              hint: 'Select category',
+              options: List.generate(4, (i) {
+                return Option(option: 'test');
+              }),
+              labelStyle: LzFormLabelStyle(),
             ),
           ),
           Flexible(
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ColorConstants.primaryColor,
+              ),
               onPressed: () {
-                // Aksi
+                //  ---
               },
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
           ),
         ],

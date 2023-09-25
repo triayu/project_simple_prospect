@@ -37,8 +37,8 @@ class EventView extends ConsumerWidget {
               calendarFormat: CalendarFormat.week,
               startingDayOfWeek: StartingDayOfWeek.monday,
               daysOfWeekStyle: DaysOfWeekStyle(
-                weekendStyle: TextStyle(color: Colors.red),
-                weekdayStyle: TextStyle(color: Colors.black),
+                weekendStyle: TextStyle(color: ColorConstants.errorColor, fontSize: 15),
+                weekdayStyle: TextStyle(color: ColorConstants.textPrimaryColor, fontSize: 15),
               ),
               calendarStyle: CalendarStyle(
                 selectedDecoration: BoxDecoration(
@@ -46,15 +46,17 @@ class EventView extends ConsumerWidget {
                   shape: BoxShape.circle,
                 ),
                 todayDecoration: BoxDecoration(
-                  color: Colors.blueAccent,
+                  color: ColorConstants.primaryColor,
                   shape: BoxShape.circle,
                 ),
                 markerDecoration: BoxDecoration(
-                  color: Colors.green,
+                  color: ColorConstants.successColor,
                   shape: BoxShape.circle,
                 ),
-                defaultTextStyle: TextStyle(fontSize: 12),
-                todayTextStyle: TextStyle(fontSize: 14),
+                defaultTextStyle: TextStyle(
+                  fontSize: 12,
+                ),
+                todayTextStyle: TextStyle(fontSize: 12),
               ),
               headerStyle: HeaderStyle(
                 titleTextStyle: TextStyle(
@@ -158,7 +160,7 @@ class EventView extends ConsumerWidget {
                         child: IconButton(
                           icon: Icon(
                             Ti.trash,
-                            color: Colors.red,
+                            color: ColorConstants.errorColor,
                             size: 20,
                           ),
                           onPressed: () {
@@ -202,7 +204,7 @@ class EventView extends ConsumerWidget {
                         child: IconButton(
                           icon: Icon(
                             Ti.edit,
-                            color: Colors.green,
+                            color: ColorConstants.successColor,
                             size: 20,
                           ),
                           onPressed: () {
@@ -225,12 +227,18 @@ class EventView extends ConsumerWidget {
                                   ),
                                   actions: [
                                     ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: ColorConstants.primaryColor,
+                                      ),
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
                                       child: Text('Save'),
                                     ),
                                     ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: ColorConstants.primaryColor,
+                                      ),
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
