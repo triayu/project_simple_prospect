@@ -72,8 +72,6 @@ class ContohView extends StatelessWidget {
             child: Row(
               children: [
                 Icon(Ti.settings, key: bottomKey).onPressed(() {
-                
-
                   final options = ['Edit', 'Delete', 'Reminder', 'Uncheck All', 'Sort', 'Share'].options();
                   DropX.show(bottomKey, options: options);
                 })

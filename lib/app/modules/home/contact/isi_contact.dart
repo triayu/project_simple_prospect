@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-import '../form/form_contact/form_contact_view.dart';
-import '../isi_drawer/message_template/isi_pesan_view.dart';
+import '../../form/form_contact/form_contact_view.dart';
+import '../../isi_drawer/message_template/isi_pesan_view.dart';
 
-class ContactView extends ConsumerWidget {
-  const ContactView({Key? key}) : super(key: key);
+class IsiContactView extends ConsumerWidget {
+  const IsiContactView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,30 +20,28 @@ class ContactView extends ConsumerWidget {
             physics: BouncingScrollPhysics(),
             child: Col(
               children: [
+                CustomAppBar(
+                  title: Text('Tutorial'),
+                  centerTitle: true,
+                ),
                 Container(
                   height: 70,
                   width: 400,
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                    padding: Ei.only(h: 10),
+                    child: Container(
+                      height: 20,
+                      width: double.infinity,
+                      child: TextField(
+                        cursorHeight: 20,
+                        cursorColor: ColorConstants.primaryColor,
+                        autofocus: false,
+                        decoration: InputDecoration(
+                          hintText: 'Search by Name, Company ...',
+                          hintStyle: TextStyle(color: ColorConstants.primaryColor),
+                          prefixIcon: Icon(Icons.search, color: ColorConstants.primaryColor),
                         ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.grey,
-                        ),
-                        hintText: 'Search Contact',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        contentPadding: EdgeInsets.only(top: 5),
                       ),
-                      onChanged: (value) {
-                        // ref.read(searchQueryProvider).state = value;
-                      },
-                      style: TextStyle(color: Colors.black38),
                     ),
                   ),
                 ),
