@@ -21,7 +21,7 @@ class IsiContactView extends ConsumerWidget {
             child: Col(
               children: [
                 CustomAppBar(
-                  title: Text('Tutorial'),
+                  title: Text('Kontak Anda'),
                   centerTitle: true,
                 ),
                 Container(

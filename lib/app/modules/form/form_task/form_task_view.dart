@@ -9,7 +9,6 @@ class FormTask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final key = GlobalKey(), bottomKey = GlobalKey();
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Form Contact',

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/modules/home/widgets/wi_dashboard/drawer_widget.dart';
-import 'package:simple_prospect/app/modules/isi_drawer/prospect/prospect.dart';
 import '../../constants/color_constants.dart';
 import '../../providers/home/home_state_provider.dart';
 import '../../widgets/custom_appbar.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/modules/home/contact/broadcast_view.dart';
 
 import 'isi_contact.dart';
 
@@ -131,7 +132,7 @@ class ContactView extends ConsumerWidget {
                     ),
                   ),
                 ),
-                // Broadcast //  MasMessage
+                // Kontak
                 InkWell(
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => IsiContactView()));
@@ -186,10 +187,10 @@ class ContactView extends ConsumerWidget {
                     ),
                   ),
                 ),
-                // Kontak Whatsapp
+                // Broadcast // Pesan Whatsapp
                 InkWell(
                   onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => BroadcastView()));
                   },
                   child: Container(
                     height: 130,
