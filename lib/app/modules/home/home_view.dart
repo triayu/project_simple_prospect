@@ -46,7 +46,7 @@ class HomeView extends ConsumerWidget {
                           });
                     }
 
-                    if (notifier.activeIndex == 4) {
+                    if (notifier.activeIndex == 3) {
                       logg('Ini Action Task');
                       showDialog(
                           context: context,
