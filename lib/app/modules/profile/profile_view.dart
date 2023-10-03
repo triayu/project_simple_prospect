@@ -13,7 +13,7 @@ class ProfileView extends StatelessWidget {
         child: SizedBox(
           child: Stack(
             children: [
-              Col(
+              Column(
                 children: [
                   // Foto
                   Container(
@@ -49,68 +49,68 @@ class ProfileView extends StatelessWidget {
                     ),
                   ),
 
-                  Container(
-                    width: double.infinity,
-                    height: 100,
-                    padding: Ei.only(v: 10),
-                    margin: Ei.only(l: 20, r: 20),
-                    decoration: BoxDecoration(
-                      color: ColorConstants.secondaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.yellow.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: Offset(0, 1),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.verified_user,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                'Verifikasi Data',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                '1 dari 5 data belum terverifikasi ',
-                                style: TextStyle(color: const Color.fromARGB(255, 216, 198, 31), fontSize: 12),
-                              ),
-                              Spacer(),
-                              Icon(
-                                Ti.alertCircle,
-                                color: const Color.fromARGB(255, 216, 198, 31),
-                                size: 20,
-                              ),
-                            ],
-                          ),
-                          Text(
-                            'Tap untuk verifikasi ',
-                            style: TextStyle(color: Color.fromARGB(255, 216, 198, 31), fontSize: 12),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   width: double.infinity,
+                  //   height: 100,
+                  //   padding: Ei.only(v: 10),
+                  //   margin: Ei.only(l: 20, r: 20),
+                  //   decoration: BoxDecoration(
+                  //     color: ColorConstants.secondaryColor,
+                  //     boxShadow: [
+                  //       BoxShadow(
+                  //         color: Colors.yellow.withOpacity(0.1),
+                  //         spreadRadius: 1,
+                  //         blurRadius: 1,
+                  //         offset: Offset(0, 1),
+                  //       ),
+                  //     ],
+                  //   ),
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.symmetric(horizontal: 20),
+                  //     child: Column(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Row(
+                  //           children: [
+                  //             Icon(
+                  //               Icons.verified_user,
+                  //               color: Colors.black,
+                  //               size: 20,
+                  //             ),
+                  //             SizedBox(width: 10),
+                  //             Text(
+                  //               'Verifikasi Data',
+                  //               style: TextStyle(
+                  //                 fontSize: 14,
+                  //                 fontWeight: FontWeight.bold,
+                  //                 color: Colors.black,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //         Row(
+                  //           children: [
+                  //             Text(
+                  //               '1 dari 5 data belum terverifikasi ',
+                  //               style: TextStyle(color: const Color.fromARGB(255, 216, 198, 31), fontSize: 12),
+                  //             ),
+                  //             Spacer(),
+                  //             Icon(
+                  //               Ti.alertCircle,
+                  //               color: const Color.fromARGB(255, 216, 198, 31),
+                  //               size: 20,
+                  //             ),
+                  //           ],
+                  //         ),
+                  //         Text(
+                  //           'Tap untuk verifikasi ',
+                  //           style: TextStyle(color: Color.fromARGB(255, 216, 198, 31), fontSize: 12),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   Container(
                     padding: Ei.only(h: 20),
                     color: Colors.white,

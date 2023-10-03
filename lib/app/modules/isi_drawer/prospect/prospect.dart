@@ -18,10 +18,10 @@ class ProspectView extends ConsumerWidget {
           height: MediaQuery.of(context).size.height,
           child: Stack(
             children: [
-              Col(
+              Column(
                 children: [
                   // All Contact
-                  Col(
+                  Column(
                     children: [
                       Padding(
                         padding: Ei.all(10),

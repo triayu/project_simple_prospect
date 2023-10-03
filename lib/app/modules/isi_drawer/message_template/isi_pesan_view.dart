@@ -18,7 +18,7 @@ class IsiPesanView extends ConsumerWidget {
           Column(
             children: [
               Expanded(
-                child: Col(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(

@@ -7,6 +7,8 @@ class ColorConstants {
   static final backgroundColor = Utils.hex('F0F0F0');
   static final textPrimaryColor = Utils.hex('000000');
   static final textSecondaryColor = Utils.hex('D9D9D9');
+
+  static final textMediumColor = Utils.hex('CD7B00');
   static final bgcolor1 = Utils.hex('18046A');
   static final bgcolor2 = Utils.hex('007383');
   static final bgcolor3 = Utils.hex('45652D');

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lazyui/config/font.dart';
+
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -13,7 +13,7 @@ class EventView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
-      child: Col(
+      child: Column(
         children: [
           // All Contact
           Container(
@@ -70,56 +70,14 @@ class EventView extends ConsumerWidget {
             ),
           ),
 
-          Row(
-            children: [
-              Padding(
-                padding: Ei.all(10),
-                child: Text(
-                  'Your Event',
-                  style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-              Spacer(),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FormEvent(),
-                    ),
-                  );
-                },
-                child: Container(
-                  height: 30,
-                  width: 70,
-                  margin: EdgeInsets.only(bottom: 10, right: 10, top: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: ColorConstants.primaryColor,
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 3),
-                        child: Icon(
-                          Ti.plus,
-                          size: 15,
-                          color: ColorConstants.secondaryColor,
-                        ),
-                      ),
-                      Text(
-                        'Add Event',
-                        style: TextStyle(
-                          color: ColorConstants.secondaryColor,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
+          Padding(
+            padding: Ei.all(10),
+            child: Text(
+              'Your Event',
+              style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
+
           ListView.separated(
             padding: Ei.sym(h: 10),
             physics: NeverScrollableScrollPhysics(),
@@ -261,6 +219,68 @@ class EventView extends ConsumerWidget {
             },
             itemCount: 4,
           ),
+          Poslign(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              width: 50,
+              height: 50,
+              margin: Ei.only(b: 10, r: 10, t: 30),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: ColorConstants.primaryColor,
+              ),
+              child: IconButton(
+                icon: Icon(
+                  Ti.plus,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => FormEvent(),
+                  ));
+                },
+              ),
+            ),
+          )
+          // InkWell(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => FormEvent(),
+          //       ),
+          //     );
+          //   },
+          //   child: Container(
+          //     height: 30,
+          //     width: 70,
+          //     margin: EdgeInsets.only(bottom: 10, right: 10, top: 10),
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(10),
+          //       color: ColorConstants.primaryColor,
+          //     ),
+          //     child: Row(
+          //       children: [
+          //         Container(
+          //           padding: EdgeInsets.only(left: 3),
+          //           child: Icon(
+          //             Ti.plus,
+          //             size: 15,
+          //             color: ColorConstants.secondaryColor,
+          //           ),
+          //         ),
+          //         Text(
+          //           'Add Event',
+          //           style: TextStyle(
+          //             color: ColorConstants.secondaryColor,
+          //             fontSize: 10,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

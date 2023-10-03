@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lazyui/config/font.dart';
+
 import 'package:lazyui/lazyui.dart' hide Gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/core/text_theme.dart';
 
 import '../../providers/auth/register_provider.dart';
 import '../home/home_view.dart';

@@ -16,7 +16,7 @@ void main() async {
 
   // Initialize LazyUi
   LazyUi.config(
-      textStyle: TextStyle(fontSize: 18.0, color: ColorConstants.textPrimaryColor), radius: 7.0, theme: AppTheme.light);
+      font: TextStyle(fontSize: 18.0, color: ColorConstants.textPrimaryColor), radius: 7.0, theme: AppTheme.light);
 
   // Initialize SharedPreferencesHelper
   await SharedPreferencesHelper.instance.init();

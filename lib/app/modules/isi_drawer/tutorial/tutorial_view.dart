@@ -19,17 +19,13 @@ class TutorialView extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             child: Stack(
               children: [
-                Col(
+                Column(
                   children: [
-                    // All Contact
-                    Col(
+                    // Video Tutorial
+                    Column(
                       children: [
                         Padding(
-                          padding: Ei.all(10),
-                          child: Text(
-                            'Tutorial',
-                            style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
-                          ),
+                          padding: Ei.sym(h: 10, v: 5),
                         ),
                       ],
                     ),
@@ -49,9 +45,9 @@ class TutorialView extends StatelessWidget {
 
                     Container(
                       width: double.infinity,
-                      height: 200,
-                      padding: Ei.only(t: 10),
-                      margin: Ei.only(l: 20, r: 20),
+                      height: 220,
+                      padding: Ei.only(t: 5),
+                      margin: Ei.sym(h: 10),
                       decoration: BoxDecoration(
                         color: ColorConstants.secondaryColor,
                         borderRadius: BorderRadius.only(

@@ -5,7 +5,7 @@ import 'package:simple_prospect/app/modules/isi_drawer/provide_feedback/feedback
 
 import '../../../../constants/color_constants.dart';
 import '../../../isi_drawer/message_template/message_template.dart';
-import '../../../isi_drawer/tutorial/tutorial_view.dart';
+import '../../../isi_drawer/tutorial/list_tutorial.dart';
 
 class WiDrawer extends StatelessWidget {
   const WiDrawer({super.key});
@@ -15,7 +15,7 @@ class WiDrawer extends StatelessWidget {
     return SafeArea(
       child: Drawer(
         width: context.width * 0.8,
-        child: Col(
+        child: Column(
           children: [
             //
             Container(
@@ -88,7 +88,7 @@ class WiDrawer extends StatelessWidget {
                           break;
                         case 1:
                           Navigator.pop(context);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => TutorialView()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ListTutorialView()));
                           break;
                         case 2:
                           // Navigasi ke subscription

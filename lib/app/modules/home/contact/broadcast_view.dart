@@ -31,7 +31,7 @@ class BroadcastView extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             child: Stack(
               children: [
-                Col(
+                Column(
                   children: [
                     // Template Pesan
 
@@ -71,7 +71,9 @@ class BroadcastView extends StatelessWidget {
                                 Spacer(),
                                 Icon(Ti.menu2, key: bottomKey).onPressed(() {
                                   final options = ['Kirim Pesan', 'Edit', 'Hapus'].options();
-                                  DropX.show(bottomKey, options: options);
+                                  DropX.show(bottomKey, options: options, onSelect: (p0) {
+                                    
+                                  },);
                                 })
                               ],
                             ),

@@ -18,7 +18,7 @@ class IsiContactView extends ConsumerWidget {
         children: [
           SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            child: Col(
+            child: Column(
               children: [
                 CustomAppBar(
                   title: Text('Kontak Anda'),
@@ -81,12 +81,13 @@ class IsiContactView extends ConsumerWidget {
                 ),
 
                 // All Contact
-                Col(
+                Column(
                   children: [
                     Padding(
                       padding: Ei.all(10),
                       child: Text(
                         'All Contact',
+                        textAlign: Ta.start,
                         style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),

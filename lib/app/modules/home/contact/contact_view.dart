@@ -16,7 +16,7 @@ class ContactView extends ConsumerWidget {
         children: [
           SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            child: Col(
+            child: Column(
               children: [
                 InkWell(
                   onTap: () {

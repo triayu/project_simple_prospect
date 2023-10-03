@@ -1,9 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lazyui/config/font.dart';
+
 import 'package:lazyui/lazyui.dart' hide Gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/core/text_theme.dart';
 
 import '../profile/profile_view.dart';
 
@@ -37,7 +38,7 @@ class DashBoardView extends ConsumerWidget {
             children: [
               Flexible(
                 flex: 1,
-                child: Col(
+                child: Column(
                   children: [
                     Text(
                       'Halo, Selamat Datang Vivi',
@@ -207,7 +208,7 @@ class DashBoardView extends ConsumerWidget {
                               ),
                             ),
                             SizedBox(width: 10),
-                            Col(
+                            Column(
                               children: [
                                 Text(
                                   'Waktu $index',
@@ -226,7 +227,7 @@ class DashBoardView extends ConsumerWidget {
                   ),
                 ),
                 // TASK TERUPDATE
-                Col(
+                Column(
                   children: [
                     Padding(
                       padding: Ei.only(h: 20, b: 10, t: 10),

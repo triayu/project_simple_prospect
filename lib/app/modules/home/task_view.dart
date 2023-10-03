@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lazyui/config/font.dart';
+
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/modules/form/form_task/form_task_view.dart';
@@ -10,61 +10,19 @@ class TaskView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Col(
+    return Column(
       children: [
         // All Contact
-        Col(
+        Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Row(
-              children: [
-                Padding(
-                  padding: Ei.all(10),
-                  child: Text(
-                    'Task Terupdate',
-                    style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Spacer(),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FormTask(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    height: 30,
-                    width: 70,
-                    margin: EdgeInsets.only(bottom: 10, right: 10, top: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: ColorConstants.primaryColor,
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(left: 3),
-                          child: Icon(
-                            Ti.plus,
-                            size: 15,
-                            color: ColorConstants.secondaryColor,
-                          ),
-                        ),
-                        Text(
-                          'Add Task',
-                          style: TextStyle(
-                            color: ColorConstants.secondaryColor,
-                            fontSize: 10,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
+            Padding(
+              padding: Ei.all(10),
+              child: Text(
+                'Task Terupdate',
+                textAlign: Ta.left,
+                style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
+              ),
             ),
             ListView.separated(
               padding: Ei.sym(h: 10),
@@ -72,7 +30,7 @@ class TaskView extends ConsumerWidget {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Container(
-                  height: 60,
+                  height: 80,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(
                       Radius.circular(15),
@@ -88,17 +46,38 @@ class TaskView extends ConsumerWidget {
                     ],
                   ),
                   child: ListTile(
-                    contentPadding: Ei.only(b: 15, h: 10),
+                    contentPadding: Ei.only(b: 15, h: 10, t: 10),
                     dense: true,
                     tileColor: Colors.white,
                     style: ListTileStyle.list,
-                    title: Text(
-                      'Desc Task $index',
-                      style: TextStyle(
-                        color: ColorConstants.textPrimaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                    title: Row(
+                      children: [
+                        Text(
+                          'Desc Task $index',
+                          style: TextStyle(
+                            color: ColorConstants.textPrimaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Spacer(),
+                        Container(
+                          width: 70,
+                          padding: EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                            color: ColorConstants.textMediumColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Text(
+                            'Medium',
+                            textAlign: Ta.center,
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: ColorConstants.secondaryColor,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     subtitle: Row(
                       children: [
@@ -127,11 +106,7 @@ class TaskView extends ConsumerWidget {
                             color: ColorConstants.textSecondaryColor,
                           ),
                         ),
-                      ],
-                    ),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
+                        Spacer(),
                         Container(
                           child: IconButton(
                             icon: Icon(
@@ -178,54 +153,53 @@ class TaskView extends ConsumerWidget {
                         ),
                         Container(
                           child: IconButton(
-                            icon: Icon(
-                              Ti.edit,
-                              color: ColorConstants.successColor,
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  String editContact = 'Name $index';
-                                  return AlertDialog(
-                                    title: Text('Edit Contact'),
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        TextField(
-                                          decoration: InputDecoration(labelText: 'Name'),
-                                          onChanged: (value) {
-                                            editContact = value;
+                              icon: Icon(
+                                Ti.edit,
+                                color: ColorConstants.successColor,
+                                size: 20,
+                              ),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    String editContact = 'Name $index';
+                                    return AlertDialog(
+                                      title: Text('Edit Contact'),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          TextField(
+                                            decoration: InputDecoration(labelText: 'Name'),
+                                            onChanged: (value) {
+                                              editContact = value;
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      actions: [
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: ColorConstants.primaryColor,
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
                                           },
+                                          child: Text('Save'),
+                                        ),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: ColorConstants.primaryColor,
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text('Cancel'),
                                         ),
                                       ],
-                                    ),
-                                    actions: [
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: ColorConstants.primaryColor,
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('Save'),
-                                      ),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: ColorConstants.primaryColor,
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('Cancel'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                          ),
+                                    );
+                                  },
+                                );
+                              }),
                         ),
                       ],
                     ),
@@ -239,6 +213,30 @@ class TaskView extends ConsumerWidget {
             ),
           ],
         ),
+        Poslign(
+          alignment: Alignment.bottomRight,
+          child: Container(
+            width: 50,
+            height: 50,
+            margin: Ei.only(b: 10, r: 10, t: 30),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: ColorConstants.primaryColor,
+            ),
+            child: IconButton(
+              icon: Icon(
+                Ti.plus,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => FormTask(),
+                ));
+              },
+            ),
+          ),
+        )
       ],
     );
   }

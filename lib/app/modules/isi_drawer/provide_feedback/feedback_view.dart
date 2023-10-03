@@ -13,9 +13,9 @@ class FeedbackView extends ConsumerWidget {
         title: Text('Feedback'),
         centerTitle: true,
       ),
-      body: Col(
+      body: Column(
         children: [
-          Col(
+          Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(

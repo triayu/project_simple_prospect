@@ -33,7 +33,7 @@ class EditProfileView extends ConsumerWidget {
             right: 0,
             bottom: 0,
             child: SingleChildScrollView(
-              child: Col(
+              child: Column(
                 children: [
                   Column(
                     children: [

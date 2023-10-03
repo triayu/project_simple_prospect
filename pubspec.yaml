@@ -36,9 +36,9 @@ dependencies:
   flutter_hooks: ^0.20.0
   flutter_localization: ^0.1.13
   flutter_native_splash: ^2.3.2
-  google_fonts: ^4.0.4
+  google_fonts: any
   hooks_riverpod: ^2.3.6
-  lazyui: ^0.4.8
+  lazyui: ^1.0.11
   riverpod: ^2.3.6
   shared_preferences: ^2.2.0
   table_calendar: ^3.0.9
