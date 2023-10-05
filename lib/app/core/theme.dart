@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/core/text_theme.dart';
 
 ThemeData appTheme = ThemeData(
   appBarTheme: AppBarTheme(
@@ -17,4 +17,3 @@ ThemeData appTheme = ThemeData(
     titleSmall: gfont,
   ),
 );
-

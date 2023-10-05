@@ -1,29 +1,57 @@
+import 'dart:async';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:lazyui/lazyui.dart';
 
-import '../../data/models/banner_intro_model.dart';
+final appIntroNotifier = ChangeNotifierProvider((ref) => AppIntroNotifier());
 
-class CarouselStateNotifier extends StateNotifier<BannerIntroModel> {
-  CarouselStateNotifier() : super(BannerIntroModel());
+class AppIntroNotifier with ChangeNotifier {
+  int index = 0;
+  CarouselController carouselController = CarouselController();
 
-  void setBanner(BannerIntroModel banners) {
-    state = banners;
+  void onChange(int value) {
+    index = value;
+    notifyListeners();
   }
 
-  void setPage(int index) {}
+  // line bar progress
+  double width = 0;
+  int duration = 5;
+  Timer? timer;
 
-  // void goToNext() {
-  //   state++;
-  // }
+  void startTimer(double screenWidth) {
+    timer?.cancel();
 
-  // void goToPrevious() {
-  //   state--;
-  // }
+    try {
+      width = 0;
+      if (index >= 2) {
+        index = 0;
+        carouselController.animateToPage(0);
+      }
 
-  // void setPage(int index) {
-  //   state = index;
-  // }
+      timer = Timer.periodic(150.ms, (timer) {
+        width = (duration * 1000) / screenWidth * timer.tick;
+        notifyListeners();
+
+        if (width >= (screenWidth + 20)) {
+          carouselController.nextPage();
+
+          timer.cancel();
+          startTimer(screenWidth);
+        }
+
+        logg(width);
+      });
+    } catch (e) {
+      logg(e);
+    }
+  }
+
+  void onDispose() {
+    timer?.cancel();
+    timer = null;
+    dispose();
+  }
 }
-
-final carouselStateProvider = StateNotifierProvider<CarouselStateNotifier, BannerIntroModel>((ref) {
-  return CarouselStateNotifier();
-});

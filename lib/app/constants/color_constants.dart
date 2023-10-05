@@ -7,6 +7,7 @@ class ColorConstants {
   static final backgroundColor = Utils.hex('F0F0F0');
   static final textPrimaryColor = Utils.hex('000000');
   static final textSecondaryColor = Utils.hex('D9D9D9');
+  static final softBlack = Utils.hex('43424A');
 
   static final textMediumColor = Utils.hex('CD7B00');
   static final bgcolor1 = Utils.hex('18046A');
@@ -14,7 +15,7 @@ class ColorConstants {
   static final bgcolor3 = Utils.hex('45652D');
   static final errorColor = Utils.hex('B90202');
   static final successColor = Utils.hex('3A6A1D');
-  static final event1 = Utils.hex('B886C5');
-  static final event2 = Utils.hex('0D4B3C');
-  static final event3 = Utils.hex('3E2938');
+  static final event1 = Utils.hex('44328D');
+  static final event2 = Utils.hex('117E8D');
+  static final event3 = Utils.hex('214A00');
 }

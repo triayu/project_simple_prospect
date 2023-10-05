@@ -10,72 +10,62 @@ class FormTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Form Contact',
-        canBack: true,
-      ),
-      body: LzFormList(
-        style: LzFormStyle(),
-        children: [
-          Flexible(
-            child: LzForm.input(
+        appBar: CustomAppBar(
+          title: 'Add Task',
+          canBack: true,
+        ),
+        body: LzFormList(
+          style: LzFormStyle(
+              inputLabelFontWeight: FontWeight.w400,
+              type: FormType.topInner,
+              inputBorderColor: ColorConstants.softBlack),
+          children: [
+            LzForm.input(
               label: 'Title',
               hint: 'Enter your title',
             ),
-          ),
-          LzForm.input(
-            label: 'Note',
-            hint: 'Enter your note',
-          ),
-          LzForm.input(
-            label: 'Date',
-            hint: 'Enter date',
-          ),
-          Row(
-            children: [
-              Flexible(
-                child: LzForm.input(
-                  label: 'Start Time',
-                  hint: 'Enter start time',
+            LzForm.input(
+              label: 'Note',
+              hint: 'Enter your note',
+            ),
+            LzForm.input(
+              label: 'Date',
+              hint: 'Enter date',
+            ),
+            Row(
+              children: [
+                Flexible(
+                  child: LzForm.input(
+                    label: 'Start Time',
+                    hint: 'Enter start time',
+                  ),
                 ),
-              ),
-              SizedBox(width: 10),
-              Flexible(
-                child: LzForm.input(
-                  label: 'End Time',
-                  hint: 'Enter end time',
+                SizedBox(width: 10),
+                Flexible(
+                  child: LzForm.input(
+                    label: 'End Time',
+                    hint: 'Enter end time',
+                  ),
                 ),
-              ),
-            ],
-          ),
-          InkWell(
-            child: LzForm.select(
+              ],
+            ),
+            LzForm.select(
               label: 'Priority',
               hint: 'Select category',
               options: List.generate(4, (i) {
                 return Option(option: 'test');
               }),
             ),
-          ),
-          Flexible(
-            child: LzForm.input(
+            LzForm.input(
               label: 'Set Time Reminder',
               hint: 'Enter set time reminder',
             ),
-          ),
-          Flexible(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ColorConstants.primaryColor,
-              ),
-              onPressed: () {
-                // ...
-              },
-              child: const Text('Submit'),
-            ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+        bottomNavigationBar: LzButton(
+          text: 'Add Task',
+          color: ColorConstants.softBlack,
+          onTap: (val) {},
+        ).dark(Colors.white).theme1());
   }
 }

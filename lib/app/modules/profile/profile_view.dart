@@ -9,149 +9,88 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        padding: Ei.sym(v: 20),
         physics: BouncingScrollPhysics(),
-        child: SizedBox(
-          child: Stack(
-            children: [
-              Column(
+        child: Column(
+          children: [
+            Container(
+              padding: Ei.only(t: 20, b: 20),
+              child: Column(
                 children: [
-                  // Foto
-                  Container(
-                    alignment: Alignment.bottomCenter,
-                    padding: Ei.only(b: 20, t: 40),
+                  SizedBox(
                     child: LzImage(
                       'poto.jpg',
                       radius: 70,
                       size: 130,
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Tri Ayu Novitasari',
-                      textAlign: Ta.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                  Textr(
+                    'Tri Ayu Novitasari',
+                    textAlign: Ta.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
+                    margin: Ei.only(b: 10),
                   ),
-                  Container(
-                    padding: Ei.only(b: 20),
-                    alignment: Alignment.center,
-                    child: Text(
-                      '12340987',
-                      textAlign: Ta.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
+                  Textr(
+                    '12340987',
+                    textAlign: Ta.center,
+                    style: TextStyle(
+                      fontSize: 18,
                     ),
+                    margin: Ei.only(b: 10),
                   ),
+                ],
+              ),
+            ),
+            Container(
+              padding: Ei.sym(h: 20),
+              margin: Ei.sym(h: 20),
+              width: context.width,
+              decoration: BoxDecoration(color: Colors.white, border: Br.all(color: Colors.black.withOpacity(0.1))),
+              child: Column(
+                children: [
+                  // Foto
 
-                  // Container(
-                  //   width: double.infinity,
-                  //   height: 100,
-                  //   padding: Ei.only(v: 10),
-                  //   margin: Ei.only(l: 20, r: 20),
-                  //   decoration: BoxDecoration(
-                  //     color: ColorConstants.secondaryColor,
-                  //     boxShadow: [
-                  //       BoxShadow(
-                  //         color: Colors.yellow.withOpacity(0.1),
-                  //         spreadRadius: 1,
-                  //         blurRadius: 1,
-                  //         offset: Offset(0, 1),
-                  //       ),
-                  //     ],
-                  //   ),
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.symmetric(horizontal: 20),
-                  //     child: Column(
-                  //       mainAxisAlignment: MainAxisAlignment.center,
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Row(
-                  //           children: [
-                  //             Icon(
-                  //               Icons.verified_user,
-                  //               color: Colors.black,
-                  //               size: 20,
-                  //             ),
-                  //             SizedBox(width: 10),
-                  //             Text(
-                  //               'Verifikasi Data',
-                  //               style: TextStyle(
-                  //                 fontSize: 14,
-                  //                 fontWeight: FontWeight.bold,
-                  //                 color: Colors.black,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //         Row(
-                  //           children: [
-                  //             Text(
-                  //               '1 dari 5 data belum terverifikasi ',
-                  //               style: TextStyle(color: const Color.fromARGB(255, 216, 198, 31), fontSize: 12),
-                  //             ),
-                  //             Spacer(),
-                  //             Icon(
-                  //               Ti.alertCircle,
-                  //               color: const Color.fromARGB(255, 216, 198, 31),
-                  //               size: 20,
-                  //             ),
-                  //           ],
-                  //         ),
-                  //         Text(
-                  //           'Tap untuk verifikasi ',
-                  //           style: TextStyle(color: Color.fromARGB(255, 216, 198, 31), fontSize: 12),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  Container(
-                    padding: Ei.only(h: 20),
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text("ID Anda", style: gfont.copyWith(color: LzColors.grey)),
-                          subtitle: Text('1234987', style: Gfont.black),
-                          onTap: () {},
-                        ),
-                        Divider(),
-                        ListTile(
-                          title: Text("Nama Lengkap", style: gfont.copyWith(color: LzColors.grey)),
-                          subtitle: Text('Tri Ayu Novitasari', style: Gfont.black),
-                          onTap: () {
-                            // Aksi
-                          },
-                        ),
-                        Divider(),
-                        ListTile(
-                          title: Text("Alamat", style: gfont.copyWith(color: LzColors.grey)),
-                          subtitle: Text('Jl. Lijen, Glagah, Kp. Baru', style: Gfont.black),
-                          onTap: () {
-                            // Aksi
-                          },
-                        ),
-                        Divider(),
-                        ListTile(
-                          title: Text("No. Telepon", style: gfont.copyWith(color: LzColors.grey)),
-                          subtitle: Text('08123456789', style: Gfont.black),
-                          onTap: () {
-                            // Aksi
-                          },
-                        ),
-                      ],
-                    ),
+                  Column(
+                    children: [
+                      ListTile(
+                        title: Text("ID Anda", style: gfont.copyWith(color: LzColors.grey)),
+                        subtitle: Text('1234987', style: Gfont.black),
+                        onTap: () {},
+                      ),
+                      Divider(),
+                      ListTile(
+                        title: Text("Nama Lengkap", style: gfont.copyWith(color: LzColors.grey)),
+                        subtitle: Text('Tri Ayu Novitasari', style: Gfont.black),
+                        onTap: () {
+                          // Aksi
+                        },
+                      ),
+                      Divider(),
+                      ListTile(
+                        title: Text("Alamat", style: gfont.copyWith(color: LzColors.grey)),
+                        subtitle: Text('Jl. Lijen, Glagah, Kp. Baru', style: Gfont.black),
+                        onTap: () {
+                          // Aksi
+                        },
+                      ),
+                      Divider(),
+                      ListTile(
+                        title: Text("No. Telepon", style: gfont.copyWith(color: LzColors.grey)),
+                        subtitle: Text('08123456789', style: Gfont.black),
+                        onTap: () {
+                          // Aksi
+                        },
+                      ),
+                    ],
                   )
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

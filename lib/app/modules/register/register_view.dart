@@ -21,61 +21,39 @@ class RegisterView extends ConsumerWidget {
         child: SingleChildScrollView(
           padding: Ei.sym(h: 20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               LzImage(
                 'logo.png',
                 size: 150,
+                fit: BoxFit.cover,
               ),
               Textr(
                 'Register',
                 margin: Ei.only(b: 20),
                 style: Gfont.fs(20).copyWith(fontWeight: FontWeight.bold, color: ColorConstants.primaryColor),
               ),
-              Container(
-                margin: Ei.only(b: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: ColorConstants.primaryColor, width: 1),
-                ),
-                child: LzForm.input(
-                  label: 'Fisrt name',
-                  hint: 'Type your username',
-                ),
-              ),
-              Container(
-                margin: Ei.only(b: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: ColorConstants.primaryColor, width: 1),
-                ),
-                child: LzForm.input(
-                  label: 'Last name',
-                  hint: 'Type your username',
-                ),
-              ),
-              Container(
-                margin: Ei.only(b: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: ColorConstants.primaryColor, width: 1),
-                ),
-                child: LzForm.input(
-                  label: 'Email',
-                  hint: 'Your email address',
-                ),
-              ),
-              Container(
-                margin: Ei.only(b: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: ColorConstants.primaryColor, width: 1),
-                ),
-                child: LzForm.input(
-                  label: 'Password',
-                  hint: 'Type your password',
-                  obsecureToggle: true,
-                ),
+              LzFormGroup(
+                keepLabel: true,
+                sublabelStyle: SublabelStyle.text,
+                children: [
+                  LzForm.input(
+                    label: 'Fisrt name',
+                    hint: 'Type your username',
+                  ),
+                  LzForm.input(
+                    label: 'Last name',
+                    hint: 'Type your username',
+                  ),
+                  LzForm.input(
+                    label: 'Email',
+                    hint: 'Your email address',
+                  ),
+                  LzForm.input(
+                    label: 'Password',
+                    hint: 'Type your password',
+                    obsecureToggle: true,
+                  ),
+                ],
               ),
               SizedBox(height: 20),
               LzButton(
@@ -92,7 +70,8 @@ class RegisterView extends ConsumerWidget {
                 color: null,
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 120),
                 radius: 25.0,
-              )
+              ),
+              SizedBox(height: 20),
             ],
           ),
         ),

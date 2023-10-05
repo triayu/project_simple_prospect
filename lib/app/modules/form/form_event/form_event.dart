@@ -9,32 +9,30 @@ class FormEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final key = GlobalKey(), bottomKey = GlobalKey();
+    // final key = GlobalKey(), bottomKey = GlobalKey();
+
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Form Contact',
-        canBack: true,
-      ),
-      body: LzFormList(
-        style: LzFormStyle(),
-        children: [
-          Flexible(
-            child: LzForm.input(
+        appBar: CustomAppBar(
+          title: 'Add Event',
+          canBack: true,
+        ),
+        body: LzFormList(
+          style: LzFormStyle(
+              inputLabelFontWeight: FontWeight.w400,
+              type: FormType.topInner,
+              inputBorderColor: ColorConstants.softBlack),
+          children: [
+            LzForm.input(
               label: 'Title',
               hint: 'Enter your title',
               labelStyle: LzFormLabelStyle(),
             ),
-          ),
-          SizedBox(width: 10),
-          Flexible(
-            child: LzForm.input(
+            LzForm.input(
               label: 'Meeting With',
               hint: 'Enter meeting with',
               labelStyle: LzFormLabelStyle(),
             ),
-          ),
-          InkWell(
-            child: LzForm.select(
+            LzForm.select(
               label: 'Meeting Type',
               hint: 'Select category',
               options: List.generate(4, (i) {
@@ -42,60 +40,46 @@ class FormEvent extends StatelessWidget {
               }),
               labelStyle: LzFormLabelStyle(),
             ),
-          ),
-          Row(
-            children: [
-              Flexible(
-                child: LzForm.input(
-                  label: 'Start Time',
-                  hint: 'Enter start time',
-                  labelStyle: LzFormLabelStyle(),
+            Row(
+              children: [
+                Flexible(
+                  child: LzForm.input(
+                    label: 'Start Time',
+                    hint: 'Enter start time',
+                    labelStyle: LzFormLabelStyle(),
+                  ),
                 ),
-              ),
-              SizedBox(width: 10),
-              Flexible(
-                child: LzForm.input(
-                  label: 'End Time',
-                  hint: 'Enter end time',
-                  labelStyle: LzFormLabelStyle(),
+                SizedBox(width: 10),
+                Flexible(
+                  child: LzForm.input(
+                    label: 'End Time',
+                    hint: 'Enter end time',
+                    labelStyle: LzFormLabelStyle(),
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Flexible(
-            child: LzForm.input(
+              ],
+            ),
+            LzForm.input(
               label: 'Location',
               hint: 'Enter locationr',
               labelStyle: LzFormLabelStyle(),
             ),
-          ),
-          Flexible(
-            child: LzForm.input(
+            LzForm.input(
               label: 'Set Time Reminder',
               hint: 'Enter set time reminder',
               labelStyle: LzFormLabelStyle(),
             ),
-          ),
-          Flexible(
-            child: LzForm.input(
+            LzForm.input(
               label: 'Note Event',
               hint: 'Enter note event',
               labelStyle: LzFormLabelStyle(),
             ),
-          ),
-          Flexible(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ColorConstants.primaryColor,
-              ),
-              onPressed: () {
-                // ...
-              },
-              child: const Text('Submit'),
-            ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+        bottomNavigationBar: LzButton(
+          text: 'Add Event',
+          color: ColorConstants.softBlack,
+          onTap: (val) {},
+        ).dark(Colors.white).theme1());
   }
 }

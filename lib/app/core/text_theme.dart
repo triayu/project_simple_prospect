@@ -4,13 +4,13 @@ import 'package:simple_prospect/app/constants/color_constants.dart';
 // import 'package:riverpod_example/app/constants/color_constants.dart';
 
 TextStyle gfont = GoogleFonts.getFont(
-  "Open Sans",
-  fontSize: 15.5,
+  "Poppins",
+  fontSize: 16,
   color: ColorConstants.textPrimaryColor,
 );
 
 TextStyle gfontBold =
-    GoogleFonts.getFont("Open Sans", fontSize: 15.5, color: ColorConstants.primaryColor, fontWeight: FontWeight.bold);
+    GoogleFonts.getFont("Poppins", fontSize: 15.5, color: ColorConstants.primaryColor, fontWeight: FontWeight.bold);
 
 class Gfont {
   // size

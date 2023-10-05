@@ -1,12 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'package:lazyui/lazyui.dart' hide Gfont;
+import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
-
-import '../profile/profile_view.dart';
 
 class DashBoardView extends ConsumerWidget {
   DashBoardView({super.key});
@@ -20,293 +17,271 @@ class DashBoardView extends ConsumerWidget {
   ];
 
   final List<Color> customColorsevent = [
-    ColorConstants.event1.withOpacity(0.5),
-    ColorConstants.event2.withOpacity(0.5),
-    ColorConstants.event3.withOpacity(0.5),
+    ColorConstants.event1,
+    ColorConstants.event2,
+    ColorConstants.event3,
   ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      children: [
-        // // HEADER
-        Container(
-          padding: Ei.only(h: 20, b: 5, t: 15),
-          decoration: BoxDecoration(border: Br.only(['b'], color: Colors.black.withOpacity(0.1))),
-          child: Row(
-            mainAxisAlignment: Maa.spaceBetween,
-            children: [
-              Flexible(
-                flex: 1,
-                child: Column(
-                  children: [
-                    Text(
-                      'Halo, Selamat Datang Vivi',
-                      style: Gfont.fs(18).copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 1,
-                      overflow: Tof.ellipsis,
-                    ),
-                    Text(
-                      'Good Morning',
-                      style: Gfont.fs(16).copyWith(color: ColorConstants.textSecondaryColor),
-                      maxLines: 1,
-                      overflow: Tof.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                children: [
-                  Container(
-                    padding: Ei.all(5),
-                    child: Icon(
-                      Ti.bellFilled,
-                      color: ColorConstants.primaryColor,
-                      size: 25,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileView()));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      child: LzImage(
-                        'poto.jpg',
-                        width: 50,
-                        height: 50,
-                        radius: 30,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-
-        // SLIDER
-        Expanded(
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            padding: Ei.sym(v: 10),
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Column(
+        mainAxisAlignment: Maa.start,
+        crossAxisAlignment: Caa.start,
+        children: [
+          // // HEADER
+          Container(
+            padding: Ei.sym(h: 20, v: 25),
             child: Column(
+              mainAxisAlignment: Maa.start,
+              crossAxisAlignment: Caa.start,
               children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: Ei.only(h: 20, b: 10, t: 10),
-                    child: Text(
-                      'Goals',
-                      style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
-                    ),
+                Text(
+                  'Halo, Selamat Datang Vivi',
+                  style: gfont.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    color: ColorConstants.textPrimaryColor,
                   ),
+                  maxLines: 2,
+                  overflow: Tof.ellipsis,
                 ),
-                CarouselSlider(
-                  options: CarouselOptions(viewportFraction: 0.9, height: 200),
-                  items: [1, 2, 3, 4, 5].map((i) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 5.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: customColors[i - 1],
-                          ),
-                          child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.center,
-                                child: RichText(
-                                  textAlign: TextAlign.center,
-                                  strutStyle: StrutStyle(fontSize: 50.0),
-                                  text: TextSpan(
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: '0',
-                                        style: Gfont.fs(65).copyWith(color: ColorConstants.secondaryColor),
-                                      ),
-                                      TextSpan(
-                                        text: ' / ',
-                                        style: Gfont.fs(50).copyWith(color: ColorConstants.secondaryColor),
-                                      ),
-                                      TextSpan(
-                                        text: '0',
-                                        style: Gfont.fs(35).copyWith(color: ColorConstants.secondaryColor),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Padding(
-                                  padding: Ei.only(l: 10, b: 10),
-                                  child: Text(
-                                    'Prospect Booked $i',
-                                    style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
+                Text(
+                  'Good Morning',
+                  style: Gfont.fs(16).copyWith(color: ColorConstants.textSecondaryColor),
+                  maxLines: 1,
+                  overflow: Tof.ellipsis,
                 ),
+              ],
+            ),
+          ),
 
-                // EVENT TERUPDATE
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: Ei.only(h: 20, b: 10, t: 10),
-                    child: Text(
-                      'Event Terupdate',
-                      style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-
-                SizedBox(
-                  height: 90,
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    padding: Ei.only(h: 10, b: 5),
-                    separatorBuilder: (context, index) => SizedBox(width: 10),
-                    itemCount: 3,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      Color backgroundColor = customColorsevent[index % customColors.length];
-
+          // SLIDER
+          Column(
+            children: [
+              CarouselSlider(
+                options: CarouselOptions(viewportFraction: 0.9, height: context.height * 0.25),
+                items: [1, 2, 3, 4, 5].map((i) {
+                  return Builder(
+                    builder: (BuildContext context) {
                       return Container(
-                        padding: Ei.all(10),
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(
-                          color: backgroundColor,
                           borderRadius: BorderRadius.circular(10),
+                          color: customColors[i - 1],
                         ),
-                        child: Row(
-                          mainAxisAlignment: Maa.spaceBetween,
+                        child: Stack(
                           children: [
-                            Container(
-                              padding: Ei.all(10),
-                              decoration: BoxDecoration(
-                                color: ColorConstants.secondaryColor.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'tanggal $index',
-                                    style: Gfont.fs(10).copyWith(color: ColorConstants.secondaryColor),
+                            Positioned.fill(
+                                top: -50,
+                                bottom: -50,
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: LzImage(
+                                    'banner_ornament.svg',
+                                    size: context.width,
+                                    fit: BoxFit.fitHeight,
                                   ),
-                                ],
+                                )),
+                            Poslign(
+                              margin: Ei.only(t: context.viewPadding.top + 30),
+                              alignment: Alignment.topCenter,
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                strutStyle: StrutStyle(fontSize: 50.0),
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: '0',
+                                      style: Gfont.fs(65).copyWith(color: ColorConstants.secondaryColor),
+                                    ),
+                                    TextSpan(
+                                      text: ' / ',
+                                      style: Gfont.fs(50).copyWith(color: ColorConstants.secondaryColor),
+                                    ),
+                                    TextSpan(
+                                      text: '0',
+                                      style: Gfont.fs(35).copyWith(color: ColorConstants.secondaryColor),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            SizedBox(width: 10),
-                            Column(
-                              children: [
-                                Text(
-                                  'Waktu $index',
-                                  style: Gfont.fs(10).copyWith(color: ColorConstants.secondaryColor),
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Padding(
+                                padding: Ei.only(l: 10, b: 10),
+                                child: Text(
+                                  'Prospect Booked $i',
+                                  style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
                                 ),
-                                Text(
-                                  'Meeting $index',
-                                  style: Gfont.fs(16).copyWith(color: ColorConstants.secondaryColor),
-                                ),
-                              ],
+                              ),
                             ),
                           ],
                         ),
                       );
                     },
+                  );
+                }).toList(),
+              ),
+
+              // EVENT TERUPDATE
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: Ei.only(h: 20, b: 10, t: 30),
+                  child: Text(
+                    'Aktifitas yang akan datang',
+                    style: Gfont.fs(20).copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
-                // TASK TERUPDATE
-                Column(
-                  children: [
-                    Padding(
-                      padding: Ei.only(h: 20, b: 10, t: 10),
-                      child: Text(
-                        'Task Terupdate',
-                        style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
+              ),
+
+              SizedBox(
+                height: 90,
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  padding: Ei.only(h: 10, b: 5),
+                  separatorBuilder: (context, index) => SizedBox(width: 10),
+                  itemCount: 3,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: ColorConstants.softBlack,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    ),
-                    ListView.separated(
-                        padding: Ei.sym(
-                          h: 10,
-                        ),
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: ColorConstants.secondaryColor,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  spreadRadius: 1,
-                                  blurRadius: 1,
-                                  offset: Offset(0, 1),
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                              top: -50,
+                              bottom: -50,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: LzImage(
+                                  'banner_ornament.svg',
+                                  size: context.width,
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              )),
+                          Container(
+                            padding: Ei.all(10),
+                            child: Row(
+                              mainAxisAlignment: Maa.spaceBetween,
+                              crossAxisAlignment: Caa.center,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '16/8/2023',
+                                      style: Gfont.fs(16).copyWith(color: ColorConstants.secondaryColor),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(width: 10),
+                                Column(
+                                  mainAxisAlignment: Maa.center,
+                                  crossAxisAlignment: Caa.start,
+                                  children: [
+                                    Text(
+                                      'Waktu $index',
+                                      style: Gfont.fs(14).copyWith(color: ColorConstants.secondaryColor),
+                                    ),
+                                    Text(
+                                      'Meeting $index',
+                                      style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                            child: ListTile(
-                              contentPadding: Ei.all(10),
-                              dense: true,
-                              tileColor: ColorConstants.secondaryColor,
-                              style: ListTileStyle.list,
-                              title: Text(
-                                'Hasil Meeting $index',
-                                style: Gfont.fs(16),
-                              ),
-                              subtitle: Row(
-                                children: [
-                                  Text('Contact $index'),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      color: ColorConstants.event2.withOpacity(0.10),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Text(
-                                      'Reminder : 23/09/2023 04.00 PM',
-                                      style: TextStyle(
-                                        fontSize: 8,
-                                        color: ColorConstants.textPrimaryColor,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              trailing: Column(
-                                children: [
-                                  Text('23', style: TextStyle(fontSize: 10)),
-                                  Text('Jan', style: TextStyle(fontSize: 10)),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(height: 10);
-                        },
-                        itemCount: 4),
-                  ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
-              ],
-            ),
-          ),
-        )
-      ],
+              ),
+
+              // ======================
+              // TASK TERUPDATE
+              // ======================
+              Column(
+                mainAxisAlignment: Maa.start,
+                crossAxisAlignment: Caa.start,
+                children: [
+                  Padding(
+                    padding: Ei.only(h: 20, b: 10, t: 30),
+                    child: Text(
+                      'Task Terupdate',
+                      style: Gfont.fs(20).copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  ListView.separated(
+                      padding: Ei.only(h: 10, b: 30),
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: ColorConstants.secondaryColor,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: Offset(0, 1),
+                              ),
+                            ],
+                          ),
+                          child: ListTile(
+                            contentPadding: Ei.all(10),
+                            dense: true,
+                            minVerticalPadding: 10,
+                            tileColor: ColorConstants.secondaryColor,
+                            style: ListTileStyle.list,
+                            title: Textr(
+                              'Hasil Meeting $index',
+                              style: Gfont.fs(16),
+                              margin: Ei.only(b: 5),
+                            ),
+                            subtitle: Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: ColorConstants.event2.withOpacity(0.10),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Text(
+                                    'Reminder : 23/09/2023 04.00 PM',
+                                    style: Gfont.fs(12).copyWith(color: ColorConstants.event2),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            trailing: Column(
+                              children: [
+                                Text('Dates', style: Gfont.fs14),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return SizedBox(height: 15);
+                      },
+                      itemCount: 4),
+                ],
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
