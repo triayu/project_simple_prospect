@@ -15,43 +15,4 @@ class AppIntroNotifier with ChangeNotifier {
     index = value;
     notifyListeners();
   }
-
-  // line bar progress
-  double width = 0;
-  int duration = 5;
-  Timer? timer;
-
-  void startTimer(double screenWidth) {
-    timer?.cancel();
-
-    try {
-      width = 0;
-      if (index >= 2) {
-        index = 0;
-        carouselController.animateToPage(0);
-      }
-
-      timer = Timer.periodic(150.ms, (timer) {
-        width = (duration * 1000) / screenWidth * timer.tick;
-        notifyListeners();
-
-        if (width >= (screenWidth + 20)) {
-          carouselController.nextPage();
-
-          timer.cancel();
-          startTimer(screenWidth);
-        }
-
-        logg(width);
-      });
-    } catch (e) {
-      logg(e);
-    }
-  }
-
-  void onDispose() {
-    timer?.cancel();
-    timer = null;
-    dispose();
-  }
 }

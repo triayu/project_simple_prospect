@@ -1,5 +1,5 @@
 {
-  "cmake.sourceDirectory": "${workspaceFolder}/example/linux",
+  "cmake.sourceDirectory": "D:/Development/mobile/project_simple_prospect/linux",
   "dart.lineLength": 120,
   "[dart]": {
     "editor.rulers": [120]

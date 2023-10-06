@@ -1,25 +1,33 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lazyui/lazyui.dart';
+import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/modules/login/login_view.dart';
 import 'package:simple_prospect/app/widgets/widget.dart';
+
+import '../../providers/onboarding/onboarding_provider.dart';
 
 class OnboardingView extends ConsumerWidget {
   const OnboardingView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<String> images = ['logo.png', 'onboarding1.png', 'onboarding2.png'];
+    final notifier = ref.watch(appIntroNotifier.notifier);
 
-    CarouselController carouselController = CarouselController();
+    List<String> images = ['logo.png', 'onboarding1.png', 'onboarding2.png'];
+    List<String> description = [
+      "Selamat datang di Simple Prospect! 🚀 \n Dengan Simple Prospect, Anda akan memiliki akses ke berbagai alat yang dirancang untuk membantu Anda mengidentifikasi, melacak, dan berinteraksi dengan prospek potensial Anda dengan cara yang lebih mudah dan efisie",
+      "Kami berkomitmen untuk memberikan pengalaman yang sederhana, intuitif, dan efisien dalam mengelola prospek Anda, sehingga Anda dapat fokus pada apa yang paling penting: membangun hubungan yang kuat dengan member potensial Anda.",
+      "Terima kasih telah memilih Simple Prospect. Kami berharap aplikasi ini dapat membantu Anda mencapai kesuksesan dalam upaya pemasaran dan penjualan Anda!",
+    ];
 
     return Column(
       children: [
         Expanded(
           child: CarouselSlider(
-              carouselController: carouselController,
+              carouselController: notifier.carouselController,
               options: CarouselOptions(
                   viewportFraction: 1,
                   initialPage: 0,
@@ -27,7 +35,9 @@ class OnboardingView extends ConsumerWidget {
                   enableInfiniteScroll: true,
                   height: context.height,
                   autoPlayCurve: Curves.fastOutSlowIn,
-                  onPageChanged: (index, _) {},
+                  onPageChanged: (index, _) {
+                    notifier.onChange(index);
+                  },
                   scrollPhysics: BounceScroll()),
               items: List.generate(images.length, (i) {
                 return LzImage(
@@ -41,24 +51,37 @@ class OnboardingView extends ConsumerWidget {
           repeat: true,
           duration: 10.s,
           progressColor: ColorConstants.primaryColor,
-          onComplete: () {},
+          onComplete: () {
+            notifier.carouselController.nextPage();
+          },
         ),
         Container(
           padding: Ei.all(25),
           child: Column(
             children: [
-              Text('Get Organized', style: Gfont.fs20.bold),
-              Text(
-                Faker.words(15),
-                style: Gfont.muted,
-              ).margin(t: 10, b: 35),
+              Text('Simple Prospect', style: Gfont.fs20.bold),
+              notifier.watch(
+                (p0) {
+                  logg(p0.index);
+                  return Text(
+                    description[p0.index],
+                    style: Gfont.fs16.copyWith(color: ColorConstants.textPrimaryColor),
+                    textAlign: Ta.justify,
+                  ).margin(t: 10, b: 35);
+                },
+              ),
               Row(
                 mainAxisAlignment: Maa.spaceBetween,
                 children: [
-                  LzSlidebar(
-                    active: 0,
-                    activeColor: ColorConstants.primaryColor,
-                    size: (i) => [i == 0 ? 13 : 7, 7],
+                  notifier.watch(
+                    (p0) {
+                      return LzSlidebar(
+                        length: images.length,
+                        active: p0.index,
+                        spacing: 10,
+                        size: (int i) => [i == p0.index ? 20 : 5, 5],
+                      );
+                    },
                   ),
                   LzButton(
                       radius: 100,

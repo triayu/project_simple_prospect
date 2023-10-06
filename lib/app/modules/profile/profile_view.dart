@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/constants/color_constants.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
