@@ -39,17 +39,17 @@ class DashBoardView extends ConsumerWidget {
               children: [
                 Text(
                   'Halo, Selamat Datang Vivi',
-                  style: gfont.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    color: ColorConstants.textPrimaryColor,
-                  ),
+                  style: Gfont.autoSizeText(context, FontSizeManager.getHeadlineFontSize(), fontWeight: Fw.bold),
                   maxLines: 2,
                   overflow: Tof.ellipsis,
                 ),
                 Text(
                   'Good Morning',
-                  style: Gfont.fs(16).copyWith(color: ColorConstants.textSecondaryColor),
+                  style: Gfont.autoSizeText(
+                    context,
+                    FontSizeManager.getSublineFontSize(),
+                    color: ColorConstants.textSecondaryColor,
+                  ),
                   maxLines: 1,
                   overflow: Tof.ellipsis,
                 ),
@@ -134,7 +134,7 @@ class DashBoardView extends ConsumerWidget {
                   padding: Ei.only(h: 20, b: 10, t: 30),
                   child: Text(
                     'Aktifitas yang akan datang',
-                    style: Gfont.fs(20).copyWith(fontWeight: FontWeight.bold),
+                    style: Gfont.autoSizeText(context, FontSizeManager.getSublineFontSize(), fontWeight: Fw.bold),
                   ),
                 ),
               ),
@@ -215,9 +215,21 @@ class DashBoardView extends ConsumerWidget {
                 children: [
                   Padding(
                     padding: Ei.only(h: 20, b: 10, t: 30),
-                    child: Text(
-                      'Task Terupdate',
-                      style: Gfont.fs(20).copyWith(fontWeight: FontWeight.bold),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Task Terupdate',
+                          style: Gfont.autoSizeText(
+                            context,
+                            FontSizeManager.getSublineFontSize(),
+                            fontWeight: Fw.bold,
+                          ),
+                        ),
+                        Spacer(),
+                        Text('Lihat Semua',
+                            style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize(),
+                                color: ColorConstants.textSecondaryColor)),
+                      ],
                     ),
                   ),
                   ListView.separated(
@@ -226,51 +238,74 @@ class DashBoardView extends ConsumerWidget {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: ColorConstants.secondaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset: Offset(0, 1),
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                            contentPadding: Ei.all(10),
-                            dense: true,
-                            minVerticalPadding: 10,
-                            tileColor: ColorConstants.secondaryColor,
-                            style: ListTileStyle.list,
-                            title: Textr(
-                              'Hasil Meeting $index',
-                              style: Gfont.fs(16),
-                              margin: Ei.only(b: 5),
-                            ),
-                            subtitle: Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color: ColorConstants.event2.withOpacity(0.10),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Text(
-                                    'Reminder : 23/09/2023 04.00 PM',
-                                    style: Gfont.fs(12).copyWith(color: ColorConstants.event2),
-                                  ),
+                            padding: Ei.all(15),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: ColorConstants.secondaryColor,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  offset: Offset(0, 1),
                                 ),
                               ],
                             ),
-                            trailing: Column(
+                            child: Row(
+                              mainAxisAlignment: Maa.spaceBetween,
                               children: [
-                                Text('Dates', style: Gfont.fs14),
+                                Flexible(
+                                    flex: 2,
+                                    child: Column(
+                                      children: [
+                                        Text('Task asdasdasdasdasdasdasdasdasdasdsadasdsadsdads $index',
+                                            style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize(),
+                                                color: ColorConstants.textPrimaryColor)),
+                                        SizedBox(height: 10),
+                                        Row(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(Ti.calendar, color: ColorConstants.textPrimaryColor, size: 20),
+                                                SizedBox(width: 5),
+                                                Text('16/8/2023',
+                                                    style: Gfont.autoSizeText(
+                                                        context, FontSizeManager.getBodyFontSize(),
+                                                        color: ColorConstants.textPrimaryColor)),
+                                              ],
+                                            ),
+                                            SizedBox(width: 10),
+                                            Row(
+                                              children: [
+                                                Icon(Ti.clock, color: ColorConstants.textPrimaryColor, size: 20),
+                                                SizedBox(width: 5),
+                                                Text('13:03:99',
+                                                    style: Gfont.autoSizeText(
+                                                        context, FontSizeManager.getBodyFontSize(),
+                                                        color: ColorConstants.textPrimaryColor)),
+                                              ],
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    )),
+                                SizedBox(width: 10),
+                                Flexible(
+                                    flex: 1,
+                                    child: Container(
+                                      padding: Ei.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: Br.circle,
+                                        color: ColorConstants.softBlack,
+                                      ),
+                                      child: Icon(
+                                        size: 20,
+                                        Ti.dotsVertical,
+                                        color: Colors.white,
+                                      ),
+                                    )),
                               ],
-                            ),
-                          ),
-                        );
+                            ));
                       },
                       separatorBuilder: (context, index) {
                         return SizedBox(height: 15);

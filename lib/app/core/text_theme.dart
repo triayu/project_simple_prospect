@@ -3,16 +3,29 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 // import 'package:riverpod_example/app/constants/color_constants.dart';
 
-TextStyle gfont = GoogleFonts.getFont(
-  "Poppins",
-  fontSize: 16,
-  color: ColorConstants.textPrimaryColor,
-);
+TextStyle gfont =
+    GoogleFonts.getFont("Poppins", fontSize: 16, color: ColorConstants.textPrimaryColor, letterSpacing: 1);
 
 TextStyle gfontBold =
-    GoogleFonts.getFont("Poppins", fontSize: 15.5, color: ColorConstants.primaryColor, fontWeight: FontWeight.bold);
+    GoogleFonts.getFont("Poppins", fontSize: 15.5, color: ColorConstants.textPrimaryColor, fontWeight: FontWeight.bold);
 
 class Gfont {
+// Auto Size Text ================================
+  static autoSizeText(BuildContext context, double size,
+      {Color? color, TextOverflow? overflow, FontWeight? fontWeight, FontStyle? fontStyle}) {
+    final double scaleFactor = MediaQuery.of(context).size.shortestSide / 1000;
+    final double fontSize = size * scaleFactor;
+    return gfont.copyWith(
+        fontSize: fontSize,
+        letterSpacing: 1,
+        wordSpacing: 0.5,
+        fontStyle: fontStyle,
+        fontWeight: fontWeight ?? FontWeight.normal,
+        overflow: overflow ?? TextOverflow.ellipsis,
+        decoration: TextDecoration.none,
+        color: color ?? ColorConstants.textPrimaryColor);
+  }
+
   // size
   static final fs12 = gfont.copyWith(fontSize: 12);
   static final fs13 = gfont.copyWith(fontSize: 13);
@@ -46,4 +59,26 @@ class Gfont {
   //             )),
   //   );
   // }
+}
+
+class FontSizeManager {
+  static double getHeadlineFontSize() {
+    return 55;
+  }
+
+  static double getSublineFontSize() {
+    return 47;
+  }
+
+  static double getTittleFontSize() {
+    return 42;
+  }
+
+  static double getBodyFontSize() {
+    return 38;
+  }
+
+  static double getCaptionFontSize() {
+    return 30;
+  }
 }

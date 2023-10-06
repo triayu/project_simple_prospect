@@ -71,9 +71,11 @@ class BroadcastView extends StatelessWidget {
                                 Spacer(),
                                 Icon(Ti.menu2, key: bottomKey).onPressed(() {
                                   final options = ['Kirim Pesan', 'Edit', 'Hapus'].options();
-                                  DropX.show(bottomKey, options: options, onSelect: (p0) {
-                                    
-                                  },);
+                                  DropX.show(
+                                    bottomKey,
+                                    options: options,
+                                    onSelect: (p0) {},
+                                  );
                                 })
                               ],
                             ),

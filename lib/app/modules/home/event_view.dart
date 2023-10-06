@@ -121,7 +121,6 @@ class EventView extends ConsumerWidget {
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    String editContact = 'Name $index';
                                     return AlertDialog(
                                       title: Text('Apakah anda yakin untuk hapus?'),
                                       content: Column(
@@ -165,7 +164,7 @@ class EventView extends ConsumerWidget {
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    String editContact = 'Name $index';
+                                    // String editContact = 'Name $index';
                                     return AlertDialog(
                                       title: Text('Edit Contact'),
                                       content: Column(
@@ -174,7 +173,7 @@ class EventView extends ConsumerWidget {
                                           TextField(
                                             decoration: InputDecoration(labelText: 'Name'),
                                             onChanged: (value) {
-                                              editContact = value;
+                                              // editContact = value;
                                             },
                                           ),
                                         ],

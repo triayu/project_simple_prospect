@@ -6,7 +6,7 @@ class ColorConstants {
   static final accentColor = Utils.hex('FF5733');
   static final backgroundColor = Utils.hex('F0F0F0');
   static final textPrimaryColor = Utils.hex('000000');
-  static final textSecondaryColor = Utils.hex('D9D9D9');
+  static final textSecondaryColor = Utils.hex('3E3E3E');
   static final softBlack = Utils.hex('43424A');
 
   static final textMediumColor = Utils.hex('CD7B00');
