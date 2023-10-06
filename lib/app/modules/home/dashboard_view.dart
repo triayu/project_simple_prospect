@@ -61,7 +61,7 @@ class DashBoardView extends ConsumerWidget {
           Column(
             children: [
               CarouselSlider(
-                options: CarouselOptions(viewportFraction: 0.9, height: context.height * 0.25),
+                options: CarouselOptions(viewportFraction: 0.9, height: context.height * 0.20),
                 items: [1, 2, 3, 4, 5].map((i) {
                   return Builder(
                     builder: (BuildContext context) {

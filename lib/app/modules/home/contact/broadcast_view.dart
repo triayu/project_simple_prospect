@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/modules/home/contact/tambah_pesan_view.dart';
 
+import 'kirim_pesan_view.dart';
+
 class BroadcastView extends StatelessWidget {
   const BroadcastView({Key? key}) : super(key: key);
 
@@ -40,9 +42,8 @@ class BroadcastView extends StatelessWidget {
                         // Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
                       },
                       child: Container(
-                        height: 160,
-                        margin: Ei.only(l: 10, r: 10, t: 20),
-                        padding: Ei.only(h: 20, v: 10),
+                        margin: Ei.only(h: 10, t: 20, b: 10),
+                        padding: Ei.sym(h: 20, v: 10),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -69,13 +70,23 @@ class BroadcastView extends StatelessWidget {
                                   ),
                                 ),
                                 Spacer(),
-                                Icon(Ti.menu2, key: bottomKey).onPressed(() {
+                                Icon(
+                                  Ti.menu2,
+                                  key: bottomKey,
+                                ).onPressed(() {
                                   final options = ['Kirim Pesan', 'Edit', 'Hapus'].options();
-                                  DropX.show(
-                                    bottomKey,
-                                    options: options,
-                                    onSelect: (p0) {},
-                                  );
+                                  DropX.show(bottomKey, options: options, onSelect: (p0) {
+                                    logg(p0.option);
+                                    if (p0.option == 'Kirim Pesan') {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => KirimPesanView(),
+                                      ));
+                                    } else if (p0 == 'Edit') {
+                                      // ---
+                                    } else if (p0 == 'Hapus') {
+                                      // ---
+                                    }
+                                  });
                                 })
                               ],
                             ),

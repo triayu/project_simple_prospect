@@ -83,7 +83,6 @@ class ContactView extends ConsumerWidget {
                     // Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
                   },
                   child: Container(
-                    height: 130,
                     margin: Ei.only(l: 10, r: 10, t: 20),
                     padding: Ei.only(h: 20, v: 10),
                     decoration: BoxDecoration(
@@ -138,7 +137,6 @@ class ContactView extends ConsumerWidget {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => IsiContactView()));
                   },
                   child: Container(
-                    height: 120,
                     margin: Ei.only(l: 10, r: 10, t: 20),
                     padding: Ei.only(h: 20, v: 10),
                     decoration: BoxDecoration(
@@ -193,7 +191,6 @@ class ContactView extends ConsumerWidget {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => BroadcastView()));
                   },
                   child: Container(
-                    height: 130,
                     margin: Ei.only(l: 10, r: 10, t: 20),
                     padding: Ei.only(h: 20, v: 10),
                     decoration: BoxDecoration(
