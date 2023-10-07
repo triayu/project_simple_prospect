@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
@@ -218,6 +219,12 @@ class KirimPesanView extends StatelessWidget {
                     )
                   ],
                 ),
+                Column(
+                  children: [
+                  // hyyyhyhyhyhyhyhyhyhyhyhyhyhyhyhyhyhyhyhy
+                  ],
+
+                )
               ],
             ),
           ),

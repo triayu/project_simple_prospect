@@ -99,7 +99,7 @@ class DashBoardView extends ConsumerWidget {
                                     ),
                                     TextSpan(
                                       text: ' / ',
-                                      style: Gfont.fs(50).copyWith(color: ColorConstants.secondaryColor),
+                                      style: Gfont.fs(40).copyWith(color: ColorConstants.secondaryColor),
                                     ),
                                     TextSpan(
                                       text: '0',

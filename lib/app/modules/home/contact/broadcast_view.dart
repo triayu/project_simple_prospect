@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/modules/home/contact/tambah_pesan_view.dart';
 
+import 'edit_pesan_view.dart';
 import 'kirim_pesan_view.dart';
 
 class BroadcastView extends StatelessWidget {
@@ -81,8 +82,12 @@ class BroadcastView extends StatelessWidget {
                                       Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) => KirimPesanView(),
                                       ));
-                                    } else if (p0 == 'Edit') {
-                                      // ---
+                                    }
+                                    logg(p0.option);
+                                    if (p0.option == 'Edit') {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => EditPesanView(),
+                                      ));
                                     } else if (p0 == 'Hapus') {
                                       // ---
                                     }

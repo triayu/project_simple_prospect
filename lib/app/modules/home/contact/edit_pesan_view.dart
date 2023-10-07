@@ -4,14 +4,14 @@ import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
 import '../../../constants/color_constants.dart';
 
-class TambahPesanView extends StatelessWidget {
-  const TambahPesanView({Key? key}) : super(key: key);
+class EditPesanView extends StatelessWidget {
+  const EditPesanView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Tambah Pesan',
+        title: 'Edit Pesan',
         canBack: true,
       ),
       body: Stack(
@@ -56,43 +56,6 @@ class TambahPesanView extends StatelessWidget {
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
-                ),
-                Container(
-                  height: 100,
-                  margin: Ei.only(h: 5, t: 5, b: 20),
-                  padding: Ei.only(h: 10, t: 20, b: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: Colors.black12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white,
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset: Offset(0, 1),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Ti.fileDownload,
-                        size: 30,
-                        color: Colors.black,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Klik disini untuk upload File',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
                   ),
                 ),
                 Spacer(),
