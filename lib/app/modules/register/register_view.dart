@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
+import 'package:simple_prospect/app/modules/login/login_view.dart';
 
 import '../../providers/auth/register_provider.dart';
 import '../home/home_view.dart';
@@ -37,7 +38,7 @@ class RegisterView extends ConsumerWidget {
                 sublabelStyle: SublabelStyle.text,
                 children: [
                   LzForm.input(
-                    label: 'Fisrt name',
+                    label: 'First name',
                     hint: 'Type your username',
                   ),
                   LzForm.input(
@@ -61,14 +62,14 @@ class RegisterView extends ConsumerWidget {
                 onTap: (state) {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => HomeView(),
+                      builder: (context) => LoginView(),
                     ),
                   );
                 },
                 type: ButtonType.primary,
                 gradient: true,
                 color: null,
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 120),
+                padding: Ei.sym(v: 10, h: 130),
                 radius: 25.0,
               ),
               SizedBox(height: 20),

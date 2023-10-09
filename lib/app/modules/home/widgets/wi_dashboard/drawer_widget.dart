@@ -117,7 +117,7 @@ class WiDrawer extends StatelessWidget {
                 margin: Ei.all(20),
                 padding: Ei.only(l: 20),
                 radius: BorderRadius.circular(10),
-                color: ColorConstants.textSecondaryColor,
+                color: ColorConstants.textSecondaryColor.withOpacity(0.3),
 
                 child: Row(
                   children: [

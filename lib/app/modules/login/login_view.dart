@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/modules/home/dashboard_view.dart';
+import 'package:simple_prospect/app/modules/home/home_view.dart';
 import '../../constants/color_constants.dart';
 import '../register/register_view.dart';
 
@@ -21,7 +23,7 @@ class LoginView extends ConsumerWidget {
               children: [
                 LzImage(
                   'logo.png',
-                  size: 150,
+                  size: 200,
                   fit: BoxFit.contain,
                 ),
                 Text(
@@ -32,7 +34,7 @@ class LoginView extends ConsumerWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 50),
                 LzFormGroup(
                   keepLabel: true,
                   sublabelStyle: SublabelStyle.text,
@@ -48,21 +50,51 @@ class LoginView extends ConsumerWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 30,
+                ),
                 LzButton(
-                  text: 'Login',
+                  text: 'Continue',
                   onTap: (state) {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => RegisterView(),
+                        builder: (context) => HomeView(),
                       ),
                     );
                   },
                   type: ButtonType.primary,
                   gradient: true,
                   color: null,
-                  padding: Ei.sym(v: 10, h: 120),
+                  padding: Ei.sym(v: 10, h: 130),
                   radius: 25.0,
                 ),
+                Container(
+                  padding: Ei.sym(h: 35),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Belum mempunyai akun?',
+                        style: TextStyle(
+                          color: ColorConstants.primaryColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterView()));
+                        },
+                        child: Text(
+                          'Register',
+                          style: TextStyle(
+                            color: ColorConstants.primaryColor,
+                            fontSize: 14,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),

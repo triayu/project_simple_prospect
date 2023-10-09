@@ -63,10 +63,17 @@ class HomeView extends ConsumerWidget {
               : Row(
                   children: [
                     InkTouch(
+                        margin: Ei.all(10),
+                        child: Icon(
+                          Ti.bellFilled,
+                          size: 25,
+                          color: ColorConstants.softBlack,
+                        )),
+                    InkTouch(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileView()));
                       },
-                      margin: Ei.all(10),
+                      margin: Ei.only(r: 10),
                       child: SizedBox(
                         width: 45,
                         height: 45,
@@ -78,13 +85,6 @@ class HomeView extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    InkTouch(
-                        margin: Ei.all(10),
-                        child: Icon(
-                          Ti.bellFilled,
-                          size: 25,
-                          color: ColorConstants.softBlack,
-                        )),
                   ],
                 ),
         ],
