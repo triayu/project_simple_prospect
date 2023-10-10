@@ -11,7 +11,7 @@ class AppConfig {
   | Server Base URL
   |------------------------------------------------------------*/
 
-  static const String baseUrl = 'https://dummyjson.com/';
+  static const String baseUrl = 'http://192.168.88.212:8000/api';
 
   /* -------------------------------------------------------------------------------------------------------------------
   | Version

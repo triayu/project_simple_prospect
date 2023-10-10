@@ -12,147 +12,130 @@ class IsiContactView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: Stack(
+    return Scaffold(
+      appBar: CustomAppBar(
+        title: Text('Kontak Anda'),
+        centerTitle: true,
+      ),
+      body: Column(
         children: [
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                CustomAppBar(
-                  title: Text('Kontak Anda'),
-                  centerTitle: true,
-                ),
-                Container(
-                  height: 70,
-                  width: 400,
-                  child: Padding(
-                    padding: Ei.only(h: 10),
-                    child: Container(
-                      height: 20,
-                      width: double.infinity,
-                      child: TextField(
-                        cursorHeight: 20,
-                        cursorColor: ColorConstants.primaryColor,
-                        autofocus: false,
-                        decoration: InputDecoration(
-                          hintText: 'Search by Name, Company ...',
-                          hintStyle: TextStyle(color: ColorConstants.primaryColor),
-                          prefixIcon: Icon(Icons.search, color: ColorConstants.primaryColor),
-                        ),
-                      ),
-                    ),
+          Container(
+            height: 70,
+            width: 400,
+            child: Padding(
+              padding: Ei.only(h: 10),
+              child: Container(
+                height: 20,
+                width: double.infinity,
+                child: TextField(
+                  cursorHeight: 20,
+                  cursorColor: ColorConstants.primaryColor,
+                  autofocus: false,
+                  decoration: InputDecoration(
+                    hintText: 'Search by Name, Company ...',
+                    hintStyle: TextStyle(color: ColorConstants.textPrimaryColor),
+                    prefixIcon: Icon(Icons.search, color: ColorConstants.primaryColor),
                   ),
                 ),
-
-                InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
-                  },
-                  child: Container(
-                    height: 50,
-                    margin: Ei.only(l: 10, r: 10),
-                    padding: Ei.sym(h: 20, v: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: Offset(0, 1),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Ti.textCaption),
-                        Text('Tambah Kontak'),
-                        Icon(
-                          Ti.chevronRight,
-                          color: Colors.black,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                // All Contact
-                Column(
-                  children: [
-                    Padding(
-                      padding: Ei.all(10),
-                      child: Text(
-                        'All Contact',
-                        textAlign: Ta.start,
-                        style: Gfont.fs(16).copyWith(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    ListView.separated(
-                      padding: Ei.sym(h: 10),
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        final String imagePath = 'poto.jpg';
-
-                        return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset: Offset(0, 1),
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                            contentPadding: Ei.all(10),
-                            dense: true,
-                            tileColor: Colors.white,
-                            style: ListTileStyle.list,
-                            leading: LzImage(
-                              imagePath,
-                              radius: 50,
-                              width: 40,
-                              height: 40,
-                            ),
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Name lengkap $index',
-                                  style: Gfont.fs(16),
-                                ),
-                                Text(
-                                  'Company - - -',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return SizedBox(height: 10);
-                      },
-                      itemCount: 10,
-                    ),
-                  ],
-                ),
-              ],
+              ),
             ),
           ),
+          InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
+            },
+            child: Container(
+              height: 50,
+              margin: Ei.only(l: 10, r: 10),
+              padding: Ei.sym(h: 20, v: 10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                    offset: Offset(0, 1),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(Ti.textCaption),
+                  Text('Tambah Kontak'),
+                  Icon(
+                    Ti.chevronRight,
+                    color: Colors.black,
+                  ),
+                ],
+              ),
+            ),
+          ),
+         // ... Previous code ...
+
+          // Rest of your content here
+          Expanded(
+            child: ListView.separated(
+              padding: Ei.sym(h: 10),
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                final String imagePath = 'poto.jpg';
+
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: ListTile(
+                    contentPadding: Ei.all(10),
+                    dense: true,
+                    tileColor: Colors.white,
+                    style: ListTileStyle.list,
+                    leading: LzImage(
+                      imagePath,
+                      radius: 50,
+                      width: 40,
+                      height: 40,
+                    ),
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Name lengkap $index',
+                          style: Gfont.fs(16),
+                        ),
+                        Text(
+                          'Company - - -',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return SizedBox(height: 10);
+              },
+              itemCount: 10,
+            ),
+          ),
+          // ),
           Poslign(
             alignment: Alignment.bottomRight,
             child: Container(
@@ -253,7 +236,7 @@ class IsiContactView extends ConsumerWidget {
                 },
               ),
             ),
-          )
+          ),
         ],
       ),
     );

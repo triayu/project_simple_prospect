@@ -122,7 +122,11 @@ class EventView extends ConsumerWidget {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      title: Text('Apakah anda yakin untuk hapus?'),
+                                      title: Text(
+                                        'Apakah anda yakin untuk hapus?',
+                                        style: Gfont.autoSizeText(context, FontSizeManager.getHeadlineFontSize(),
+                                            fontWeight: Fw.bold),
+                                      ),
                                       content: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [],
