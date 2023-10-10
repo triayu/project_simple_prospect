@@ -36,5 +36,8 @@ class UseFetch {
     _header = header ?? {'Accept': 'application/json', 'Content-Type': 'application/json'};
     _ignoreErrorStatus = ignoreStatus ?? [401, 422];
     _onRequest = onRequest;
+
+    logg({'baseUrl': _baseUrl, 'header': _header, 'ignoreStatus': _ignoreErrorStatus});
+    logg('Fetch initialized');
   }
 }

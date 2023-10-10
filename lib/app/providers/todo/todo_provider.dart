@@ -4,7 +4,7 @@ import 'package:simple_prospect/app/core/extension.dart';
 import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 
 import '../../data/api/api.dart';
-import '../../data/models/todo_model.dart';
+import '../../data/models/model.dart';
 import '../appstate/appstate_provider.dart';
 
 class TodoNotifier extends StateNotifier<AsyncValue<List<Todo>>> with UseApi {

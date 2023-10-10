@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simple_prospect/app/core/app_config.dart';
+import 'package:simple_prospect/app/data/local/auth_storage.dart';
 import 'package:simple_prospect/app/modules/home/home_view.dart';
+import 'package:simple_prospect/app/modules/login/login_view.dart';
 import 'package:simple_prospect/app/modules/onboarding/onboarding_view.dart';
-
+import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 import 'app/constants/color_constants.dart';
 import 'app/core/theme.dart';
 import 'app/data/local/intro_storage.dart';
@@ -18,24 +23,42 @@ void main() async {
   LazyUi.config(
       font: TextStyle(fontSize: 18.0, color: ColorConstants.textPrimaryColor), radius: 7.0, theme: AppTheme.light);
 
-  // Initialize SharedPreferencesHelper
-  await SharedPreferencesHelper.instance.init();
+  // Initialize SharedPreferences
+  prefs = await SharedPreferences.getInstance();
+
+  // Check if user is logged in
+  bool isLoggedIn = await AuthStorage.isLogged();
 
   // Check if intro banner is shown
   bool isIntroBannerShown = await IntroBannerStorage.checkShowBanner();
 
-  runApp(ProviderScope(
+  // Initialize Fetch
+  UseFetch(
+    baseUrl: AppConfig.baseUrl,
+    onRequest: (statusCode, data) {},
+  ).init();
+
+  // initialize FlutterNativeSplash
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  // Run Apps
+  runApp(
+    ProviderScope(
       child: MyApp(
-    isShow: isIntroBannerShown,
-  )));
+        isLoggedIn: isLoggedIn,
+        isShow: isIntroBannerShown,
+      ),
+    ),
+  );
 
   // Prevent the application for sreen rotation
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 }
 
 class MyApp extends StatelessWidget {
-  final bool isShow;
-  const MyApp({Key? key, required this.isShow});
+  final bool isShow, isLoggedIn;
+  const MyApp({Key? key, required this.isShow, this.isLoggedIn = false});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +76,11 @@ class MyApp extends StatelessWidget {
           child: LzToastOverlay(child: widget),
         );
       },
-      home: isShow ? OnboardingView() : HomeView(),
+      home: isShow
+          ? OnboardingView()
+          : isLoggedIn
+              ? HomeView()
+              : LoginView(),
     );
   }
 }

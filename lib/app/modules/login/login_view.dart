@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/modules/home/dashboard_view.dart';
-import 'package:simple_prospect/app/modules/home/home_view.dart';
 import '../../constants/color_constants.dart';
+import '../../providers/auth/auth_provider.dart';
 import '../register/register_view.dart';
 
 class LoginView extends ConsumerWidget {
@@ -11,7 +10,7 @@ class LoginView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final notifier = ref.watch(authProvider.notifier);
+    final notifier = ref.watch(authProvider.notifier);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -40,12 +39,14 @@ class LoginView extends ConsumerWidget {
                   sublabelStyle: SublabelStyle.text,
                   children: [
                     LzForm.input(
-                      label: 'Username',
-                      hint: 'Type your username',
-                    ),
+                        label: 'Username',
+                        hint: 'Type your username',
+                        model: notifier.forms['username'],
+                        autofocus: true),
                     LzForm.input(
                       label: 'Password',
                       hint: 'Type your password',
+                      model: notifier.forms['password'],
                       obsecureToggle: true,
                     ),
                   ],
@@ -56,11 +57,7 @@ class LoginView extends ConsumerWidget {
                 LzButton(
                   text: 'Continue',
                   onTap: (state) {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => HomeView(),
-                      ),
-                    );
+                    notifier.login(context);
                   },
                   type: ButtonType.primary,
                   gradient: true,
@@ -69,7 +66,7 @@ class LoginView extends ConsumerWidget {
                   radius: 25.0,
                 ),
                 Container(
-                  padding: Ei.sym(h: 35),
+                  padding: Ei.sym(h: 35, v: 15),
                   child: Row(
                     children: [
                       Text(

@@ -1,3 +1,5 @@
+part of model;
+
 class User {
   int? id;
   String? firstName;
@@ -33,8 +35,8 @@ class User {
         referralCode: json["referral_code"],
         status: json["status"],
         emailVerifiedAt: json["email_verified_at"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] != null ? DateTime.parse(json["created_at"]) : null,
+        updatedAt: json['updated_at'] != null ? DateTime.parse(json["updated_at"]) : null,
         deletedAt: json["deleted_at"],
         expiredAt: json["expired_at"],
       );
@@ -52,4 +54,9 @@ class User {
         "deleted_at": deletedAt,
         "expired_at": expiredAt,
       };
+
+  @override
+  String toString() {
+    return 'User(id: $id, firstName: $firstName, lastName: $lastName, email: $email, referralCode: $referralCode, status: $status, emailVerifiedAt: $emailVerifiedAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, expiredAt: $expiredAt)';
+  }
 }

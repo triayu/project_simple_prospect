@@ -62,7 +62,6 @@ class OnboardingView extends ConsumerWidget {
               Text('Simple Prospect', style: Gfont.fs20.bold),
               notifier.watch(
                 (p0) {
-                  logg(p0.index);
                   return Text(
                     description[p0.index],
                     style: Gfont.fs16.copyWith(color: ColorConstants.textPrimaryColor),
