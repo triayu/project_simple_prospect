@@ -7,14 +7,13 @@ import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/modules/login/login_view.dart';
 
 import '../../providers/auth/register_provider.dart';
-import '../home/home_view.dart';
 
 class RegisterView extends ConsumerWidget {
-  const RegisterView({Key? key});
+  const RegisterView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final auth = ref.read(registerProvider.notifier);
+    final registerNotifier = ref.read(registerProvider.notifier);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -40,18 +39,28 @@ class RegisterView extends ConsumerWidget {
                   LzForm.input(
                     label: 'First name',
                     hint: 'Type your username',
+                    model: notifier.formm['first_name'],
                   ),
                   LzForm.input(
                     label: 'Last name',
                     hint: 'Type your username',
+                    model: notifier.formm['last_name'],
                   ),
                   LzForm.input(
                     label: 'Email',
                     hint: 'Your email address',
+                    model: notifier.formm['email'],
                   ),
                   LzForm.input(
                     label: 'Password',
                     hint: 'Type your password',
+                    model: notifier.formm['password'],
+                    obsecureToggle: true,
+                  ),
+                  LzForm.input(
+                    label: 'Password Confirmation',
+                    hint: 'Type your password',
+                    model: notifier.formm['password_confirmation'],
                     obsecureToggle: true,
                   ),
                 ],
@@ -69,7 +78,7 @@ class RegisterView extends ConsumerWidget {
                 type: ButtonType.primary,
                 gradient: true,
                 color: null,
-                padding: Ei.sym(v: 10, h: 130),
+                padding: Ei.sym(v: 10, h: 110),
                 radius: 25.0,
               ),
               SizedBox(height: 20),

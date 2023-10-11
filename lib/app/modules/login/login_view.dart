@@ -39,9 +39,9 @@ class LoginView extends ConsumerWidget {
                   sublabelStyle: SublabelStyle.text,
                   children: [
                     LzForm.input(
-                      label: 'Username',
-                      hint: 'Type your username',
-                      model: notifier.forms['username'],
+                      label: 'Email',
+                      hint: 'Your email address',
+                      model: notifier.forms['email'],
                     ),
                     LzForm.input(
                       label: 'Password',
@@ -62,35 +62,29 @@ class LoginView extends ConsumerWidget {
                   type: ButtonType.primary,
                   gradient: true,
                   color: null,
-                  padding: Ei.sym(v: 10, h: 130),
+                  padding: Ei.sym(v: 10, h: 110),
                   radius: 25.0,
                 ),
-                Container(
-                  padding: Ei.sym(h: 35, v: 15),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Belum mempunyai akun?',
-                        style: TextStyle(
-                          color: ColorConstants.primaryColor,
-                          fontSize: 14,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterView()));
-                        },
-                        child: Text(
-                          'Register',
-                          style: TextStyle(
-                            color: ColorConstants.primaryColor,
-                            fontSize: 14,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  crossAxisAlignment: Caa.center,
+                  mainAxisAlignment: Maa.center,
+                  children: [
+                    // Gak perlu pakai text style lagi, pakai class gfont
+                    Text('Belum mempunyai akun?', style: Gfont.fs14.copyWith(color: ColorConstants.textSecondaryColor)),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterView()));
+                      },
+                      child: Text('Register',
+                          style: Gfont.black.copyWith(
+                              fontSize: 14,
+                              decoration: TextDecoration.underline,
+                              color: ColorConstants.textPrimaryColor)),
+                    ),
+                  ],
                 )
               ],
             ),

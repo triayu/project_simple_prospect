@@ -9,75 +9,63 @@ class FormContactView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final key = GlobalKey(), bottomKey = GlobalKey();
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Form Contact',
-        canBack: true,
-      ),
-      body: LzFormList(
-        style: LzFormStyle(),
-        children: [
-          Row(
-            children: [
-              Flexible(
-                child: LzForm.input(
-                  label: 'First name',
-                  hint: 'Enter first name',
+        appBar: CustomAppBar(
+          title: 'Tambah Kontak',
+          canBack: true,
+        ),
+        body: LzFormList(
+          style: LzFormStyle(
+              inputLabelFontWeight: FontWeight.w400,
+              type: FormType.topInner,
+              inputBorderColor: ColorConstants.softBlack),
+          children: [
+            Row(
+              children: [
+                Flexible(
+                  child: LzForm.input(
+                    label: 'First name',
+                    hint: 'Enter first name',
+                  ),
                 ),
-              ),
-              SizedBox(width: 10),
-              Flexible(
-                child: LzForm.input(
-                  label: 'Last name',
-                  hint: 'Enter last name',
+                SizedBox(width: 10),
+                Flexible(
+                  child: LzForm.input(
+                    label: 'Last name',
+                    hint: 'Enter last name',
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Flexible(
-            child: LzForm.input(
+              ],
+            ),
+            LzForm.input(
               label: 'Email',
               hint: 'Your email address',
             ),
-          ),
-          Flexible(
-            child: LzForm.input(
+            LzForm.input(
               label: 'Phone number',
               hint: 'Enter phone number',
             ),
-          ),
-          LzForm.input(
-            label: 'Work phone number',
-            hint: 'Enter work phone number',
-          ),
-          LzForm.input(
-            label: 'Home phone number',
-            hint: 'Enter home phone number',
-          ),
-          InkWell(
-            child: LzForm.select(
+            LzForm.input(
+              label: 'Work phone number',
+              hint: 'Enter work phone number',
+            ),
+            LzForm.input(
+              label: 'Home phone number',
+              hint: 'Enter home phone number',
+            ),
+            LzForm.select(
               label: 'Category',
               hint: 'Select category',
               options: List.generate(4, (i) {
                 return Option(option: 'test');
               }),
-              labelStyle: LzFormLabelStyle(),
             ),
-          ),
-          Flexible(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ColorConstants.primaryColor,
-              ),
-              onPressed: () {
-                //  ---
-              },
-              child: const Text('Submit'),
-            ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+        bottomNavigationBar: LzButton(
+          text: 'Submit',
+          color: ColorConstants.softBlack,
+          onTap: (val) {},
+        ).dark(Colors.white).theme1());
   }
 }

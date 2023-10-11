@@ -201,26 +201,7 @@ class TaskView extends ConsumerWidget {
           },
           itemCount: 5,
         ),
-        Poslign(
-          alignment: Alignment.bottomRight,
-          child: Container(
-            width: 50,
-            height: 50,
-            margin: Ei.only(b: 10, r: 10, t: 30),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: ColorConstants.primaryColor,
-            ),
-            child: IconButton(
-              icon: Icon(
-                Ti.plus,
-                color: Colors.white,
-                size: 30,
-              ),
-              onPressed: () {},
-            ),
-          ),
-        ),
+
         Poslign(
           alignment: Alignment.bottomRight,
           child: InkTouch(

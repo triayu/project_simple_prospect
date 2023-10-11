@@ -1,95 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/widgets/custom_appbar.dart';
+import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 
+import '../../../constants/color_constants.dart';
+import '../../../core/text_theme.dart';
 import '../../form/form_contact/form_contact_view.dart';
-import '../../isi_drawer/message_template/isi_pesan_view.dart';
 
-class IsiContactView extends ConsumerWidget {
+import 'edit_pesan_view.dart';
+import 'kirim_pesan_view.dart';
+
+class IsiContactView extends StatelessWidget {
   const IsiContactView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    final key = GlobalKey(), bottomKey = GlobalKey();
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: AppBar(
         title: Text('Kontak Anda'),
         centerTitle: true,
+        actions: [
+          Icon(
+            Ti.menu2,
+            key: bottomKey,
+          ).onPressed(() {
+            final options = ['Import to excel', 'Export contact', 'Import from phonebook'].options();
+            DropX.show(bottomKey, options: options, onSelect: (p0) {
+              logg(p0.option);
+              if (p0.option == 'Import to excel') {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => KirimPesanView(),
+                ));
+              }
+              logg(p0.option);
+              if (p0.option == 'Export contact') {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => EditPesanView(),
+                ));
+              } else if (p0 == 'Import from phonebook') {
+                // ---
+              }
+            });
+          })
+        ],
       ),
-      body: Column(
-        children: [
-          Container(
-            height: 70,
-            width: 400,
-            child: Padding(
-              padding: Ei.only(h: 10),
-              child: Container(
-                height: 20,
-                width: double.infinity,
-                child: TextField(
-                  cursorHeight: 20,
-                  cursorColor: ColorConstants.primaryColor,
-                  autofocus: false,
-                  decoration: InputDecoration(
-                    hintText: 'Search by Name, Company ...',
-                    hintStyle: TextStyle(color: ColorConstants.textPrimaryColor),
-                    prefixIcon: Icon(Icons.search, color: ColorConstants.primaryColor),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
-            },
-            child: Container(
-              height: 50,
-              margin: Ei.only(l: 10, r: 10),
-              padding: Ei.sym(h: 20, v: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: Offset(0, 1),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(Ti.textCaption),
-                  Text('Tambah Kontak'),
-                  Icon(
-                    Ti.chevronRight,
-                    color: Colors.black,
-                  ),
-                ],
-              ),
-            ),
-          ),
-         // ... Previous code ...
-
-          // Rest of your content here
-          Expanded(
-            child: ListView.separated(
-              padding: Ei.sym(h: 10),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ListView.separated(
+              padding: Ei.only(t: 10, b: 30, h: 10),
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                final String imagePath = 'poto.jpg';
-
                 return Container(
+                  padding: Ei.all(15),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorConstants.secondaryColor,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.1),
@@ -99,30 +65,37 @@ class IsiContactView extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  child: ListTile(
-                    contentPadding: Ei.all(10),
-                    dense: true,
-                    tileColor: Colors.white,
-                    style: ListTileStyle.list,
-                    leading: LzImage(
-                      imagePath,
-                      radius: 50,
-                      width: 40,
-                      height: 40,
-                    ),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Flexible(
+                    flex: 2,
+                    child: Row(
                       children: [
-                        Text(
-                          'Name lengkap $index',
-                          style: Gfont.fs(16),
+                        LzImage(
+                          'tutorial.png',
+                          radius: 50,
+                          size: 50,
                         ),
-                        Text(
-                          'Company - - -',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
+                        SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Nama Kontak $index',
+                              style: Gfont.autoSizeText(
+                                context,
+                                FontSizeManager.getBodyFontSize(),
+                                fontWeight: Fw.bold,
+                                color: ColorConstants.textPrimaryColor,
+                              ),
+                            ),
+                            Text(
+                              'Company ---- $index',
+                              style: Gfont.autoSizeText(
+                                context,
+                                FontSizeManager.getBodyFontSize(),
+                                color: ColorConstants.textPrimaryColor,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -130,114 +103,31 @@ class IsiContactView extends ConsumerWidget {
                 );
               },
               separatorBuilder: (context, index) {
-                return SizedBox(height: 10);
+                return SizedBox(height: 15);
               },
-              itemCount: 10,
+              itemCount: 6,
             ),
-          ),
-          // ),
-          Poslign(
-            alignment: Alignment.bottomRight,
-            child: Container(
-              width: 60,
-              height: 60,
-              margin: Ei.only(b: 10, r: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
+            Poslign(
+              alignment: Alignment.bottomRight,
+              child: InkTouch(
+                padding: Ei.all(10),
+                margin: Ei.all(10),
+                radius: Br.circle,
                 color: ColorConstants.primaryColor,
-              ),
-              child: IconButton(
-                icon: Icon(
-                  Icons.menu_open_rounded,
+                child: Icon(
+                  Ti.plus,
                   color: Colors.white,
                   size: 35,
                 ),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Dialog(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // Baris pertama
-                            Container(
-                              margin: Ei.only(t: 40, b: 20),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => IsiPesanView(),
-                                        ),
-                                      );
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Icon(Ti.messageCheck, color: ColorConstants.primaryColor, size: 30),
-                                        Text(
-                                          "Mass message",
-                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Icon(Ti.fileSpreadsheet, color: ColorConstants.primaryColor, size: 30),
-                                      Text("Import to excel",
-                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Icon(Ti.deviceMobileCheck, color: ColorConstants.primaryColor, size: 30),
-                                      Text("Export contact",
-                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            // Icon baris kedua
-                            Container(
-                              padding: Ei.only(t: 20, b: 40),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Icon(Ti.addressBook, color: ColorConstants.primaryColor, size: 30),
-                                      Text("Import from phonebook",
-                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Icon(Ti.barcode, color: ColorConstants.primaryColor, size: 30),
-                                      Text("Scan business card",
-                                          style: TextStyle(fontSize: 10, color: ColorConstants.primaryColor)),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  );
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => FormContactView(),
+                  ));
                 },
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

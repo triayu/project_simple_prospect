@@ -1,5 +1,6 @@
 library api;
 
+import 'package:dio/dio.dart';
 import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 
 part 'auth_api.dart';
