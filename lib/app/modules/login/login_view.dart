@@ -39,10 +39,10 @@ class LoginView extends ConsumerWidget {
                   sublabelStyle: SublabelStyle.text,
                   children: [
                     LzForm.input(
-                        label: 'Username',
-                        hint: 'Type your username',
-                        model: notifier.forms['username'],
-                        autofocus: true),
+                      label: 'Username',
+                      hint: 'Type your username',
+                      model: notifier.forms['username'],
+                    ),
                     LzForm.input(
                       label: 'Password',
                       hint: 'Type your password',

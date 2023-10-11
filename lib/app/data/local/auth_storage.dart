@@ -31,8 +31,6 @@ class AuthStorage {
     String? token = prefs.getString('token');
     bool isLoggedIn = token != null;
 
-    logg('Is Logged In: $isLoggedIn', name: 'Is Logged In');
-
     if (isLoggedIn) {
       // set token to Dio
       dio.options.headers['authorization'] = 'Bearer $token';

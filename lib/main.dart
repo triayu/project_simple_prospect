@@ -52,6 +52,9 @@ void main() async {
     ),
   );
 
+  // whenever your initialization is completed, remove the splash screen:
+  FlutterNativeSplash.remove();
+
   // Prevent the application for sreen rotation
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 }
