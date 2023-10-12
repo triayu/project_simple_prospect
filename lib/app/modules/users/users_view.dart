@@ -16,10 +16,10 @@ class UsersView extends ConsumerWidget {
           title: const Text('RDR2 Characters'),
           actions: [
             const Icon(Ti.reload).onPressed(() {
-              notifier.getData(isRefreshing: true);
+              // notifier.getData(isRefreshing: true);
             }),
             const Icon(Ti.plus).onPressed(() {
-              notifier.add(Faker.name());
+              // notifier.add(Faker.name());
             })
           ],
         ),
@@ -33,11 +33,8 @@ class UsersView extends ConsumerWidget {
                   return const LzNoData(message: 'Opps! No data found');
                 }
 
-                return Refreshtor(
-                  onRefresh: () async => notifier.getData(isRefreshing: true),
-                  child: LzListView(
-                    children: users.generate((item, i) => ListItem(name: item, index: i)),
-                  ),
+                return LzListView(
+                  children: users.generate((item, i) => ListItem(name: item, index: i)),
                 );
               },
               loading: () => LzLoader.bar(message: 'Loading...'),

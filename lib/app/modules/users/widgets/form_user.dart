@@ -12,7 +12,7 @@ class FormUser extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(userProvider.notifier);
-    notifier.forms.fill({'name': name});
+    // notifier.forms.fill({'name': name});
 
     return Wrapper(
       child: Scaffold(
@@ -22,16 +22,16 @@ class FormUser extends ConsumerWidget {
         ),
         body: LzListView(
           children: [
-            LzForm.input(label: 'Name', hint: 'Enter your name', model: notifier.forms['name'], autofocus: true),
+            // LzForm.input(label: 'Name', hint: 'Enter your name', model: notifier.forms['name'], autofocus: true),
           ],
         ),
         bottomNavigationBar: LzButton(
           text: 'Submit',
           onTap: (state) async {
-            bool ok = await notifier.update(index);
-            if (ok && context.mounted) {
-              Navigator.of(context).pop();
-            }
+            // bool ok = await notifier.update(index);
+            // if (ok && context.mounted) {
+            //   Navigator.of(context).pop();
+            // }
           },
         ).theme1(),
       ),

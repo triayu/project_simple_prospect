@@ -4,9 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
-import 'package:simple_prospect/app/data/local/auth_storage.dart';
-import 'package:simple_prospect/app/data/models/model.dart';
-import 'package:simple_prospect/app/providers/dashboard/dashboar_provider.dart';
+import 'package:simple_prospect/app/providers/dashboard/dashboard_provider.dart';
 
 class DashBoardView extends ConsumerWidget {
   DashBoardView({super.key});

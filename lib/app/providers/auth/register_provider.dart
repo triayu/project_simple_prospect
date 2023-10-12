@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/data/local/shared_preferences.dart';
-import 'package:simple_prospect/app/providers/auth/auth_provider.dart';
 import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
 import '../../data/api/api.dart';
 
@@ -33,10 +31,6 @@ class Register with ChangeNotifier, UseApi {
         if (!res.status) {
           return LzToast.show(res.message);
         }
-
-        SharedPreferencesHelper.setMap('user', res.data);
-
-        SharedPreferencesHelper.setString('token', res.data['token']);
 
         // Navigator.of(context).pushReplacement(
         //   MaterialPageRoute(
