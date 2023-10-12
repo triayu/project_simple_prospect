@@ -4,6 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
+import 'package:simple_prospect/app/data/local/auth_storage.dart';
+import 'package:simple_prospect/app/data/models/model.dart';
+import 'package:simple_prospect/app/providers/dashboard/dashboar_provider.dart';
 
 class DashBoardView extends ConsumerWidget {
   DashBoardView({super.key});
@@ -24,6 +27,11 @@ class DashBoardView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.watch(dashboardNotifier.notifier);
+
+    // Jalankan Function Ini untuk mengambill data user
+    notifier.getUser();
+
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
@@ -38,7 +46,7 @@ class DashBoardView extends ConsumerWidget {
               crossAxisAlignment: Caa.start,
               children: [
                 Text(
-                  'Halo, Selamat Datang Vivi',
+                  'Halo, Selamat Datang ${notifier.user.firstName}',
                   style: Gfont.autoSizeText(context, FontSizeManager.getHeadlineFontSize(), fontWeight: Fw.bold),
                   maxLines: 2,
                   overflow: Tof.ellipsis,
@@ -65,7 +73,7 @@ class DashBoardView extends ConsumerWidget {
                 items: [1, 2, 3, 4, 5].map((i) {
                   return Builder(
                     builder: (BuildContext context) {
-                     return Container(
+                      return Container(
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(

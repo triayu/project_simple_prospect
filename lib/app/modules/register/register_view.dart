@@ -13,7 +13,7 @@ class RegisterView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final registerNotifier = ref.read(registerProvider.notifier);
+    final notifier = ref.read(RegisterProvider.notifier);
 
     return Scaffold(
       backgroundColor: Colors.white,

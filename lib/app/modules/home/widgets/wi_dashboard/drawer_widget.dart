@@ -118,7 +118,6 @@ class WiDrawer extends StatelessWidget {
                 padding: Ei.only(l: 20),
                 radius: BorderRadius.circular(10),
                 color: ColorConstants.textSecondaryColor.withOpacity(0.3),
-
                 child: Row(
                   children: [
                     Icon(
@@ -134,9 +133,6 @@ class WiDrawer extends StatelessWidget {
                     ),
                   ],
                 ),
-                // onPressed: () {
-
-                // },
               ),
             )
           ],

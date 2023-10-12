@@ -6,9 +6,9 @@ import 'package:simple_prospect/app/providers/auth/auth_provider.dart';
 import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
 import '../../data/api/api.dart';
 
-final AuthController = ChangeNotifierProvider((ref) => Auth());
+final RegisterProvider = ChangeNotifierProvider((ref) => Register());
 
-class registerProvider with ChangeNotifier, UseApi {
+class Register with ChangeNotifier, UseApi {
   final formm = LzForm.make(['first_name', 'last_name', 'email', 'password', 'password_confirmation']);
 
   Future register(BuildContext context) async {
