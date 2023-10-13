@@ -30,49 +30,40 @@ class EditPesanView extends StatelessWidget {
           Padding(
             padding: Ei.only(t: 30),
             child: LzFormList(
-              style: LzFormStyle(),
+              style: LzFormStyle(
+                  inputLabelFontWeight: FontWeight.w400,
+                  type: FormType.topInner,
+                  inputBorderColor: ColorConstants.softBlack),
               children: [
-                Flexible(
-                  child: LzForm.input(
-                    label: 'Judul',
-                    hint: 'Masukkan Judul pesan',
-                    labelStyle: LzFormLabelStyle(),
-                  ),
+                LzForm.input(
+                  label: 'Judul',
+                  hint: 'Masukkan judul',
                 ),
-                SizedBox(width: 10),
-                Flexible(
-                  child: LzForm.input(
-                    label: 'Pesan',
-                    hint: 'Masukkan Pesan',
-                    labelStyle: LzFormLabelStyle(),
-                  ),
+                LzForm.input(
+                  label: 'Pesan',
+                  hint: 'Masukkan pesan',
                 ),
-                Positioned(
-                  top: 10,
-                  left: 30,
-                  child: Text(
-                    'Lampiran File',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Spacer(),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorConstants.primaryColor,
-                  ),
-                  onPressed: () {
-                    // ...
-                  },
-                  child: const Text('Submit'),
-                ),
+                // Positioned(
+                //   top: 10,
+                //   left: 30,
+                //   child: Text(
+                //     'Lampiran File',
+                //     style: TextStyle(
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
         ],
       ),
+      bottomNavigationBar: LzButton(
+        text: 'Submit',
+        color: ColorConstants.softBlack,
+        onTap: (val) {},
+      ).dark(Colors.white).theme1(),
     );
   }
 }

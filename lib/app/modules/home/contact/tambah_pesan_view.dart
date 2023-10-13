@@ -11,7 +11,7 @@ class TambahPesanView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Tambah Pesan',
+        title: 'Edit Pesan',
         canBack: true,
       ),
       body: Stack(
@@ -30,86 +30,40 @@ class TambahPesanView extends StatelessWidget {
           Padding(
             padding: Ei.only(t: 30),
             child: LzFormList(
-              style: LzFormStyle(),
+              style: LzFormStyle(
+                  inputLabelFontWeight: FontWeight.w400,
+                  type: FormType.topInner,
+                  inputBorderColor: ColorConstants.softBlack),
               children: [
-                Flexible(
-                  child: LzForm.input(
-                    label: 'Judul',
-                    hint: 'Masukkan Judul pesan',
-                    labelStyle: LzFormLabelStyle(),
-                  ),
+                LzForm.input(
+                  label: 'Judul',
+                  hint: 'Masukkan judul',
                 ),
-                SizedBox(width: 10),
-                Flexible(
-                  child: LzForm.input(
-                    label: 'Pesan',
-                    hint: 'Masukkan Pesan',
-                    labelStyle: LzFormLabelStyle(),
-                  ),
+                LzForm.input(
+                  label: 'Pesan',
+                  hint: 'Masukkan pesan',
                 ),
-                Positioned(
-                  top: 10,
-                  left: 30,
-                  child: Text(
-                    'Lampiran File',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 100,
-                  margin: Ei.only(h: 5, t: 5, b: 20),
-                  padding: Ei.only(h: 10, t: 20, b: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: Colors.black12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white,
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset: Offset(0, 1),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Ti.fileDownload,
-                        size: 30,
-                        color: Colors.black,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Klik disini untuk upload File',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Spacer(),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorConstants.primaryColor,
-                  ),
-                  onPressed: () {
-                    // ...
-                  },
-                  child: const Text('Submit'),
-                ),
+                // Positioned(
+                //   top: 10,
+                //   left: 30,
+                //   child: Text(
+                //     'Lampiran File',
+                //     style: TextStyle(
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
         ],
       ),
+      bottomNavigationBar: LzButton(
+        text: 'Submit',
+        color: ColorConstants.softBlack,
+        onTap: (val) {},
+      ).dark(Colors.white).theme1(),
     );
   }
 }

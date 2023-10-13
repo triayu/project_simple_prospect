@@ -69,11 +69,7 @@ class RegisterView extends ConsumerWidget {
               LzButton(
                 text: 'Continue',
                 onTap: (state) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => LoginView(),
-                    ),
-                  );
+                 notifier.register(context);
                 },
                 type: ButtonType.primary,
                 gradient: true,

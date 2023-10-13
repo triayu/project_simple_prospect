@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/modules/login/login_view.dart';
 import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
 import '../../data/api/api.dart';
 
@@ -32,11 +33,11 @@ class Register with ChangeNotifier, UseApi {
           return LzToast.show(res.message);
         }
 
-        // Navigator.of(context).pushReplacement(
-        //   MaterialPageRoute(
-        //     builder: (context) => LoginView(),
-        //   ),
-        // );
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => LoginView(),
+          ),
+        );
 
         return LzToast.show('Nice! You are regist in');
       }

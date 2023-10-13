@@ -16,7 +16,7 @@ class OnboardingView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(appIntroNotifier.notifier);
 
-    List<String> images = ['vektor1.png', 'onboarding1.png', 'onboarding2.png'];
+    List<String> images = ['vektor1.png', 'vektor2.png', 'vektor3.png'];
     List<String> description = [
       "Selamat datang di Simple Prospect! 🚀 \n Dengan Simple Prospect, Anda akan memiliki akses ke berbagai alat yang dirancang untuk membantu Anda mengidentifikasi, melacak, dan berinteraksi dengan prospek potensial Anda dengan cara yang lebih mudah dan efisie",
       "Kami berkomitmen untuk memberikan pengalaman yang sederhana, intuitif, dan efisien dalam mengelola prospek Anda, sehingga Anda dapat fokus pada apa yang paling penting: membangun hubungan yang kuat dengan member potensial Anda.",

@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/modules/home/contact/tambah_pesan_view.dart';
+import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
 class KirimPesanView extends StatelessWidget {
   const KirimPesanView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final DataTableSource _source = _dataTableSource();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Pesan Whatasapp'),
-        centerTitle: true,
+      appBar: CustomAppBar(
+        title: 'Pesan Whatasapp',
         actions: [
           IconButton(
               icon: Icon(Ti.plus),
@@ -27,203 +28,171 @@ class KirimPesanView extends StatelessWidget {
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    // HASIL PESAN
-                    InkWell(
-                      onTap: () {
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
-                      },
-                      child: Container(
-                        margin: Ei.only(l: 10, r: 10, t: 20),
-                        padding: Ei.only(h: 20, v: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              spreadRadius: 1,
-                              blurRadius: 1,
-                              offset: Offset(0, 1),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Pesan',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                            Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-                              textAlign: Ta.justify,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            Text(
-                              'Fitur Produk',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                            Text(
-                              'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                              textAlign: Ta.justify,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                              ),
-                            )
-                          ],
+          Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
+                },
+                child: Container(
+                  margin: Ei.only(l: 10, r: 10, t: 20),
+                  padding: Ei.only(h: 20, v: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Pesan',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        // FILE
-                        InkWell(
-                          onTap: () {
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => IsiContactView()));
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: 105,
-                            margin: Ei.sym(v: 20, h: 10),
-                            padding: Ei.sym(v: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ColorConstants.event1.withOpacity(0.8),
-                                  spreadRadius: 1,
-                                  offset: Offset(0, 1),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Ti.fileInvoice,
-                                  size: 30,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  'File',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+                      Text(
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+                        textAlign: Ta.justify,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
                         ),
-                        // Broadcast // Pesan Whatsapp
-                        InkWell(
-                          onTap: () {
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => BroadcastView()));
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: 105,
-                            margin: Ei.only(v: 20),
-                            padding: Ei.only(h: 10, v: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ColorConstants.event2.withOpacity(0.8),
-                                  spreadRadius: 1,
-                                  offset: Offset(0, 1),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                Icon(
-                                  Ti.video,
-                                  size: 30,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  'Video',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        // GAMBAR
-                        InkWell(
-                          onTap: () {
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => BroadcastView()));
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: 105,
-                            margin: Ei.sym(v: 20, h: 10),
-                            padding: Ei.sym(h: 10, v: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ColorConstants.event3.withOpacity(0.8),
-                                  spreadRadius: 1,
-                                  offset: Offset(0, 1),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                Icon(
-                                  Ti.photo,
-                                  size: 30,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  'Gambar',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                  
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-              
-            ),
+              ),
+              // Kamu gk prlu buat inkwell sbenyak 3 kali kek gtu, tdak efisien, kodenya panjaang bgt jadinya,
+              // susah dibaca
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: List.generate(3, (i) {
+                  List<IconData> icons = [La.fileAlt, La.video, La.image];
+                  List<Color> colors = [ColorConstants.event1, ColorConstants.event2, ColorConstants.event3];
+                  return Expanded(
+                    child: InkTouch(
+                      onTap: () {},
+                      child: Container(
+                        padding: Ei.all(20),
+                        height: 100,
+                        margin: Ei.sym(h: 5),
+                        decoration:
+                            BoxDecoration(color: colors[i], borderRadius: BorderRadius.circular(10), boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 5,
+                            offset: Offset(0, 5),
+                          )
+                        ]),
+                        child: Column(children: [
+                          Icon(
+                            icons[i],
+                            size: 30,
+                            color: colors[i],
+                          ),
+                          Text(
+                            i.toString(),
+                            style: Gfont.white,
+                          ),
+                        ]),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              // Data Table
+              PaginatedDataTable(
+                  showCheckboxColumn: false,
+                  arrowHeadColor: ColorConstants.textPrimaryColor,
+                  availableRowsPerPage: [
+                    10,
+                    20,
+                    30,
+                    40,
+                    50,
+                  ],
+                  columns: List.generate(6, (i) {
+                    List<String> tittle = ['ID', 'Aksi', 'Nama Kontak', 'No HP', 'Status', 'Keterangan'];
+                    return DataColumn(
+                        label: Text(
+                      tittle[i],
+                      style: Gfont.black
+                          .copyWith(fontWeight: FontWeight.bold, fontSize: 16, color: ColorConstants.textPrimaryColor),
+                    ));
+                  }),
+                  columnSpacing: 40,
+                  primary: true,
+                  source: _source),
+            ],
           ),
         ],
       ),
     );
   }
+}
+
+class _dataTableSource extends DataTableSource {
+  @override
+  DataRow? getRow(int index) {
+    final List<Map<String, dynamic>> _datas = List.generate(15, (i) {
+      return {
+        'Id': index + 1,
+        'Aksi': '',
+        'Nama Kontak': 'Testing',
+        'No Hp': '0821sisanya besok',
+        'status': 'Capek Ngoding',
+        'Keterangan': '-',
+      };
+    });
+
+    // Color colorStatus = _ctrl.queues[index].status == 'pending'
+    //     ? C.yellow2
+    //     : _ctrl.queues[index].status == 'failed'
+    //         ? C.red2
+    //         : _ctrl.queues[index].status == 'progress'
+    //             ? C.blue
+    //             : C.green2;
+
+    return DataRow(cells: [
+      DataCell(Text(_datas[index]['Id'].toString())),
+      DataCell(Text('Action')),
+      DataCell(Text(_datas[index]['Nama Kontak'].toString())),
+      DataCell(Text(_datas[index]['No Hp'].toString())),
+      DataCell(Container(
+          decoration: BoxDecoration(
+            color: ColorConstants.accentColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          padding: Ei.all(3),
+          child: Text(
+            _datas[index]['status'].toString(),
+            style: Gfont.bold.copyWith(color: ColorConstants.textPrimaryColor, fontSize: 14),
+          ))),
+      DataCell(Text(_datas[index]['Keterangan'].toString())),
+    ]);
+  }
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get rowCount => 15;
+
+  @override
+  int get selectedRowCount => 0;
 }

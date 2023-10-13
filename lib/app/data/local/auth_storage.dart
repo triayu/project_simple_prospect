@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/local/shared_preferences.dart';
 import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
@@ -9,16 +11,10 @@ class AuthStorage {
   /// await Auth.login();
   /// ```
   ///
-  static Future<User> user() async {
+  static User user() {
     User user = User();
-
-    try {
-      Map<String, dynamic>? data = await SharedPreferencesHelper.getMap('user');
-      user = User.fromJson(data);
-      logg(data, color: LogColor.blue);
-    } catch (e, s) {
-      Errors.check(e, s);
-    }
+    Map<String, dynamic>? data = SharedPreferencesHelper.getMap('user');
+    user = User.fromJson(data);
     return user;
   }
 
@@ -33,6 +29,7 @@ class AuthStorage {
 
     if (isLoggedIn) {
       // set token to Dio
+      logg('Bearer $token', name: 'Token');
       dio.options.headers['authorization'] = 'Bearer $token';
     }
 

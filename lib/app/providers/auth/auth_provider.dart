@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/local/shared_preferences.dart';
 import 'package:simple_prospect/app/modules/home/home_view.dart';
+import 'package:simple_prospect/app/modules/login/login_view.dart';
 import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
 import '../../data/api/api.dart';
 
@@ -42,7 +43,7 @@ class Auth with ChangeNotifier, UseApi {
         ResHandler res = await authApi.login(map);
 
         // Nah ketika proses di atas berjalan , variable res diata akan mereturn beberapa nilai, salah satunya
-        // res.status, yang nilainya beruba boolean, true or false, 
+        // res.status, yang nilainya beruba boolean, true or false,
         // nah kondisi dibwah menjunkkan jika kondisi api tersebut hasilnya false, maka dia akan memunculkan toast
         // yg ada di dalam if
         if (!res.status) {
@@ -52,7 +53,8 @@ class Auth with ChangeNotifier, UseApi {
         SharedPreferencesHelper.setMap('user', res.data);
 
         // Set token to local storage agar token bisa diakses di seluruh aplikasi
-        SharedPreferencesHelper.setString('token', res.data['token']);
+        // Kenapa res.data[access_token], karena kita ingin menyimpan data token yang diterima oleh
+        SharedPreferencesHelper.setString('token', res.data['access_token']);
 
         // Navigasi ke page home ketika sudah login
         Navigator.of(context).pushReplacement(
@@ -67,6 +69,29 @@ class Auth with ChangeNotifier, UseApi {
       Errors.check(e, s);
     } finally {
       LzToast.dismiss();
+    }
+  }
+
+  Future logOut(BuildContext context) async {
+    try {
+      // Untuk logout , kita harus menghapus token dan menghapus user serta , jika ada api kita post ke api
+      // Tapi smntra kita hpus token dan user saja
+      LzToast.overlay('Sedang Logout...');
+      prefs.remove('user');
+      prefs.remove('token');
+
+      // lalu navigate ke halaman login
+      Utils.timer(() {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => LoginView(),
+          ),
+        );
+      }, 5.s);
+
+      LzToast.dismiss();
+    } catch (e, s) {
+      Errors.check(e, s);
     }
   }
 }

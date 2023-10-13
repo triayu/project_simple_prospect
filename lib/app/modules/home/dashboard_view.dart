@@ -4,7 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
-import 'package:simple_prospect/app/providers/dashboard/dashboard_provider.dart';
+import 'package:simple_prospect/app/data/local/auth_storage.dart';
+import 'package:simple_prospect/app/data/models/model.dart';
 
 class DashBoardView extends ConsumerWidget {
   DashBoardView({super.key});
@@ -25,10 +26,8 @@ class DashBoardView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.watch(dashboardNotifier.notifier);
-
-    // Jalankan Function Ini untuk mengambill data user
-    notifier.getUser();
+    // Variable Data User didapatkan dari penyimpanan local storage
+    User userData = AuthStorage.user();
 
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
@@ -44,7 +43,7 @@ class DashBoardView extends ConsumerWidget {
               crossAxisAlignment: Caa.start,
               children: [
                 Text(
-                  'Halo, Selamat Datang ${notifier.user.firstName}',
+                  'Halo, Selamat Datang ${userData.fullName!.ucwords}',
                   style: Gfont.autoSizeText(context, FontSizeManager.getHeadlineFontSize(), fontWeight: Fw.bold),
                   maxLines: 2,
                   overflow: Tof.ellipsis,

@@ -71,12 +71,12 @@ class HomeView extends ConsumerWidget {
                         )),
                     InkTouch(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileView()));
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileView()));
                       },
                       margin: Ei.only(r: 10),
                       child: SizedBox(
                         width: 45,
-                        height: 45,
+                        height: 45, 
                         child: ClipOval(
                           child: LzImage(
                             'poto.jpg',
