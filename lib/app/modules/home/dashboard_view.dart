@@ -37,7 +37,7 @@ class DashBoardView extends ConsumerWidget {
         children: [
           // // HEADER
           Container(
-            padding: Ei.sym(h: 20, v: 25),
+            padding: Ei.sym(h: 20, v: 20),
             child: Column(
               mainAxisAlignment: Maa.start,
               crossAxisAlignment: Caa.start,
@@ -114,7 +114,7 @@ class DashBoardView extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                            Align(
+                            Align( 
                               alignment: Alignment.bottomLeft,
                               child: Padding(
                                 padding: Ei.only(l: 10, b: 10),

@@ -9,6 +9,9 @@ class FormTask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formstart = LzForm.make(['date']);
+    final formend = LzForm.make(['date']);
+
     return Scaffold(
         appBar: CustomAppBar(
           title: 'Add Task',
@@ -38,6 +41,12 @@ class FormTask extends StatelessWidget {
                   child: LzForm.input(
                     label: 'Start Time',
                     hint: 'Enter start time',
+                    model: formstart['date'],
+                    suffixIcon: La.calendar,
+                    onTap: (model) async {
+                      DateTime? date = await LzPicker.datePicker(context);
+                      if (date != null) model.text = date.format();
+                    },
                   ),
                 ),
                 SizedBox(width: 10),
@@ -45,6 +54,12 @@ class FormTask extends StatelessWidget {
                   child: LzForm.input(
                     label: 'End Time',
                     hint: 'Enter end time',
+                    model: formend['date'],
+                    suffixIcon: La.calendar,
+                    onTap: (model) async {
+                      DateTime? date = await LzPicker.datePicker(context);
+                      if (date != null) model.text = date.format();
+                    },
                   ),
                 ),
               ],

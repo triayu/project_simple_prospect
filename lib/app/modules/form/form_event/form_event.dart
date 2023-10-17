@@ -10,6 +10,8 @@ class FormEvent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final key = GlobalKey(), bottomKey = GlobalKey();
+    final forms = LzForm.make(['date']);
+    final formend = LzForm.make(['date']);
 
     return Scaffold(
         appBar: CustomAppBar(
@@ -47,6 +49,12 @@ class FormEvent extends StatelessWidget {
                     label: 'Start Time',
                     hint: 'Enter start time',
                     labelStyle: LzFormLabelStyle(),
+                    model: forms['date'],
+                    suffixIcon: La.calendar,
+                    onTap: (model) async {
+                      DateTime? date = await LzPicker.datePicker(context);
+                      if (date != null) model.text = date.format();
+                    },
                   ),
                 ),
                 SizedBox(width: 10),
@@ -55,6 +63,12 @@ class FormEvent extends StatelessWidget {
                     label: 'End Time',
                     hint: 'Enter end time',
                     labelStyle: LzFormLabelStyle(),
+                    model: formend['date'],
+                    suffixIcon: La.calendar,
+                    onTap: (model) async {
+                      DateTime? date = await LzPicker.datePicker(context);
+                      if (date != null) model.text = date.format();
+                    },
                   ),
                 ),
               ],
