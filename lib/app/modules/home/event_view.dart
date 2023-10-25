@@ -126,6 +126,7 @@ class EventView extends ConsumerWidget {
                                         'Apakah anda yakin untuk hapus?',
                                         style: Gfont.autoSizeText(context, FontSizeManager.getHeadlineFontSize(),
                                             fontWeight: Fw.bold),
+                                        maxLines: 2,
                                       ),
                                       content: Column(
                                         mainAxisSize: MainAxisSize.min,
@@ -170,7 +171,7 @@ class EventView extends ConsumerWidget {
                                   builder: (BuildContext context) {
                                     // String editContact = 'Name $index';
                                     return AlertDialog(
-                                      title: Text('Edit Contact'),
+                                      title: Text('Edit Event'),
                                       content: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [

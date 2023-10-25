@@ -75,7 +75,7 @@ class FormEvent extends StatelessWidget {
             ),
             LzForm.input(
               label: 'Location',
-              hint: 'Enter locationr',
+              hint: 'Enter location',
               labelStyle: LzFormLabelStyle(),
             ),
             LzForm.input(

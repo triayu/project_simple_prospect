@@ -11,7 +11,6 @@ class FormTask extends StatelessWidget {
   Widget build(BuildContext context) {
     final formstart = LzForm.make(['date']);
     final formend = LzForm.make(['date']);
-
     return Scaffold(
         appBar: CustomAppBar(
           title: 'Add Task',

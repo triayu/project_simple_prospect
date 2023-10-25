@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
-import 'package:simple_prospect/app/modules/login/login_view.dart';
 
 import '../../providers/auth/register_provider.dart';
 
@@ -67,9 +66,9 @@ class RegisterView extends ConsumerWidget {
               ),
               SizedBox(height: 20),
               LzButton(
-                text: 'Continue',
+                text: 'Register',
                 onTap: (state) {
-                 notifier.register(context);
+                  notifier.register(context);
                 },
                 type: ButtonType.primary,
                 gradient: true,

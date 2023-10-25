@@ -55,7 +55,7 @@ class LoginView extends ConsumerWidget {
                   height: 30,
                 ),
                 LzButton(
-                  text: 'Continue',
+                  text: 'Login',
                   onTap: (state) {
                     notifier.login(context);
                   },

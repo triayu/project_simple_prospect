@@ -17,7 +17,7 @@ class Register with ChangeNotifier, UseApi {
           singleNotifier: false,
           notifierType: LzFormNotifier.text,
           messages: FormMessages(required: {
-            'fisrt_name': 'Fisrt Name Tidak Boleh Kosong',
+            'first_name': 'First Name Tidak Boleh Kosong',
             'last_name': 'Last Name Tidak Boleh Kosong',
             'email': 'Email Tidak Boleh Kosong',
             'password_confirmation': 'Password Tidak Boleh Kosong'
@@ -38,6 +38,8 @@ class Register with ChangeNotifier, UseApi {
             builder: (context) => LoginView(),
           ),
         );
+
+        formm.clear();
 
         return LzToast.show('Nice! You are regist in');
       }

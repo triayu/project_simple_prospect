@@ -63,6 +63,8 @@ class Auth with ChangeNotifier, UseApi {
           ),
         );
 
+        forms.clear();
+
         return LzToast.show('Nice! You are logged in');
       }
     } catch (e, s) {

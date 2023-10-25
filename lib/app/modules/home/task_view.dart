@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:lazyui/lazyui.dart';
+import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/modules/form/form_task/form_task_view.dart';
 
 class TaskView extends ConsumerWidget {
@@ -110,7 +111,12 @@ class TaskView extends ConsumerWidget {
                             builder: (BuildContext context) {
                               String editContact = 'Name $index';
                               return AlertDialog(
-                                title: Text('Apakah anda yakin untuk hapus?'),
+                                title: Text(
+                                  'Apakah anda yakin untuk hapus?',
+                                  style: Gfont.autoSizeText(context, FontSizeManager.getHeadlineFontSize(),
+                                      fontWeight: Fw.bold),
+                                  maxLines: 2,
+                                ),
                                 content: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [],
@@ -154,7 +160,7 @@ class TaskView extends ConsumerWidget {
                               builder: (BuildContext context) {
                                 String editContact = 'Name $index';
                                 return AlertDialog(
-                                  title: Text('Edit Contact'),
+                                  title: Text('Edit Task'),
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [

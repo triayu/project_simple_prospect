@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
+import 'package:simple_prospect/app/modules/home/contact/buku_telephone.dart';
 
 import '../../../constants/color_constants.dart';
 import '../../../core/text_theme.dart';
@@ -13,10 +14,10 @@ class IsiContactView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final key = GlobalKey(), bottomKey = GlobalKey();
+    final bottomKey = GlobalKey();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kontak Anda'),
+        title: Text('List Kontak'),
         centerTitle: true,
         actions: [
           Icon(
@@ -27,26 +28,28 @@ class IsiContactView extends StatelessWidget {
             DropX.show(bottomKey, options: options, onSelect: (p0) {
               logg(p0.option);
               if (p0.option == 'Import to excel') {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => KirimPesanView(),
-                ));
+                // Navigator.of(context).push(MaterialPageRoute(
+                //   builder: (context) => KirimPesanView(),
+                // ));
               }
               logg(p0.option);
               if (p0.option == 'Export contact') {
+                // Navigator.of(context).push(MaterialPageRoute(
+                //   builder: (context) => EditPesanView(),
+                // ));
+              } else if (p0.option == 'Import from phonebook') {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => EditPesanView(),
+                  builder: (context) => PhoneBook(),
                 ));
-              } else if (p0 == 'Import from phonebook') {
-                // ---
               }
             });
           })
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListView.separated(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: ListView.separated(
               padding: Ei.only(t: 10, b: 30, h: 10),
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -65,69 +68,66 @@ class IsiContactView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Flexible(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        LzImage(
-                          'tutorial.png',
-                          radius: 50,
-                          size: 50,
-                        ),
-                        SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Nama Kontak $index',
-                              style: Gfont.autoSizeText(
-                                context,
-                                FontSizeManager.getBodyFontSize(),
-                                fontWeight: Fw.bold,
-                                color: ColorConstants.textPrimaryColor,
-                              ),
+                  child: Row(
+                    children: [
+                      LzImage(
+                        'tutorial.png',
+                        radius: 50,
+                        size: 50,
+                      ),
+                      SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Nama Kontak $index',
+                            style: Gfont.autoSizeText(
+                              context,
+                              FontSizeManager.getBodyFontSize(),
+                              fontWeight: Fw.bold,
+                              color: ColorConstants.textPrimaryColor,
                             ),
-                            Text(
-                              'Company ---- $index',
-                              style: Gfont.autoSizeText(
-                                context,
-                                FontSizeManager.getBodyFontSize(),
-                                color: ColorConstants.textPrimaryColor,
-                              ),
+                          ),
+                          Text(
+                            'Company ---- $index',
+                            style: Gfont.autoSizeText(
+                              context,
+                              FontSizeManager.getBodyFontSize(),
+                              color: ColorConstants.textPrimaryColor,
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 );
               },
               separatorBuilder: (context, index) {
                 return SizedBox(height: 15);
               },
-              itemCount: 6,
+              itemCount: 10,
             ),
-            Poslign(
-              alignment: Alignment.bottomRight,
-              child: InkTouch(
-                padding: Ei.all(10),
-                margin: Ei.all(10),
-                radius: Br.circle,
-                color: ColorConstants.primaryColor,
-                child: Icon(
-                  Ti.plus,
-                  color: Colors.white,
-                  size: 35,
-                ),
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => FormContactView(),
-                  ));
-                },
+          ),
+          Poslign(
+            alignment: Alignment.bottomRight,
+            child: InkTouch(
+              padding: Ei.all(10),
+              margin: Ei.all(10),
+              radius: Br.circle,
+              color: ColorConstants.primaryColor,
+              child: Icon(
+                Ti.plus,
+                color: Colors.white,
+                size: 35,
               ),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => FormContactView(),
+                ));
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

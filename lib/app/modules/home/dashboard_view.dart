@@ -48,16 +48,6 @@ class DashBoardView extends ConsumerWidget {
                   maxLines: 2,
                   overflow: Tof.ellipsis,
                 ),
-                Text(
-                  'Good Morning',
-                  style: Gfont.autoSizeText(
-                    context,
-                    FontSizeManager.getSublineFontSize(),
-                    color: ColorConstants.textSecondaryColor,
-                  ),
-                  maxLines: 1,
-                  overflow: Tof.ellipsis,
-                ),
               ],
             ),
           ),
@@ -114,7 +104,7 @@ class DashBoardView extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                            Align( 
+                            Align(
                               alignment: Alignment.bottomLeft,
                               child: Padding(
                                 padding: Ei.only(l: 10, b: 10),
