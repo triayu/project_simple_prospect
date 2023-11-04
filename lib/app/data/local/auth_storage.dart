@@ -29,7 +29,7 @@ class AuthStorage {
 
     if (isLoggedIn) {
       // set token to Dio
-      logg('Bearer $token', name: 'Token');
+      logg('Bearer $token', name: 'Token', color: LogColor.red);
       dio.options.headers['authorization'] = 'Bearer $token';
     }
 

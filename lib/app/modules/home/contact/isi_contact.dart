@@ -6,8 +6,6 @@ import '../../../constants/color_constants.dart';
 import '../../../core/text_theme.dart';
 import '../../form/form_contact/form_contact_view.dart';
 
-import 'edit_pesan_view.dart';
-import 'kirim_pesan_view.dart';
 
 class IsiContactView extends StatelessWidget {
   const IsiContactView({Key? key}) : super(key: key);

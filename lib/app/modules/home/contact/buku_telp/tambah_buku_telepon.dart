@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-import '../../../constants/color_constants.dart';
+import '../../../../constants/color_constants.dart';
 
 class TambahBukuTelepon extends StatelessWidget {
   const TambahBukuTelepon({Key? key}) : super(key: key);
@@ -23,19 +23,19 @@ class TambahBukuTelepon extends StatelessWidget {
                 inputBorderColor: ColorConstants.softBlack),
             children: [
               LzForm.input(
-                label: 'Judul',
-                hint: 'Masukkan judul',
+                label: 'Nama',
+                hint: 'Masukkan Nama',
               ),
               LzForm.input(
-                label: 'Deskripsi',
-                hint: 'Masukkan deskripsi',
+                label: 'Title',
+                hint: 'Masukkan Title',
               ),
             ],
           ),
         ],
       ),
       bottomNavigationBar: LzButton(
-        text: 'Submit',
+        text: 'Tambah Data',
         color: ColorConstants.softBlack,
         onTap: (val) {},
       ).dark(Colors.white).theme1(),

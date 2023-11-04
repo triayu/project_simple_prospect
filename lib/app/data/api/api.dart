@@ -9,4 +9,5 @@ part 'todo_api.dart';
 mixin UseApi {
   AuthApi authApi = AuthApi();
   TodoApi todoApi = TodoApi();
+  
 }

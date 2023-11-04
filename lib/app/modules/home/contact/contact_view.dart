@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/modules/home/contact/broadcast_view.dart';
-import 'package:simple_prospect/app/modules/home/contact/isi_contact.dart';
+import 'package:simple_prospect/app/modules/home/contact/buku_telp/phonebook_view.dart';
 
 class ContactView extends ConsumerWidget {
   const ContactView({Key? key}) : super(key: key);
@@ -93,7 +93,7 @@ class ContactView extends ConsumerWidget {
                       ),
                       child: InkWell(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => IsiContactView()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => PhonebookView()));
                           },
                           child: Column(
                             children: [

@@ -11,7 +11,8 @@ class AppConfig {
   | Server Base URL
   |------------------------------------------------------------*/
 
-  static const String baseUrl = 'http://192.168.88.212:8000/api';
+  // static const String baseUrl = 'http://192.168.88.212:8000/api';
+  static const String baseUrl = 'https://prospect.galkasoft.id/api';
 
   /* -------------------------------------------------------------------------------------------------------------------
   | Version

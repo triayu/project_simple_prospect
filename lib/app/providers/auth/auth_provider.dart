@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
@@ -55,6 +57,10 @@ class Auth with ChangeNotifier, UseApi {
         // Set token to local storage agar token bisa diakses di seluruh aplikasi
         // Kenapa res.data[access_token], karena kita ingin menyimpan data token yang diterima oleh
         SharedPreferencesHelper.setString('token', res.data['access_token']);
+
+        String? token = prefs.getString('token');
+
+        logg(token);
 
         // Navigasi ke page home ketika sudah login
         Navigator.of(context).pushReplacement(
