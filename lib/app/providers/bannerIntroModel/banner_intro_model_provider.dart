@@ -2,9 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/models/banner_intro_model.dart';
 import 'package:simple_prospect/app/utils/fetch/fetch.dart';
-
 import '../../data/api/api.dart';
-import '../appstate/appstate_provider.dart';
 
 class BannerIntroModelProvider extends StateNotifier<AsyncValue<List<BannerIntroModel>>> with UseApi {
   final AutoDisposeStateNotifierProviderRef? ref; // if you want to use ref inside this provider

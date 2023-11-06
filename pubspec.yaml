@@ -43,6 +43,15 @@ dependencies:
   table_calendar: ^3.0.9
   youtube_player_flutter: ^8.1.2
 
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+
+  image: assets/images/logo.png
+  color: "#ffffff"
+  background_color: "#ffffff"
+
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:

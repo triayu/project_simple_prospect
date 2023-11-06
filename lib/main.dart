@@ -15,7 +15,7 @@ import 'app/data/local/shared_preferences.dart';
 
 void main() async {
   // Initialize WidgetsFlutterBinding
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize LazyUi
   LazyUi.config(
@@ -31,7 +31,6 @@ void main() async {
   bool isIntroBannerShown = await IntroBannerStorage.checkShowBanner();
 
   // initialize FlutterNativeSplash
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // Run Apps

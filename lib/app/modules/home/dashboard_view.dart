@@ -57,8 +57,6 @@ class DashBoardView extends ConsumerWidget {
               ),
             ),
 
-            // SLIDER
-
             Column(
               children: [
                 //Slider Banner
