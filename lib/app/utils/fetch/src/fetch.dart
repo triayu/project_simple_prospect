@@ -3,6 +3,7 @@ library fetch;
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:lazyui/lazyui.dart' hide Response, MultipartFile;
+import 'package:simple_prospect/app/core/app_config.dart';
 part 'extension.dart';
 part 'fetch_config.dart';
 part 'response_handler.dart';

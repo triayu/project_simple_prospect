@@ -30,97 +30,107 @@ class DashBoardView extends ConsumerWidget {
     // Variable Data User didapatkan dari penyimpanan local storage
     User userData = AuthStorage.user();
 
-    return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Column(
-        mainAxisAlignment: Maa.start,
-        crossAxisAlignment: Caa.start,
-        children: [
-          // // HEADER
-          Container(
-            padding: Ei.sym(h: 20, v: 20),
-            child: Column(
-              mainAxisAlignment: Maa.start,
-              crossAxisAlignment: Caa.start,
-              children: [
-                Text(
-                  'Halo, Selamat Datang ${userData.fullName!.ucwords}',
-                  style: Gfont.autoSizeText(context, FontSizeManager.getHeadlineFontSize(), fontWeight: Fw.bold),
-                  maxLines: 2,
-                  overflow: Tof.ellipsis,
-                ),
-              ],
+    return RefreshIndicator(
+      onRefresh: () async {
+        await ref.read(introProvider.notifier).getIntro();
+      },
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          mainAxisAlignment: Maa.start,
+          crossAxisAlignment: Caa.start,
+          children: [
+            // // HEADER
+            Container(
+              padding: Ei.sym(h: 20, v: 20),
+              child: Column(
+                mainAxisAlignment: Maa.start,
+                crossAxisAlignment: Caa.start,
+                children: [
+                  Text(
+                    'Halo, Selamat Datang ${userData.fullName!.ucwords}',
+                    style: Gfont.autoSizeText(context, FontSizeManager.getHeadlineFontSize(), fontWeight: Fw.bold),
+                    maxLines: 2,
+                    overflow: Tof.ellipsis,
+                  ),
+                ],
+              ),
             ),
-          ),
 
-          // SLIDER
-          Consumer(builder: (context, ref, _) {
-            final notifier = ref.read(introProvider.notifier);
+            // SLIDER
 
-            return Column(
+            Column(
               children: [
-                CarouselSlider(
-                  options: CarouselOptions(viewportFraction: 0.9, height: context.height * 0.26),
-                  items: [1, 2, 3, 4, 5].map((i) {
-                    return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: customColors[i - 1],
-                      ),
-                      child: Stack(
-                        children: [
-                          Positioned.fill(
-                              top: -50,
-                              bottom: -50,
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: LzImage(
-                                  'banner_ornament.svg',
-                                  size: context.width,
-                                  fit: BoxFit.fitHeight,
+                //Slider Banner
+                Consumer(builder: (context, ref, _) {
+                  final asyncData = ref.watch(introProvider);
+
+                  return asyncData.when(data: (data) {
+                    if (data.isEmpty) {
+                      return LzNoData(
+                          message: 'Opps! No data found', onTap: () => ref.read(introProvider.notifier).getIntro());
+                    }
+
+                    return CarouselSlider(
+                      options: CarouselOptions(viewportFraction: 0.9, height: context.height * 0.26),
+                      items: data.map((i) {
+                        String tittle = i.name;
+                        String total = i.total.toString();
+
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.symmetric(horizontal: 5.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: customColors[data.indexOf(i)],
+                          ),
+                          child: Stack(
+                            children: [
+                              Positioned.fill(
+                                  bottom: -50,
+                                  child: Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: LzImage('banner_ornament.svg', size: context.height, fit: BoxFit.contain),
+                                  )),
+                              Poslign(
+                                margin: Ei.only(t: context.viewPadding.top + 30),
+                                alignment: Alignment.topCenter,
+                                child: RichText(
+                                  textAlign: TextAlign.center,
+                                  strutStyle: StrutStyle(fontSize: 50.0),
+                                  text: TextSpan(
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: total,
+                                        style: Gfont.fs(65).copyWith(color: ColorConstants.secondaryColor),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              )),
-                          Poslign(
-                            margin: Ei.only(t: context.viewPadding.top + 30),
-                            alignment: Alignment.topCenter,
-                            child: RichText(
-                              textAlign: TextAlign.center,
-                              strutStyle: StrutStyle(fontSize: 50.0),
-                              text: TextSpan(
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: '0',
-                                    style: Gfont.fs(65).copyWith(color: ColorConstants.secondaryColor),
-                                  ),
-                                  TextSpan(
-                                    text: ' / ',
-                                    style: Gfont.fs(40).copyWith(color: ColorConstants.secondaryColor),
-                                  ),
-                                  TextSpan(
-                                    text: '0',
-                                    style: Gfont.fs(35).copyWith(color: ColorConstants.secondaryColor),
-                                  ),
-                                ],
                               ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Padding(
-                              padding: Ei.only(l: 10, b: 10),
-                              child: Text(
-                                'Prospect Booked $i',
-                                style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
+                              Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Padding(
+                                  padding: Ei.only(l: 10, b: 10),
+                                  child: Text(
+                                    'Total ${tittle.ucwords}',
+                                    style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
+                        );
+                      }).toList(),
                     );
-                  }).toList(),
-                ),
+                  }, error: (error, _) {
+                    return LzNoData(message: 'Opps! $error');
+                  }, loading: () {
+                    return LzLoader.bar(message: 'Loading...');
+                  });
+                }),
+
+                // ======================
 
                 // EVENT TERUPDATE
                 Align(
@@ -309,9 +319,9 @@ class DashBoardView extends ConsumerWidget {
                   ],
                 ),
               ],
-            );
-          })
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -4,12 +4,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simple_prospect/app/core/app_config.dart';
 import 'package:simple_prospect/app/data/local/auth_storage.dart';
 import 'package:simple_prospect/app/modules/home/home_view.dart';
 import 'package:simple_prospect/app/modules/login/login_view.dart';
 import 'package:simple_prospect/app/modules/onboarding/onboarding_view.dart';
-import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 import 'app/constants/color_constants.dart';
 import 'app/core/theme.dart';
 import 'app/data/local/intro_storage.dart';
@@ -31,12 +29,6 @@ void main() async {
 
   // Check if intro banner is shown
   bool isIntroBannerShown = await IntroBannerStorage.checkShowBanner();
-
-  // Initialize Fetch
-  UseFetch(
-    baseUrl: AppConfig.baseUrl,
-    onRequest: (statusCode, data) {},
-  ).init();
 
   // initialize FlutterNativeSplash
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
