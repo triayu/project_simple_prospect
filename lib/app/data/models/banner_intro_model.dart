@@ -1,13 +1,28 @@
 class BannerIntroModel {
-  final int? id;
-  final String? title;
-  final String? description;
-  final String? image;
+  String name;
+  int count;
+  int total;
 
   BannerIntroModel({
-    this.id,
-    this.title,
-    this.description,
-    this.image,
+    required this.name,
+    required this.count,
+    required this.total,
   });
+
+  factory BannerIntroModel.fromJson(Map<String, dynamic> json) => BannerIntroModel(
+        name: json["name"],
+        count: json["count"],
+        total: json["total"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "count": count,
+        "total": total,
+      };
+
+  @override
+  String toString() {
+    return super.toString();
+  }
 }

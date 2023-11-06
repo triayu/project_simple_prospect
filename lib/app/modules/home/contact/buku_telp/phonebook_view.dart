@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/modules/home/contact/buku_telp/edit_buku_telepon.dart';
 import 'package:simple_prospect/app/modules/home/contact/buku_telp/kelola_kontak.dart';
 import 'package:simple_prospect/app/modules/home/contact/buku_telp/tambah_buku_telepon.dart';
-
-import '../edit_pesan_view.dart';
 
 class PhonebookView extends StatelessWidget {
   const PhonebookView({Key? key}) : super(key: key);
@@ -86,7 +85,7 @@ class PhonebookView extends StatelessWidget {
                                     logg(p0.option);
                                     if (p0.option == 'Edit') {
                                       Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (context) => EditPesanView(),
+                                        builder: (context) => EditPhonebook(),
                                       ));
                                     } else if (p0 == 'Hapus') {
                                       // ---
