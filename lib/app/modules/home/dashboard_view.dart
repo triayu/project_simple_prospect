@@ -5,8 +5,10 @@ import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/data/local/auth_storage.dart';
+import 'package:simple_prospect/app/data/models/coming_event_model.dart';
 import 'package:simple_prospect/app/data/models/model.dart';
-import 'package:simple_prospect/app/providers/bannerIntroModel/banner_intro_model_provider.dart';
+import 'package:simple_prospect/app/providers/dashboard/banner_intro_provider.dart';
+import 'package:simple_prospect/app/providers/dashboard/dashboard_coming_event_provider.dart';
 
 class DashBoardView extends ConsumerWidget {
   DashBoardView({super.key});
@@ -33,6 +35,7 @@ class DashBoardView extends ConsumerWidget {
     return RefreshIndicator(
       onRefresh: () async {
         await ref.read(introProvider.notifier).getIntro();
+        await ref.read(comingeventProvider.notifier).getComing();
       },
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -60,73 +63,82 @@ class DashBoardView extends ConsumerWidget {
             Column(
               children: [
                 //Slider Banner
-                Consumer(builder: (context, ref, _) {
-                  final asyncData = ref.watch(introProvider);
+                Consumer(
+                  builder: (context, ref, _) {
+                    final asyncData = ref.watch(introProvider);
 
-                  return asyncData.when(data: (data) {
-                    if (data.isEmpty) {
-                      return LzNoData(
-                          message: 'Opps! No data found', onTap: () => ref.read(introProvider.notifier).getIntro());
-                    }
+                    return asyncData.when(
+                      data: (data) {
+                        if (data.isEmpty) {
+                          return LzNoData(
+                              message: 'Opps! No data found', onTap: () => ref.read(introProvider.notifier).getIntro());
+                        }
 
-                    return CarouselSlider(
-                      options: CarouselOptions(viewportFraction: 0.9, height: context.height * 0.26),
-                      items: data.map((i) {
-                        String tittle = i.name;
-                        String total = i.total.toString();
+                        return CarouselSlider(
+                          options: CarouselOptions(viewportFraction: 0.9, height: context.height * 0.26),
+                          items: data.map(
+                            (i) {
+                              String tittle = i.name;
+                              String total = i.total.toString();
 
-                        return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 5.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: customColors[data.indexOf(i)],
-                          ),
-                          child: Stack(
-                            children: [
-                              Positioned.fill(
-                                  bottom: -50,
-                                  child: Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: LzImage('banner_ornament.svg', size: context.height, fit: BoxFit.contain),
-                                  )),
-                              Poslign(
-                                margin: Ei.only(t: context.viewPadding.top + 30),
-                                alignment: Alignment.topCenter,
-                                child: RichText(
-                                  textAlign: TextAlign.center,
-                                  strutStyle: StrutStyle(fontSize: 50.0),
-                                  text: TextSpan(
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: total,
-                                        style: Gfont.fs(65).copyWith(color: ColorConstants.secondaryColor),
+                              return Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: customColors[data.indexOf(i)],
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Positioned.fill(
+                                        bottom: -50,
+                                        child: Align(
+                                          alignment: Alignment.bottomRight,
+                                          child:
+                                              LzImage('banner_ornament.svg', size: context.height, fit: BoxFit.contain),
+                                        )),
+                                    Poslign(
+                                      margin: Ei.only(t: context.viewPadding.top + 30),
+                                      alignment: Alignment.topCenter,
+                                      child: RichText(
+                                        textAlign: TextAlign.center,
+                                        strutStyle: StrutStyle(fontSize: 50.0),
+                                        text: TextSpan(
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text: total,
+                                              style: Gfont.fs(65).copyWith(color: ColorConstants.secondaryColor),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.bottomLeft,
+                                      child: Padding(
+                                        padding: Ei.only(l: 10, b: 10),
+                                        child: Text(
+                                          'Total ${tittle.ucwords}',
+                                          style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Padding(
-                                  padding: Ei.only(l: 10, b: 10),
-                                  child: Text(
-                                    'Total ${tittle.ucwords}',
-                                    style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                              );
+                            },
+                          ).toList(),
                         );
-                      }).toList(),
+                      },
+                      error: (error, _) {
+                        return LzNoData(message: 'Opps! $error');
+                      },
+                      loading: () {
+                        return LzLoader.bar(message: 'Loading...');
+                      },
                     );
-                  }, error: (error, _) {
-                    return LzNoData(message: 'Opps! $error');
-                  }, loading: () {
-                    return LzLoader.bar(message: 'Loading...');
-                  });
-                }),
+                  },
+                ),
 
                 // ======================
 
@@ -142,71 +154,96 @@ class DashBoardView extends ConsumerWidget {
                   ),
                 ),
 
-                SizedBox(
-                  height: 90,
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    padding: Ei.only(h: 10, b: 5),
-                    separatorBuilder: (context, index) => SizedBox(width: 10),
-                    itemCount: 3,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: ColorConstants.softBlack,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Stack(
-                          children: [
-                            Positioned.fill(
-                                top: -50,
-                                bottom: -50,
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: LzImage(
-                                    'banner_ornament.svg',
-                                    size: context.width,
-                                    fit: BoxFit.fitHeight,
-                                  ),
-                                )),
-                            Container(
-                              padding: Ei.all(10),
-                              child: Row(
-                                mainAxisAlignment: Maa.spaceBetween,
-                                crossAxisAlignment: Caa.center,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '16/8/2023',
-                                        style: Gfont.fs(16).copyWith(color: ColorConstants.secondaryColor),
+                Consumer(
+                  builder: (context, ref, _) {
+                    final asyncData = ref.watch(comingeventProvider);
+
+                    return asyncData.when(
+                      data: (List<ComingEventModel> data) {
+                        if (data.isEmpty) {
+                          return LzNoData(
+                            message: 'Opps! No data found',
+                            onTap: () => ref.read(comingeventProvider.notifier).getComing(),
+                          );
+                        }
+
+                        return SizedBox(
+                          height: 90,
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            padding: EdgeInsets.only(top: 10, bottom: 5),
+                            separatorBuilder: (context, index) => SizedBox(width: 10),
+                            itemCount: data.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              final event = data[index];
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: ColorConstants.softBlack,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Positioned.fill(
+                                      top: -50,
+                                      bottom: -50,
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: LzImage(
+                                          'banner_ornament.svg',
+                                          size: context.width,
+                                          fit: BoxFit.fitHeight,
+                                        ),
                                       ),
-                                    ],
-                                  ),
-                                  SizedBox(width: 10),
-                                  Column(
-                                    mainAxisAlignment: Maa.center,
-                                    crossAxisAlignment: Caa.start,
-                                    children: [
-                                      Text(
-                                        'Waktu $index',
-                                        style: Gfont.fs(14).copyWith(color: ColorConstants.secondaryColor),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(10),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                '16/8/2023',
+                                                style: Gfont.fs(16).copyWith(color: ColorConstants.secondaryColor),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(width: 10),
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Waktu ${event.count}',
+                                                style: Gfont.fs(14).copyWith(color: ColorConstants.secondaryColor),
+                                              ),
+                                              Text(
+                                                'Meeting ${event.name}',
+                                                style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        'Meeting $index',
-                                        style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      error: (error, _) {
+                        return LzNoData(message: 'Opps! $error');
+                      },
+                      loading: () {
+                        return LzLoader.bar(message: 'Loading...');
+                      },
+                    );
+                  },
                 ),
 
                 // ======================

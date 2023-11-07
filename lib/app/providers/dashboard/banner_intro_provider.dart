@@ -19,6 +19,7 @@ class BannerIntroProvider extends StateNotifier<AsyncValue<List<BannerIntroModel
       // Koneksi Ke api untuk mendapatkan data
       ResHandler res = await goalApi.getGoal();
 
+
       // Kemudian variable respon diatas akan mengembalikan sejumlah nilai, diantaranya:
       // res.status  --> Status dari respon (true atau false)
       // res.message --> Pesan dari respon (Ini untuk pesan yang ada pada object message)
