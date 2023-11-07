@@ -43,7 +43,7 @@ void main() async {
     ),
   );
 
-  // whenever your initialization is completed, remove the splash screen:
+  // Whenever your initialization is completed, remove the splash screen:
   FlutterNativeSplash.remove();
 
   // Prevent the application for sreen rotation
