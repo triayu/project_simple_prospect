@@ -8,6 +8,7 @@ part 'todo_api.dart';
 part 'count_goal_api.dart';
 part 'count_up_coming_event_api.dart';
 part 'event_api.dart';
+part 'task_api.dart';
 
 mixin UseApi {
   AuthApi authApi = AuthApi();
@@ -15,6 +16,7 @@ mixin UseApi {
   GoalApi goalApi = GoalApi();
   ComingApi comingEvent = ComingApi();
   EventApi eventApi = EventApi();
+  TaskApi taskApi = TaskApi();
 }
 
 // 

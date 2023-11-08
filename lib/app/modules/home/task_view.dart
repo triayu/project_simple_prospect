@@ -5,6 +5,7 @@ import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/modules/form/form_task/form_task_view.dart';
+import 'package:simple_prospect/app/providers/task/task_provider.dart';
 
 class TaskView extends ConsumerWidget {
   const TaskView({Key? key}) : super(key: key);
@@ -15,143 +16,97 @@ class TaskView extends ConsumerWidget {
       clipBehavior: Clip.none,
       fit: StackFit.expand,
       children: [
-        // All Contact
-        ListView.separated(
-          padding: Ei.sym(h: 10, v: 20),
-          physics: BouncingScrollPhysics(),
-          itemBuilder: (context, index) {
-            return Container(
-              height: 80,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: Offset(0, 1),
+        // TASK
+        Consumer(builder: (context, ref, _) {
+          final AsyncData = ref.watch(taskProvider);
+
+          return ListView.separated(
+            padding: Ei.sym(h: 10, v: 20),
+            physics: BouncingScrollPhysics(),
+            itemBuilder: (context, index) {
+              return Container(
+                height: 80,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15),
                   ),
-                ],
-              ),
-              child: ListTile(
-                contentPadding: Ei.only(b: 15, h: 10, t: 10),
-                dense: true,
-                tileColor: Colors.white,
-                style: ListTileStyle.list,
-                title: Row(
-                  children: [
-                    Text(
-                      'Desc Task $index',
-                      style: TextStyle(
-                        color: ColorConstants.textPrimaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Spacer(),
-                    Container(
-                      width: 70,
-                      padding: EdgeInsets.all(3),
-                      decoration: BoxDecoration(
-                        color: ColorConstants.textMediumColor,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Text(
-                        'Medium',
-                        textAlign: Ta.center,
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: ColorConstants.secondaryColor,
-                        ),
-                      ),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: Offset(0, 1),
                     ),
                   ],
                 ),
-                subtitle: Row(
-                  children: [
-                    Icon(
-                      Ti.calendarCheck,
-                      color: ColorConstants.textSecondaryColor,
-                      size: 16,
-                    ),
-                    Text(
-                      '23 Mei 2023',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: ColorConstants.textSecondaryColor,
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Icon(
-                      Ti.clockCheck,
-                      color: ColorConstants.textSecondaryColor,
-                      size: 16,
-                    ),
-                    Text(
-                      '23 Mei 2023',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: ColorConstants.textSecondaryColor,
-                      ),
-                    ),
-                    Spacer(),
-                    Container(
-                      child: IconButton(
-                        icon: Icon(
-                          Ti.trash,
-                          color: ColorConstants.errorColor,
-                          size: 20,
+                child: ListTile(
+                  contentPadding: Ei.only(b: 15, h: 10, t: 10),
+                  dense: true,
+                  tileColor: Colors.white,
+                  style: ListTileStyle.list,
+                  title: Row(
+                    children: [
+                      Text(
+                        'Desc Task $index',
+                        style: TextStyle(
+                          color: ColorConstants.textPrimaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              String editContact = 'Name $index';
-                              return AlertDialog(
-                                title: Text(
-                                  'Apakah anda yakin untuk hapus?',
-                                  style: Gfont.autoSizeText(context, FontSizeManager.getHeadlineFontSize(),
-                                      fontWeight: Fw.bold),
-                                  maxLines: 2,
-                                ),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [],
-                                ),
-                                actions: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: ColorConstants.primaryColor,
-                                    ),
-                                    child: Text('Hapus'),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: ColorConstants.primaryColor,
-                                    ),
-                                    child: Text('Batal'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
                       ),
-                    ),
-                    Container(
-                      child: IconButton(
+                      Spacer(),
+                      Container(
+                        width: 70,
+                        padding: EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          color: ColorConstants.textMediumColor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Text(
+                          'Medium',
+                          textAlign: Ta.center,
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: ColorConstants.secondaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  subtitle: Row(
+                    children: [
+                      Icon(
+                        Ti.calendarCheck,
+                        color: ColorConstants.textSecondaryColor,
+                        size: 16,
+                      ),
+                      Text(
+                        '23 Mei 2023',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: ColorConstants.textSecondaryColor,
+                        ),
+                      ),
+                      SizedBox(width: 5),
+                      Icon(
+                        Ti.clockCheck,
+                        color: ColorConstants.textSecondaryColor,
+                        size: 16,
+                      ),
+                      Text(
+                        '23 Mei 2023',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: ColorConstants.textSecondaryColor,
+                        ),
+                      ),
+                      Spacer(),
+                      Container(
+                        child: IconButton(
                           icon: Icon(
-                            Ti.edit,
-                            color: ColorConstants.successColor,
+                            Ti.trash,
+                            color: ColorConstants.errorColor,
                             size: 20,
                           ),
                           onPressed: () {
@@ -160,53 +115,103 @@ class TaskView extends ConsumerWidget {
                               builder: (BuildContext context) {
                                 String editContact = 'Name $index';
                                 return AlertDialog(
-                                  title: Text('Edit Task'),
+                                  title: Text(
+                                    'Apakah anda yakin untuk hapus?',
+                                    style: Gfont.autoSizeText(context, FontSizeManager.getHeadlineFontSize(),
+                                        fontWeight: Fw.bold),
+                                    maxLines: 2,
+                                  ),
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      TextField(
-                                        decoration: InputDecoration(labelText: 'Name'),
-                                        onChanged: (value) {
-                                          editContact = value;
-                                        },
-                                      ),
-                                    ],
+                                    children: [],
                                   ),
                                   actions: [
                                     ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: ColorConstants.primaryColor,
-                                      ),
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: Text('Save'),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: ColorConstants.primaryColor,
+                                      ),
+                                      child: Text('Hapus'),
                                     ),
                                     ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: ColorConstants.primaryColor,
-                                      ),
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: Text('Cancel'),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: ColorConstants.primaryColor,
+                                      ),
+                                      child: Text('Batal'),
                                     ),
                                   ],
                                 );
                               },
                             );
-                          }),
-                    ),
-                  ],
+                          },
+                        ),
+                      ),
+                      Container(
+                        child: IconButton(
+                            icon: Icon(
+                              Ti.edit,
+                              color: ColorConstants.successColor,
+                              size: 20,
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  String editContact = 'Name $index';
+                                  return AlertDialog(
+                                    title: Text('Edit Task'),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextField(
+                                          decoration: InputDecoration(labelText: 'Name'),
+                                          onChanged: (value) {
+                                            editContact = value;
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: ColorConstants.primaryColor,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Save'),
+                                      ),
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: ColorConstants.primaryColor,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Cancel'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
-          separatorBuilder: (context, index) {
-            return SizedBox(height: 10);
-          },
-          itemCount: 5,
-        ),
+              );
+            },
+            separatorBuilder: (context, index) {
+              return SizedBox(height: 10);
+            },
+            itemCount: 5,
+          );
+        }),
 
         Poslign(
           alignment: Alignment.bottomRight,
