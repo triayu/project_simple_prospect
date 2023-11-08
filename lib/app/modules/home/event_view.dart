@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
+import 'package:simple_prospect/app/providers/event/event_provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../form/form_event/form_event.dart';
@@ -73,153 +74,184 @@ class EventView extends ConsumerWidget {
 
             Divider(height: 1, color: Colors.black.withOpacity(0.1)),
             // Event
-            Expanded(
-              child: ListView.separated(
-                padding: Ei.sym(h: 10, v: 20),
-                physics: BouncingScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: Offset(0, 1),
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      dense: true,
-                      tileColor: Colors.white,
-                      style: ListTileStyle.list,
-                      title: Text(
-                        'Desc Event $index',
-                        style: TextStyle(
-                          color: ColorConstants.textPrimaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            child: IconButton(
-                              icon: Icon(
-                                Ti.trash,
-                                color: ColorConstants.errorColor,
-                                size: 20,
+            SingleChildScrollView(
+              child: Consumer(
+                builder: (context, ref, _) {
+                  final AsyncData = ref.watch(eventProvider);
+
+                  return AsyncData.when(
+                    data: (data) {
+                      if (data.isEmpty) {
+                        return LzNoData(
+                            message: 'Opps! No data found', onTap: () => ref.read(eventProvider.notifier).getEvent());
+                      }
+                      return ListView.separated(
+                        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                        physics: BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          final event = data[index];
+                          return Container(
+                            height: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
                               ),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text(
-                                        'Apakah anda yakin untuk hapus?',
-                                        style: Gfont.autoSizeText(context, FontSizeManager.getHeadlineFontSize(),
-                                            fontWeight: Fw.bold),
-                                        maxLines: 2,
-                                      ),
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [],
-                                      ),
-                                      actions: [
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: ColorConstants.primaryColor,
-                                          ),
-                                          child: Text('Hapus'),
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: ColorConstants.primaryColor,
-                                          ),
-                                          child: Text('Batal'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  offset: Offset(0, 1),
+                                ),
+                              ],
                             ),
-                          ),
-                          Container(
-                            child: IconButton(
-                              icon: Icon(
-                                Ti.edit,
-                                color: ColorConstants.successColor,
-                                size: 20,
+                            // List Event
+                            child: ListTile(
+                              dense: true,
+                              tileColor: Colors.white,
+                              style: ListTileStyle.list,
+                              title: Text(
+                                event.title,
+                                style: TextStyle(
+                                  color: ColorConstants.textPrimaryColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
                               ),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    // String editContact = 'Name $index';
-                                    return AlertDialog(
-                                      title: Text('Edit Event'),
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          TextField(
-                                            decoration: InputDecoration(labelText: 'Name'),
-                                            onChanged: (value) {
-                                              // editContact = value;
-                                            },
-                                          ),
-                                        ],
+                              subtitle: Text(
+                                event.userFirstName,
+                                style: TextStyle(
+                                  color: ColorConstants.textSecondaryColor,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Ti.trash,
+                                        color: ColorConstants.errorColor,
+                                        size: 20,
                                       ),
-                                      actions: [
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: ColorConstants.primaryColor,
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                'Apakah anda yakin untuk hapus?',
+                                                style: Gfont.autoSizeText(
+                                                  context,
+                                                  FontSizeManager.getHeadlineFontSize(),
+                                                  fontWeight: Fw.bold,
+                                                ),
+                                                maxLines: 2,
+                                              ),
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [],
+                                              ),
+                                              actions: [
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: ColorConstants.primaryColor,
+                                                  ),
+                                                  child: Text('Hapus'),
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: ColorConstants.primaryColor,
+                                                  ),
+                                                  child: Text('Batal'),
+                                                ),
+                                              ],
+                                            );
                                           },
-                                          child: Text('Save'),
-                                        ),
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: ColorConstants.primaryColor,
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Container(
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Ti.edit,
+                                        color: ColorConstants.successColor,
+                                        size: 20,
+                                      ),
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text('Edit Event'),
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  TextField(
+                                                    decoration: InputDecoration(labelText: 'Name'),
+                                                    onChanged: (value) {
+                                                      // editContact = value;
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                              actions: [
+                                                ElevatedButton(
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: ColorConstants.primaryColor,
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text('Save'),
+                                                ),
+                                                ElevatedButton(
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: ColorConstants.primaryColor,
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text('Cancel'),
+                                                ),
+                                              ],
+                                            );
                                           },
-                                          child: Text('Cancel'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return SizedBox(height: 10);
+                        },
+                        itemCount: data.length, 
+                      );
+                    },
+                    error: (error, _) {
+                      return LzNoData(message: 'Opps! $error');
+                    },
+                    loading: () {
+                      return LzLoader.bar(message: 'Loading...');
+                    },
                   );
                 },
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: 10);
-                },
-                itemCount: 10,
               ),
-            ),
+            )
           ],
         ),
         Poslign(

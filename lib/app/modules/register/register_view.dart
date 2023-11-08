@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
+import 'package:simple_prospect/app/modules/login/login_view.dart';
 
 import '../../providers/auth/register_provider.dart';
 
@@ -77,6 +78,26 @@ class RegisterView extends ConsumerWidget {
                 radius: 25.0,
               ),
               SizedBox(height: 20),
+              Row(
+                crossAxisAlignment: Caa.center,
+                mainAxisAlignment: Maa.center,
+                children: [
+                  // Gak perlu pakai text style lagi, pakai class gfont
+                  Text('Sudah mempunyai akun?', style: Gfont.fs14.copyWith(color: ColorConstants.textSecondaryColor)),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginView()));
+                    },
+                    child: Text(
+                      'Login',
+                      // style: Gfont.black.copyWith(
+                      //     fontSize: 14,
+                      //     decoration: TextDecoration.underline,
+                      //     color: ColorConstants.textPrimaryColor)
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),

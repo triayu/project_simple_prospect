@@ -71,70 +71,92 @@ class DashBoardView extends ConsumerWidget {
                       data: (data) {
                         if (data.isEmpty) {
                           return LzNoData(
-                              message: 'Opps! No data found', onTap: () => ref.read(introProvider.notifier).getIntro());
+                            message: 'Opps! No data found',
+                            onTap: () => ref.read(introProvider.notifier).getIntro(),
+                          );
                         }
 
-                        return CarouselSlider(
-                          options: CarouselOptions(viewportFraction: 0.9, height: context.height * 0.26),
-                          items: data.map(
-                            (i) {
-                              String tittle = i.name;
-                              String total = i.total.toString();
+                        return Stack(
+                          children: [
+                            CarouselSlider(
+                              options: CarouselOptions(
+                                viewportFraction: 0.9,
+                                height: context.height * 0.26,
+                              ),
+                              items: data.map((i) {
+                                String tittle = i.name;
+                                String total = i.total.toString();
 
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: customColors[data.indexOf(i)],
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Positioned.fill(
+                                return Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: customColors[data.indexOf(i)],
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      Positioned.fill(
                                         bottom: -50,
                                         child: Align(
                                           alignment: Alignment.bottomRight,
                                           child:
                                               LzImage('banner_ornament.svg', size: context.height, fit: BoxFit.contain),
-                                        )),
-                                    Poslign(
-                                      margin: Ei.only(t: context.viewPadding.top + 30),
-                                      alignment: Alignment.topCenter,
-                                      child: RichText(
-                                        textAlign: TextAlign.center,
-                                        strutStyle: StrutStyle(fontSize: 50.0),
-                                        text: TextSpan(
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text: total,
-                                              style: Gfont.fs(65).copyWith(color: ColorConstants.secondaryColor),
-                                            ),
-                                          ],
                                         ),
                                       ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.bottomLeft,
-                                      child: Padding(
-                                        padding: Ei.only(l: 10, b: 10),
-                                        child: Text(
-                                          'Total ${tittle.ucwords}',
-                                          style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
+                                      Poslign(
+                                        margin: EdgeInsets.only(top: context.viewPadding.top + 30),
+                                        alignment: Alignment.topCenter,
+                                        child: RichText(
+                                          textAlign: TextAlign.center,
+                                          strutStyle: StrutStyle(fontSize: 50.0),
+                                          text: TextSpan(
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text: total,
+                                                style: Gfont.fs(65).copyWith(color: ColorConstants.secondaryColor),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ).toList(),
+                                      Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(left: 10, bottom: 10),
+                                          child: Text(
+                                            'Total ${tittle.ucwords}',
+                                            style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ],
                         );
                       },
                       error: (error, _) {
                         return LzNoData(message: 'Opps! $error');
                       },
                       loading: () {
-                        return LzLoader.bar(message: 'Loading...');
+                        return SizedBox(
+                          height: 250,
+                          child: ListView.builder(
+                            itemCount: 10,
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return Skeleton(
+                                radius: 10,
+                                margin: Ei.all(10),
+                                size: [context.width * 0.9, context.height * 0.26],
+                              );
+                            },
+                          ),
+                        );
                       },
                     );
                   },
@@ -240,7 +262,20 @@ class DashBoardView extends ConsumerWidget {
                         return LzNoData(message: 'Opps! $error');
                       },
                       loading: () {
-                        return LzLoader.bar(message: 'Loading...');
+                        return SizedBox(
+                          height: 90,
+                          child: ListView.builder(
+                            itemCount: 10, // Number of skeleton items
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return Skeleton(
+                                  radius: 10,
+                                  margin: EdgeInsets.all(10),
+                                  size: [250, 20]); // Adjust size and margin as needed
+                            },
+                          ),
+                        );
                       },
                     );
                   },
