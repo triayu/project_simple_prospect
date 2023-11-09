@@ -30,7 +30,31 @@ class EventProvider extends StateNotifier<AsyncValue<List<EventModel>>> with Use
       state = AsyncValue.data([]);
     }
   }
+
+Future delEvent(int id) async {
+    try {
+      state = const AsyncValue.loading();
+
+      ResHandler res = await eventApi.deleteEvent(id);
+
+      if (res.status) {
+        // Kalau dia true maka tmpilkan pesan sukses , dan panggil ulang fucntion get task , untuk mereload data task
+        LzToast.show(res.message);
+        getEvent();
+      } else {
+        // Kalau false maka tmpilkan pesan error
+        LzToast.show(res.message);
+      }
+    } catch (e, s) {
+      Errors.check(e, s);
+    }
+  }
+
+
+
 }
+
+ 
 
 final eventProvider = StateNotifierProvider.autoDispose<EventProvider, AsyncValue<List<EventModel>>>((ref) {
   return EventProvider(

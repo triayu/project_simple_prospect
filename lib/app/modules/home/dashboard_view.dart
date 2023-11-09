@@ -32,6 +32,8 @@ class DashBoardView extends ConsumerWidget {
     // Variable Data User didapatkan dari penyimpanan local storage
     User userData = AuthStorage.user();
 
+    logg(userData.accessToken, color: LogColor.red);
+
     return RefreshIndicator(
       onRefresh: () async {
         await ref.read(introProvider.notifier).getIntro();
@@ -168,7 +170,7 @@ class DashBoardView extends ConsumerWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: Ei.only(h: 20, b: 10, t: 30),
+                    padding: Ei.only(h: 10, b: 10, t: 30),
                     child: Text(
                       'Aktifitas yang akan datang',
                       style: Gfont.autoSizeText(context, FontSizeManager.getSublineFontSize(), fontWeight: Fw.bold),
@@ -193,7 +195,7 @@ class DashBoardView extends ConsumerWidget {
                           height: 90,
                           child: ListView.separated(
                             shrinkWrap: true,
-                            padding: EdgeInsets.only(top: 10, bottom: 5),
+                            padding: Ei.only(t: 10, b: 5, h: 20),
                             separatorBuilder: (context, index) => SizedBox(width: 10),
                             itemCount: data.length,
                             scrollDirection: Axis.horizontal,
@@ -219,7 +221,8 @@ class DashBoardView extends ConsumerWidget {
                                       ),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.all(10),
+                                      margin: Ei.only(h: 20),
+                                      padding: Ei.all(10),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         crossAxisAlignment: CrossAxisAlignment.center,

@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
+import 'package:simple_prospect/app/data/models/event_model.dart';
 import 'package:simple_prospect/app/providers/event/event_provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -86,12 +87,18 @@ class EventView extends ConsumerWidget {
                           return LzNoData(
                               message: 'Opps! No data found', onTap: () => ref.read(eventProvider.notifier).getEvent());
                         }
+
                         return ListView.separated(
                           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
                           physics: BouncingScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
+                            List<EventModel> datas = data;
+
+                            int id = datas[index].id;
+
                             final event = data[index];
+
                             return Container(
                               height: 60,
                               decoration: BoxDecoration(
@@ -140,45 +147,17 @@ class EventView extends ConsumerWidget {
                                         ),
                                         onPressed: () {
                                           showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                  'Apakah anda yakin untuk hapus?',
-                                                  style: Gfont.autoSizeText(
-                                                    context,
-                                                    FontSizeManager.getHeadlineFontSize(),
-                                                    fontWeight: Fw.bold,
-                                                  ),
-                                                  maxLines: 2,
-                                                ),
-                                                content: Column(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  children: [],
-                                                ),
-                                                actions: [
-                                                  ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    style: ElevatedButton.styleFrom(
-                                                      backgroundColor: ColorConstants.primaryColor,
-                                                    ),
-                                                    child: Text('Hapus'),
-                                                  ),
-                                                  ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    style: ElevatedButton.styleFrom(
-                                                      backgroundColor: ColorConstants.primaryColor,
-                                                    ),
-                                                    child: Text('Batal'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return LzConfirm(
+                                                  title: "Apakah Anda Yakin Untuk Menghapus Data Ini",
+                                                  onConfirm: () {
+                                                    logg('Tekan Hapus');
+                                                    logg(id);
+                                                    ref.read(eventProvider.notifier).delEvent(id);
+                                                  },
+                                                );
+                                              });
                                         },
                                       ),
                                     ),

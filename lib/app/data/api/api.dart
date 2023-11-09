@@ -17,6 +17,7 @@ mixin UseApi {
   ComingApi comingEvent = ComingApi();
   EventApi eventApi = EventApi();
   TaskApi taskApi = TaskApi();
+
 }
 
-// 
+
