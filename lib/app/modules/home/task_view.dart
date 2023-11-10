@@ -33,7 +33,7 @@ class TaskView extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   List<TaskModel> datas = data;
 
-                  int id = datas[index].id;
+                  int id = datas[index].id ?? 0;
 
                   return Container(
                     height: 80,
@@ -147,7 +147,7 @@ class TaskView extends ConsumerWidget {
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
-                                      String editContact = 'Name $index';
+                                      String editTask = 'Name $index';
                                       return AlertDialog(
                                         title: Text('Edit Task'),
                                         content: Column(
@@ -156,7 +156,7 @@ class TaskView extends ConsumerWidget {
                                             TextField(
                                               decoration: InputDecoration(labelText: 'Name'),
                                               onChanged: (value) {
-                                                editContact = value;
+                                                editTask = value;
                                               },
                                             ),
                                           ],

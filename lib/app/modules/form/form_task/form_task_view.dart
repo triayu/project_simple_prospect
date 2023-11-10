@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/providers/task/task_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
 import '../../../constants/color_constants.dart';
 
-class FormTask extends StatelessWidget {
+class FormTask extends ConsumerWidget {
   const FormTask({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final formstart = LzForm.make(['date']);
-    final formend = LzForm.make(['date']);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.read(taskProvider);
+
+ 
     return Scaffold(
         appBar: CustomAppBar(
           title: 'Add Task',
@@ -40,7 +43,7 @@ class FormTask extends StatelessWidget {
                   child: LzForm.input(
                     label: 'Start Time',
                     hint: 'Enter start time',
-                    model: formstart['date'],
+                    // model: formstart['date'],
                     suffixIcon: La.calendar,
                     onTap: (model) async {
                       DateTime? date = await LzPicker.datePicker(context);
@@ -53,7 +56,7 @@ class FormTask extends StatelessWidget {
                   child: LzForm.input(
                     label: 'End Time',
                     hint: 'Enter end time',
-                    model: formend['date'],
+                    // model: formend['date'],
                     suffixIcon: La.calendar,
                     onTap: (model) async {
                       DateTime? date = await LzPicker.datePicker(context);

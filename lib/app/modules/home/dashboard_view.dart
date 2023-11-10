@@ -7,7 +7,9 @@ import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/data/local/auth_storage.dart';
 import 'package:simple_prospect/app/data/models/coming_event_model.dart';
 import 'package:simple_prospect/app/data/models/model.dart';
+import 'package:simple_prospect/app/data/models/up_daily_task_model.dart';
 import 'package:simple_prospect/app/providers/dashboard/banner_intro_provider.dart';
+import 'package:simple_prospect/app/providers/dashboard/dashboar_up_daily_task_provider.dart';
 import 'package:simple_prospect/app/providers/dashboard/dashboard_coming_event_provider.dart';
 
 class DashBoardView extends ConsumerWidget {
@@ -165,8 +167,9 @@ class DashBoardView extends ConsumerWidget {
                 ),
 
                 // ======================
-
                 // EVENT TERUPDATE
+                // ======================
+
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
@@ -242,7 +245,7 @@ class DashBoardView extends ConsumerWidget {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Waktu ${event.count}',
+                                                'Jumlah ${event.count}',
                                                 style: Gfont.fs(14).copyWith(color: ColorConstants.secondaryColor),
                                               ),
                                               Text(
@@ -268,14 +271,11 @@ class DashBoardView extends ConsumerWidget {
                         return SizedBox(
                           height: 90,
                           child: ListView.builder(
-                            itemCount: 10, // Number of skeleton items
+                            itemCount: 10,
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              return Skeleton(
-                                  radius: 10,
-                                  margin: EdgeInsets.all(10),
-                                  size: [250, 20]); // Adjust size and margin as needed
+                              return Skeleton(radius: 10, margin: Ei.all(10), size: [250, 20]);
                             },
                           ),
                         );
@@ -287,35 +287,47 @@ class DashBoardView extends ConsumerWidget {
                 // ======================
                 // TASK TERUPDATE
                 // ======================
-                Column(
-                  mainAxisAlignment: Maa.start,
-                  crossAxisAlignment: Caa.start,
-                  children: [
-                    Padding(
-                      padding: Ei.only(h: 20, b: 10, t: 30),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Task Terupdate',
-                            style: Gfont.autoSizeText(
-                              context,
-                              FontSizeManager.getSublineFontSize(),
-                              fontWeight: Fw.bold,
-                            ),
-                          ),
-                          Spacer(),
-                          Text('Lihat Semua',
-                              style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize(),
-                                  color: ColorConstants.textSecondaryColor)),
-                        ],
+
+                Padding(
+                  padding: Ei.only(h: 20, b: 10, t: 30),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Task Terupdate',
+                        style: Gfont.autoSizeText(
+                          context,
+                          FontSizeManager.getSublineFontSize(),
+                          fontWeight: Fw.bold,
+                        ),
                       ),
-                    ),
-                    ListView.separated(
-                        padding: Ei.only(h: 10, b: 30),
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Container(
+                      Spacer(),
+                      Text(
+                        'Lihat Semua',
+                        style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize(),
+                            color: ColorConstants.textSecondaryColor),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Consumer(
+                  builder: (context, ref, _) {
+                    final asyncData = ref.watch(upTaskProvider);
+
+                    return asyncData.when(
+                      data: (List<UpDailyTaskModel> data) {
+                        if (data.isEmpty) {
+                          return LzNoData(
+                            message: 'Opps! No data found',
+                            onTap: () => ref.read(upTaskProvider.notifier).getUpDailyTask(),
+                          );
+                        }
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: data.map((task) {
+                            return Container(
+                              margin: Ei.only(h: 20, b: 10),
                               padding: Ei.all(15),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
@@ -329,67 +341,75 @@ class DashBoardView extends ConsumerWidget {
                                   ),
                                 ],
                               ),
-                              child: Row(
-                                mainAxisAlignment: Maa.spaceBetween,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Flexible(
-                                      flex: 2,
-                                      child: Column(
+                                  Text(
+                                    '${task.name}',
+                                    style: Gfont.autoSizeText(
+                                      context,
+                                      FontSizeManager.getBodyFontSize(),
+                                      color: ColorConstants.textPrimaryColor,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      Row(
                                         children: [
-                                          Text('Task asdasdasdasdasdasdasdasdasdasdsadasdsadsdads $index',
-                                              style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize(),
-                                                  color: ColorConstants.textPrimaryColor)),
-                                          SizedBox(height: 10),
-                                          Row(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Icon(Ti.calendar, color: ColorConstants.textPrimaryColor, size: 20),
-                                                  SizedBox(width: 5),
-                                                  Text('16/8/2023',
-                                                      style: Gfont.autoSizeText(
-                                                          context, FontSizeManager.getBodyFontSize(),
-                                                          color: ColorConstants.textPrimaryColor)),
-                                                ],
-                                              ),
-                                              SizedBox(width: 10),
-                                              Row(
-                                                children: [
-                                                  Icon(Ti.clock, color: ColorConstants.textPrimaryColor, size: 20),
-                                                  SizedBox(width: 5),
-                                                  Text('13:03:99',
-                                                      style: Gfont.autoSizeText(
-                                                          context, FontSizeManager.getBodyFontSize(),
-                                                          color: ColorConstants.textPrimaryColor)),
-                                                ],
-                                              ),
-                                            ],
-                                          )
+                                          Icon(Ti.calendar, color: ColorConstants.textPrimaryColor, size: 20),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            '16/8/2023', // Masik di revisi rahmad untuk field due_date
+                                            style: Gfont.autoSizeText(
+                                              context,
+                                              FontSizeManager.getBodyFontSize(),
+                                              color: ColorConstants.textPrimaryColor,
+                                            ),
+                                          ),
                                         ],
-                                      )),
-                                  SizedBox(width: 10),
-                                  Flexible(
-                                      flex: 1,
-                                      child: Container(
-                                        padding: Ei.all(10),
-                                        decoration: BoxDecoration(
-                                          borderRadius: Br.circle,
-                                          color: ColorConstants.softBlack,
-                                        ),
-                                        child: Icon(
-                                          size: 20,
-                                          Ti.dotsVertical,
-                                          color: Colors.white,
-                                        ),
-                                      )),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Row(
+                                        children: [
+                                          Icon(Ti.clock, color: ColorConstants.textPrimaryColor, size: 20),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            ' ${task.dueTime}',
+                                            style: Gfont.autoSizeText(
+                                              context,
+                                              FontSizeManager.getBodyFontSize(),
+                                              color: ColorConstants.textPrimaryColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ],
-                              ));
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(height: 15);
-                        },
-                        itemCount: 4),
-                  ],
+                              ),
+                            );
+                          }).toList(),
+                        );
+                      },
+                      error: (error, _) {
+                        return LzNoData(message: 'Opps! $error');
+                      },
+                      loading: () {
+                        return SizedBox(
+                          height: 90,
+                          child: ListView.builder(
+                            itemCount: 10,
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return Skeleton(radius: 10, margin: Ei.all(10), size: [250, 20]);
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ],
             )

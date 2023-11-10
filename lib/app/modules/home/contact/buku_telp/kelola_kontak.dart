@@ -51,7 +51,7 @@ class _KelolaViewState extends State<KelolaView> {
               logg(p0.option);
               if (p0.option == 'Export Contact') {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => EditPesanView(),
+                  builder: (context) => FormContactView(),
                 ));
               } else if (p0 == 'Import from Excel') {
                 // ---

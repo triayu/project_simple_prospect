@@ -18,6 +18,8 @@ class EventProvider extends StateNotifier<AsyncValue<List<EventModel>>> with Use
 
       ResHandler res = await eventApi.getEvent();
 
+      logg(res.status);
+
       if (res.status) {
         List data = res.data ?? [];
 
@@ -31,7 +33,7 @@ class EventProvider extends StateNotifier<AsyncValue<List<EventModel>>> with Use
     }
   }
 
-Future delEvent(int id) async {
+  Future delEvent(int id) async {
     try {
       state = const AsyncValue.loading();
 
@@ -49,12 +51,7 @@ Future delEvent(int id) async {
       Errors.check(e, s);
     }
   }
-
-
-
 }
-
- 
 
 final eventProvider = StateNotifierProvider.autoDispose<EventProvider, AsyncValue<List<EventModel>>>((ref) {
   return EventProvider(

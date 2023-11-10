@@ -76,161 +76,159 @@ class EventView extends ConsumerWidget {
             Divider(height: 1, color: Colors.black.withOpacity(0.1)),
             // EVENT
             Expanded(
-              child: SingleChildScrollView(
-                child: Consumer(
-                  builder: (context, ref, _) {
-                    final AsyncData = ref.watch(eventProvider);
+              child: Consumer(
+                builder: (context, ref, _) {
+                  final AsyncData = ref.watch(eventProvider);
 
-                    return AsyncData.when(
-                      data: (data) {
-                        if (data.isEmpty) {
-                          return LzNoData(
-                              message: 'Opps! No data found', onTap: () => ref.read(eventProvider.notifier).getEvent());
-                        }
+                  return AsyncData.when(
+                    data: (data) {
+                      if (data.isEmpty) {
+                        return LzNoData(
+                            message: 'Opps! No data found', onTap: () => ref.read(eventProvider.notifier).getEvent());
+                      }
 
-                        return ListView.separated(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-                          physics: BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            List<EventModel> datas = data;
+                      return ListView.separated(
+                        padding: Ei.only(b: 60, t: 10),
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          List<EventModel> datas = data;
 
-                            int id = datas[index].id;
+                          int id = datas[index].id ?? 0;
+                          String tittle = datas[index].title ?? '';
+                          String eventUsername = datas[index].meetingType ?? '';
 
-                            final event = data[index];
-
-                            return Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(15),
+                          return Container(
+                            height: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  offset: Offset(0, 1),
                                 ),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
-                                    spreadRadius: 1,
-                                    blurRadius: 1,
-                                    offset: Offset(0, 1),
+                              ],
+                            ),
+                            // List Event
+                            child: ListTile(
+                              dense: true,
+                              tileColor: Colors.white,
+                              style: ListTileStyle.list,
+                              title: Text(
+                                tittle,
+                                style: TextStyle(
+                                  color: ColorConstants.textPrimaryColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              subtitle: Text(
+                                eventUsername,
+                                style: TextStyle(
+                                  color: ColorConstants.textSecondaryColor,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Ti.trash,
+                                        color: ColorConstants.errorColor,
+                                        size: 20,
+                                      ),
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return LzConfirm(
+                                                title: "Apakah Anda Yakin Untuk Menghapus Data Ini",
+                                                onConfirm: () {
+                                                  logg('Tekan Hapus');
+                                                  logg(id);
+                                                  ref.read(eventProvider.notifier).delEvent(id);
+                                                },
+                                              );
+                                            });
+                                      },
+                                    ),
+                                  ),
+                                  Container(
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Ti.edit,
+                                        color: ColorConstants.successColor,
+                                        size: 20,
+                                      ),
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            String editEvent = 'Name $index';
+                                            return AlertDialog(
+                                              title: Text('Edit Event'),
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  TextField(
+                                                    decoration: InputDecoration(labelText: 'Name'),
+                                                    onChanged: (value) {
+                                                      editEvent = value;
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                              actions: [
+                                                ElevatedButton(
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: ColorConstants.primaryColor,
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text('Save'),
+                                                ),
+                                                ElevatedButton(
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: ColorConstants.primaryColor,
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text('Cancel'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ],
                               ),
-                              // List Event
-                              child: ListTile(
-                                dense: true,
-                                tileColor: Colors.white,
-                                style: ListTileStyle.list,
-                                title: Text(
-                                  event.title,
-                                  style: TextStyle(
-                                    color: ColorConstants.textPrimaryColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                subtitle: Text(
-                                  event.userFirstName,
-                                  style: TextStyle(
-                                    color: ColorConstants.textSecondaryColor,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      child: IconButton(
-                                        icon: Icon(
-                                          Ti.trash,
-                                          color: ColorConstants.errorColor,
-                                          size: 20,
-                                        ),
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return LzConfirm(
-                                                  title: "Apakah Anda Yakin Untuk Menghapus Data Ini",
-                                                  onConfirm: () {
-                                                    logg('Tekan Hapus');
-                                                    logg(id);
-                                                    ref.read(eventProvider.notifier).delEvent(id);
-                                                  },
-                                                );
-                                              });
-                                        },
-                                      ),
-                                    ),
-                                    Container(
-                                      child: IconButton(
-                                        icon: Icon(
-                                          Ti.edit,
-                                          color: ColorConstants.successColor,
-                                          size: 20,
-                                        ),
-                                        onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: Text('Edit Event'),
-                                                content: Column(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  children: [
-                                                    TextField(
-                                                      decoration: InputDecoration(labelText: 'Name'),
-                                                      onChanged: (value) {
-                                                        // editContact = value;
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
-                                                actions: [
-                                                  ElevatedButton(
-                                                    style: ElevatedButton.styleFrom(
-                                                      backgroundColor: ColorConstants.primaryColor,
-                                                    ),
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: Text('Save'),
-                                                  ),
-                                                  ElevatedButton(
-                                                    style: ElevatedButton.styleFrom(
-                                                      backgroundColor: ColorConstants.primaryColor,
-                                                    ),
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: Text('Cancel'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return SizedBox(height: 10);
-                          },
-                          itemCount: data.length,
-                        );
-                      },
-                      error: (error, _) {
-                        return LzNoData(message: 'Opps! $error');
-                      },
-                      loading: () {
-                        return LzLoader.bar(message: 'Loading...');
-                      },
-                    );
-                  },
-                ),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return SizedBox(height: 10);
+                        },
+                        itemCount: data.length,
+                      );
+                    },
+                    error: (error, _) {
+                      return LzNoData(message: 'Opps! $error');
+                    },
+                    loading: () {
+                      return LzLoader.bar(message: 'Loading...');
+                    },
+                  );
+                },
               ),
             )
           ],
