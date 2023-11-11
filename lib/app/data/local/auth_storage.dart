@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/local/shared_preferences.dart';
 import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
@@ -24,7 +22,7 @@ class AuthStorage {
   /// ```
 
   static Future<bool> isLogged() async {
-    String? token = prefs.getString('token');
+    String? token = await prefs.getString('token');
     bool isLoggedIn = token != null;
 
     if (isLoggedIn) {

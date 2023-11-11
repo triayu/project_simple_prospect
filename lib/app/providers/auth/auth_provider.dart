@@ -29,7 +29,13 @@ class Auth with ChangeNotifier, UseApi {
           messages: FormMessages(required: {
             'email': 'Username Tidak Boleh Kosong',
             'password': 'Password Tidak Boleh Kosong',
-          }));
+            
+          },
+          email: {
+            'email': 'Email Tidak Valid'
+          }
+          
+          ));
 
       if (validate.ok) {
         // ini data Form Body yg dikirim dari inputan, data yg dikitim berupa json, / atau dalam dart itu map

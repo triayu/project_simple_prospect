@@ -10,6 +10,7 @@ part 'count_up_coming_event_api.dart';
 part 'event_api.dart';
 part 'task_api.dart';
 part 'up_daily_task_api.dart';
+part 'phone_book_api.dart';
 
 mixin UseApi {
   AuthApi authApi = AuthApi();
@@ -19,4 +20,5 @@ mixin UseApi {
   EventApi eventApi = EventApi();
   TaskApi taskApi = TaskApi();
   UpDailyTaskeApi upDailyTaskApi = UpDailyTaskeApi();
+  PhoneBookApi phoneBookApi = PhoneBookApi();
 }

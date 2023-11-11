@@ -19,9 +19,9 @@ class TaskView extends ConsumerWidget {
       children: [
         // TASK
         Consumer(builder: (context, ref, _) {
-          final AsyncData = ref.watch(taskProvider);
+          final asyncData = ref.watch(taskProvider);
 
-          return AsyncData.when(
+          return asyncData.when(
             data: (data) {
               if (data.isEmpty) {
                 return LzNoData(message: 'Opps! No data found', onTap: () => ref.read(taskProvider.notifier).getTask());
@@ -216,7 +216,7 @@ class TaskView extends ConsumerWidget {
             child: Icon(
               Ti.plus,
               color: Colors.white,
-              size: 35,
+              size: 40,
             ),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(

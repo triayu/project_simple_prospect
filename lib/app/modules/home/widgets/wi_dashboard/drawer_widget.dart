@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/models/model.dart';
-import 'package:simple_prospect/app/modules/isi_drawer/prospect/prospect.dart';
 import 'package:simple_prospect/app/modules/isi_drawer/provide_feedback/feedback_view.dart';
-import 'package:simple_prospect/app/modules/login/login_view.dart';
 import 'package:simple_prospect/app/providers/auth/auth_provider.dart';
 
 import '../../../../constants/color_constants.dart';

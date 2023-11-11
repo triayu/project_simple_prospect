@@ -78,9 +78,9 @@ class EventView extends ConsumerWidget {
             Expanded(
               child: Consumer(
                 builder: (context, ref, _) {
-                  final AsyncData = ref.watch(eventProvider);
+                  final asyncData = ref.watch(eventProvider);
 
-                  return AsyncData.when(
+                  return asyncData.when(
                     data: (data) {
                       if (data.isEmpty) {
                         return LzNoData(

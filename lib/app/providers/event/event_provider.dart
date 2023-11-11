@@ -18,8 +18,6 @@ class EventProvider extends StateNotifier<AsyncValue<List<EventModel>>> with Use
 
       ResHandler res = await eventApi.getEvent();
 
-      logg(res.status);
-
       if (res.status) {
         List data = res.data ?? [];
 
