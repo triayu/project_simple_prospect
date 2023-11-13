@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/modules/home/contact/tambah_pesan_view.dart';
+import 'package:simple_prospect/app/modules/home/contact/add_contact_view.dart';
+import 'package:simple_prospect/app/modules/home/contact/add_template_message_view.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-class KirimPesanView extends StatelessWidget {
-  const KirimPesanView({Key? key}) : super(key: key);
+class SendMessage extends StatelessWidget {
+  const SendMessage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final DataTableSource _source = _dataTableSource();
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Pesan Whatasapp',
+        title: 'Kirim Pesan',
         actions: [
           IconButton(
               icon: Icon(Ti.plus),
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => TambahPesanView(),
+                    builder: (context) => AddContact(),
                   ),
                 );
               }),

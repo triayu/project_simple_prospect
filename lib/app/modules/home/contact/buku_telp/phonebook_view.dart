@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/modules/home/contact/buku_telp/edit_buku_telepon.dart';
-import 'package:simple_prospect/app/modules/home/contact/buku_telp/kelola_kontak.dart';
-import 'package:simple_prospect/app/modules/home/contact/buku_telp/tambah_buku_telepon.dart';
+import 'package:simple_prospect/app/modules/home/contact/buku_telp/edit_phone_book_view.dart';
+import 'package:simple_prospect/app/modules/home/contact/buku_telp/manage_contact_view.dart';
+import 'package:simple_prospect/app/modules/home/contact/buku_telp/add_contact_book_view.dart';
 
 class PhonebookView extends StatelessWidget {
   const PhonebookView({Key? key}) : super(key: key);
@@ -69,7 +69,7 @@ class PhonebookView extends StatelessWidget {
                                       logg(p0.option);
                                       if (p0.option == 'Kelola') {
                                         Navigator.of(context).push(MaterialPageRoute(
-                                          builder: (context) => KelolaView(),
+                                          builder: (context) => ManageContact(),
                                         ));
                                       }
                                       logg(p0.option);
@@ -98,7 +98,7 @@ class PhonebookView extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => TambahBukuTelepon(),
+              builder: (context) => AddContactBook(),
             ));
           },
           child: Icon(Ti.plus),

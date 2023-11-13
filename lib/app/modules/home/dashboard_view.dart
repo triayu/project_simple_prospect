@@ -34,8 +34,6 @@ class DashBoardView extends ConsumerWidget {
     // Variable Data User didapatkan dari penyimpanan local storage
     User userData = AuthStorage.user();
 
-    logg(userData.accessToken, color: LogColor.red);
-
     return RefreshIndicator(
       onRefresh: () async {
         await ref.read(introProvider.notifier).getIntro();
@@ -173,7 +171,7 @@ class DashBoardView extends ConsumerWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: Ei.only(h: 10, b: 10, t: 30),
+                    padding: Ei.only(h: 10, b: 10, t: 20),
                     child: Text(
                       'Aktifitas yang akan datang',
                       style: Gfont.autoSizeText(context, FontSizeManager.getSublineFontSize(), fontWeight: Fw.bold),
@@ -289,7 +287,7 @@ class DashBoardView extends ConsumerWidget {
                 // ======================
 
                 Padding(
-                  padding: Ei.only(h: 20, b: 10, t: 30),
+                  padding: Ei.only(h: 20, b: 10, t: 20),
                   child: Row(
                     children: [
                       Text(
@@ -360,7 +358,7 @@ class DashBoardView extends ConsumerWidget {
                                           Icon(Ti.calendar, color: ColorConstants.textPrimaryColor, size: 20),
                                           SizedBox(width: 5),
                                           Text(
-                                            '16/8/2023', // Masik di revisi rahmad untuk field due_date
+                                            '16/8/2023',
                                             style: Gfont.autoSizeText(
                                               context,
                                               FontSizeManager.getBodyFontSize(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/modules/home/contact/broadcast_view.dart';
+import 'package:simple_prospect/app/modules/home/contact/message_template_view.dart';
 import 'package:simple_prospect/app/modules/home/contact/buku_telp/phonebook_view.dart';
 
 class ContactView extends ConsumerWidget {
@@ -146,7 +146,7 @@ class ContactView extends ConsumerWidget {
                       ),
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => BroadcastView()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => MessageTemplate()));
                         },
                         child: Center(
                           child: Column(

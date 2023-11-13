@@ -8,7 +8,7 @@ import '../../data/api/api.dart';
 final RegisterProvider = ChangeNotifierProvider((ref) => Register());
 
 class Register with ChangeNotifier, UseApi {
-  final formm = LzForm.make(['first_name', 'last_name', 'email', 'password', 'password_confirmation']);
+  final formm = LzForm.make(['first_name', 'last_name', 'email', 'password', 'password_confirmation', 'code_reveral']);
 
   Future register(BuildContext context) async {
     try {
@@ -20,7 +20,8 @@ class Register with ChangeNotifier, UseApi {
             'first_name': 'First Name Tidak Boleh Kosong',
             'last_name': 'Last Name Tidak Boleh Kosong',
             'email': 'Email Tidak Boleh Kosong',
-            'password_confirmation': 'Password Tidak Boleh Kosong'
+            'password_confirmation': 'Password Tidak Boleh Kosong',
+            'code_reveral': 'Code Tidak Boleh Kosong'
           }));
 
       if (validate.ok) {

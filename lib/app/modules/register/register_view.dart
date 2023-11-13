@@ -63,6 +63,12 @@ class RegisterView extends ConsumerWidget {
                     model: notifier.formm['password_confirmation'],
                     obsecureToggle: true,
                   ),
+                   LzForm.input(
+                    label: 'Code Reveral',
+                    hint: 'Type your code',
+                    model: notifier.formm['code_reveral'],
+                    
+                  ),
                 ],
               ),
               SizedBox(height: 20),
@@ -83,18 +89,14 @@ class RegisterView extends ConsumerWidget {
                 mainAxisAlignment: Maa.center,
                 children: [
                   // Gak perlu pakai text style lagi, pakai class gfont
-                  Text('Sudah mempunyai akun?', style: Gfont.fs14.copyWith(color: ColorConstants.textSecondaryColor)),
+                  Text('Sudah mempunyai akun?', style: Gfont.fs14.copyWith(color: ColorConstants.primaryColor)),
                   InkWell(
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => LoginView()));
                     },
-                    child: Text(
-                      'Login',
-                      // style: Gfont.black.copyWith(
-                      //     fontSize: 14,
-                      //     decoration: TextDecoration.underline,
-                      //     color: ColorConstants.textPrimaryColor)
-                    ),
+                    child: Text('Login',
+                        style: Gfont.fs16.copyWith(
+                            fontSize: 14, decoration: TextDecoration.underline, color: ColorConstants.primaryColor)),
                   ),
                 ],
               )

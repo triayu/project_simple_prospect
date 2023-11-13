@@ -21,14 +21,12 @@ class AuthStorage {
   /// await Auth.setToken('token');
   /// ```
 
-  static Future<bool> isLogged() async {
-    String? token = await prefs.getString('token');
+  static bool isLogged() {
+    String? token = prefs.getString('token');
     bool isLoggedIn = token != null;
 
     if (isLoggedIn) {
-      // set token to Dio
-      logg('Bearer $token', name: 'Token', color: LogColor.red);
-      dio.options.headers['authorization'] = 'Bearer $token';
+      dio.setToken(token);
     }
 
     return isLoggedIn;

@@ -56,6 +56,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    logg(isLoggedIn, name: 'Log In Main.dart');
+
     return MaterialApp(
       title: 'Simple Prospect',
       theme: appTheme,

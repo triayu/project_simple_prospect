@@ -4,8 +4,8 @@ import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
 import '../../../constants/color_constants.dart';
 
-class TambahPesanView extends StatelessWidget {
-  const TambahPesanView({Key? key}) : super(key: key);
+class EditMessage extends StatelessWidget {
+  const EditMessage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

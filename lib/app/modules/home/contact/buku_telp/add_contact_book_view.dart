@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/providers/phone_book/phone_book_provider.dart';
-import 'package:simple_prospect/app/providers/phone_book/post_phone_book_profider.dart';
+import 'package:simple_prospect/app/providers/phone_book/post_phone_book_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
 import '../../../../constants/color_constants.dart';
 
-class TambahBukuTelepon extends ConsumerWidget {
-  const TambahBukuTelepon({Key? key}) : super(key: key);
+class AddContactBook extends ConsumerWidget {
+  const AddContactBook({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

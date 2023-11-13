@@ -73,16 +73,14 @@ class LoginView extends ConsumerWidget {
                   mainAxisAlignment: Maa.center,
                   children: [
                     // Gak perlu pakai text style lagi, pakai class gfont
-                    Text('Belum mempunyai akun?', style: Gfont.fs14.copyWith(color: ColorConstants.textSecondaryColor)),
+                    Text('Belum mempunyai akun?', style: Gfont.fs14.copyWith(color: ColorConstants.primaryColor)),
                     InkWell(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterView()));
                       },
                       child: Text('Register',
                           style: Gfont.black.copyWith(
-                              fontSize: 14,
-                              decoration: TextDecoration.underline,
-                              color: ColorConstants.textPrimaryColor)),
+                              fontSize: 14, decoration: TextDecoration.underline, color: ColorConstants.primaryColor)),
                     ),
                   ],
                 )

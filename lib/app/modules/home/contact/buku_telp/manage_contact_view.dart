@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/modules/form/form_contact/form_contact_view.dart';
+import 'package:simple_prospect/app/modules/home/contact/edit_message_view.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-import '../../../constants/color_constants.dart';
-import 'buku_telp/tambah_buku_telepon.dart';
-
-class PhoneBook extends StatefulWidget {
-  const PhoneBook({Key? key}) : super(key: key);
+class ManageContact extends StatefulWidget {
+  const ManageContact({Key? key}) : super(key: key);
 
   @override
-  _PhoneBookState createState() => _PhoneBookState();
+  _ManageContactState createState() => _ManageContactState();
 }
 
-class _PhoneBookState extends State<PhoneBook> {
+class _ManageContactState extends State<ManageContact> {
   bool isLoading = false;
 
   void fetchData() async {
@@ -30,19 +30,34 @@ class _PhoneBookState extends State<PhoneBook> {
 
   @override
   Widget build(BuildContext context) {
+    final key = GlobalKey(), bottomKey = GlobalKey();
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Buku Kontak Telepon',
+        title: 'Kelola Kontak',
         actions: [
-          IconButton(
-              icon: Icon(Ti.plus),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => TambahBukuTelepon(),
-                  ),
-                );
-              }),
+          Icon(
+            Ti.menu2,
+            color: Colors.black,
+            key: bottomKey,
+          ).onPressed(() {
+            final options = ['Tambah kontak', 'Export Contact', 'Import from Excel'].options();
+            DropX.show(bottomKey, options: options, onSelect: (p0) {
+              logg(p0.option);
+              if (p0.option == 'Tambah kontak') {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => FormContactView(),
+                ));
+              }
+              logg(p0.option);
+              if (p0.option == 'Export Contact') {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => FormContactView(),
+                ));
+              } else if (p0 == 'Import from Excel') {
+                // ---
+              }
+            });
+          }),
         ],
       ),
       body: Center(

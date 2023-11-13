@@ -6,6 +6,7 @@ import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/data/models/event_model.dart';
 import 'package:simple_prospect/app/providers/event/event_provider.dart';
+import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../form/form_event/form_event.dart';
@@ -150,7 +151,6 @@ class EventView extends ConsumerWidget {
                                               return LzConfirm(
                                                 title: "Apakah Anda Yakin Untuk Menghapus Data Ini",
                                                 onConfirm: () {
-                                                  logg('Tekan Hapus');
                                                   logg(id);
                                                   ref.read(eventProvider.notifier).delEvent(id);
                                                 },

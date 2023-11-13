@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/modules/home/contact/tambah_pesan_view.dart';
+import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/modules/home/contact/add_template_message_view.dart';
 
-import 'edit_pesan_view.dart';
-import 'kirim_pesan_view.dart';
+import 'edit_message_view.dart';
+import 'send_message_view.dart';
 
-class BroadcastView extends StatelessWidget {
-  const BroadcastView({Key? key}) : super(key: key);
+class MessageTemplate extends ConsumerWidget {
+  const MessageTemplate({Key? key}) : super(key: key);
+
+  // ini nama class nya jangan buat MessageTemplate, sesuaikan dengan tmpilanya, ini kan tmpilan
+  // temmplaye pesan
+  // Nama class nya gnti vivi, sesuaikan
 
   @override
-  Widget build(BuildContext context) {
-    final key = GlobalKey(), bottomKey = GlobalKey();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bottomKey = GlobalKey();
     return Scaffold(
       appBar: AppBar(
         title: Text('Pesan Whatasapp'),
         centerTitle: true,
-        actions: [
-          IconButton(
-              icon: Icon(Ti.plus),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => TambahPesanView(),
-                  ),
-                );
-              }),
-        ],
       ),
       body: ListView(
         physics: BouncingScrollPhysics(),
@@ -76,17 +71,16 @@ class BroadcastView extends StatelessWidget {
                                   key: bottomKey,
                                 ).onPressed(() {
                                   final options = ['Kirim Pesan', 'Edit', 'Hapus'].options();
-                                  DropX.show(bottomKey, options: options, onSelect: (p0) {
-                                    logg(p0.option);
+                                  DropX.show(bottomKey.context, options: options, onSelect: (p0) {
                                     if (p0.option == 'Kirim Pesan') {
                                       Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (context) => KirimPesanView(),
+                                        builder: (context) => SendMessage(),
                                       ));
                                     }
                                     logg(p0.option);
                                     if (p0.option == 'Edit') {
                                       Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (context) => EditPesanView(),
+                                        builder: (context) => EditMessage(),
                                       ));
                                     } else if (p0 == 'Hapus') {
                                       // ---
@@ -115,6 +109,16 @@ class BroadcastView extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Ti.plus),
+          backgroundColor: ColorConstants.primaryColor,
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => AddTemplateMessage(),
+              ),
+            );
+          }),
     );
   }
 }

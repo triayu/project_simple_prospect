@@ -37,7 +37,7 @@ class HomeView extends ConsumerWidget {
               ? InkTouch(
                   onTap: () {
                     if (notifier.activeIndex == 1) {
-                      logg('Ini Action Contact');
+                  
 
                       showDialog(
                           context: context,
@@ -47,7 +47,7 @@ class HomeView extends ConsumerWidget {
                     }
 
                     if (notifier.activeIndex == 3) {
-                      logg('Ini Action Task');
+                
                       showDialog(
                           context: context,
                           builder: (context) {

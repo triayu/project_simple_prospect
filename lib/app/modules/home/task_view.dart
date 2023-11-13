@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/core/text_theme.dart';
+
 import 'package:simple_prospect/app/data/models/task_model.dart';
 import 'package:simple_prospect/app/modules/form/form_task/form_task_view.dart';
 import 'package:simple_prospect/app/providers/task/task_provider.dart';
@@ -19,6 +19,7 @@ class TaskView extends ConsumerWidget {
       children: [
         // TASK
         Consumer(builder: (context, ref, _) {
+          // nama asyn data ini cuma nama variable, kamu bisa ubah ubah dengan nama apapun
           final asyncData = ref.watch(taskProvider);
 
           return asyncData.when(
