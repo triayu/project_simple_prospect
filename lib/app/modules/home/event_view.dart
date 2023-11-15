@@ -43,8 +43,8 @@ class EventView extends ConsumerWidget {
                 calendarFormat: CalendarFormat.week,
                 startingDayOfWeek: StartingDayOfWeek.monday,
                 daysOfWeekStyle: DaysOfWeekStyle(
-                  weekendStyle: TextStyle(color: ColorConstants.errorColor, fontSize: 15),
-                  weekdayStyle: TextStyle(color: ColorConstants.textPrimaryColor, fontSize: 15),
+                  weekendStyle: TextStyle(color: ColorConstants.errorColor, fontSize: 14),
+                  weekdayStyle: TextStyle(color: ColorConstants.textPrimaryColor, fontSize: 14),
                 ),
                 calendarStyle: CalendarStyle(
                   selectedDecoration: BoxDecoration(
@@ -59,13 +59,13 @@ class EventView extends ConsumerWidget {
                     color: ColorConstants.successColor,
                     shape: BoxShape.circle,
                   ),
-                  defaultTextStyle: Gfont.normal.copyWith(fontSize: 16, color: ColorConstants.softBlack),
-                  todayTextStyle: gfont.copyWith(fontSize: 16, color: Colors.white),
+                  defaultTextStyle: Gfont.normal.copyWith(fontSize: 15, color: ColorConstants.softBlack),
+                  todayTextStyle: gfont.copyWith(fontSize: 15, color: Colors.white),
                 ),
                 headerStyle: HeaderStyle(
                   titleTextStyle: TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 15,
                   ),
                   leftChevronIcon: Icon(Icons.chevron_left, color: Colors.black),
                   rightChevronIcon: Icon(Icons.chevron_right, color: Colors.black),
@@ -212,6 +212,8 @@ class EventView extends ConsumerWidget {
                                   ),
                                 ],
                               ),
+                            
+                            
                             ),
                           );
                         },
@@ -220,12 +222,25 @@ class EventView extends ConsumerWidget {
                         },
                         itemCount: data.length,
                       );
+                    
+                    
+                    
                     },
                     error: (error, _) {
                       return LzNoData(message: 'Opps! $error');
                     },
                     loading: () {
-                      return LzLoader.bar(message: 'Loading...');
+                      return SizedBox(
+                        height: 90,
+                        child: ListView.builder(
+                          itemCount: 10,
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
+                          },
+                        ),
+                      );
                     },
                   );
                 },

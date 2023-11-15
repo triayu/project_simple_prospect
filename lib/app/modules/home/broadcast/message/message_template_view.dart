@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/modules/home/contact/add_template_message_view.dart';
+import 'package:simple_prospect/app/modules/home/broadcast/message/add_template_message_view.dart';
 
 import 'edit_message_view.dart';
 import 'send_message_view.dart';
 
 class MessageTemplate extends ConsumerWidget {
   const MessageTemplate({Key? key}) : super(key: key);
-
-  // ini nama class nya jangan buat MessageTemplate, sesuaikan dengan tmpilanya, ini kan tmpilan
-  // temmplaye pesan
-  // Nama class nya gnti vivi, sesuaikan
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,7 +56,7 @@ class MessageTemplate extends ConsumerWidget {
                                 Text(
                                   'Leaf Bobby Pins',
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                   ),
@@ -94,7 +90,7 @@ class MessageTemplate extends ConsumerWidget {
                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
                               textAlign: Ta.justify,
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: Colors.black,
                               ),
                             )

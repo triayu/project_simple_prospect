@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/models/model.dart';
+import 'package:simple_prospect/app/modules/isi_drawer/contact/contact_view.dart';
 import 'package:simple_prospect/app/modules/isi_drawer/provide_feedback/feedback_view.dart';
 import 'package:simple_prospect/app/providers/auth/auth_provider.dart';
 
@@ -58,9 +59,10 @@ class WiDrawer extends ConsumerWidget {
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 5,
+                itemCount: 6,
                 itemBuilder: (context, index) {
                   List<String> titles = [
+                    'Contact',
                     'Tutorial',
                     'Subscription',
                     'Refferals',
@@ -68,6 +70,7 @@ class WiDrawer extends ConsumerWidget {
                     'Message Template'
                   ];
                   List<IconData> icons = [
+                    Ti.addressBook,
                     Ti.brandYoutube,
                     Icons.follow_the_signs,
                     Icons.code,
@@ -88,18 +91,21 @@ class WiDrawer extends ConsumerWidget {
                       Navigator.pop(context);
                       switch (index) {
                         case 0:
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ListTutorialView()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView()));
                           break;
                         case 1:
-                          // Navigasi ke subscription
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ListTutorialView()));
                           break;
                         case 2:
-                          // Navigasi ke refferals
+                          // Navigasi ke subscription
                           break;
                         case 3:
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackView()));
+                          // Navigasi ke refferals
                           break;
                         case 4:
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackView()));
+                          break;
+                        case 5:
                           Navigator.push(context, MaterialPageRoute(builder: (context) => MessageView()));
                           break;
                       }

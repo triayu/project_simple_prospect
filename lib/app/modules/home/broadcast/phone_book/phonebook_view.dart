@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/modules/home/contact/buku_telp/edit_phone_book_view.dart';
-import 'package:simple_prospect/app/modules/home/contact/buku_telp/manage_contact_view.dart';
-import 'package:simple_prospect/app/modules/home/contact/buku_telp/add_contact_book_view.dart';
+import 'package:simple_prospect/app/modules/home/broadcast/phone_book/edit_phone_book_view.dart';
+import 'package:simple_prospect/app/modules/home/broadcast/phone_book/manage_contact_view.dart';
+import 'package:simple_prospect/app/modules/home/broadcast/phone_book/add_phone_book_view.dart';
 
 class PhonebookView extends StatelessWidget {
   const PhonebookView({Key? key}) : super(key: key);
@@ -25,11 +25,11 @@ class PhonebookView extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      // Template Pesan
-
+                      // ==================
+                      // PHONE BOOK
                       InkWell(
                         onTap: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ManageContact()));
                         },
                         child: Container(
                           margin: Ei.only(h: 10, t: 20, b: 10),
@@ -52,7 +52,7 @@ class PhonebookView extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    'Elena Kaia Rambu Gyta A',
+                                    'Client',
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class PhonebookView extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => AddContactBook(),
+              builder: (context) => AddPhoneBook(),
             ));
           },
           child: Icon(Ti.plus),

@@ -61,7 +61,7 @@ class FormContactView extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: LzButton(
-        text: 'Submit',
+        text: 'Tambah Kontak',
         color: ColorConstants.softBlack,
         onTap: (val) {},
       ).dark(Colors.white).theme1(),

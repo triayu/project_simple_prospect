@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/modules/home/contact/add_contact_view.dart';
-import 'package:simple_prospect/app/modules/home/contact/add_template_message_view.dart';
+import 'package:simple_prospect/app/modules/home/broadcast/message/add_contact_view.dart';
+import 'package:simple_prospect/app/modules/home/broadcast/message/add_template_message_view.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
 class SendMessage extends StatelessWidget {

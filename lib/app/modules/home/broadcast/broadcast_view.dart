@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/modules/home/contact/message_template_view.dart';
-import 'package:simple_prospect/app/modules/home/contact/buku_telp/phonebook_view.dart';
+import 'package:simple_prospect/app/modules/home/broadcast/message/message_template_view.dart';
+import 'package:simple_prospect/app/modules/home/broadcast/phone_book/phonebook_view.dart';
 
-class ContactView extends ConsumerWidget {
-  const ContactView({Key? key}) : super(key: key);
+class BroadcastView extends ConsumerWidget {
+  const BroadcastView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -76,7 +76,9 @@ class ContactView extends ConsumerWidget {
                   padding: Ei.only(t: 20, h: 10),
                   shrinkWrap: true,
                   children: [
-                    // Kotak pertama
+                    // =============
+                    // CONTACT
+                    // =============
                     Container(
                       margin: Ei.only(h: 5),
                       padding: Ei.all(10),
@@ -109,7 +111,7 @@ class ContactView extends ConsumerWidget {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      'Kontak',
+                                      'Contact ',
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -130,6 +132,10 @@ class ContactView extends ConsumerWidget {
                             ],
                           )),
                     ),
+
+                    // =============
+                    // MESSAGE
+                    // =============
                     Container(
                       margin: Ei.only(h: 5),
                       padding: Ei.all(10),
@@ -163,7 +169,7 @@ class ContactView extends ConsumerWidget {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      'Pesan',
+                                      'Message',
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,

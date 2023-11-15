@@ -35,162 +35,172 @@ class TaskView extends ConsumerWidget {
                   List<TaskModel> datas = data;
 
                   int id = datas[index].id ?? 0;
+                  String title = datas[index].title ?? '';
+                  String note = datas[index].note ?? '';
+                  String priority = datas[index].priority ?? '';
+                  DateTime dueDate = datas[index].dueDate ?? DateTime.now();
 
                   return Container(
-                    height: 80,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: Offset(0, 1),
+                      height: 80,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
                         ),
-                      ],
-                    ),
-                    child: ListTile(
-                      contentPadding: Ei.only(b: 15, h: 10, t: 10),
-                      dense: true,
-                      tileColor: Colors.white,
-                      style: ListTileStyle.list,
-                      title: Row(
-                        children: [
-                          Text(
-                            'Desc Task $index',
-                            style: TextStyle(
-                              color: ColorConstants.textPrimaryColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Spacer(),
-                          Container(
-                            width: 70,
-                            padding: EdgeInsets.all(3),
-                            decoration: BoxDecoration(
-                              color: ColorConstants.textMediumColor,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Text(
-                              'Medium',
-                              textAlign: Ta.center,
-                              style: TextStyle(
-                                fontSize: 10,
-                                color: ColorConstants.secondaryColor,
-                              ),
-                            ),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
                           ),
                         ],
                       ),
-                      subtitle: Row(
-                        children: [
-                          Icon(
-                            Ti.calendarCheck,
-                            color: ColorConstants.textSecondaryColor,
-                            size: 16,
-                          ),
-                          Text(
-                            '23 Mei 2023',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: ColorConstants.textSecondaryColor,
-                            ),
-                          ),
-                          SizedBox(width: 5),
-                          Icon(
-                            Ti.clockCheck,
-                            color: ColorConstants.textSecondaryColor,
-                            size: 16,
-                          ),
-                          Text(
-                            '23 Mei 2023',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: ColorConstants.textSecondaryColor,
-                            ),
-                          ),
-                          Spacer(),
-                          Container(
-                            child: IconButton(
-                              icon: Icon(
-                                Ti.trash,
-                                color: ColorConstants.errorColor,
-                                size: 20,
+                      child: ListTile(
+                        contentPadding: Ei.only(b: 15, h: 10, t: 10),
+                        dense: true,
+                        tileColor: Colors.white,
+                        style: ListTileStyle.list,
+                        title: Row(
+                          children: [
+                            Text(
+                              title,
+                              style: TextStyle(
+                                color: ColorConstants.textPrimaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
                               ),
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return LzConfirm(
-                                        title: "Apakah Anda Yakin Untuk Menghapus Data Ini",
-                                        onConfirm: () {
-                                          logg('Tekan Hapus');
-                                          logg(id);
-                                          ref.read(taskProvider.notifier).delTask(id);
-                                        },
-                                      );
-                                    });
-                              },
                             ),
-                          ),
-                          Container(
-                            child: IconButton(
+                            Spacer(),
+                            Container(
+                              width: 70,
+                              padding: EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                color: ColorConstants.textMediumColor,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Text(
+                                priority,
+                                textAlign: Ta.center,
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: ColorConstants.secondaryColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        subtitle: Row(
+                          children: [
+                            // Text(
+                            //   note,
+                            //   style: TextStyle(
+                            //     color: ColorConstants.textSecondaryColor,
+                            //     fontSize: 12,
+                            //   ),
+                            // ),
+                            Icon(
+                              Ti.calendarCheck,
+                              color: ColorConstants.textSecondaryColor,
+                              size: 16,
+                            ),
+                            Text(
+                              '23 Mei 2023',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: ColorConstants.textSecondaryColor,
+                              ),
+                            ),
+                            SizedBox(width: 5),
+                            Icon(
+                              Ti.clockCheck,
+                              color: ColorConstants.textSecondaryColor,
+                              size: 16,
+                            ),
+                            Text(
+                              '12.30',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: ColorConstants.textSecondaryColor,
+                              ),
+                            ),
+                            Spacer(),
+                            Container(
+                              child: IconButton(
                                 icon: Icon(
-                                  Ti.edit,
-                                  color: ColorConstants.successColor,
+                                  Ti.trash,
+                                  color: ColorConstants.errorColor,
                                   size: 20,
                                 ),
                                 onPressed: () {
                                   showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      String editTask = 'Name $index';
-                                      return AlertDialog(
-                                        title: Text('Edit Task'),
-                                        content: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            TextField(
-                                              decoration: InputDecoration(labelText: 'Name'),
-                                              onChanged: (value) {
-                                                editTask = value;
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return LzConfirm(
+                                          title: "Apakah Anda Yakin Untuk Menghapus Data Ini",
+                                          onConfirm: () {
+                                            logg('Tekan Hapus');
+                                            logg(id);
+                                            ref.read(taskProvider.notifier).delTask(id);
+                                          },
+                                        );
+                                      });
+                                },
+                              ),
+                            ),
+                            Container(
+                              child: IconButton(
+                                  icon: Icon(
+                                    Ti.edit,
+                                    color: ColorConstants.successColor,
+                                    size: 20,
+                                  ),
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        String editTask = 'Name $index';
+                                        return AlertDialog(
+                                          title: Text('Edit Task'),
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              TextField(
+                                                decoration: InputDecoration(labelText: 'Name'),
+                                                onChanged: (value) {
+                                                  editTask = value;
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          actions: [
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: ColorConstants.primaryColor,
+                                              ),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
                                               },
+                                              child: Text('Save'),
+                                            ),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: ColorConstants.primaryColor,
+                                              ),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text('Cancel'),
                                             ),
                                           ],
-                                        ),
-                                        actions: [
-                                          ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: ColorConstants.primaryColor,
-                                            ),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text('Save'),
-                                          ),
-                                          ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: ColorConstants.primaryColor,
-                                            ),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text('Cancel'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                }),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+                                        );
+                                      },
+                                    );
+                                  }),
+                            ),
+                          ],
+                        ),
+                      ));
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 10);
@@ -202,7 +212,17 @@ class TaskView extends ConsumerWidget {
               return LzNoData(message: 'Opps! $error');
             },
             loading: () {
-              return LzLoader.bar(message: 'Loading...');
+              return SizedBox(
+                height: 90,
+                child: ListView.builder(
+                  itemCount: 10,
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
+                  },
+                ),
+              );
             },
           );
         }),

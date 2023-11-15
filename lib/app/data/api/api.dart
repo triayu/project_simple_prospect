@@ -12,6 +12,8 @@ part 'task_api.dart';
 part 'up_daily_task_api.dart';
 part 'phone_book_api.dart';
 part 'message_template_api.dart';
+part 'drawer_api/tutorial_api.dart';
+part 'drawer_api/contact_api.dart';
 
 mixin UseApi {
   AuthApi authApi = AuthApi();
@@ -23,4 +25,6 @@ mixin UseApi {
   UpDailyTaskeApi upDailyTaskApi = UpDailyTaskeApi();
   PhoneBookApi phoneBookApi = PhoneBookApi();
   MessageTemplateApi messageTemplateApi = MessageTemplateApi();
+  TutorialVideoApi tutorialApi = TutorialVideoApi();
+  ContactApi contactApi = ContactApi();
 }

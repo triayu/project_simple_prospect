@@ -54,7 +54,7 @@ class DashBoardView extends ConsumerWidget {
                 children: [
                   Text(
                     'Halo, Selamat Datang ${userData.fullName!.ucwords}',
-                    style: Gfont.autoSizeText(context, FontSizeManager.getHeadlineFontSize(), fontWeight: Fw.bold),
+                    style: Gfont.autoSizeText(context, FontSizeManager.getSublineFontSize(), fontWeight: Fw.bold),
                     maxLines: 2,
                     overflow: Tof.ellipsis,
                   ),
@@ -91,7 +91,7 @@ class DashBoardView extends ConsumerWidget {
 
                                 return Container(
                                   width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                  margin: Ei.sym(h: 5.0),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: customColors[data.indexOf(i)],
@@ -171,10 +171,10 @@ class DashBoardView extends ConsumerWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: Ei.only(h: 10, b: 10, t: 20),
+                    padding: Ei.only(h: 20, t: 15, b: 5),
                     child: Text(
                       'Aktifitas yang akan datang',
-                      style: Gfont.autoSizeText(context, FontSizeManager.getSublineFontSize(), fontWeight: Fw.bold),
+                      style: Gfont.autoSizeText(context, FontSizeManager.getTittleFontSize(), fontWeight: Fw.bold),
                     ),
                   ),
                 ),
@@ -248,7 +248,7 @@ class DashBoardView extends ConsumerWidget {
                                               ),
                                               Text(
                                                 'Meeting ${event.name}',
-                                                style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
+                                                style: Gfont.fs(16).copyWith(color: ColorConstants.secondaryColor),
                                               ),
                                             ],
                                           ),
@@ -287,14 +287,14 @@ class DashBoardView extends ConsumerWidget {
                 // ======================
 
                 Padding(
-                  padding: Ei.only(h: 20, b: 10, t: 20),
+                  padding: Ei.only(h: 20, b: 10, t: 15),
                   child: Row(
                     children: [
                       Text(
                         'Task Terupdate',
                         style: Gfont.autoSizeText(
                           context,
-                          FontSizeManager.getSublineFontSize(),
+                          FontSizeManager.getTittleFontSize(),
                           fontWeight: Fw.bold,
                         ),
                       ),
