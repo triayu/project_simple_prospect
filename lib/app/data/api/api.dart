@@ -9,11 +9,11 @@ part 'dashboard_api/count_goal_api.dart';
 part 'dashboard_api/count_up_coming_event_api.dart';
 part 'event_api.dart';
 part 'task_api.dart';
-part 'up_daily_task_api.dart';
+part 'dashboard_api/up_daily_task_api.dart';
 part 'phone_book_api.dart';
 part 'message_template_api.dart';
-part 'drawer_api/tutorial_api.dart';
-part 'drawer_api/contact_api.dart';
+part 'tutorial_api.dart';
+part 'contact_api.dart';
 
 mixin UseApi {
   AuthApi authApi = AuthApi();

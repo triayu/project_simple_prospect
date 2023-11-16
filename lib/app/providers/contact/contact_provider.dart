@@ -1,8 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/data/models/contact_model.dart';
+
 import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 import '../../data/api/api.dart';
+import '../../data/models/model.dart';
 
 class ContactProvider extends StateNotifier<AsyncValue<List<ContactModel>>> with UseApi {
   final AutoDisposeStateNotifierProviderRef? ref;
@@ -56,24 +57,3 @@ final contactProvider = StateNotifierProvider.autoDispose<ContactProvider, Async
 
 
 
-
-
-
-
-
-
-// import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-// final contactListProvider = StateProvider<List<String>>((ref) {
-//   // Isi data kontak awal di sini
-//   return [
-//     'Kontak 1',
-//     'Kontak 2',
-//     'Kontak 3',
-//     // Tambahkan lebih banyak kontak jika diperlukan
-//   ];
-// });
-
-// final searchQueryProvider = StateProvider<String?>((ref) {
-//   return null;
-// });

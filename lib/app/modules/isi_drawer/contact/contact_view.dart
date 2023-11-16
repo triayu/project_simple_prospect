@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/data/models/contact_model.dart';
+
 import 'package:simple_prospect/app/modules/form/form_contact/form_contact_view.dart';
 import 'package:simple_prospect/app/providers/contact/contact_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
+
+import '../../../data/models/model.dart';
 
 class ContactView extends ConsumerWidget {
   const ContactView({Key? key}) : super(key: key);

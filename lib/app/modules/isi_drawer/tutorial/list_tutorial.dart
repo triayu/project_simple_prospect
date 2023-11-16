@@ -31,6 +31,7 @@ class ListTutorialView extends ConsumerWidget {
               itemCount: data.length,
               itemBuilder: (context, index) {
                 final TutorialModel tutorial = data[index];
+                String? image = tutorial.thumbnailUrl ?? '';
 
                 return InkWell(
                   onTap: () {
@@ -49,7 +50,7 @@ class ListTutorialView extends ConsumerWidget {
                       dense: true,
                       tileColor: Colors.white,
                       leading: LzImage(
-                        '${tutorial.thumbnail}',
+                        image,
                         radius: 5,
                         width: 80,
                         height: 80,

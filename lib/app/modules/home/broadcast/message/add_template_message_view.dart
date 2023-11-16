@@ -23,8 +23,14 @@ class AddTemplateMessage extends ConsumerWidget {
         style: LzFormStyle(
             inputLabelFontWeight: FontWeight.w400, type: FormType.topInner, inputBorderColor: ColorConstants.softBlack),
         children: [
-          LzForm.input(label: 'Judul', hint: 'Masukkan judul', model: provider.forms['title']),
-          LzForm.input(label: 'Pesan', hint: 'Masukkan pesan', model: provider.forms['message']),
+          LzForm.input(
+            label: 'Judul', 
+            hint: 'Masukkan judul', 
+            model: provider.forms['title']),
+          LzForm.input(
+            label: 'Pesan', 
+            hint: 'Masukkan pesan', 
+            model: provider.forms['message']),
 
           // Positioned(
           //   top: 10,

@@ -59,24 +59,10 @@ class WiDrawer extends ConsumerWidget {
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 6,
+                itemCount: 5,
                 itemBuilder: (context, index) {
-                  List<String> titles = [
-                    'Contact',
-                    'Tutorial',
-                    'Subscription',
-                    'Refferals',
-                    'Provide Feedback',
-                    'Message Template'
-                  ];
-                  List<IconData> icons = [
-                    Ti.addressBook,
-                    Ti.brandYoutube,
-                    Icons.follow_the_signs,
-                    Icons.code,
-                    Icons.feedback,
-                    Ti.messageCircle
-                  ];
+                  List<String> titles = ['Contact', 'Prospect', 'Tutorial', 'Provide Feedback', 'Message Template'];
+                  List<IconData> icons = [Ti.addressBook, Ti.user, Ti.brandYoutube, Icons.feedback, Ti.messageCircle];
 
                   return ListTile(
                     leading: Icon(
@@ -94,18 +80,16 @@ class WiDrawer extends ConsumerWidget {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView()));
                           break;
                         case 1:
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ListTutorialView()));
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => ListTutorialView()));
                           break;
                         case 2:
-                          // Navigasi ke subscription
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ListTutorialView()));
                           break;
+
                         case 3:
-                          // Navigasi ke refferals
-                          break;
-                        case 4:
                           Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackView()));
                           break;
-                        case 5:
+                        case 4:
                           Navigator.push(context, MaterialPageRoute(builder: (context) => MessageView()));
                           break;
                       }
