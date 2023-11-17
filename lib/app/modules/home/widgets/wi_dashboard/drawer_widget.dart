@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/models/model.dart';
-import 'package:simple_prospect/app/modules/isi_drawer/contact/contact_view.dart';
-import 'package:simple_prospect/app/modules/isi_drawer/provide_feedback/feedback_view.dart';
+import 'package:simple_prospect/app/modules/drawer/contact/contact_view.dart';
+import 'package:simple_prospect/app/modules/drawer/prospect/prospect_view.dart';
+import 'package:simple_prospect/app/modules/drawer/provide_feedback/feedback_view.dart';
 import 'package:simple_prospect/app/providers/auth/auth_provider.dart';
 
 import '../../../../constants/color_constants.dart';
 import '../../../../data/local/auth_storage.dart';
-import '../../../isi_drawer/message_template/message_template.dart';
-import '../../../isi_drawer/tutorial/list_tutorial.dart';
+import '../../../drawer/message_template/message_template.dart';
+import '../../../drawer/tutorial/list_tutorial.dart';
 
 class WiDrawer extends ConsumerWidget {
   const WiDrawer({super.key});
@@ -80,7 +81,7 @@ class WiDrawer extends ConsumerWidget {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView()));
                           break;
                         case 1:
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => ListTutorialView()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ProspectView()));
                           break;
                         case 2:
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ListTutorialView()));

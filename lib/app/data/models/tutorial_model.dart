@@ -2,6 +2,7 @@ part of model;
 
 class TutorialModel {
   int? id;
+  dynamic title;
   String? type;
   String? description;
   dynamic thumbnailUrl;
@@ -9,6 +10,7 @@ class TutorialModel {
 
   TutorialModel({
     this.id,
+    this.title,
     this.type,
     this.description,
     this.thumbnailUrl,
@@ -17,6 +19,7 @@ class TutorialModel {
 
   factory TutorialModel.fromJson(Map<String, dynamic> json) => TutorialModel(
         id: json["id"],
+        title: json["title"],
         type: json["type"],
         description: json["description"],
         thumbnailUrl: json["thumbnail_url"],
@@ -25,6 +28,7 @@ class TutorialModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "title": title,
         "type": type,
         "description": description,
         "thumbnail_url": thumbnailUrl,

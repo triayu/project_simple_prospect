@@ -221,6 +221,7 @@ class DashBoardView extends ConsumerWidget {
                                         ),
                                       ),
                                     ),
+                                   
                                     Container(
                                       margin: Ei.only(h: 20),
                                       padding: Ei.all(10),
@@ -257,10 +258,14 @@ class DashBoardView extends ConsumerWidget {
                                     ),
                                   ],
                                 ),
+                              
+                              
                               );
                             },
                           ),
                         );
+                      
+                      
                       },
                       error: (error, _) {
                         return LzNoData(message: 'Opps! $error');

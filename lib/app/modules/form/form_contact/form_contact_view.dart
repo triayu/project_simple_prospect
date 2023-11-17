@@ -43,9 +43,12 @@ class FormContactView extends ConsumerWidget {
             label: 'Category',
             hint: 'Select category',
             model: provider.forms['category'],
-            options: List.generate(4, (i) {
-              return Option(option: 'test');
-            }),
+            // ini untuk ketika dia kamu tap, bakal jalnin apa (ontap) yg dipake
+            onTap: (ctrl) async {
+              await provider.getCategoryContact();
+              provider.setCategory();
+            },
+            //
           ),
         ],
       ),

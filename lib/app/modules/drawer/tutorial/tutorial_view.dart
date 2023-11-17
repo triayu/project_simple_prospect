@@ -21,7 +21,7 @@ class TutorialView extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    // Video Tutorial
+                    
                     Column(
                       children: [
                         Padding(

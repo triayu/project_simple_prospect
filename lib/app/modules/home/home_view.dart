@@ -9,7 +9,7 @@ import '../../providers/home/home_state_provider.dart';
 import '../dialog/dialog_task_view.dart';
 import '../profile/profile_view.dart';
 import 'dashboard_view.dart';
-import 'event_view.dart';
+import '../event/event_view.dart';
 import 'task_view.dart';
 
 class HomeView extends ConsumerWidget {

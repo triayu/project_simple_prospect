@@ -70,74 +70,24 @@ class BroadcastView extends ConsumerWidget {
                     ],
                   ),
                 ),
-                // GRIDVIEW
-                GridView.count(
-                  crossAxisCount: 1,
-                  padding: Ei.only(t: 20, h: 10),
-                  shrinkWrap: true,
+                //  ============
+                //  MESSAGE
+                Stack(
                   children: [
-                    // =============
-                    // CONTACT
-                    // =============
-                    // Container(
-                    //   margin: Ei.only(h: 5),
-                    //   padding: Ei.all(10),
-                    //   decoration: BoxDecoration(
-                    //     borderRadius: BorderRadius.circular(10),
-                    //     boxShadow: [
-                    //       BoxShadow(
-                    //         color: Colors.tealAccent.shade700,
-                    //         spreadRadius: 1,
-                    //         blurRadius: 1,
-                    //         offset: Offset(0, 1),
-                    //       ),
-                    //     ],
-                    //   ),
-                    //   child: InkWell(
-                    //       onTap: () {
-                    //         Navigator.push(context, MaterialPageRoute(builder: (context) => PhonebookView()));
-                    //       },
-                    //       child: Column(
-                    //         children: [
-                    //           Row(
-                    //             children: [
-                    //               Icon(
-                    //                 Ti.users,
-                    //                 size: 30,
-                    //                 color: Colors.white,
-                    //               ),
-                    //               SizedBox(
-                    //                 width: 10,
-                    //               ),
-                    //               Expanded(
-                    //                 child: Text(
-                    //                   'Contact ',
-                    //                   style: TextStyle(
-                    //                     fontSize: 18,
-                    //                     fontWeight: FontWeight.bold,
-                    //                     color: Colors.white,
-                    //                   ),
-                    //                 ),
-                    //               ),
-                    //             ],
-                    //           ),
-                    //           SizedBox(height: 10),
-                    //           Text(
-                    //             'Temukan daftar nomor penting dalam kontak yang tersimpan dengan fitur ini.',
-                    //             style: TextStyle(
-                    //               fontSize: 14,
-                    //               color: Colors.white,
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       )),
-                    // ),
-
-                    // =============
-                    // MESSAGE
-                    // =============
+                    Positioned.fill(
+                      top: -50,
+                      bottom: -50,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: LzImage(
+                          'banner_ornament.svg',
+                          size: context.width,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                    ),
                     Container(
-                      margin: Ei.only(h: 5),
+                      margin: Ei.only(h: 10, t: 20),
                       padding: Ei.all(10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -191,9 +141,9 @@ class BroadcastView extends ConsumerWidget {
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
-                ),
+                )
               ],
             ),
           ),

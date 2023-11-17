@@ -10,7 +10,7 @@ final contactPostProvider = AutoDisposeChangeNotifierProvider((ref) => contactPo
 
 class contactPost with ChangeNotifier, UseApi {
   final forms = LzForm.make(
-      ['first_name', 'last_name', 'email', 'phone_number', 'work_phone_number', 'home_phone_number', 'categor']);
+      ['first_name', 'last_name', 'email', 'phone_number', 'work_phone_number', 'home_phone_number', 'category']);
 
   Future post(BuildContext context) async {
     try {
@@ -56,26 +56,40 @@ class contactPost with ChangeNotifier, UseApi {
     }
   }
 
-
   List<CategoryContactModel> categoryContacts = [];
-
 
   Future getCategoryContact() async {
     try {
-      LzToast.overlay('Loading data...') ;
+      LzToast.overlay('Loading data...');
       ResHandler res = await contactApi.getCategoryContact();
       LzToast.dismiss();
-
-      if(res.status) {
-        List data = res.data ?? [];
-
-        categoryContacts = data.map((e) => CategoryContactModel.fromJson(e)).toList();
-        notifyListeners();
-      } else {}
-
-    } catch (e,s) {
-
+      if (!res.status) {
+        LzToast.show(res.message);
+      }
+      List data = res.data ?? [];
+      categoryContacts = data.map((e) => CategoryContactModel.fromJson(e)).toList();
+    } catch (e, s) {
       Errors.check(e, s);
     }
+  }
+
+  void setCategory() async {
+    // Ini variable yang merepresentasikan model dari formnya
+    final form = forms['category']?.notifier;
+    // trus di set null jadi option nya tu isinya kosong
+    form?.setOption(null);
+    // lalu kita get catgory nya dari api
+
+    // kemudian kita tangkap datanya ubah jadikan variable yang return nya List Of Option
+    // Biar mau tampil dia di Lzform.select value nya, harus pake option
+    List<Option> options = List.generate(categoryContacts.length, (i) {
+      return Option(
+        option: categoryContacts[i].categoryName ?? '',
+        value: categoryContacts[i].id ?? '',
+      );
+    });
+    form?.setOption(null);
+    // Lalu terakhir tinggal setIsi dari LzFormSelectnya
+    form?.setOptions(options);
   }
 }

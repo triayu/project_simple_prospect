@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/constants/color_constants.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends ConsumerWidget {
   const ProfileView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: SingleChildScrollView(
         padding: Ei.sym(v: 20),
@@ -23,6 +25,17 @@ class ProfileView extends StatelessWidget {
                       size: 130,
                     ),
                   ),
+                  InkWell(
+                    onTap: () {
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => halamanedit()));
+                    },
+                    child: Text('Edit foto',
+                        style: Gfont.black.copyWith(
+                            fontSize: 14,
+                            decoration: TextDecoration.underline,
+                            color: ColorConstants.textPrimaryColor)),
+                  ),
+                  SizedBox(height: 20),
                   Textr(
                     'Tri Ayu Novitasari',
                     textAlign: Ta.center,
@@ -31,7 +44,7 @@ class ProfileView extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
-                    margin: Ei.only(b: 10),
+                    margin: Ei.only(b: 5),
                   ),
                   Textr(
                     '12340987',

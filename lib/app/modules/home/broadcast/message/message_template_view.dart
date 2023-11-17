@@ -31,7 +31,7 @@ class MessageTemplate extends ConsumerWidget {
 
                     InkWell(
                       onTap: () {
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SendMessage()));
                       },
                       child: Container(
                         margin: Ei.only(h: 10, t: 20, b: 10),

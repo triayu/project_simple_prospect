@@ -3,7 +3,7 @@ import 'package:lazyui/lazyui.dart';
 class ColorConstants {
   static final primaryColor = Utils.hex('0B588D');
   static final secondaryColor = Utils.hex('FFFFFF');
-  static final accentColor = Utils.hex('FF5733');
+  static final accentColor = Utils.hex('B90202');
   static final backgroundColor = Utils.hex('F0F0F0');
   static final textPrimaryColor = Utils.hex('000000');
   static final textSecondaryColor = Utils.hex('3E3E3E');

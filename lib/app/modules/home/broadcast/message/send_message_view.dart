@@ -1,29 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/modules/home/broadcast/message/add_contact_view.dart';
 import 'package:simple_prospect/app/modules/home/broadcast/message/add_template_message_view.dart';
+import 'package:simple_prospect/app/modules/drawer/contact/contact_view.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-class SendMessage extends StatelessWidget {
+class SendMessage extends ConsumerWidget {
   const SendMessage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bottomKey = GlobalKey();
     final DataTableSource _source = _dataTableSource();
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Kirim Pesan',
         actions: [
-          IconButton(
-              icon: Icon(Ti.plus),
-              onPressed: () {
+          Icon(
+            Ti.plus,
+            key: bottomKey,
+          ).onPressed(() {
+            final options = ['Tambah Kontak', 'Import Kontak', 'Hapus'].options();
+            DropX.show(bottomKey.context, options: options, onSelect: (p0) {
+              if (p0.option == 'Kirim Pesan') {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => AddContact(),
+                ));
+              }
+              logg(p0.option);
+              if (p0.option == 'Edit') {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => AddContact(),
+                    builder: (context) => ContactView(),
                   ),
                 );
-              }),
+              } else if (p0 == 'Hapus') {
+                // ---
+              }
+            });
+          })
+          // onPressed: () {
+          //   Navigator.of(context).push(
+          //     MaterialPageRoute(
+          //       builder: (context) => AddContact(),
+          //     ),
+          //   );
+          // },
         ],
       ),
       body: ListView(
@@ -73,8 +97,7 @@ class SendMessage extends StatelessWidget {
                   ),
                 ),
               ),
-              // Kamu gk prlu buat inkwell sbenyak 3 kali kek gtu, tdak efisien, kodenya panjaang bgt jadinya,
-              // susah dibaca
+
               SizedBox(
                 height: 10,
               ),
@@ -128,7 +151,7 @@ class SendMessage extends StatelessWidget {
                     50,
                   ],
                   columns: List.generate(6, (i) {
-                    List<String> tittle = ['ID', 'Aksi', 'Nama Kontak', 'No HP', 'Status', 'Keterangan'];
+                    List<String> tittle = ['ID', 'Nama Kontak', 'No HP', 'Status', 'Keterangan', 'Aksi'];
                     return DataColumn(
                         label: Text(
                       tittle[i],
@@ -153,11 +176,11 @@ class _dataTableSource extends DataTableSource {
     final List<Map<String, dynamic>> _datas = List.generate(15, (i) {
       return {
         'Id': index + 1,
-        'Aksi': '',
-        'Nama Kontak': 'Testing',
+        'Nama Kontak': ' Aing Liyer',
         'No Hp': '0821sisanya besok',
         'status': 'Capek Ngoding',
-        'Keterangan': '-',
+        'Keterangan': 'Pesan sudah terkirim dan tunggu',
+        'Aksi': '',
       };
     });
 
@@ -171,7 +194,6 @@ class _dataTableSource extends DataTableSource {
 
     return DataRow(cells: [
       DataCell(Text(_datas[index]['Id'].toString())),
-      DataCell(Text('Action')),
       DataCell(Text(_datas[index]['Nama Kontak'].toString())),
       DataCell(Text(_datas[index]['No Hp'].toString())),
       DataCell(Container(
@@ -182,9 +204,10 @@ class _dataTableSource extends DataTableSource {
           padding: Ei.all(3),
           child: Text(
             _datas[index]['status'].toString(),
-            style: Gfont.bold.copyWith(color: ColorConstants.textPrimaryColor, fontSize: 14),
+            style: Gfont.bold.copyWith(color: ColorConstants.secondaryColor, fontSize: 12),
           ))),
       DataCell(Text(_datas[index]['Keterangan'].toString())),
+      DataCell(Text('Action')),
     ]);
   }
 

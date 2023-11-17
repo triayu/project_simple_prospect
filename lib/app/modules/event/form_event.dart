@@ -4,7 +4,7 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/providers/event/event_post_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-import '../../../constants/color_constants.dart';
+import '../../constants/color_constants.dart';
 
 class FormEvent extends ConsumerWidget {
   const FormEvent({Key? key}) : super(key: key);
