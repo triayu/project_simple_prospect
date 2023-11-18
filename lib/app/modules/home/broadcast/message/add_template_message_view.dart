@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
@@ -23,26 +24,49 @@ class AddTemplateMessage extends ConsumerWidget {
         style: LzFormStyle(
             inputLabelFontWeight: FontWeight.w400, type: FormType.topInner, inputBorderColor: ColorConstants.softBlack),
         children: [
-          LzForm.input(
-            label: 'Judul', 
-            hint: 'Masukkan judul', 
-            model: provider.forms['title']),
-          LzForm.input(
-            label: 'Pesan', 
-            hint: 'Masukkan pesan', 
-            model: provider.forms['message']),
+          LzForm.input(label: 'Judul', hint: 'Masukkan judul', model: provider.forms['title']),
+          LzForm.input(label: 'Pesan', hint: 'Masukkan pesan', model: provider.forms['message']),
+          Text(
+            'Lampiran File',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 5),
+          // PILIH FILE ==========
+          ElevatedButton(
+            onPressed: () async {
+              FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-          // Positioned(
-          //   top: 10,
-          //   left: 30,
-          //   child: Text(
-          //     'Lampiran File',
-          //     style: TextStyle(
-          //       fontSize: 16,
-          //       fontWeight: FontWeight.bold,
-          //     ),
-          //   ),
-          // ),
+              if (result != null) {
+                PlatformFile file = result.files.first;
+                print('Picked file: ${file.name}');
+              } else {
+                // User canceled the picker
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 15),
+                Icon(
+                  Ti.fileDownload,
+                  size: 30,
+                  color: Colors.black,
+                ),
+                SizedBox(height: 15),
+                Text(
+                  'Klik disini untuk upload file',
+                  style: TextStyle(color: Colors.black),
+                ),
+                SizedBox(height: 15),
+              ],
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: LzButton(

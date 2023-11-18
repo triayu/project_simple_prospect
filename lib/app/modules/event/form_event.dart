@@ -96,6 +96,8 @@ class FormEvent extends ConsumerWidget {
             ),
           ],
         ),
+      
+      
         bottomNavigationBar: LzButton(
           text: 'Add Event',
           color: ColorConstants.softBlack,

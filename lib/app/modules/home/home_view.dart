@@ -33,57 +33,50 @@ class HomeView extends ConsumerWidget {
       appBar: AppBar(
         toolbarHeight: 70,
         actions: [
-          ref.watch(homeProvider).activeIndex != 0
-              ? InkTouch(
-                  onTap: () {
-                    // if (notifier.activeIndex == 1) {
-                    //   // showDialog(
-                    //   //     context: context,
-                    //   //     builder: (context) {
-                    //   //       return DialogContactView();
-                    //   //     });
-                    // }
-
-                    if (notifier.activeIndex == 3) {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return DialogTaskView();
-                          });
-                    }
+          if (ref.watch(homeProvider).activeIndex == 3)
+            InkTouch(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return DialogTaskView();
                   },
-                  child: Padding(
-                    padding: Ei.all(15),
-                    child: Icon(Ti.filterPlus),
+                );
+              },
+              child: Padding(
+                padding: Ei.all(15),
+                child: Icon(Ti.filterPlus),
+              ),
+            ),
+          if (ref.watch(homeProvider).activeIndex == 0)
+            Row(
+              children: [
+                InkTouch(
+                  margin: Ei.all(10),
+                  child: Icon(
+                    Ti.bellFilled,
+                    size: 25,
+                    color: ColorConstants.softBlack,
                   ),
-                )
-              : Row(
-                  children: [
-                    InkTouch(
-                        margin: Ei.all(10),
-                        child: Icon(
-                          Ti.bellFilled,
-                          size: 25,
-                          color: ColorConstants.softBlack,
-                        )),
-                    InkTouch(
-                      onTap: () {
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileView()));
-                      },
-                      margin: Ei.only(r: 10),
-                      child: SizedBox(
-                        width: 45,
-                        height: 45,
-                        child: ClipOval(
-                          child: LzImage(
-                            'poto.jpg',
-                            size: context.width,
-                          ),
-                        ),
+                ),
+                InkTouch(
+                  onTap: () {
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileView()));
+                  },
+                  margin: Ei.only(r: 10),
+                  child: SizedBox(
+                    width: 45,
+                    height: 45,
+                    child: ClipOval(
+                      child: LzImage(
+                        'poto.jpg',
+                        size: context.width,
                       ),
                     ),
-                  ],
+                  ),
                 ),
+              ],
+            ),
         ],
         title: Text(
           title[notifier.activeIndex] ?? '',

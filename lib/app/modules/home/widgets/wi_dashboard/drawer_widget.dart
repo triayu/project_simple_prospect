@@ -22,7 +22,7 @@ class WiDrawer extends ConsumerWidget {
     User userData = AuthStorage.user();
     return SafeArea(
       child: Drawer(
-        width: context.width * 0.8,
+        width: context.width * 0.5,
         child: Column(
           children: [
             //

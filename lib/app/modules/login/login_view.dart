@@ -17,23 +17,19 @@ class LoginView extends ConsumerWidget {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: Ei.sym(h: 20),
+            padding: Ei.sym(h: 10),
             child: Column(
               children: [
-                LzImage(
-                  'logo.png',
-                  size: 200,
-                  fit: BoxFit.contain,
-                ),
+                LzImage('logo.png', size: 130, fit: BoxFit.fill),
                 Text(
-                  'Login',
+                  'PROSPECT',
                   style: TextStyle(
                     color: ColorConstants.primaryColor,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 40),
                 LzFormGroup(
                   keepLabel: true,
                   sublabelStyle: SublabelStyle.text,
@@ -80,7 +76,10 @@ class LoginView extends ConsumerWidget {
                       },
                       child: Text('Register',
                           style: Gfont.black.copyWith(
-                              fontSize: 14, decoration: TextDecoration.underline, color: ColorConstants.primaryColor)),
+                              fontSize: 14,
+                              decoration: TextDecoration.underline,
+                              color: ColorConstants.primaryColor,
+                              fontWeight: FontWeight.bold)),
                     ),
                   ],
                 )
