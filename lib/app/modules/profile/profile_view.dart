@@ -10,12 +10,12 @@ class ProfileView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: Ei.sym(v: 20),
+        padding: Ei.sym(v: 15),
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             Container(
-              padding: Ei.only(t: 20, b: 20),
+              padding: Ei.only(t: 20, b: 10),
               child: Column(
                 children: [
                   SizedBox(
@@ -35,7 +35,7 @@ class ProfileView extends ConsumerWidget {
                             decoration: TextDecoration.underline,
                             color: ColorConstants.textPrimaryColor)),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   Textr(
                     'Tri Ayu Novitasari',
                     textAlign: Ta.center,
@@ -58,50 +58,48 @@ class ProfileView extends ConsumerWidget {
               ),
             ),
             Container(
-              padding: Ei.sym(h: 20),
-              margin: Ei.sym(h: 20),
+              padding: Ei.sym(h: 10),
+              margin: Ei.sym(h: 10),
               width: context.width,
               decoration: BoxDecoration(color: Colors.white, border: Br.all(color: Colors.black.withOpacity(0.1))),
               child: Column(
                 children: [
                   // Foto
 
-                  Column(
-                    children: [
-                      ListTile(
-                        title: Text("ID Anda", style: gfont.copyWith(color: LzColors.grey)),
-                        subtitle: Text('1234987', style: Gfont.black),
-                        onTap: () {},
-                      ),
-                      Divider(),
-                      ListTile(
-                        title: Text("Nama Lengkap", style: gfont.copyWith(color: LzColors.grey)),
-                        subtitle: Text('Tri Ayu Novitasari', style: Gfont.black),
-                        onTap: () {
-                          // Aksi
-                        },
-                      ),
-                      Divider(),
-                      ListTile(
-                        title: Text("Alamat", style: gfont.copyWith(color: LzColors.grey)),
-                        subtitle: Text('Jl. Lijen, Glagah, Kp. Baru', style: Gfont.black),
-                        onTap: () {
-                          // Aksi
-                        },
-                      ),
-                      Divider(),
-                      ListTile(
-                        title: Text("No. Telepon", style: gfont.copyWith(color: LzColors.grey)),
-                        subtitle: Text('08123456789', style: Gfont.black),
-                        onTap: () {
-                          // Aksi
-                        },
-                      ),
-                    ],
+                  ListTile(
+                    title: Text("ID Anda", style: gfont.copyWith(color: LzColors.grey)),
+                    subtitle: Text('1234987', style: Gfont.black),
+                    onTap: () {},
+                  ),
+                  Divider(),
+                  ListTile(
+                    title: Text("Nama Lengkap", style: gfont.copyWith(color: LzColors.grey)),
+                    subtitle: Text('Tri Ayu Novitasari', style: Gfont.black),
+                    onTap: () {
+                      // Aksi
+                    },
+                  ),
+                  Divider(),
+                  ListTile(
+                    title: Text("Alamat", style: gfont.copyWith(color: LzColors.grey)),
+                    subtitle: Text('Jl. Lijen, Glagah, Kp. Baru', style: Gfont.black),
+                    onTap: () {
+                      // Aksi
+                    },
+                  ),
+                  Divider(),
+                  ListTile(
+                    title: Text("No. Telepon", style: gfont.copyWith(color: LzColors.grey)),
+                    subtitle: Text('08123456789', style: Gfont.black),
+                    onTap: () {
+                      // Aksi
+                    },
                   )
                 ],
               ),
             ),
+          
+          
           ],
         ),
       ),

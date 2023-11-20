@@ -6,7 +6,7 @@ import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 import '../../data/api/api.dart';
 
 class EventProvider extends StateNotifier<AsyncValue<List<EventModel>>> with UseApi {
-  final AutoDisposeStateNotifierProviderRef? ref; // if you want to use ref inside this provider
+  final AutoDisposeStateNotifierProviderRef? ref; 
 
   EventProvider(this.ref) : super(const AsyncValue.loading()) {
     getEvent();
@@ -31,6 +31,26 @@ class EventProvider extends StateNotifier<AsyncValue<List<EventModel>>> with Use
     }
   }
 
+  Future showEvent(int id) async {
+    try {
+      state = const AsyncValue.loading();
+
+      ResHandler res = await eventApi.showEvent(id);
+
+      if (res.status) {
+   
+        EventModel event = EventModel.fromJson(res.data);
+
+      
+        LzToast.show("Event Details: ${event}");
+      } else {
+        LzToast.show(res.message);
+      }
+    } catch (e, s) {
+      Errors.check(e, s);
+    }
+  }
+
   Future delEvent(int id) async {
     try {
       state = const AsyncValue.loading();
@@ -38,11 +58,9 @@ class EventProvider extends StateNotifier<AsyncValue<List<EventModel>>> with Use
       ResHandler res = await eventApi.deleteEvent(id);
 
       if (res.status) {
-        // Kalau dia true maka tmpilkan pesan sukses , dan panggil ulang fucntion get task , untuk mereload data task
         LzToast.show(res.message);
         getEvent();
       } else {
-        // Kalau false maka tmpilkan pesan error
         LzToast.show(res.message);
       }
     } catch (e, s) {
@@ -56,25 +74,3 @@ final eventProvider = StateNotifierProvider.autoDispose<EventProvider, AsyncValu
     ref,
   );
 });
-
-
-
-
-
-
-
-
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// // Buat provider untuk data event
-// final eventListProvider = StateNotifierProvider<EventList, List<String>>((ref) {
-//   return EventList();
-// });
-
-// class EventList extends StateNotifier<List<String>> {
-//   EventList() : super([]);
-
-//   void addEvent(String event) {
-//     state = [...state, event];
-//   }
-// }

@@ -22,7 +22,7 @@ class WiDrawer extends ConsumerWidget {
     User userData = AuthStorage.user();
     return SafeArea(
       child: Drawer(
-        width: context.width * 0.5,
+        width: context.width * 0.8,
         child: Column(
           children: [
             //
@@ -32,7 +32,7 @@ class WiDrawer extends ConsumerWidget {
               height: 60,
               decoration: BoxDecoration(
                 color: ColorConstants.primaryColor,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(25),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -60,6 +60,7 @@ class WiDrawer extends ConsumerWidget {
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
+                
                 itemCount: 5,
                 itemBuilder: (context, index) {
                   List<String> titles = ['Contact', 'Prospect', 'Tutorial', 'Provide Feedback', 'Message Template'];

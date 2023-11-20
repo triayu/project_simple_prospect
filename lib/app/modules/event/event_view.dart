@@ -5,7 +5,7 @@ import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/data/models/event_model.dart';
-import 'package:simple_prospect/app/modules/event/show_event.dart';
+import 'package:simple_prospect/app/modules/event/show_event_view.dart';
 import 'package:simple_prospect/app/providers/event/event_provider.dart';
 import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -101,10 +101,11 @@ class EventView extends ConsumerWidget {
 
                           return InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
+                              Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => ShowEventView(),
+                                  builder: (context) => ShowEventView(
+                                    event: EventModel(),
+                                  ),
                                 ),
                               );
                             },
@@ -230,6 +231,8 @@ class EventView extends ConsumerWidget {
                         },
                         itemCount: data.length,
                       );
+                  
+                  
                     },
                     error: (error, _) {
                       return LzNoData(message: 'Opps! $error');

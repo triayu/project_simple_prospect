@@ -78,12 +78,12 @@ class FormTask extends ConsumerWidget {
               label: 'Set Time Reminder',
               hint: 'Enter set time reminder',
               model: provider.forms['set_time_reminder'],
-              onTap: (model) async {
-                DateTime? date = await LzPicker.timePicker(context);
-                if (date != null) model.text = date.format('HH:mm a');
+              // onTap: (model) async {
+              //   DateTime? date = await LzPicker.timePicker(context);
+              //   if (date != null) model.text = date.format('HH:mm a');
 
-                logg(model);
-              },
+              //   logg(model);
+              // },
             ),
           ],
         ),

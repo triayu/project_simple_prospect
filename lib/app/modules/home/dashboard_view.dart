@@ -221,7 +221,6 @@ class DashBoardView extends ConsumerWidget {
                                         ),
                                       ),
                                     ),
-                                   
                                     Container(
                                       margin: Ei.only(h: 20),
                                       padding: Ei.all(10),
@@ -258,14 +257,10 @@ class DashBoardView extends ConsumerWidget {
                                     ),
                                   ],
                                 ),
-                              
-                              
                               );
                             },
                           ),
                         );
-                      
-                      
                       },
                       error: (error, _) {
                         return LzNoData(message: 'Opps! $error');
@@ -363,7 +358,7 @@ class DashBoardView extends ConsumerWidget {
                                           Icon(Ti.calendar, color: ColorConstants.textPrimaryColor, size: 20),
                                           SizedBox(width: 5),
                                           Text(
-                                            '16/8/2023',
+                                            'MASIH REVISI', // '${task.dueDate}',
                                             style: Gfont.autoSizeText(
                                               context,
                                               FontSizeManager.getBodyFontSize(),
