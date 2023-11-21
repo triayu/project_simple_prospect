@@ -223,7 +223,7 @@ class DashBoardView extends ConsumerWidget {
                                     ),
                                     Container(
                                       margin: Ei.only(h: 20),
-                                      padding: Ei.all(10),
+                                      padding: Ei.all(5),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -232,8 +232,8 @@ class DashBoardView extends ConsumerWidget {
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                '16/8/2023',
-                                                style: Gfont.fs(16).copyWith(color: ColorConstants.secondaryColor),
+                                                '${event.date}',
+                                                style: Gfont.fs(14).copyWith(color: ColorConstants.secondaryColor),
                                               ),
                                             ],
                                           ),
@@ -243,13 +243,13 @@ class DashBoardView extends ConsumerWidget {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Jumlah ${event.count}',
+                                                '${event.name}',
                                                 style: Gfont.fs(14).copyWith(color: ColorConstants.secondaryColor),
                                               ),
-                                              Text(
-                                                'Meeting ${event.name}',
-                                                style: Gfont.fs(16).copyWith(color: ColorConstants.secondaryColor),
-                                              ),
+                                              // Text(
+                                              //   'Meeting ${event.name}',
+                                              //   style: Gfont.fs(16).copyWith(color: ColorConstants.secondaryColor),
+                                              // ),
                                             ],
                                           ),
                                         ],
@@ -343,7 +343,7 @@ class DashBoardView extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${task.name}',
+                                    '${task.fullName}',
                                     style: Gfont.autoSizeText(
                                       context,
                                       FontSizeManager.getBodyFontSize(),
@@ -358,7 +358,7 @@ class DashBoardView extends ConsumerWidget {
                                           Icon(Ti.calendar, color: ColorConstants.textPrimaryColor, size: 20),
                                           SizedBox(width: 5),
                                           Text(
-                                            'MASIH REVISI', // '${task.dueDate}',
+                                            '${task.reminder}',
                                             style: Gfont.autoSizeText(
                                               context,
                                               FontSizeManager.getBodyFontSize(),
@@ -368,20 +368,20 @@ class DashBoardView extends ConsumerWidget {
                                         ],
                                       ),
                                       SizedBox(width: 10),
-                                      Row(
-                                        children: [
-                                          Icon(Ti.clock, color: ColorConstants.textPrimaryColor, size: 20),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            ' ${task.dueTime}',
-                                            style: Gfont.autoSizeText(
-                                              context,
-                                              FontSizeManager.getBodyFontSize(),
-                                              color: ColorConstants.textPrimaryColor,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                      // Row(
+                                      //   children: [
+                                      //     Icon(Ti.clock, color: ColorConstants.textPrimaryColor, size: 20),
+                                      //     SizedBox(width: 5),
+                                      //     Text(
+                                      //       ' ${task.dueTime}',
+                                      //       style: Gfont.autoSizeText(
+                                      //         context,
+                                      //         FontSizeManager.getBodyFontSize(),
+                                      //         color: ColorConstants.textPrimaryColor,
+                                      //       ),
+                                      //     ),
+                                      //   ],
+                                      // ),
                                     ],
                                   ),
                                 ],

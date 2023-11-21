@@ -201,12 +201,16 @@ class TaskView extends ConsumerWidget {
                           ],
                         ),
                       ));
+                
+                
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 10);
                 },
                 itemCount: data.length,
               );
+           
+           
             },
             error: (error, _) {
               return LzNoData(message: 'Opps! $error');

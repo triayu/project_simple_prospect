@@ -14,6 +14,7 @@ part 'phone_book_api.dart';
 part 'message_template_api.dart';
 part 'tutorial_api.dart';
 part 'contact_api.dart';
+part 'profile_api.dart';
 
 mixin UseApi {
   AuthApi authApi = AuthApi();
@@ -27,4 +28,5 @@ mixin UseApi {
   MessageTemplateApi messageTemplateApi = MessageTemplateApi();
   TutorialVideoApi tutorialApi = TutorialVideoApi();
   ContactApi contactApi = ContactApi();
+  ProfileApi profileApi = ProfileApi();
 }

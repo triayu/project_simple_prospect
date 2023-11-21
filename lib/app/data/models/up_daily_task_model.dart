@@ -1,33 +1,25 @@
 class UpDailyTaskModel {
-  String? name;
-  int? count;
-  int? total;
-  DateTime? dueDate;
-  String? dueTime;
+  DateTime? reminder;
+  String? fullName;
+  String? title;
 
   UpDailyTaskModel({
-    this.name,
-    this.count,
-    this.total,
-    this.dueDate,
-    this.dueTime,
+    this.reminder,
+    this.fullName,
+    this.title,
   });
 
   factory UpDailyTaskModel.fromJson(Map<String, dynamic> json) => UpDailyTaskModel(
-        name: json["name"],
-        count: json["count"],
-        total: json["total"],
-        dueDate: DateTime.parse(json["due_date"]),
-        dueTime: json["due_time"],
+        reminder: DateTime.parse(json["reminder"]),
+        fullName: json["full_name"],
+        title: json["title"],
       );
 
   Map<String, dynamic> toJson() => {
-        "name": name,
-        "count": count,
-        "total": total,
-        "due_date": dueDate != null
-            ? "${dueDate!.year.toString().padLeft(4, '0')}-${dueDate!.month.toString().padLeft(2, '0')}-${dueDate!.day.toString().padLeft(2, '0')}"
+        "reminder": reminder != null
+            ? "${reminder!.year.toString().padLeft(4, '0')}-${reminder!.month.toString().padLeft(2, '0')}-${reminder!.day.toString().padLeft(2, '0')}"
             : null,
-        "due_time": dueTime,
+        "full_name": fullName,
+        "title": title,
       };
 }
