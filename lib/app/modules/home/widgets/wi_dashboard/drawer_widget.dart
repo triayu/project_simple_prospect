@@ -5,11 +5,11 @@ import 'package:simple_prospect/app/data/models/model.dart';
 import 'package:simple_prospect/app/modules/drawer/contact/contact_view.dart';
 import 'package:simple_prospect/app/modules/drawer/prospect/prospect_view.dart';
 import 'package:simple_prospect/app/modules/drawer/provide_feedback/feedback_view.dart';
+import 'package:simple_prospect/app/modules/home/broadcast/message/message_template_view.dart';
 import 'package:simple_prospect/app/providers/auth/auth_provider.dart';
 
 import '../../../../constants/color_constants.dart';
 import '../../../../data/local/auth_storage.dart';
-import '../../../drawer/message_template/message_template.dart';
 import '../../../drawer/tutorial/list_tutorial.dart';
 
 class WiDrawer extends ConsumerWidget {
@@ -60,7 +60,6 @@ class WiDrawer extends ConsumerWidget {
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                
                 itemCount: 5,
                 itemBuilder: (context, index) {
                   List<String> titles = ['Contact', 'Prospect', 'Tutorial', 'Provide Feedback', 'Message Template'];
@@ -92,7 +91,7 @@ class WiDrawer extends ConsumerWidget {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackView()));
                           break;
                         case 4:
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => MessageView()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => MessageTemplate()));
                           break;
                       }
                     },

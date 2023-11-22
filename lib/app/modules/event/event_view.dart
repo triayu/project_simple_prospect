@@ -24,7 +24,7 @@ class EventView extends ConsumerWidget {
         Column(
           children: [
             Container(
-              padding: EdgeInsets.all(10),
+              padding: Ei.all(10),
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -93,24 +93,25 @@ class EventView extends ConsumerWidget {
                         padding: Ei.only(b: 60, t: 10, h: 10),
                         physics: BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          List<EventModel> datas = data;
+                          EventModel datas = data[index];
 
-                          int id = datas[index].id ?? 0;
-                          String tittle = datas[index].title ?? '';
-                          String eventUsername = datas[index].meetingType ?? '';
+                          int id = datas.id ?? 0;
+                          String tittle = datas.title ?? '';
+                          String eventUsername = datas.meetingType ?? '';
+                          DateTime reminder = datas.reminder ?? DateTime.now();
 
                           return InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => ShowEventView(
-                                    event: EventModel(),
-                                  ),
-                                ),
-                              );
-                            },
+                            // onTap: () {
+                            //   Navigator.of(context).push(
+                            //     MaterialPageRoute(
+                            //       builder: (context) => ShowEventView(
+                            //         event: EventModel,
+                            //       ),
+                            //     ),
+                            //   );
+                            // },
                             child: Container(
-                              height: 60,
+                              height: 70,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(15),
@@ -138,7 +139,7 @@ class EventView extends ConsumerWidget {
                                   ),
                                 ),
                                 subtitle: Text(
-                                  eventUsername,
+                                  reminder.toString(),
                                   style: TextStyle(
                                     color: ColorConstants.textSecondaryColor,
                                     fontSize: 12,
@@ -177,45 +178,12 @@ class EventView extends ConsumerWidget {
                                           size: 20,
                                         ),
                                         onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              String editEvent = 'Name $index';
-                                              return AlertDialog(
-                                                title: Text('Edit Event'),
-                                                content: Column(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  children: [
-                                                    TextField(
-                                                      decoration: InputDecoration(labelText: 'Name'),
-                                                      onChanged: (value) {
-                                                        editEvent = value;
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
-                                                actions: [
-                                                  ElevatedButton(
-                                                    style: ElevatedButton.styleFrom(
-                                                      backgroundColor: ColorConstants.primaryColor,
-                                                    ),
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: Text('Save'),
-                                                  ),
-                                                  ElevatedButton(
-                                                    style: ElevatedButton.styleFrom(
-                                                      backgroundColor: ColorConstants.primaryColor,
-                                                    ),
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: Text('Cancel'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) => FormEvent(
+                                                data: datas,
+                                              ),
+                                            ),
                                           );
                                         },
                                       ),
@@ -231,8 +199,6 @@ class EventView extends ConsumerWidget {
                         },
                         itemCount: data.length,
                       );
-                  
-                  
                     },
                     error: (error, _) {
                       return LzNoData(message: 'Opps! $error');

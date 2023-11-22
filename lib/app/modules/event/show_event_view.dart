@@ -28,13 +28,12 @@ class ShowEventView extends ConsumerWidget {
                 if (data.isEmpty) {
                   return LzNoData(
                     message: 'Opps! No data found',
-                    onTap: () => ref.read(eventProvider.notifier).showEvent(event.id!), 
+                    onTap: () => ref.read(eventProvider.notifier).getDetailEvent(event.id!),
                   );
                 }
 
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  
                   children: [
                     _buildSectionTitle('Meeting'),
                     _buildInfoContainer([

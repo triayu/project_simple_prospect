@@ -38,7 +38,8 @@ class TaskView extends ConsumerWidget {
                   String title = datas[index].title ?? '';
                   String note = datas[index].note ?? '';
                   String priority = datas[index].priority ?? '';
-                  DateTime dueDate = datas[index].dueDate ?? DateTime.now();
+                  DateTime reminder = datas[index].reminder ?? DateTime.now();
+                  // DateTime reminder = datas[index].reminder ?? DateTime.now();
 
                   return Container(
                       height: 80,
@@ -99,31 +100,32 @@ class TaskView extends ConsumerWidget {
                             //     fontSize: 12,
                             //   ),
                             // ),
-                            Icon(
-                              Ti.calendarCheck,
-                              color: ColorConstants.textSecondaryColor,
-                              size: 16,
-                            ),
+                            // Icon(
+                            //   Ti.calendarCheck,
+                            //   color: ColorConstants.textSecondaryColor,
+                            //   size: 16,
+                            // ),
                             Text(
-                              '23 Mei 2023',
+                              reminder.toString(),
                               style: TextStyle(
                                 fontSize: 12,
                                 color: ColorConstants.textSecondaryColor,
                               ),
                             ),
+
                             SizedBox(width: 5),
-                            Icon(
-                              Ti.clockCheck,
-                              color: ColorConstants.textSecondaryColor,
-                              size: 16,
-                            ),
-                            Text(
-                              '12.30',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: ColorConstants.textSecondaryColor,
-                              ),
-                            ),
+                            // Icon(
+                            //   Ti.clockCheck,
+                            //   color: ColorConstants.textSecondaryColor,
+                            //   size: 16,
+                            // ),
+                            // Text(
+                            //   '12.30',
+                            //   style: TextStyle(
+                            //     fontSize: 12,
+                            //     color: ColorConstants.textSecondaryColor,
+                            //   ),
+                            // ),
                             Spacer(),
                             Container(
                               child: IconButton(
@@ -201,16 +203,12 @@ class TaskView extends ConsumerWidget {
                           ],
                         ),
                       ));
-                
-                
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 10);
                 },
                 itemCount: data.length,
               );
-           
-           
             },
             error: (error, _) {
               return LzNoData(message: 'Opps! $error');

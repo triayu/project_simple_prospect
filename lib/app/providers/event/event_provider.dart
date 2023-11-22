@@ -31,7 +31,14 @@ class EventProvider extends StateNotifier<AsyncValue<List<EventModel>>> with Use
     }
   }
 
-  Future showEvent(int id) async {
+// ini function untuk apa ? untuk ngeget apa vivi ?
+// itu untuk liat hasil dari event itu ya kak
+// untuk detail event ?? iya betul
+// kalau dia untuk detail event buatin nae judul nya getDetailEvent VIVI, biar gk bingungg
+// nanti aku yg nglanjutin project ini bsa stres sndiri kalau anamnya gk sesuai wkwkw
+// ini respon nya emang sama pake Event Model Juga ?
+// iya sama kak
+  Future getDetailEvent(int id) async {
     try {
       state = const AsyncValue.loading();
 

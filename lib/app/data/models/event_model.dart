@@ -65,4 +65,5 @@ class EventModel {
         "reminder": reminder != null ? reminder!.toIso8601String() : null,
         "note": note,
       };
+      
 }
