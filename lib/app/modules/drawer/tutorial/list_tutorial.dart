@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 
 import 'package:simple_prospect/app/modules/drawer/tutorial/tutorial_view.dart';
-import 'package:simple_prospect/app/providers/drawer/tutorial/tutorial_provider.dart';
+import 'package:simple_prospect/app/providers/tutorial/tutorial_provider.dart';
 
 import '../../../data/models/model.dart';
 

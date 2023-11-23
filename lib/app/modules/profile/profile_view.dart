@@ -15,9 +15,9 @@ class ProfileView extends ConsumerWidget {
         padding: Ei.sym(v: 15),
         physics: BouncingScrollPhysics(),
         child: Consumer(builder: (context, ref, _) {
-          final asyncData = ref.watch(profileProvider);
+          final profileData = ref.watch(profileProvider);
 
-          return asyncData.when(
+          return profileData.when(
             data: (data) {
               if (data.isEmpty) {
                 return LzNoData(
@@ -89,16 +89,14 @@ class ProfileView extends ConsumerWidget {
                             BoxDecoration(color: Colors.white, border: Br.all(color: Colors.black.withOpacity(0.1))),
                         child: Column(
                           children: [
-                            // Foto
-
                             ListTile(
                               title: Text("ID Anda", style: gfont.copyWith(color: LzColors.grey)),
-                              subtitle: Text('1234987', style: Gfont.black),
+                              subtitle: Text(email, style: Gfont.black),
                               onTap: () {},
                             ),
                             Divider(),
                             ListTile(
-                              title: Text("Nama Lengkap", style: gfont.copyWith(color: LzColors.grey)),
+                              title: Text(firstName, style: gfont.copyWith(color: LzColors.grey)),
                               subtitle: Text('Tri Ayu Novitasari', style: Gfont.black),
                               onTap: () {
                                 // Aksi
@@ -107,19 +105,19 @@ class ProfileView extends ConsumerWidget {
                             Divider(),
                             ListTile(
                               title: Text("Alamat", style: gfont.copyWith(color: LzColors.grey)),
-                              subtitle: Text('Jl. Lijen, Glagah, Kp. Baru', style: Gfont.black),
+                              subtitle: Text(email, style: Gfont.black),
                               onTap: () {
                                 // Aksi
                               },
                             ),
-                            Divider(),
-                            ListTile(
-                              title: Text("No. Telepon", style: gfont.copyWith(color: LzColors.grey)),
-                              subtitle: Text('08123456789', style: Gfont.black),
-                              onTap: () {
-                                // Aksi
-                              },
-                            )
+                            // Divider(),
+                            // ListTile(
+                            //   title: Text("No. Telepon", style: gfont.copyWith(color: LzColors.grey)),
+                            //   subtitle: Text('08123456789', style: Gfont.black),
+                            //   onTap: () {
+                            //     // Aksi
+                            //   },
+                            // )
                           ],
                         ),
                       ),

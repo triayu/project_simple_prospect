@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/data/models/model.dart';
-import 'package:simple_prospect/app/providers/drawer/tutorial/tutorial_provider.dart';
+import 'package:simple_prospect/app/providers/tutorial/tutorial_provider.dart';
 
 class TutorialView extends ConsumerWidget {
   const TutorialView({Key? key}) : super(key: key);

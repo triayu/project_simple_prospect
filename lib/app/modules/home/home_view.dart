@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/modules/home/broadcast/broadcast_view.dart';
-import 'package:simple_prospect/app/modules/home/widgets/wi_dashboard/drawer_widget.dart';
+import 'package:simple_prospect/app/modules/home/drawer_widget.dart';
 import '../../constants/color_constants.dart';
 import '../../providers/home/home_state_provider.dart';
 
@@ -10,7 +10,7 @@ import '../dialog/dialog_task_view.dart';
 import '../profile/profile_view.dart';
 import 'dashboard_view.dart';
 import '../event/event_view.dart';
-import 'task_view.dart';
+import '../task/task_view.dart';
 
 class HomeView extends ConsumerWidget {
   const HomeView({super.key});

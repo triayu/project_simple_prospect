@@ -11,113 +11,122 @@ class ShowEventView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final asyncData = ref.watch(eventProvider);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Event'),
+        title: Text('DETAIL EVENT'),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: Ei.sym(v: 5, h: 10),
-        physics: BouncingScrollPhysics(),
-        child: Consumer(
-          builder: (context, ref, _) {
-            final eventState = ref.watch(eventProvider);
-
-            return eventState.when(
-              data: (data) {
-                if (data.isEmpty) {
-                  return LzNoData(
-                    message: 'Opps! No data found',
-                    onTap: () => ref.read(eventProvider.notifier).getDetailEvent(event.id!),
-                  );
-                }
-
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildSectionTitle('Meeting'),
-                    _buildInfoContainer([
-                      _buildListTile("Meeting With", event.meetingWith ?? ""),
-                      _buildListTile("Meeting type", event.meetingType ?? ""),
-                    ]),
-                    _buildSectionTitle('Detail Acara'),
-                    _buildInfoContainer([
-                      _buildListTile("Title", event.title ?? ""),
-                      _buildListTile("Note Event", event.note ?? ""),
-                      _buildListTile("Start Date", event.startDate?.toString() ?? ""),
-                      _buildListTile("End Date", event.endDate?.toString() ?? ""),
-                      _buildListTile("Location", event.location ?? ""),
-                      _buildListTile("Set Time Reminder", event.reminder?.toString() ?? ""),
-                    ]),
-                  ],
-                );
-              },
-              error: (error, _) {
-                return LzNoData(message: 'Opps! $error');
-              },
-              loading: () {
-                return SizedBox(
-                  height: 90,
-                  child: ListView.builder(
-                    itemCount: 10,
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
-                    },
-                  ),
-                );
-              },
+      body: asyncData.when(
+        data: (data) {
+          if (data.isEmpty) {
+            return LzNoData(
+              message: 'Opps! No data found',
+              onTap: () => ref.read(eventProvider.notifier).getDetailEvent,
             );
-          },
-        ),
+          }
+
+          return buildEventDetails(event);
+        },
+        error: (error, _) {
+          return LzNoData(message: 'Opps! $error');
+        },
+        loading: () {
+          return SizedBox(
+            height: 90,
+            child: ListView.builder(
+              itemCount: 1,
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
+              },
+            ),
+          );
+        },
       ),
     );
   }
 
-  Widget _buildListTile(String title, String content) {
-    return ListTile(
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      subtitle: Text(
-        content,
-        style: TextStyle(
-          fontSize: 14,
-        ),
-      ),
+  Widget buildEventDetails(EventModel event) {
+    return ListView.separated(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      physics: BouncingScrollPhysics(),
+      itemBuilder: (context, index) {
+        int id = event.id ?? 0;
+        String title = event.title ?? '';
+        String userFirstName = event.userFirstName ?? '';
+        String userLastName = event.userLastName ?? '';
+        String meetingWith = event.meetingWith ?? '';
+        String meetingType = event.meetingType ?? '';
+        String location = event.location ?? '';
+        String note = event.note ?? '';
+        DateTime reminder = event.reminder ?? DateTime.now();
+
+        return Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              padding: Ei.only(h: 15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                    offset: Offset(0, 1),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  buildInfoRow('Event ID', id.toString()),
+                  buildInfoRow('Title', title),
+                  buildInfoRow('First Name', userFirstName),
+                  buildInfoRow('Meeting With', meetingWith),
+                  buildInfoRow('Meeting Type', meetingType),
+                  buildInfoRow('Location', location),
+                  buildInfoRow('Reminder', reminder.toString()),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+      separatorBuilder: (context, index) {
+        return SizedBox(height: 10);
+      },
+      itemCount: 1, // Displaying only one event
     );
   }
 
-  Widget _buildSectionTitle(String title) {
-    return Container(
-      padding: Ei.only(t: 10),
-      child: Text(
-        title,
-        textAlign: TextAlign.left,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
+  Widget buildInfoRow(String label, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildInfoContainer(List<Widget> children) {
-    return Container(
-      padding: Ei.sym(v: 5),
-      margin: Ei.sym(v: 10),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.black.withOpacity(0.1)),
-      ),
-      child: Column(children: children),
+        SizedBox(height: 10),
+        Text(
+          value,
+          textAlign: TextAlign.justify,
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(height: 20),
+      ],
     );
   }
 }

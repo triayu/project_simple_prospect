@@ -24,6 +24,8 @@ class MessageTemplateProvider extends StateNotifier<AsyncValue<List<MessageTempl
         List data = res.data ?? [];
 
         state = AsyncValue.data(data.map((e) => MessageTemplateModel.fromJson(e)).toList());
+
+        logg(state, color: LogColor.red);
       } else {
         LzToast.show(res.message);
       }

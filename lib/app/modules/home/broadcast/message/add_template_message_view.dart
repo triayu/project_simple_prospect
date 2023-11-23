@@ -43,7 +43,6 @@ class AddTemplateMessage extends ConsumerWidget {
                 PlatformFile file = result.files.first;
                 print('Picked file: ${file.name}');
               } else {
-                // User canceled the picker
               }
             },
             style: ElevatedButton.styleFrom(

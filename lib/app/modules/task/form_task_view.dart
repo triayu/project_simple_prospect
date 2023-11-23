@@ -5,7 +5,7 @@ import 'package:simple_prospect/app/providers/task/task_post_provider.dart';
 
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-import '../../../constants/color_constants.dart';
+import '../../constants/color_constants.dart';
 
 class FormTask extends ConsumerWidget {
   const FormTask({Key? key}) : super(key: key);

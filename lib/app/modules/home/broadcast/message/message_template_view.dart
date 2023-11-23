@@ -5,8 +5,6 @@ import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/data/models/message_template_model.dart';
 import 'package:simple_prospect/app/modules/home/broadcast/message/add_template_message_view.dart';
 import 'package:simple_prospect/app/providers/message_template/message_template_provider.dart';
-
-import 'edit_message_view.dart';
 import 'send_message_view.dart';
 
 class MessageTemplate extends ConsumerWidget {
@@ -14,7 +12,6 @@ class MessageTemplate extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bottomKey = GlobalKey();
     return Scaffold(
       appBar: AppBar(
         title: Text('Pesan Whatasapp'),
@@ -25,6 +22,8 @@ class MessageTemplate extends ConsumerWidget {
 
         return asyncData.when(
           data: (data) {
+            logg(data.length, color: LogColor.red);
+
             if (data.isEmpty) {
               return LzNoData(
                   message: 'Opps! No data found',
@@ -32,97 +31,86 @@ class MessageTemplate extends ConsumerWidget {
             }
 
             return ListView.separated(
-              padding: Ei.sym(h: 10, v: 20),
+              padding: Ei.sym(h: 20, v: 20),
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                List<MessageTemplateModel> datas = data;
+                logg(index);
 
+                List<MessageTemplateModel> datas = data;
+                final gkey = GlobalKey();
                 int id = datas[index].id ?? 0;
                 String title = datas[index].title ?? '';
-                String userFirstName = datas[index].userFirstName ?? '';
+                // String userFirstName = datas[index].userFirstName ?? '';
                 String message = datas[index].message ?? '';
 
-                SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: Stack(
-                    children: [
-                      Column(
-                        children: [
-                          // Template Pesan
+                return Column(
+                  children: [
+                    // Template Pesan
 
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => SendMessage()));
-                            },
-                            child: Container(
-                              margin: Ei.only(h: 10, t: 20, b: 10),
-                              padding: Ei.sym(h: 20, v: 10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
-                                    spreadRadius: 1,
-                                    blurRadius: 1,
-                                    offset: Offset(0, 1),
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        title,
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Icon(
-                                        Ti.menu2,
-                                        key: bottomKey,
-                                      ).onPressed(() {
-                                        final options = ['Kirim Pesan', 'Edit', 'Hapus'].options();
-                                        DropX.show(bottomKey.context, options: options, onSelect: (p0) {
-                                          if (p0.option == 'Kirim Pesan') {
-                                            Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => SendMessage(),
-                                            ));
-                                          }
-                                          logg(p0.option);
-                                          if (p0.option == 'Edit') {
-                                            Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => EditMessage(),
-                                            ));
-                                          } else if (p0 == 'Hapus') {
-                                            // ---
-                                          }
-                                        });
-                                      })
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    message,
-                                    textAlign: Ta.justify,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
+                    Container(
+                      padding: Ei.only(h: 20, b: 15),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                title,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Spacer(),
+                              Icon(
+                                Ti.menu2,
+                                key: gkey,
+                              ).onPressed(() {
+                                final options = ['Kirim Pesan', 'Edit', 'Hapus'].options();
+                                DropX.show(gkey.context, options: options, onSelect: (p0) {
+                                  if (p0.option == 'Kirim Pesan') {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => SendMessage(),
+                                    ));
+                                  }
+                                  logg(p0.option);
+                                  if (p0.option == 'Edit') {
+                                    // Navigator.of(context).push(MaterialPageRoute(
+                                    //   builder: (context) => EditMessage(),
+                                    // ));
+                                  } else if (p0 == 'Hapus') {
+                                    // ---
+                                  }
+                                });
+                              })
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            message,
+                            textAlign: Ta.justify,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
                 );
               },
               separatorBuilder: (context, index) {

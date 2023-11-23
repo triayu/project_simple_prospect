@@ -4,7 +4,7 @@ import 'package:simple_prospect/app/data/api/api.dart';
 
 import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 
-import '../../../data/models/model.dart';
+import '../../data/models/model.dart';
 
 class TutorialProvider extends StateNotifier<AsyncValue<List<TutorialModel>>> with UseApi {
   final AutoDisposeStateNotifierProviderRef? ref; // if you want to use ref inside this provider

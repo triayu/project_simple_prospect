@@ -8,9 +8,9 @@ import 'package:simple_prospect/app/modules/drawer/provide_feedback/feedback_vie
 import 'package:simple_prospect/app/modules/home/broadcast/message/message_template_view.dart';
 import 'package:simple_prospect/app/providers/auth/auth_provider.dart';
 
-import '../../../../constants/color_constants.dart';
-import '../../../../data/local/auth_storage.dart';
-import '../../../drawer/tutorial/list_tutorial.dart';
+import '../../constants/color_constants.dart';
+import '../../data/local/auth_storage.dart';
+import '../drawer/tutorial/list_tutorial.dart';
 
 class WiDrawer extends ConsumerWidget {
   const WiDrawer({super.key});

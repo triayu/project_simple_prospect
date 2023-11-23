@@ -13,6 +13,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'form_event.dart';
 
 class EventView extends ConsumerWidget {
+  
   const EventView({Key? key}) : super(key: key);
 
   @override
@@ -101,15 +102,15 @@ class EventView extends ConsumerWidget {
                           DateTime reminder = datas.reminder ?? DateTime.now();
 
                           return InkWell(
-                            // onTap: () {
-                            //   Navigator.of(context).push(
-                            //     MaterialPageRoute(
-                            //       builder: (context) => ShowEventView(
-                            //         event: EventModel,
-                            //       ),
-                            //     ),
-                            //   );
-                            // },
+                            onTap: () async {
+                              Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => ShowEventView(event: EventModel()),
+  ),
+);
+
+                            },
                             child: Container(
                               height: 70,
                               decoration: BoxDecoration(
@@ -193,12 +194,16 @@ class EventView extends ConsumerWidget {
                               ),
                             ),
                           );
+                        
+                        
+                        
                         },
                         separatorBuilder: (context, index) {
                           return SizedBox(height: 10);
                         },
                         itemCount: data.length,
                       );
+                  
                     },
                     error: (error, _) {
                       return LzNoData(message: 'Opps! $error');
