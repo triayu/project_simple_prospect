@@ -22,111 +22,118 @@ class WiDrawer extends ConsumerWidget {
     User userData = AuthStorage.user();
     return SafeArea(
       child: Drawer(
-        width: context.width * 0.8,
-        child: Column(
-          children: [
-            //
-            Container(
-              margin: Ei.only(t: 30, l: 10),
-              width: 250,
-              height: 60,
-              decoration: BoxDecoration(
-                color: ColorConstants.primaryColor,
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  LzImage(
-                    'poto.jpg',
-                    radius: 50,
-                    size: 40,
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.8,
+          decoration: BoxDecoration(color: ColorConstants.secondaryColor),
+          child: Column(
+            children: [
+              UserAccountsDrawerHeader(
+                accountName: Text(
+                  '${userData.fullName!.ucwords}',
+                  style: TextStyle(fontSize: 18, color: ColorConstants.secondaryColor, fontWeight: FontWeight.bold),
+                ),
+                accountEmail: Text(
+                  '${userData.email}',
+                  style: TextStyle(color: ColorConstants.secondaryColor, fontSize: 16),
+                ),
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/poto.jpg'),
+                ),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [ColorConstants.primaryColor, ColorConstants.secondaryColor],
                   ),
-                  SizedBox(width: 10),
-                  Container(
-                    padding: EdgeInsets.only(right: 30),
-                    child: Text(
-                      '${userData.fullName!.ucwords}',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  List<String> titles = ['Contact', 'Prospect', 'Tutorial', 'Provide Feedback', 'Message Template'];
-                  List<IconData> icons = [Ti.addressBook, Ti.user, Ti.brandYoutube, Icons.feedback, Ti.messageCircle];
-
-                  return ListTile(
-                    leading: Icon(
-                      icons[index],
-                      color: ColorConstants.primaryColor,
-                    ),
-                    title: Text(
-                      titles[index],
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                      switch (index) {
-                        case 0:
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView()));
-                          break;
-                        case 1:
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ProspectView()));
-                          break;
-                        case 2:
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ListTutorialView()));
-                          break;
-
-                        case 3:
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackView()));
-                          break;
-                        case 4:
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => MessageTemplate()));
-                          break;
-                      }
-                    },
-                  );
-                },
-              ),
-            ),
-            InkTouch(
-              onTap: () {
-                notifier.logOut(context);
-              },
-              margin: Ei.all(20),
-              padding: Ei.only(l: 20),
-              radius: BorderRadius.circular(10),
-              color: ColorConstants.textSecondaryColor.withOpacity(0.3),
-              child: Padding(
-                padding: Ei.all(10),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.exit_to_app,
-                      color: ColorConstants.primaryColor,
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      "LogOut",
-                      style: TextStyle(
-                        color: ColorConstants.primaryColor,
-                      ),
-                    ),
-                  ],
                 ),
               ),
-            )
-          ],
+              Expanded(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      List<String> titles = ['Contact', 'Prospect', 'Tutorial', 'Provide Feedback', 'Message Template'];
+                      List<IconData> icons = [
+                        Ti.addressBook,
+                        Ti.user,
+                        Ti.brandYoutube,
+                        Icons.feedback,
+                        Ti.messageCircle
+                      ];
+
+                      return Card(
+                        elevation: 0.3,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: ListTile(
+                          contentPadding: Ei.sym(v: 2, h: 16),
+                          leading: Icon(
+                            icons[index],
+                            color: ColorConstants.primaryColor,
+                          ),
+                          title: Text(
+                            titles[index],
+                            style: TextStyle(fontSize: 16, color: ColorConstants.primaryColor),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                            switch (index) {
+                              case 0:
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView()));
+                                break;
+                              case 1:
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ProspectView()));
+                                break;
+                              case 2:
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ListTutorialView()));
+                                break;
+                              case 3:
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackView()));
+                                break;
+                              case 4:
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => MessageTemplate()));
+                                break;
+                            }
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              Container(
+                height: 80,
+                child: InkTouch(
+                  onTap: () {
+                    notifier.logOut(context);
+                  },
+                  margin: Ei.all(20),
+                  padding: Ei.only(l: 20),
+                  radius: BorderRadius.circular(10),
+                  color: ColorConstants.primaryColor,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.exit_to_app,
+                        color: ColorConstants.secondaryColor,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        "LogOut",
+                        style: TextStyle(
+                          color: ColorConstants.secondaryColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

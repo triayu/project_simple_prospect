@@ -33,6 +33,7 @@ class FormEvent extends ConsumerWidget {
           children: [
             LzForm.input(
               label: 'Title',
+              
               hint: 'Enter your title',
               model: provider.forms['title'],
             ),
@@ -111,7 +112,7 @@ class FormEvent extends ConsumerWidget {
         ),
         bottomNavigationBar: LzButton(
           text: 'Add Event',
-          color: ColorConstants.softBlack,
+          color: ColorConstants.primaryColor,
           onTap: (val) {
             // Tinggal kasi kondisi dsni kalau ada data yg diterima berati dia update
             if (data != null) {

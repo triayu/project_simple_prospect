@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/data/models/task_model.dart';
 import 'package:simple_prospect/app/providers/task/task_post_provider.dart';
 
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
@@ -8,15 +9,20 @@ import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 import '../../constants/color_constants.dart';
 
 class FormTask extends ConsumerWidget {
-  const FormTask({Key? key}) : super(key: key);
+  final TaskModel? data;
+  const FormTask({Key? key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(taskPostProvider);
 
+    if (data != null) {
+      provider.fillForm(data ?? null);
+    }
+
     return Scaffold(
         appBar: CustomAppBar(
-          title: 'Add Task',
+          title: data != null ? 'Edit Task' : 'Add Task',
           canBack: true,
         ),
         body: LzFormList(
@@ -89,9 +95,13 @@ class FormTask extends ConsumerWidget {
         ),
         bottomNavigationBar: LzButton(
           text: 'Add Task',
-          color: ColorConstants.softBlack,
+          color: ColorConstants.primaryColor,
           onTap: (val) {
-            provider.post(context);
+            if (data != null) {
+              provider.editTask(context, data!.id!);
+            } else {
+              provider.post(context);
+            }
           },
         ).dark(Colors.white).theme1());
   }

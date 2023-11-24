@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/data/models/message_template_model.dart';
+import 'package:simple_prospect/app/providers/message_template/message_template_provider.dart';
 import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
 import '../../data/api/api.dart';
 
@@ -63,6 +65,44 @@ class PostMessage with ChangeNotifier, UseApi {
       Errors.check(e, s);
     } finally {
       LzToast.dismiss();
+    }
+  }
+
+// Function ini dipergunakan untuk mengisi data yng mau diubah / diedit ke dalam form
+  void fillForm(MessageTemplateModel? data) {
+    try {
+      if (data != null) {
+        logg(data, limit: 20000);
+
+        final map = data.toJson();
+
+        logg(map, color: LogColor.blue);
+        map.forEach((key, value) {
+          if (forms.containsKey(key) && value != null) {
+            forms[key]!.controller.text = value.toString();
+          }
+        });
+      }
+    } catch (e, s) {
+      Errors.check(e, s);
+    }
+  }
+
+  Future editMessageTemplate(BuildContext context, int id) async {
+    // Logg
+    logg('Update Data');
+    try {
+      LzToast.overlay('Sedang Mengupdate Data..');
+      ResHandler res = await messageTemplateApi.updateMessageTemplate(forms, id);
+      LzToast.dismiss();
+      if (res.status) {
+        LzToast.show('Berhasil Mengupdate Data');
+        Navigator.of(context).pop;
+      } else if (res.message != null) {
+        LzToast.show(res.message);
+      }
+    } catch (e, s) {
+      Errors.check(e, s);
     }
   }
 }

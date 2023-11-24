@@ -2,21 +2,27 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/data/models/message_template_model.dart';
 import 'package:simple_prospect/app/providers/message_template/post_message_template_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
 import '../../../../constants/color_constants.dart';
 
 class AddTemplateMessage extends ConsumerWidget {
-  const AddTemplateMessage({Key? key}) : super(key: key);
+  final MessageTemplateModel? data;
+  const AddTemplateMessage({Key? key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(postMessageTemplateProvider);
 
+    if (data != null) {
+      provider.fillForm(data ?? null);
+    }
+
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Tambah Template Pesan',
+        title: data != null ? 'Edit Message Template' : 'Tambah Template Pesan',
         canBack: true,
       ),
       body: LzFormList(
@@ -42,8 +48,7 @@ class AddTemplateMessage extends ConsumerWidget {
               if (result != null) {
                 PlatformFile file = result.files.first;
                 print('Picked file: ${file.name}');
-              } else {
-              }
+              } else {}
             },
             style: ElevatedButton.styleFrom(
               primary: Colors.white,
@@ -69,11 +74,14 @@ class AddTemplateMessage extends ConsumerWidget {
         ],
       ),
       bottomNavigationBar: LzButton(
-        text: 'Submit',
+        text: 'Add Message Template',
         color: ColorConstants.softBlack,
         onTap: (val) {
-          // jalankan function post yang sudah kita buat di provider tadi
-          provider.post(context);
+          if (data != null) {
+            provider.editMessageTemplate(context, data!.id!);
+          } else {
+            provider.post(context);
+          }
         },
       ).dark(Colors.white).theme1(),
     );

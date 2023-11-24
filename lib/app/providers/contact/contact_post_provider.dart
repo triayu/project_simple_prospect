@@ -92,4 +92,41 @@ class contactPost with ChangeNotifier, UseApi {
     // Lalu terakhir tinggal setIsi dari LzFormSelectnya
     form?.setOptions(options);
   }
+
+  // EDIT CONTACT
+  void fillForm(ContactModel? data) {
+    try {
+      if (data != null) {
+        logg(data, limit: 20000);
+
+        final map = data.toJson();
+
+        map.forEach((key, value) {
+          if (forms.containsKey(key) && value != null) {
+            forms[key]!.controller.text = value.toString();
+          }
+        });
+      }
+    } catch (e, s) {
+      Errors.check(e, s);
+    }
+  }
+
+  Future editContact(BuildContext context, int id) async {
+    // Logg
+    logg('Update Data');
+    try {
+      LzToast.overlay('Sedang Mengupdate Data..');
+      ResHandler res = await contactApi.updateContact(forms, id);
+      LzToast.dismiss();
+      if (res.status) {
+        LzToast.show('Berhasil Mengupdate Data');
+        Navigator.of(context).pop;
+      } else if (res.message != null) {
+        LzToast.show(res.message);
+      }
+    } catch (e, s) {
+      Errors.check(e, s);
+    }
+  }
 }

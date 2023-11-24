@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/data/models/model.dart';
 import 'package:simple_prospect/app/providers/contact/contact_post_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
 import '../../../constants/color_constants.dart';
 
 class FormContactView extends ConsumerWidget {
-  const FormContactView({Key? key}) : super(key: key);
+  final ContactModel? data;
+  const FormContactView({Key? key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(contactPostProvider);
 
+    if (data != null) {
+      provider.fillForm(data ?? null);
+    }
+
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Tambah Kontak',
+        title: data != null ? 'Edit Contact' : 'Tambah Kontak',
         canBack: true,
       ),
       body: LzFormList(
@@ -56,7 +62,11 @@ class FormContactView extends ConsumerWidget {
         text: 'Tambah Kontak',
         color: ColorConstants.softBlack,
         onTap: (val) {
-          provider.post(context);
+          if (data != null) {
+            provider.editContact(context, data!.id!);
+          } else {
+            provider.post(context);
+          }
         },
       ).dark(Colors.white).theme1(),
     );

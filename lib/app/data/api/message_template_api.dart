@@ -7,4 +7,6 @@ class MessageTemplateApi extends Fetch {
       await post('/message-template', FormData.fromMap(data));
 
  Future<ResHandler> deleteMessageTemplate(int id) async => await delete('/message-template/$id');
+  Future<ResHandler> updateMessageTemplate(Map<String, dynamic> map, int id) async =>
+      await put('/message-template/$id', FormData.fromMap(map));
 }

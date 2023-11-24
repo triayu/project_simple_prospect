@@ -39,11 +39,11 @@ class ContactView extends ConsumerWidget {
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  List<ContactModel> datas = data;
+                  ContactModel datas = data[index];
 
-                  int id = datas[index].id ?? 0;
-                  String firstName = datas[index].firstName ?? '';
-                  String phoneNumber = datas[index].phoneNumber ?? '';
+                  int id = datas.id ?? 0;
+                  String firstName = datas.firstName ?? '';
+                  String phoneNumber = datas.phoneNumber ?? '';
 
                   final String imagePath = 'poto.jpg';
 
@@ -123,46 +123,13 @@ class ContactView extends ConsumerWidget {
                                 size: 20,
                               ),
                               onPressed: () {
-                                // showDialog(
-                                //   context: context,
-                                //   builder: (BuildContext context) {
-                                //     String editEvent = 'Name $index';
-                                //     return AlertDialog(
-                                //       title: Text('Edit Event'),
-                                //       content: Column(
-                                //         mainAxisSize: MainAxisSize.min,
-                                //         children: [
-                                //           TextField(
-                                //             decoration: InputDecoration(labelText: 'Name'),
-                                //             onChanged: (value) {
-                                //               editEvent = value;
-                                //             },
-                                //           ),
-                                //         ],
-                                //       ),
-                                //       actions: [
-                                //         ElevatedButton(
-                                //           style: ElevatedButton.styleFrom(
-                                //             backgroundColor: ColorConstants.primaryColor,
-                                //           ),
-                                //           onPressed: () {
-                                //             Navigator.of(context).pop();
-                                //           },
-                                //           child: Text('Save'),
-                                //         ),
-                                //         ElevatedButton(
-                                //           style: ElevatedButton.styleFrom(
-                                //             backgroundColor: ColorConstants.primaryColor,
-                                //           ),
-                                //           onPressed: () {
-                                //             Navigator.of(context).pop();
-                                //           },
-                                //           child: Text('Cancel'),
-                                //         ),
-                                //       ],
-                                //     );
-                                //   },
-                                // );
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => FormContactView(
+                                      data: datas,
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                           ),

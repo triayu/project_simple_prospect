@@ -13,7 +13,6 @@ import 'package:table_calendar/table_calendar.dart';
 import 'form_event.dart';
 
 class EventView extends ConsumerWidget {
-  
   const EventView({Key? key}) : super(key: key);
 
   @override
@@ -98,18 +97,17 @@ class EventView extends ConsumerWidget {
 
                           int id = datas.id ?? 0;
                           String tittle = datas.title ?? '';
-                          String eventUsername = datas.meetingType ?? '';
+                          String meetingType = datas.meetingType ?? '';
                           DateTime reminder = datas.reminder ?? DateTime.now();
 
                           return InkWell(
                             onTap: () async {
                               Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => ShowEventView(event: EventModel()),
-  ),
-);
-
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ShowEventView(event: EventModel()),
+                                ),
+                              );
                             },
                             child: Container(
                               height: 70,
@@ -161,7 +159,8 @@ class EventView extends ConsumerWidget {
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return LzConfirm(
-                                                  title: "Apakah Anda Yakin Untuk Menghapus Data Ini",
+                                                  title: "Apakah Anda Yakin Untuk Menghapus Data Ini?",
+                                                  titleSize: 15,
                                                   onConfirm: () {
                                                     logg(id);
                                                     ref.read(eventProvider.notifier).delEvent(id);
@@ -194,16 +193,12 @@ class EventView extends ConsumerWidget {
                               ),
                             ),
                           );
-                        
-                        
-                        
                         },
                         separatorBuilder: (context, index) {
                           return SizedBox(height: 10);
                         },
                         itemCount: data.length,
                       );
-                  
                     },
                     error: (error, _) {
                       return LzNoData(message: 'Opps! $error');

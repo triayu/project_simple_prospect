@@ -32,13 +32,13 @@ class TaskView extends ConsumerWidget {
                 padding: Ei.sym(h: 10, v: 20),
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  List<TaskModel> datas = data;
+                  TaskModel datas = data[index];
 
-                  int id = datas[index].id ?? 0;
-                  String title = datas[index].title ?? '';
-                  String note = datas[index].note ?? '';
-                  String priority = datas[index].priority ?? '';
-                  DateTime reminder = datas[index].reminder ?? DateTime.now();
+                  int id = datas.id ?? 0;
+                  String title = datas.title ?? '';
+                  String note = datas.note ?? '';
+                  String priority = datas.priority ?? '';
+                  DateTime reminder = datas.reminder ?? DateTime.now();
                   // DateTime reminder = datas[index].reminder ?? DateTime.now();
 
                   return Container(
@@ -152,53 +152,21 @@ class TaskView extends ConsumerWidget {
                             ),
                             Container(
                               child: IconButton(
-                                  icon: Icon(
-                                    Ti.edit,
-                                    color: ColorConstants.successColor,
-                                    size: 20,
-                                  ),
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        String editTask = 'Name $index';
-                                        return AlertDialog(
-                                          title: Text('Edit Task'),
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              TextField(
-                                                decoration: InputDecoration(labelText: 'Name'),
-                                                onChanged: (value) {
-                                                  editTask = value;
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                          actions: [
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: ColorConstants.primaryColor,
-                                              ),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text('Save'),
-                                            ),
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: ColorConstants.primaryColor,
-                                              ),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text('Cancel'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  }),
+                                icon: Icon(
+                                  Ti.edit,
+                                  color: ColorConstants.successColor,
+                                  size: 20,
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => FormTask(
+                                        data: datas,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ],
                         ),

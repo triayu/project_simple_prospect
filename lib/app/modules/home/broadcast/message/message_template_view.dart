@@ -36,12 +36,12 @@ class MessageTemplate extends ConsumerWidget {
               itemBuilder: (context, index) {
                 logg(index);
 
-                List<MessageTemplateModel> datas = data;
+                MessageTemplateModel datas = data[index];
                 final gkey = GlobalKey();
-                int id = datas[index].id ?? 0;
-                String title = datas[index].title ?? '';
+                int id = datas.id ?? 0;
+                String title = datas.title ?? '';
                 // String userFirstName = datas[index].userFirstName ?? '';
-                String message = datas[index].message ?? '';
+                String message = datas.message ?? '';
 
                 return Column(
                   children: [
@@ -88,11 +88,23 @@ class MessageTemplate extends ConsumerWidget {
                                   }
                                   logg(p0.option);
                                   if (p0.option == 'Edit') {
-                                    // Navigator.of(context).push(MaterialPageRoute(
-                                    //   builder: (context) => EditMessage(),
-                                    // ));
-                                  } else if (p0 == 'Hapus') {
-                                    // ---
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => AddTemplateMessage(
+                                        data: datas,
+                                      ),
+                                    ));
+                                  } else if (p0.option == 'Hapus') {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return LzConfirm(
+                                            title: "Apakah Anda Yakin Untuk Menghapus Data Ini?",
+                                            titleSize: 15,
+                                            onConfirm: () {
+                                              ref.read(messageTemplateProvider.notifier).delMessage(id);
+                                            },
+                                          );
+                                        });
                                   }
                                 });
                               })

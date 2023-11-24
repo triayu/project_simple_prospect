@@ -7,6 +7,9 @@ class ContactApi extends Fetch {
     return await post('/contact', data);
   }
 
+  Future<ResHandler> updateContact(Map<String, dynamic> map, int id) async =>
+      await put('/contact/$id', FormData.fromMap(map));
+
   // Category Api
   Future<ResHandler> getCategoryContact() async {
     return await get('/category');
