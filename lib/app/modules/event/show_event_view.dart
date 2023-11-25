@@ -15,7 +15,7 @@ class ShowEventView extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('DETAIL EVENT'),
+        title: Text('Detail Event'),
         centerTitle: true,
       ),
       body: asyncData.when(
@@ -51,7 +51,7 @@ class ShowEventView extends ConsumerWidget {
 
   Widget buildEventDetails(EventModel event) {
     return ListView.separated(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: Ei.sym(h: 20, v: 20),
       physics: BouncingScrollPhysics(),
       itemBuilder: (context, index) {
         int id = event.id ?? 0;
@@ -100,7 +100,7 @@ class ShowEventView extends ConsumerWidget {
       separatorBuilder: (context, index) {
         return SizedBox(height: 10);
       },
-      itemCount: 1, // Displaying only one event
+      itemCount: 1,
     );
   }
 

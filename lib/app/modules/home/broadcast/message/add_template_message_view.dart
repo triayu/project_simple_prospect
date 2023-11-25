@@ -75,7 +75,7 @@ class AddTemplateMessage extends ConsumerWidget {
       ),
       bottomNavigationBar: LzButton(
         text: 'Add Message Template',
-        color: ColorConstants.softBlack,
+        color: ColorConstants.primaryColor,
         onTap: (val) {
           if (data != null) {
             provider.editMessageTemplate(context, data!.id!);

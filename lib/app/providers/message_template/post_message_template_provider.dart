@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/models/message_template_model.dart';
-import 'package:simple_prospect/app/providers/message_template/message_template_provider.dart';
 import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
 import '../../data/api/api.dart';
 

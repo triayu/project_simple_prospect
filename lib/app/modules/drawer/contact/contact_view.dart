@@ -137,12 +137,17 @@ class ContactView extends ConsumerWidget {
                       ),
                     ),
                   );
+               
+               
+               
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 10);
                 },
                 itemCount: 5,
               );
+            
+            
             },
             error: (error, _) {
               return LzNoData(message: 'Opps! $error');
@@ -183,6 +188,7 @@ class ContactView extends ConsumerWidget {
           },
         ),
       ),
+   
     );
   }
 }
