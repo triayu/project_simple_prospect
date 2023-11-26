@@ -69,7 +69,12 @@ class BroadcastView extends ConsumerWidget {
                       )
                     ],
                   ),
+              
+              
+              
                 ),
+                
+                
                 //  ============
                 //  MESSAGE
                 Stack(
