@@ -5,7 +5,7 @@ import 'package:simple_prospect/app/data/api/api.dart';
 import '../../data/models/event_model.dart';
 import '../../utils/fetch/src/fetch.dart';
 
-final  eventPostProvider = AutoDisposeChangeNotifierProvider((ref) => EventPost());
+final eventPostProvider = AutoDisposeChangeNotifierProvider((ref) => EventPost());
 
 class EventPost with ChangeNotifier, UseApi {
   final forms =

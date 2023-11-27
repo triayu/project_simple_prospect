@@ -191,6 +191,7 @@ class EventView extends ConsumerWidget {
                                   ],
                                 ),
                               ),
+                          
                             ),
                           );
                         },
@@ -220,6 +221,8 @@ class EventView extends ConsumerWidget {
                 },
               ),
             )
+          
+          
           ],
         ),
         Poslign(
@@ -241,6 +244,8 @@ class EventView extends ConsumerWidget {
             },
           ),
         ),
+      
+      
       ],
     );
   }

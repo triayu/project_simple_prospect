@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/modules/home/broadcast/message/add_contact_view.dart';
-import 'package:simple_prospect/app/modules/home/broadcast/message/add_template_message_view.dart';
 import 'package:simple_prospect/app/modules/drawer/contact/contact_view.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
@@ -22,7 +21,7 @@ class SendMessage extends ConsumerWidget {
             Ti.plus,
             key: bottomKey,
           ).onPressed(() {
-            final options = ['Tambah Kontak', 'Import Kontak', 'Hapus'].options();
+            final options = ['Tambah Kontak', 'Import Kontak', 'Import From Excel '].options();
             DropX.show(bottomKey.context, options: options, onSelect: (p0) {
               if (p0.option == 'Kirim Pesan') {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -30,13 +29,13 @@ class SendMessage extends ConsumerWidget {
                 ));
               }
               logg(p0.option);
-              if (p0.option == 'Edit') {
+              if (p0.option == 'Import Kontak') {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => ContactView(),
                   ),
                 );
-              } else if (p0 == 'Hapus') {
+              } else if (p0 == 'Import From Excel ') {
                 // ---
               }
             });

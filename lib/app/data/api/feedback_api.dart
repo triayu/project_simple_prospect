@@ -2,7 +2,6 @@ part of api;
 
 class FeedbackApi extends Fetch {
   Future<ResHandler> getFeedback() async => await get('/feedback');
-  
-  // Future<ResHandler> addFeedback(Map<String, dynamic> date) async {return await post('/feedback', data);}
-   
+  Future<ResHandler> deleteFeedback(int id) async => await delete('/feedback/$id');
+  Future<ResHandler> postFeedback(Map<String, dynamic> data) async => await post('/feedback', FormData.fromMap(data));
 }

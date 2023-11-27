@@ -4,7 +4,7 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/models/model.dart';
 import 'package:simple_prospect/app/modules/drawer/contact/contact_view.dart';
 import 'package:simple_prospect/app/modules/drawer/prospect/prospect_view.dart';
-import 'package:simple_prospect/app/modules/drawer/provide_feedback/feedback_view.dart';
+import 'package:simple_prospect/app/modules/drawer/provide_feedback/list_feedback_view.dart';
 import 'package:simple_prospect/app/modules/home/broadcast/message/message_template_view.dart';
 import 'package:simple_prospect/app/providers/auth/auth_provider.dart';
 
@@ -92,7 +92,7 @@ class WiDrawer extends ConsumerWidget {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => ListTutorialView()));
                                 break;
                               case 3:
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackView()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ListFeedbackView()));
                                 break;
                               case 4:
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => MessageTemplate()));

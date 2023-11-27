@@ -139,7 +139,6 @@ class ContactView extends ConsumerWidget {
                   );
                
                
-               
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 10);

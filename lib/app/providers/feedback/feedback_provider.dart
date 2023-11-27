@@ -30,6 +30,25 @@ class FeedbackProvider extends StateNotifier<AsyncValue<List<FeedbackModel>>> wi
       state = AsyncValue.data([]);
     }
   }
+
+  // Delete Feedback
+  // =====================================
+  Future delFeedback(int id) async {
+    try {
+      state = const AsyncValue.loading();
+
+      ResHandler res = await feedbackApi.deleteFeedback(id);
+
+      if (res.status) {
+        LzToast.show(res.message);
+        getFeedback();
+      } else {
+        LzToast.show(res.message);
+      }
+    } catch (e, s) {
+      Errors.check(e, s);
+    }
+  }
 }
 
 final feedbackProvider = StateNotifierProvider.autoDispose<FeedbackProvider, AsyncValue<List<FeedbackModel>>>((ref) {
