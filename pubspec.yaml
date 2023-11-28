@@ -36,6 +36,7 @@ dependencies:
     sdk: flutter
   flutter_localization: ^0.1.13
   flutter_native_splash: ^2.3.3
+  flutter_rating_bar: ^4.0.1
   google_fonts: any
   hooks_riverpod: ^2.3.6
   lazyui: ^1.0.20

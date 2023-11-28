@@ -28,23 +28,28 @@ class FormContactView extends ConsumerWidget {
         style: LzFormStyle(
             inputLabelFontWeight: FontWeight.w400, type: FormType.topInner, inputBorderColor: ColorConstants.softBlack),
         children: [
-          Row(
-            children: [
-              Flexible(
-                child: LzForm.input(label: 'First name', hint: 'Enter first name', model: provider.forms['first_name']),
-              ),
-              SizedBox(width: 10),
-              Flexible(
-                child: LzForm.input(label: 'Last name', hint: 'Enter last name', model: provider.forms['last_name']),
-              ),
-            ],
+          LzForm.input(label: 'First name', hint: 'Enter first name', model: provider.forms['first_name'], maxLines: 3),
+          LzForm.input(label: 'Last name', hint: 'Enter last name', model: provider.forms['last_name'], maxLines: 3),
+          LzForm.input(
+            label: 'Email',
+            hint: 'Your email address',
+            model: provider.forms['email'],
           ),
-          LzForm.input(label: 'Email', hint: 'Your email address', model: provider.forms['email']),
-          LzForm.input(label: 'Phone number', hint: 'Enter phone number', model: provider.forms['phone_number']),
           LzForm.input(
-              label: 'Work phone number', hint: 'Enter work phone number', model: provider.forms['work_phone_number']),
+              keyboard: Tit.number,
+              label: 'Phone number',
+              hint: 'Enter phone number',
+              model: provider.forms['phone_number']),
           LzForm.input(
-              label: 'Home phone number', hint: 'Enter home phone number', model: provider.forms['home_phone_number']),
+              keyboard: Tit.number,
+              label: 'Work phone number',
+              hint: 'Enter work phone number',
+              model: provider.forms['work_number']),
+          LzForm.input(
+              keyboard: Tit.number,
+              label: 'Home phone number',
+              hint: 'Enter home phone number',
+              model: provider.forms['home_number']),
           LzForm.select(
             label: 'Category',
             hint: 'Select category',
@@ -54,7 +59,17 @@ class FormContactView extends ConsumerWidget {
               await provider.getCategoryContact();
               provider.setCategory();
             },
-            //
+            onChange: (value) {
+              logg(value);
+            },
+            onSelect: (selector) {
+              if (selector.option?.option != null) {
+                provider.categoryContactsSelected =
+                    provider.categoryContacts.firstWhere((e) => e.categoryName == selector.option!.option);
+
+                logg(provider.categoryContactsSelected!.id);
+              }
+            },
           ),
         ],
       ),
@@ -65,6 +80,7 @@ class FormContactView extends ConsumerWidget {
           if (data != null) {
             provider.editContact(context, data!.id!);
           } else {
+            logg('tmbah');
             provider.post(context);
           }
         },

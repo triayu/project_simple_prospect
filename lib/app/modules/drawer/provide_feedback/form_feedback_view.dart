@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
@@ -11,6 +12,7 @@ class FeedbackView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.watch(FeedbackPostProvider);
 
+    double rating = 3;
     return Scaffold(
       appBar: AppBar(
         title: Text('Feedback'),
@@ -20,7 +22,7 @@ class FeedbackView extends ConsumerWidget {
         child: Column(
           children: [
             Container(
-              padding: Ei.only(t: 20, l: 40),
+              padding: EdgeInsets.only(top: 20, left: 40),
               child: LzImage(
                 'feedback.png',
                 height: 200,
@@ -29,9 +31,9 @@ class FeedbackView extends ConsumerWidget {
             ),
             Center(
               child: Container(
-                height: 350,
+                height: 380,
                 width: 300,
-                padding: Ei.sym(h: 20),
+                padding: Ei.sym(v: 20, h: 10),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: ColorConstants.primaryColor,
@@ -42,20 +44,22 @@ class FeedbackView extends ConsumerWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(5, (index) {
-                          return Container(
-                            padding: Ei.only(b: 5, r: 3, t: 10),
-                            child: Icon(
-                              Ti.starFilled,
-                              color: Colors.yellow,
-                              size: 25,
-                            ),
-                          );
-                        }),
+                    RatingBar.builder(
+                      initialRating: rating,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: false,
+                      itemCount: 5,
+                      itemSize: 30,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
                       ),
+                      onRatingUpdate: (newRating) {
+                        rating = newRating;
+                        print(rating);
+                      },
                     ),
                     SizedBox(height: 10),
                     LzForm.input(
@@ -71,10 +75,16 @@ class FeedbackView extends ConsumerWidget {
                     SizedBox(height: 25),
                     ElevatedButton(
                       onPressed: () {
-                        provider.postFeedback(context);
+                        if (rating < 1 || rating > 5) {
+                          print('Error: Rating must be between 1 and 5');
+                        } else {
+                          provider.postFeedback(context);
+                        }
                       },
                       child: Text('Submit'),
-                      style: ElevatedButton.styleFrom(backgroundColor: ColorConstants.primaryColor),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorConstants.primaryColor,
+                      ),
                     ),
                   ],
                 ),

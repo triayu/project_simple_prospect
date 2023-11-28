@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lazyui/lazyui.dart';
+import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/data/models/prospect_model.dart';
 import 'package:simple_prospect/app/providers/prospect/prospect_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
+
+// class ProspectView extends StatefulWidget {
+//   const ProspectView({super.key});
+
+//   @override
+//   State<ProspectView> createState() => _ProspectViewState();
+// }
+
+// class _ProspectViewState extends State<ProspectView> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
 
 class ProspectView extends ConsumerWidget {
   const ProspectView({Key? key}) : super(key: key);
@@ -42,7 +57,7 @@ class ProspectView extends ConsumerWidget {
                   size: 80,
                 ),
                 SizedBox(width: 16),
-                Expanded(
+                Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -77,50 +92,36 @@ class ProspectView extends ConsumerWidget {
                 }
 
                 return SizedBox(
-                  height: 90,
-                  child: ListView.builder(
+                  height: context.height * 0.08,
+                  child: ListView.separated(
+                    shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: data.length,
+                    padding: Ei.all(10),
+                    separatorBuilder: (context, index) {
+                      return SizedBox(width: 5);
+                    },
                     itemBuilder: (BuildContext context, int index) {
                       ProspectModel datas = data[index];
 
-                      int contactId = datas.contactId ?? 0;
-                      String contactName = datas.contactName ?? '';
-                      int contactCategoryId = datas.contactCategoryId ?? 0;
+                      // int contactId = datas.contactId ?? 0;
+                      // String contactName = datas.contactName ?? '';
+                      // int contactCategoryId = datas.contactCategoryId ?? 0;
                       String categoryName = datas.categoryName?.toString() ?? '';
 
                       return Container(
-                        margin: Ei.only(
-                          l: 10,
-                          v: 20,
-                        ),
+                        padding: Ei.all(10),
                         decoration: BoxDecoration(
                           color: ColorConstants.primaryColor,
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(5),
                         ),
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              categoryName,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: Text(categoryName,
+                            style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize(), color: Colors.white)),
                       );
                     },
                   ),
-
-                  
                 );
-
-                
-                
               },
-              
               error: (error, _) {
                 return LzNoData(message: 'Oops! $error');
               },

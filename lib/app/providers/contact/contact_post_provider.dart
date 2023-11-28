@@ -9,8 +9,8 @@ import '../../utils/fetch/src/fetch.dart';
 final contactPostProvider = AutoDisposeChangeNotifierProvider((ref) => contactPost());
 
 class contactPost with ChangeNotifier, UseApi {
-  final forms = LzForm.make(
-      ['first_name', 'last_name', 'email', 'phone_number', 'work_phone_number', 'home_phone_number', 'category']);
+  final forms =
+      LzForm.make(['first_name', 'last_name', 'email', 'phone_number', 'work_number', 'home_number', 'category']);
 
   Future post(BuildContext context) async {
     try {
@@ -24,8 +24,8 @@ class contactPost with ChangeNotifier, UseApi {
               'last_name': 'Last Name Tidak Boleh Kosong',
               'email': 'Email Type Tidak Boleh Kosong',
               'phone_number': 'Phone Number Tidak Boleh Kosong',
-              'work_phone_number': 'Work Phone Number',
-              'home_phone_number': 'Home Phone Number Tidak Boleh Kosong',
+              'work_number': 'Work Phone Number',
+              'home_number': 'Home Phone Number Tidak Boleh Kosong',
               'category': 'Category Reminder',
             },
             email: {
@@ -36,7 +36,10 @@ class contactPost with ChangeNotifier, UseApi {
           email: ['email']);
 
       if (validate.ok) {
-        final map = forms.toMap();
+        final map = forms.toMap(except: ['category']);
+
+        map['category_id'] = categoryContactsSelected!.id;
+
 
         LzToast.overlay('Menambah Contact ...');
 
@@ -48,6 +51,7 @@ class contactPost with ChangeNotifier, UseApi {
           LzToast.show(res.message);
         } else {
           LzToast.show('Berhasil Menambahkan Contact');
+          
           Navigator.of(context).pop;
         }
       }
@@ -57,6 +61,7 @@ class contactPost with ChangeNotifier, UseApi {
   }
 
   List<CategoryContactModel> categoryContacts = [];
+  CategoryContactModel? categoryContactsSelected;
 
   Future getCategoryContact() async {
     try {

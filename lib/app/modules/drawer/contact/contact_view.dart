@@ -22,31 +22,32 @@ class ContactView extends ConsumerWidget {
 
       // ============
       // LIST CONTACT
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Consumer(builder: (context, ref, _) {
-          final asyncData = ref.watch(contactProvider);
+      body: Consumer(builder: (context, ref, _) {
+        final asyncData = ref.watch(contactProvider);
 
-          return asyncData.when(
-            data: (data) {
-              if (data.isEmpty) {
-                return LzNoData(
-                    message: 'Opps! No data found', onTap: () => ref.read(contactProvider.notifier).getContact());
-              }
+        return asyncData.when(
+          data: (data) {
+            if (data.isEmpty) {
+              return LzNoData(
+                  message: 'Opps! No data found', onTap: () => ref.read(contactProvider.notifier).getContact());
+            }
 
-              return ListView.separated(
+            return Refreshtor(
+              onRefresh: ()  async{
+                await ref.read(contactProvider.notifier).getContact();
+              },
+              child: ListView.separated(
                 padding: Ei.sym(h: 10),
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
+                physics: BounceScroll(),
                 itemBuilder: (context, index) {
                   ContactModel datas = data[index];
-
+            
                   int id = datas.id ?? 0;
                   String firstName = datas.firstName ?? '';
                   String phoneNumber = datas.phoneNumber ?? '';
-
+            
                   final String imagePath = 'poto.jpg';
-
+            
                   return Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(
@@ -137,36 +138,28 @@ class ContactView extends ConsumerWidget {
                       ),
                     ),
                   );
-               
-               
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 10);
                 },
-                itemCount: 5,
-              );
-            
-            
-            },
-            error: (error, _) {
-              return LzNoData(message: 'Opps! $error');
-            },
-            loading: () {
-              return SizedBox(
-                height: 90,
-                child: ListView.builder(
-                  itemCount: 10,
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
-                  },
-                ),
-              );
-            },
-          );
-        }),
-      ),
+                itemCount: data.length,
+              ),
+            );
+          },
+          error: (error, _) {
+            return LzNoData(message: 'Opps! $error');
+          },
+          loading: () {
+            return ListView.builder(
+              itemCount: 10,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
+              },
+            );
+          },
+        );
+      }),
 
       floatingActionButton: Poslign(
         alignment: Alignment.bottomRight,
@@ -187,7 +180,6 @@ class ContactView extends ConsumerWidget {
           },
         ),
       ),
-   
     );
   }
 }
