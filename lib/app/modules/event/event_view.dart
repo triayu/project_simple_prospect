@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/data/models/event_model.dart';
 import 'package:simple_prospect/app/modules/event/show_event_view.dart';
 import 'package:simple_prospect/app/providers/event/event_provider.dart';
-import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
 import 'package:table_calendar/table_calendar.dart';
-
 import 'form_event.dart';
 
 class EventView extends ConsumerWidget {
@@ -89,116 +86,117 @@ class EventView extends ConsumerWidget {
                             message: 'Opps! No data found', onTap: () => ref.read(eventProvider.notifier).getEvent());
                       }
 
-                      return ListView.separated(
-                        padding: Ei.only(b: 60, t: 10, h: 10),
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          EventModel datas = data[index];
+                      return Refreshtor(
+                        onRefresh: () => ref.read(eventProvider.notifier).getEvent(),
+                        child: ListView.separated(
+                          padding: Ei.only(b: 60, t: 10, h: 10),
+                          physics: BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            EventModel datas = data[index];
 
-                          int id = datas.id ?? 0;
-                          String tittle = datas.title ?? '';
-                          String meetingType = datas.meetingType ?? '';
-                          DateTime reminder = datas.reminder ?? DateTime.now();
+                            int id = datas.id ?? 0;
+                            String tittle = datas.title ?? '';
+                            // String meetingType = datas.meetingType ?? '';
+                            // DateTime reminder = datas.reminder ?? DateTime.now();
 
-                          return InkWell(
-                            onTap: () async {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ShowEventView(event: EventModel()),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              height: 70,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(15),
-                                ),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
-                                    spreadRadius: 1,
-                                    blurRadius: 1,
-                                    offset: Offset(0, 1),
+                            return InkWell(
+                              onTap: () async {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ShowEventView(event: EventModel()),
                                   ),
-                                ],
-                              ),
-                              child: ListTile(
-                                dense: true,
-                                tileColor: Colors.white,
-                                style: ListTileStyle.list,
-                                title: Text(
-                                  tittle,
-                                  style: TextStyle(
-                                    color: ColorConstants.textPrimaryColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
+                                );
+                              },
+                              child: Container(
+                                height: 70,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
                                   ),
-                                ),
-                                subtitle: Text(
-                                  reminder.toString(),
-                                  style: TextStyle(
-                                    color: ColorConstants.textSecondaryColor,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      child: IconButton(
-                                        icon: Icon(
-                                          Ti.trash,
-                                          color: ColorConstants.errorColor,
-                                          size: 20,
-                                        ),
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return LzConfirm(
-                                                  title: "Apakah Anda Yakin Untuk Menghapus Data Ini?",
-                                                  titleSize: 15,
-                                                  onConfirm: () {
-                                                    logg(id);
-                                                    ref.read(eventProvider.notifier).delEvent(id);
-                                                  },
-                                                );
-                                              });
-                                        },
-                                      ),
-                                    ),
-                                    Container(
-                                      child: IconButton(
-                                        icon: Icon(
-                                          Ti.edit,
-                                          color: ColorConstants.successColor,
-                                          size: 20,
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) => FormEvent(
-                                                data: datas,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      spreadRadius: 1,
+                                      blurRadius: 1,
+                                      offset: Offset(0, 1),
                                     ),
                                   ],
                                 ),
+                                child: ListTile(
+                                  dense: true,
+                                  tileColor: Colors.white,
+                                  style: ListTileStyle.list,
+                                  title: Text(
+                                    tittle,
+                                    style: TextStyle(
+                                      color: ColorConstants.textPrimaryColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    '',
+                                    style: TextStyle(
+                                      color: ColorConstants.textSecondaryColor,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  trailing: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Container(
+                                        child: IconButton(
+                                          icon: Icon(
+                                            Ti.trash,
+                                            color: ColorConstants.errorColor,
+                                            size: 20,
+                                          ),
+                                          onPressed: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return LzConfirm(
+                                                    title: "Apakah Anda Yakin Untuk Menghapus Data Ini?",
+                                                    titleSize: 15,
+                                                    onConfirm: () {
+                                                      ref.read(eventProvider.notifier).delEvent(id);
+                                                    },
+                                                  );
+                                                });
+                                          },
+                                        ),
+                                      ),
+                                      Container(
+                                        child: IconButton(
+                                          icon: Icon(
+                                            Ti.edit,
+                                            color: ColorConstants.successColor,
+                                            size: 20,
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) => FormEvent(
+                                                  data: datas,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                          
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(height: 10);
-                        },
-                        itemCount: data.length,
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return SizedBox(height: 10);
+                          },
+                          itemCount: data.length,
+                        ),
                       );
                     },
                     error: (error, _) {
@@ -221,8 +219,6 @@ class EventView extends ConsumerWidget {
                 },
               ),
             )
-          
-          
           ],
         ),
         Poslign(
@@ -244,8 +240,6 @@ class EventView extends ConsumerWidget {
             },
           ),
         ),
-      
-      
       ],
     );
   }

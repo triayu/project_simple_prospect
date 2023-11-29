@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/core/text_theme.dart';
 
 import 'package:simple_prospect/app/data/models/task_model.dart';
 import 'package:simple_prospect/app/modules/task/form_task_view.dart';
@@ -36,9 +37,10 @@ class TaskView extends ConsumerWidget {
 
                   int id = datas.id ?? 0;
                   String title = datas.title ?? '';
-                  String note = datas.note ?? '';
+                  // String note = datas.note ?? '';
                   String priority = datas.priority ?? '';
-                  DateTime reminder = datas.reminder ?? DateTime.now();
+                  String reminder = datas.reminder.format('dd MMM yyyy');
+
                   // DateTime reminder = datas[index].reminder ?? DateTime.now();
 
                   return Container(
@@ -64,14 +66,8 @@ class TaskView extends ConsumerWidget {
                         style: ListTileStyle.list,
                         title: Row(
                           children: [
-                            Text(
-                              title,
-                              style: TextStyle(
-                                color: ColorConstants.textPrimaryColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              ),
-                            ),
+                            Text(title.ucwords,
+                                maxLines: 3, style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize())),
                             Spacer(),
                             Container(
                               width: 70,
@@ -141,9 +137,7 @@ class TaskView extends ConsumerWidget {
                                         return LzConfirm(
                                           title: "Apakah Anda Yakin Untuk Menghapus Data Ini",
                                           onConfirm: () {
-                                            logg('Tekan Hapus');
-                                            logg(id);
-                                            ref.read(taskProvider.notifier).delTask(id);
+                                            ref.read(taskProvider.notifier).deltask(id);
                                           },
                                         );
                                       });
@@ -216,8 +210,6 @@ class TaskView extends ConsumerWidget {
             },
           ),
         ),
-     
-     
       ],
     );
   }

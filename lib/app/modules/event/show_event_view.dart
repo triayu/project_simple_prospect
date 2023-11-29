@@ -62,7 +62,7 @@ class ShowEventView extends ConsumerWidget {
         String meetingType = event.meetingType ?? '';
         String location = event.location ?? '';
         String note = event.note ?? '';
-        DateTime reminder = event.reminder ?? DateTime.now();
+        // DateTime reminder = event.reminder ?? DateTime.now();
 
         return Column(
           children: [
@@ -90,7 +90,7 @@ class ShowEventView extends ConsumerWidget {
                   buildInfoRow('Meeting With', meetingWith),
                   buildInfoRow('Meeting Type', meetingType),
                   buildInfoRow('Location', location),
-                  buildInfoRow('Reminder', reminder.toString()),
+                  // buildInfoRow('Reminder', reminder.toString()),
                 ],
               ),
             ),

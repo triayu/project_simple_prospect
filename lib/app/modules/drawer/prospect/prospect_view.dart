@@ -16,11 +16,15 @@ class ProspectView extends StatefulWidget {
 
 class _ProspectViewState extends State<ProspectView> {
   @override
-  
+  void initState() {
+    super.initState();
+    logg('ProspectView');
+  }
 
   @override
-  Widget build(BuildContext context ) {
-     return Scaffold(
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       appBar: CustomAppBar(
         title: 'Prospect',
         centerTitle: true,
@@ -137,7 +141,5 @@ class _ProspectViewState extends State<ProspectView> {
         ],
       ),
     );
-  
-  
   }
 }

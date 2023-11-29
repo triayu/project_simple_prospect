@@ -54,6 +54,3 @@ final contactProvider = StateNotifierProvider.autoDispose<ContactProvider, Async
     ref,
   );
 });
-
-
-

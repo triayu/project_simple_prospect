@@ -4,35 +4,29 @@ import 'package:simple_prospect/app/data/api/api.dart';
 import 'package:simple_prospect/app/data/models/profile_model.dart';
 import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 
-class ProfileProvider extends StateNotifier<AsyncValue<List<ProfileModel>>> with UseApi {
+class ProfileProvider extends StateNotifier<AsyncValue<ProfileModel?>> with UseApi {
   final AutoDisposeStateNotifierProviderRef? ref;
 
   ProfileProvider(this.ref) : super(const AsyncValue.loading()) {
     getProfile();
   }
 
-  Future<void> getProfile() async {
+  Future getProfile() async {
     try {
       state = const AsyncValue.loading();
       ResHandler res = await profileApi.getProfile();
 
-      logg(res.status);
-
       if (res.status) {
-        LzToast.show(res.message);
-        getProfile();
-      } else {
+        state = AsyncValue.data(ProfileModel.fromJson(res.data));
+      } else if (res.message != null) {
         LzToast.show(res.message);
       }
     } catch (e, s) {
       Errors.check(e, s);
     }
   }
-
-  // Variable For LzForm
-  final lzForm = LzForm.make(['date']);
 }
 
-final profileProvider = StateNotifierProvider.autoDispose<ProfileProvider, AsyncValue<List<ProfileModel>>>((ref) {
+final profileProvider = StateNotifierProvider.autoDispose<ProfileProvider, AsyncValue<ProfileModel?>>((ref) {
   return ProfileProvider(ref);
 });

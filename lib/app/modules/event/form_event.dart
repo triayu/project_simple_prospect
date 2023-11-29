@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/providers/event/event_post_provider.dart';
+import 'package:simple_prospect/app/providers/event/event_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
 import '../../constants/color_constants.dart';
@@ -14,7 +14,7 @@ class FormEvent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(eventPostProvider);
+    final provider = ref.read(eventProvider.notifier);
 
     if (data != null) {
       provider.fillForm(data ?? null);
