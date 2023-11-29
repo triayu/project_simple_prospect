@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 
-import 'package:simple_prospect/app/modules/form/form_contact/form_contact_view.dart';
+import 'package:simple_prospect/app/modules/drawer/contact/form_contact_view.dart';
 import 'package:simple_prospect/app/providers/contact/contact_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 

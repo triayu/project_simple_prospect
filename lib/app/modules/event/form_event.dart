@@ -61,7 +61,7 @@ class FormEvent extends ConsumerWidget {
                     onTap: (model) async {
                       DateTime? date = await LzPicker.datePicker(context);
                       if (date != null) {
-                        provider.forms['start_date']?.notifier.setText(date.format('Y-m-d'));
+                        provider.forms['start_date']?.notifier.setText(date.format('yyyy-MM-dd'));
                       }
                       ;
                     },
@@ -78,7 +78,7 @@ class FormEvent extends ConsumerWidget {
                     onTap: (model) async {
                       DateTime? date = await LzPicker.datePicker(context);
                       if (date != null) {
-                        provider.forms['end_date']?.notifier.setText(date.format('Y-m-d'));
+                        provider.forms['end_date']?.notifier.setText(date.format('yyyy-MM-dd'));
                       }
                     },
                   ),
@@ -109,7 +109,6 @@ class FormEvent extends ConsumerWidget {
             ),
           ],
         ),
-     
         bottomNavigationBar: LzButton(
           text: 'Add Event',
           color: ColorConstants.primaryColor,
@@ -122,7 +121,5 @@ class FormEvent extends ConsumerWidget {
             }
           },
         ).dark(Colors.white).theme1());
- 
- 
   }
 }

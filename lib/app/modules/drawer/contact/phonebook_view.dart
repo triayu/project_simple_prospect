@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/modules/home/broadcast/phone_book/edit_phone_book_view.dart';
+import 'package:simple_prospect/app/modules/drawer/contact/contact_view.dart';
 import 'package:simple_prospect/app/modules/home/broadcast/phone_book/manage_contact_view.dart';
-import 'package:simple_prospect/app/modules/home/broadcast/phone_book/add_phone_book_view.dart';
+import 'package:simple_prospect/app/modules/drawer/contact/add_phone_book_view.dart';
 
 class PhonebookView extends StatelessWidget {
   const PhonebookView({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class PhonebookView extends StatelessWidget {
     final key = GlobalKey(), bottomKey = GlobalKey();
     return Scaffold(
         appBar: AppBar(
-          title: Text('Phone Book'),
+          title: Text('Category Contact'),
           centerTitle: true,
         ),
         body: ListView(
@@ -29,7 +29,7 @@ class PhonebookView extends StatelessWidget {
                       // PHONE BOOK
                       InkWell(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ManageContact()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView()));
                         },
                         child: Container(
                           margin: Ei.only(h: 10, t: 20, b: 10),
@@ -74,9 +74,9 @@ class PhonebookView extends StatelessWidget {
                                       }
                                       logg(p0.option);
                                       if (p0.option == 'Edit') {
-                                        Navigator.of(context).push(MaterialPageRoute(
-                                          builder: (context) => EditPhonebook(),
-                                        ));
+                                        // Navigator.of(context).push(MaterialPageRoute(
+                                        //   builder: (context) => EditPhonebook(),
+                                        // ));
                                       } else if (p0 == 'Hapus') {
                                         // ---
                                       }

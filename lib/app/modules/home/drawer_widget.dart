@@ -6,6 +6,7 @@ import 'package:simple_prospect/app/modules/drawer/contact/contact_view.dart';
 import 'package:simple_prospect/app/modules/drawer/prospect/prospect_view.dart';
 import 'package:simple_prospect/app/modules/drawer/provide_feedback/list_feedback_view.dart';
 import 'package:simple_prospect/app/modules/home/broadcast/message/message_template_view.dart';
+import 'package:simple_prospect/app/modules/drawer/contact/phonebook_view.dart';
 import 'package:simple_prospect/app/providers/auth/auth_provider.dart';
 
 import '../../constants/color_constants.dart';

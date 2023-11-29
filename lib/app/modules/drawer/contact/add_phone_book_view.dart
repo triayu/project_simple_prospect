@@ -4,7 +4,7 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/providers/phone_book/post_phone_book_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-import '../../../../constants/color_constants.dart';
+import '../../../constants/color_constants.dart';
 
 class AddPhoneBook extends ConsumerWidget {
   const AddPhoneBook({Key? key}) : super(key: key);
@@ -30,16 +30,6 @@ class AddPhoneBook extends ConsumerWidget {
                 hint: 'Masukkan nama phone book',
                 model: provider.forms['name'],
               ),
-              // LzForm.input(
-              //   label: 'Title',
-              //   hint: 'Masukkan No Telpon',
-              //   model: provider.forms['phone_number'],
-              // ),
-              // // LzForm.input(
-              // //   label: 'Email',
-              // //   hint: 'Masukkan Email',
-              // //   model: provider.forms['email'],
-              // // ),
             ],
           ),
         ],

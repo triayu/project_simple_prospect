@@ -7,26 +7,20 @@ import 'package:simple_prospect/app/data/models/prospect_model.dart';
 import 'package:simple_prospect/app/providers/prospect/prospect_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-// class ProspectView extends StatefulWidget {
-//   const ProspectView({super.key});
-
-//   @override
-//   State<ProspectView> createState() => _ProspectViewState();
-// }
-
-// class _ProspectViewState extends State<ProspectView> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-
-class ProspectView extends ConsumerWidget {
-  const ProspectView({Key? key}) : super(key: key);
+class ProspectView extends StatefulWidget {
+  const ProspectView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+  State<ProspectView> createState() => _ProspectViewState();
+}
+
+class _ProspectViewState extends State<ProspectView> {
+  @override
+  
+
+  @override
+  Widget build(BuildContext context ) {
+     return Scaffold(
       appBar: CustomAppBar(
         title: 'Prospect',
         centerTitle: true,
@@ -143,5 +137,7 @@ class ProspectView extends ConsumerWidget {
         ],
       ),
     );
+  
+  
   }
 }
