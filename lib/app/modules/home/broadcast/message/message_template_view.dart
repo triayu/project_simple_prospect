@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/data/models/message_template_model.dart';
-import 'package:simple_prospect/app/modules/home/broadcast/message/add_template_message_view.dart';
-import 'package:simple_prospect/app/providers/message_template/message_template_provider.dart';
+import '../../../../constants/color_constants.dart';
+import '../../../../data/models/message_template_model.dart';
+import '../../../../providers/message_template/message_template_provider.dart';
+import 'add_template_message_view.dart';
 import 'send_message_view.dart';
 
 class MessageTemplate extends ConsumerWidget {
@@ -83,7 +83,7 @@ class MessageTemplate extends ConsumerWidget {
                                 DropX.show(gkey.context, options: options, onSelect: (p0) {
                                   if (p0.option == 'Kirim Pesan') {
                                     Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => SendMessage(),
+                                      builder: (context) => SendMessage(message: datas),
                                     ));
                                   }
                                   logg(p0.option);

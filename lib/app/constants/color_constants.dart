@@ -18,4 +18,5 @@ class ColorConstants {
   static final event1 = Utils.hex('44328D');
   static final event2 = Utils.hex('117E8D');
   static final event3 = Utils.hex('214A00');
+  static final card = Utils.hex('F4F4F4');
 }

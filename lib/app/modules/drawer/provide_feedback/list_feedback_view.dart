@@ -140,7 +140,7 @@ class ListFeedbackView extends ConsumerWidget {
               height: 90,
               child: ListView.builder(
                 itemCount: 10,
-                scrollDirection: Axis.horizontal,
+                scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);

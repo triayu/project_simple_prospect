@@ -46,6 +46,8 @@ class EventProvider extends StateNotifier<AsyncValue<List<EventModel>>> with Use
         map['latitude'] = '-8.6634992';
         map['longitude'] = '115.2109661';
 
+        logg(map);
+
         LzToast.overlay('Menambah Event ...');
         ResHandler res = await eventApi.addEvent(map);
         LzToast.dismiss();

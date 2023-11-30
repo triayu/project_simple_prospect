@@ -18,8 +18,8 @@ class FeedbackPost with ChangeNotifier, UseApi {
           notifierType: LzFormNotifier.text,
           messages: FormMessages(
             required: {
-              'title': 'Title Tidak Boleh Kosong',
-              'feedback_message': 'Feedback Message Tidak Boleh Kosong',
+              'title': 'Tidak Boleh Kosong',
+              'feedback_message': 'Tidak Boleh Kosong',
             },
           ),
           email: ['email']);

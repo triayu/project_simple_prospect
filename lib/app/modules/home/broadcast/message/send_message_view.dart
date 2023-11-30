@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/modules/home/broadcast/message/add_contact_view.dart';
-import 'package:simple_prospect/app/modules/drawer/contact/contact_view.dart';
-import 'package:simple_prospect/app/widgets/custom_appbar.dart';
+
+import '../../../../constants/color_constants.dart';
+import '../../../../data/models/message_template_model.dart';
+import '../../../../widgets/custom_appbar.dart';
+import '../../../drawer/contact/contact_view.dart';
+import 'add_contact_view.dart';
 
 class SendMessage extends ConsumerWidget {
-  const SendMessage({Key? key}) : super(key: key);
+  final MessageTemplateModel message;
+  const SendMessage({Key? key, required this.message}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -59,6 +62,7 @@ class SendMessage extends ConsumerWidget {
                   // Navigator.push(context, MaterialPageRoute(builder: (context) => FormContactView()));
                 },
                 child: Container(
+                  width: context.width,
                   margin: Ei.only(l: 10, r: 10, t: 20),
                   padding: Ei.only(h: 20, v: 10),
                   decoration: BoxDecoration(
@@ -76,16 +80,24 @@ class SendMessage extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Pesan',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
+                      Row(
+                        children: [
+                          Icon(Ti.send, size: 20),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            '${message.title}',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
                       Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+                        '${message.message}',
                         textAlign: Ta.justify,
                         style: TextStyle(
                           fontSize: 16,

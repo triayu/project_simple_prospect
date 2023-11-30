@@ -54,15 +54,14 @@ class WiDrawer extends ConsumerWidget {
                   child: ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: 5,
+                    itemCount: 4,
                     itemBuilder: (context, index) {
-                      List<String> titles = ['Contact', 'Prospect', 'Tutorial', 'Provide Feedback', 'Message Template'];
+                      List<String> titles = ['Contact', 'Prospect', 'Tutorial', 'Provide Feedback'];
                       List<IconData> icons = [
                         Ti.addressBook,
-                        Ti.user,
+                        Ti.usersGroup,
                         Ti.brandYoutube,
-                        Icons.feedback,
-                        Ti.messageCircle
+                        Icons.stars,
                       ];
 
                       return Card(
@@ -94,9 +93,6 @@ class WiDrawer extends ConsumerWidget {
                                 break;
                               case 3:
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => ListFeedbackView()));
-                                break;
-                              case 4:
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => MessageTemplate()));
                                 break;
                             }
                           },

@@ -1,6 +1,3 @@
-
-
-
 class MessageTemplateModel {
   int? id;
   int? userId;

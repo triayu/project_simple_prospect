@@ -107,7 +107,7 @@ class DashBoardView extends ConsumerWidget {
                                         ),
                                       ),
                                       Poslign(
-                                        margin: EdgeInsets.only(top: context.viewPadding.top + 30),
+                                        margin: Ei.only(t: context.viewPadding.top + 30),
                                         alignment: Alignment.topCenter,
                                         child: RichText(
                                           textAlign: TextAlign.center,
@@ -125,7 +125,7 @@ class DashBoardView extends ConsumerWidget {
                                       Align(
                                         alignment: Alignment.bottomLeft,
                                         child: Padding(
-                                          padding: EdgeInsets.only(left: 10, bottom: 10),
+                                          padding: Ei.only(l: 10, b: 10),
                                           child: Text(
                                             'Total ${tittle.ucwords}',
                                             style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),

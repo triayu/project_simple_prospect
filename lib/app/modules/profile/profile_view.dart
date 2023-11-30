@@ -105,6 +105,8 @@ class ProfileView extends ConsumerWidget {
                 )
               ],
             );
+         
+         
           },
           error: (error, _) {
             return LzNoData(message: 'Opps! $error');

@@ -22,7 +22,7 @@ class FeedbackView extends ConsumerWidget {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(top: 20, left: 40),
+              padding: Ei.only(t: 10, l: 40),
               child: LzImage(
                 'feedback.png',
                 height: 200,
@@ -31,7 +31,7 @@ class FeedbackView extends ConsumerWidget {
             ),
             Center(
               child: Container(
-                height: 380,
+                height: 350,
                 width: 300,
                 padding: Ei.sym(v: 20, h: 10),
                 decoration: BoxDecoration(
@@ -51,7 +51,7 @@ class FeedbackView extends ConsumerWidget {
                       allowHalfRating: false,
                       itemCount: 5,
                       itemSize: 30,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemPadding: Ei.sym(h: 4),
                       itemBuilder: (context, _) => Icon(
                         Icons.star,
                         color: Colors.amber,
@@ -72,7 +72,7 @@ class FeedbackView extends ConsumerWidget {
                       hint: 'Enter your message',
                       model: provider.forms['feedback_message'],
                     ),
-                    SizedBox(height: 25),
+                    // SizedBox(height: 25),
                     ElevatedButton(
                       onPressed: () {
                         if (rating < 1 || rating > 5) {

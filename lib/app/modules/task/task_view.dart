@@ -7,6 +7,7 @@ import 'package:simple_prospect/app/core/text_theme.dart';
 
 import 'package:simple_prospect/app/data/models/task_model.dart';
 import 'package:simple_prospect/app/modules/task/form_task_view.dart';
+import 'package:simple_prospect/app/modules/task/task_detail_view.dart';
 import 'package:simple_prospect/app/providers/task/task_provider.dart';
 
 class TaskView extends ConsumerWidget {
@@ -60,6 +61,13 @@ class TaskView extends ConsumerWidget {
                         ],
                       ),
                       child: ListTile(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => TaskDetailView(task: datas),
+                            ),
+                          );
+                        },
                         contentPadding: Ei.only(b: 15, h: 10, t: 10),
                         dense: true,
                         tileColor: Colors.white,
