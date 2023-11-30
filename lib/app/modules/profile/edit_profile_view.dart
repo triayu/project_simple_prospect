@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/constants/color_constants.dart';
-
+import '../../constants/color_constants.dart';
 import '../../widgets/custom_appbar.dart';
 
 class EditProfileView extends ConsumerWidget {

@@ -3,6 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/providers/profile/profile_user_providers.dart';
 
+import 'edit_profile_view.dart';
+
 class ProfileView extends ConsumerWidget {
   const ProfileView({Key? key}) : super(key: key);
 
@@ -38,18 +40,28 @@ class ProfileView extends ConsumerWidget {
                                 size: 130,
                               ),
                               Poslign(
-                                  alignment: Alignment.bottomRight,
-                                  child: InkTouch(
-                                    color: Colors.white,
-                                    radius: Br.circle,
-                                    elevation: 2,
-                                    padding: Ei.all(10),
-                                    child: Icon(
-                                      Ti.edit,
-                                      color: Colors.black,
-                                      size: 25,
-                                    ),
-                                  )),
+      alignment: Alignment.bottomRight,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => EditProfileView()),
+          );
+        },
+        child: InkTouch(
+          color: Colors.white,
+          radius: Br.circle,
+          elevation: 2,
+          padding: Ei.all(10),
+          child: Icon(
+            Ti.edit,
+            color: Colors.black,
+            size: 25,
+          ),
+        ),
+      ),
+    ),
+  
                             ],
                           ),
                           SizedBox(height: 20),
