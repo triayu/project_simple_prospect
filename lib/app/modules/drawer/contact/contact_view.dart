@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/modules/drawer/contact/contact_detail_view.dart';
 
 import 'package:simple_prospect/app/modules/drawer/contact/form_contact_view.dart';
 import 'package:simple_prospect/app/providers/contact/contact_provider.dart';
@@ -33,7 +34,7 @@ class ContactView extends ConsumerWidget {
             }
 
             return Refreshtor(
-              onRefresh: ()  async{
+              onRefresh: () async {
                 await ref.read(contactProvider.notifier).getContact();
               },
               child: ListView.separated(
@@ -41,13 +42,13 @@ class ContactView extends ConsumerWidget {
                 physics: BounceScroll(),
                 itemBuilder: (context, index) {
                   ContactModel datas = data[index];
-            
+
                   int id = datas.id ?? 0;
                   String firstName = datas.firstName ?? '';
                   String phoneNumber = datas.phoneNumber ?? '';
-            
+
                   final String imagePath = 'poto.jpg';
-            
+
                   return Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(
@@ -64,6 +65,13 @@ class ContactView extends ConsumerWidget {
                       ],
                     ),
                     child: ListTile(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ContactDetailView(contact: datas),
+                          ),
+                        );
+                      },
                       dense: true,
                       tileColor: Colors.white,
                       style: ListTileStyle.list,

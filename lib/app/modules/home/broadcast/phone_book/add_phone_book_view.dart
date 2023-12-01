@@ -4,7 +4,7 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/providers/phone_book/post_phone_book_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-import '../../../constants/color_constants.dart';
+import '../../../../constants/color_constants.dart';
 
 class AddPhoneBook extends ConsumerWidget {
   const AddPhoneBook({Key? key}) : super(key: key);

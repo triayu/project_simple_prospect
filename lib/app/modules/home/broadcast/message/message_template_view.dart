@@ -34,13 +34,12 @@ class MessageTemplate extends ConsumerWidget {
               padding: Ei.sym(h: 20, v: 20),
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                logg(index);
-
-                MessageTemplateModel datas = data[index];
+                 MessageTemplateModel datas = data[index];
+               
+               
                 final gkey = GlobalKey();
                 int id = datas.id ?? 0;
                 String title = datas.title ?? '';
-                // String userFirstName = datas[index].userFirstName ?? '';
                 String message = datas.message ?? '';
 
                 return Column(

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-
-import 'package:simple_prospect/app/modules/drawer/tutorial/tutorial_view.dart';
-import 'package:simple_prospect/app/providers/tutorial/tutorial_provider.dart';
-
 import '../../../data/models/model.dart';
+import '../../../providers/tutorial/tutorial_provider.dart';
+import 'tutorial_view.dart';
 
 class ListTutorialView extends ConsumerWidget {
   const ListTutorialView({Key? key}) : super(key: key);
@@ -39,7 +37,7 @@ class ListTutorialView extends ConsumerWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TutorialView(),
+                          builder: (context) => TutorialView(tutorial: tutorial),
                         ),
                       );
                     },
@@ -75,11 +73,8 @@ class ListTutorialView extends ConsumerWidget {
                       ),
                     ),
                   );
-             
                 },
               );
-           
-           
             },
             error: (error, _) {
               return LzNoData(message: 'Opps! $error');
@@ -98,8 +93,6 @@ class ListTutorialView extends ConsumerWidget {
               );
             },
           );
-       
-       
         },
       ),
     );
