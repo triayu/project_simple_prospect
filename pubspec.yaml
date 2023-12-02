@@ -34,7 +34,6 @@ dependencies:
   file_picker: ^6.1.1
   flutter:
     sdk: flutter
-  flutter_localization: ^0.1.13
   flutter_native_splash: ^2.3.3
   flutter_rating_bar: ^4.0.1
   google_fonts: any
@@ -45,7 +44,9 @@ dependencies:
   table_calendar: ^3.0.9
   youtube_player_flutter: ^8.1.2
   video_player: ^2.4.6
-
+  google_maps_flutter: ^2.5.0
+  flutter_google_places: ^0.3.0
+  google_api_headers: ^1.6.0
 
 flutter_native_splash:
   android: true
@@ -64,6 +65,7 @@ dev_dependencies:
 dependency_overrides:
   win32: ">=2.7.0 <5.0.0"
   package_info_plus: ^4.0.0
+  http: ^0.13.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

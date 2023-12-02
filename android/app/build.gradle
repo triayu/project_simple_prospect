@@ -25,6 +25,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+dependencies {
+  
+}
+
 android {
     namespace "com.example.simple_prospect"
     compileSdkVersion flutter.compileSdkVersion
@@ -48,10 +52,11 @@ android {
         applicationId "com.example.simple_prospect"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion = 21
+        minSdkVersion flutter.minSdkVersion = 20
         targetSdkVersion flutter.targetSdkVersion = 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     buildTypes {

@@ -22,14 +22,15 @@ class EventView extends ConsumerWidget {
           children: [
             Container(
               padding: Ei.all(10),
+
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: Offset(0, 1),
+                    spreadRadius: 35,
+                    blurRadius: 25,
+                    offset: Offset(0, 3), // changes position of shadow
                   ),
                 ],
               ),
@@ -89,110 +90,80 @@ class EventView extends ConsumerWidget {
                       return Refreshtor(
                         onRefresh: () => ref.read(eventProvider.notifier).getEvent(),
                         child: ListView.separated(
-                          padding: Ei.only(b: 60, t: 10, h: 10),
+                          padding: Ei.only(t: 10, h: 10, b: 100),
                           physics: BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
-                            EventModel datas = data[index];
+                            final key = GlobalKey();
 
+                            EventModel datas = data[index];
                             int id = datas.id ?? 0;
                             String tittle = datas.title ?? '';
                             // String meetingType = datas.meetingType ?? '';
-                            // DateTime reminder = datas.reminder ?? DateTime.now();
+                            String reminder = datas.reminder ?? '';
 
-                            return InkWell(
+                            return InkTouch(
+                              elevation: 1,
+                              key: key,
+                              color: Colors.white,
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => EventDetailView(event: datas),
-                                  ),
-                                );
+                                final options = ['Lihat Detail', 'Edit', 'Hapus']
+                                    .options(icons: [Ti.infoCircle, Ti.edit, Ti.trash]);
+                                DropX.show(key.currentContext, options: options, onSelect: (val) {
+                                  if (val.index == 0) {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => EventDetailView(event: datas),
+                                      ),
+                                    );
+                                  }
+
+                                  if (val.index == 1) {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => FormEvent(
+                                          data: datas,
+                                        ),
+                                      ),
+                                    );
+                                  }
+
+                                  if (val.index == 2) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return LzConfirm(
+                                            title: "Apakah Anda Yakin Untuk Menghapus Data Ini?",
+                                            titleSize: 15,
+                                            onConfirm: () {
+                                              ref.read(eventProvider.notifier).delEvent(id);
+                                            },
+                                          );
+                                        });
+                                  }
+                                });
                               },
-                              child: Container(
-                                height: 70,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      spreadRadius: 1,
-                                      blurRadius: 1,
-                                      offset: Offset(0, 1),
-                                    ),
-                                  ],
+                              padding: Ei.all(5),
+                              child: ListTile(
+                                dense: true,
+                                minLeadingWidth: 0,
+                                leading: Icon(
+                                  Icons.event,
+                                  color: ColorConstants.primaryColor,
+                                  size: 35,
                                 ),
-                                child: ListTile(
-                                  dense: true,
-                                  tileColor: Colors.white,
-                                  style: ListTileStyle.list,
-                                  title: Text(
-                                    tittle,
-                                    style: TextStyle(
-                                      color: ColorConstants.textPrimaryColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  subtitle: Text(
-                                    '',
-                                    style: TextStyle(
-                                      color: ColorConstants.textSecondaryColor,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  trailing: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Ti.trash,
-                                            color: ColorConstants.errorColor,
-                                            size: 20,
-                                          ),
-                                          onPressed: () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (BuildContext context) {
-                                                  return LzConfirm(
-                                                    title: "Apakah Anda Yakin Untuk Menghapus Data Ini?",
-                                                    titleSize: 15,
-                                                    onConfirm: () {
-                                                      ref.read(eventProvider.notifier).delEvent(id);
-                                                    },
-                                                  );
-                                                });
-                                          },
-                                        ),
-                                      ),
-                                      Container(
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Ti.edit,
-                                            color: ColorConstants.successColor,
-                                            size: 20,
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) => FormEvent(
-                                                  data: datas,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                title: Text(
+                                  tittle.ucwords,
+                                  style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize()),
+                                  maxLines: 3,
                                 ),
+                                subtitle: Text(reminder,
+                                    style: Gfont.autoSizeText(context, FontSizeManager.getCaptionFontSize())),
+                                trailing: Icon(Icons.more_vert, color: ColorConstants.primaryColor),
                               ),
                             );
                           },
                           separatorBuilder: (context, index) {
-                            return SizedBox(height: 10);
+                            return SizedBox(height: 20);
                           },
                           itemCount: data.length,
                         ),

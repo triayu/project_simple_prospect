@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simple_prospect/app/modules/event/widget/gmaps.dart';
 import 'package:simple_prospect/app/providers/event/event_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
-
 import '../../constants/color_constants.dart';
 import '../../data/models/event_model.dart';
 
@@ -18,6 +18,8 @@ class FormEvent extends ConsumerWidget {
 
     if (data != null) {
       provider.fillForm(data ?? null);
+    } else {
+      provider.forms.reset();
     }
 
     return Scaffold(
@@ -85,7 +87,18 @@ class FormEvent extends ConsumerWidget {
                 ),
               ],
             ),
-            LzForm.input(
+            LzForm.select(
+              onTap: (selector) async {
+                await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return GmapsLocation();
+                    }).then((value) {
+                  if (value != null) {
+                    logg(value, color: LogColor.red);
+                  }
+                });
+              },
               label: 'Location',
               hint: 'Enter location',
               model: provider.forms['location'],

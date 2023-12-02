@@ -6,6 +6,7 @@ class AppConfig {
   static const bool botActive = true;
   static const String botToken = '';
   static const String botChatId = ''; // '-914527802';
+  static const String apiKeyMaps = 'AIzaSyBMJle6HUvFRqDtYPJuB8zv4R9kjl0QYYo';
 
   /* -------------------------------------------------------------------------------------------------------------------
   | Server Base URL

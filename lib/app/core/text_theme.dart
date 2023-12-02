@@ -75,10 +75,10 @@ class FontSizeManager {
   }
 
   static double getBodyFontSize() {
-    return 38;
+    return 40;
   }
 
   static double getCaptionFontSize() {
-    return 30;
+    return 35;
   }
 }

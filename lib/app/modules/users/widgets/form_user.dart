@@ -16,7 +16,6 @@ class FormUser extends ConsumerWidget {
 
     return Wrapper(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text('Update User'),
         ),

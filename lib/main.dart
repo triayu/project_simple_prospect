@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// Copyright 2013 The Flutter Authors. All rights reserved.
+import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
+import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
@@ -19,7 +22,10 @@ void main() async {
 
   // Initialize LazyUi
   LazyUi.config(
-      font: TextStyle(fontSize: 18.0, color: ColorConstants.textPrimaryColor), radius: 7.0, theme: AppTheme.light);
+      space: 5,
+      font: TextStyle(fontSize: 16.0, color: ColorConstants.textPrimaryColor),
+      radius: 2.0,
+      theme: AppTheme.light);
 
   // Initialize SharedPreferences
   prefs = await SharedPreferences.getInstance();
@@ -56,8 +62,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logg(isLoggedIn, name: 'Log In Main.dart');
-
     return MaterialApp(
       title: 'Simple Prospect',
       theme: appTheme,
@@ -72,9 +76,9 @@ class MyApp extends StatelessWidget {
           child: LzToastOverlay(child: widget),
         );
       },
-      home: isShow
+      home: (isShow)
           ? OnboardingView()
-          : isLoggedIn
+          : (isLoggedIn)
               ? HomeView()
               : LoginView(),
     );
