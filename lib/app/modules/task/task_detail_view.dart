@@ -59,7 +59,7 @@ class TaskDetailView extends ConsumerWidget {
             buildCard('Note', '${task.note}'),
             SizedBox(height: 30),
             Text(
-              'Details Task',
+              'Details Acara',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -67,10 +67,7 @@ class TaskDetailView extends ConsumerWidget {
             ),
             buildCard('Relate To', '${task.relateTo}'),
             buildCard('Priority', '${task.priority}'),
-            buildCard(
-              'Reminder',
-              '${task.reminder}',
-            ),
+            buildCard('Reminder', '${task.reminder}'),
           ],
         ),
       ),

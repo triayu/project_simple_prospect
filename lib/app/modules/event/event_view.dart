@@ -74,7 +74,8 @@ class EventView extends ConsumerWidget {
             ),
 
             Divider(height: 1, color: Colors.black.withOpacity(0.1)),
-            // EVENT
+
+            // EVENT =========
             Expanded(
               child: Consumer(
                 builder: (context, ref, _) {
@@ -90,7 +91,7 @@ class EventView extends ConsumerWidget {
                       return Refreshtor(
                         onRefresh: () => ref.read(eventProvider.notifier).getEvent(),
                         child: ListView.separated(
-                          padding: Ei.only(t: 10, h: 10, b: 100),
+                          padding: Ei.only(t: 10, h: 10, b: 50),
                           physics: BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
                             final key = GlobalKey();
@@ -147,9 +148,9 @@ class EventView extends ConsumerWidget {
                                 dense: true,
                                 minLeadingWidth: 0,
                                 leading: Icon(
-                                  Icons.event,
+                                  Ti.calendarEvent,
                                   color: ColorConstants.primaryColor,
-                                  size: 35,
+                                  size: 30,
                                 ),
                                 title: Text(
                                   tittle.ucwords,
@@ -163,7 +164,7 @@ class EventView extends ConsumerWidget {
                             );
                           },
                           separatorBuilder: (context, index) {
-                            return SizedBox(height: 20);
+                            return SizedBox(height: 10);
                           },
                           itemCount: data.length,
                         ),
@@ -188,7 +189,9 @@ class EventView extends ConsumerWidget {
                   );
                 },
               ),
+          
             )
+        
           ],
         ),
         Poslign(
@@ -210,6 +213,7 @@ class EventView extends ConsumerWidget {
             },
           ),
         ),
+    
       ],
     );
   }

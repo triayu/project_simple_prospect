@@ -122,17 +122,25 @@ class FormEvent extends ConsumerWidget {
             ),
           ],
         ),
-        bottomNavigationBar: LzButton(
-          text: 'Add Event',
-          color: ColorConstants.primaryColor,
-          onTap: (val) {
-            // Tinggal kasi kondisi dsni kalau ada data yg diterima berati dia update
-            if (data != null) {
-              provider.editEvent(context, data!.id!);
-            } else {
-              provider.postEvent(context);
-            }
-          },
-        ).dark(Colors.white).theme1());
+        bottomNavigationBar: Container(
+          margin: Ei.all(15),
+          width: double.infinity,
+          height: 65,
+          decoration: BoxDecoration(
+            color: ColorConstants.primaryColor,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          child: LzButton(
+            text: 'Add Event',
+            color: ColorConstants.primaryColor,
+            onTap: (val) {
+              if (data != null) {
+                provider.editEvent(context, data!.id!);
+              } else {
+                provider.postEvent(context);
+              }
+            },
+          ).dark(Colors.white).theme1(),
+        ));
   }
 }

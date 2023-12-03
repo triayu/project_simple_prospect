@@ -1,11 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lazyui/lazyui.dart';
-
+import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import '../../../../constants/color_constants.dart';
+import '../../../../core/text_theme.dart';
 import '../../../../data/models/message_template_model.dart';
 import '../../../../widgets/custom_appbar.dart';
-import '../../../drawer/contact/contact_view.dart';
 import 'add_contact_view.dart';
 
 class SendMessage extends ConsumerWidget {
@@ -14,42 +15,50 @@ class SendMessage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bottomKey = GlobalKey();
+    final key = GlobalKey();
+    GlobalKey _iconKey = GlobalKey();
+    GlobalKey _inkTouchKey = GlobalKey();
+
     final DataTableSource _source = _dataTableSource();
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Kirim Pesan',
         actions: [
-          Icon(
-            Ti.plus,
-            key: bottomKey,
-          ).onPressed(() {
-            final options = ['Tambah Kontak', 'Import Kontak', 'Import From Excel '].options();
-            DropX.show(bottomKey.context, options: options, onSelect: (p0) {
-              if (p0.option == 'Kirim Pesan') {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => AddContact(),
-                ));
-              }
-              logg(p0.option);
-              if (p0.option == 'Import Kontak') {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ContactView(),
-                  ),
-                );
-              } else if (p0 == 'Import From Excel ') {
-                // ---
-              }
-            });
-          })
-          // onPressed: () {
-          //   Navigator.of(context).push(
-          //     MaterialPageRoute(
-          //       builder: (context) => AddContact(),
-          //     ),
-          //   );
-          // },
+          InkTouch(
+            elevation: 1,
+            key: _inkTouchKey,
+            child: Container(
+              padding: Ei.only(h: 20),
+              color: Colors.white,
+              child: Icon(
+                Ti.plus,
+                color: Colors.black,
+                size: 30,
+                key: _iconKey,
+              ),
+            ),
+            onTap: () {
+              final options =
+                  ['Tambah Kontak', 'Import Kontak', 'Import From Excel'].options(icons: [Ti.send, Ti.edit, Ti.trash]);
+              DropX.show(_inkTouchKey.currentContext, options: options, onSelect: (val) {
+                if (val.index == 0) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AddContact(),
+                    ),
+                  );
+                } else if (val.index == 1) {
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => AddTemplateMessage(data: datas),
+                  //   ),
+                  // );
+                } else if (val.index == 2) {
+                  // Handle 'Hapus' option
+                }
+              });
+            },
+          ),
         ],
       ),
       body: ListView(
@@ -79,6 +88,7 @@ class SendMessage extends ConsumerWidget {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       Row(
                         children: [
@@ -86,13 +96,9 @@ class SendMessage extends ConsumerWidget {
                           SizedBox(
                             width: 10,
                           ),
-                          Text(
+                          Textr(
                             '${message.title}',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+                            style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize()),
                           ),
                         ],
                       ),
@@ -139,7 +145,7 @@ class SendMessage extends ConsumerWidget {
                           ),
                           Text(
                             i.toString(),
-                            style: Gfont.white,
+                            style: Gfont.fs17,
                           ),
                         ]),
                       ),
@@ -166,7 +172,7 @@ class SendMessage extends ConsumerWidget {
                     return DataColumn(
                         label: Text(
                       tittle[i],
-                      style: Gfont.black
+                      style: Gfont.fs19
                           .copyWith(fontWeight: FontWeight.bold, fontSize: 16, color: ColorConstants.textPrimaryColor),
                     ));
                   }),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lazyui/lazyui.dart';
+import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/modules/drawer/contact/contact_detail_view.dart';
 
@@ -8,6 +8,7 @@ import 'package:simple_prospect/app/modules/drawer/contact/form_contact_view.dar
 import 'package:simple_prospect/app/providers/contact/contact_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
+import '../../../core/text_theme.dart';
 import '../../../data/models/model.dart';
 
 class ContactView extends ConsumerWidget {
@@ -23,151 +24,117 @@ class ContactView extends ConsumerWidget {
 
       // ============
       // LIST CONTACT
-      body: Consumer(builder: (context, ref, _) {
-        final asyncData = ref.watch(contactProvider);
+      body: Consumer(
+        builder: (context, ref, _) {
+          final asyncData = ref.watch(contactProvider);
 
-        return asyncData.when(
-          data: (data) {
-            if (data.isEmpty) {
-              return LzNoData(
-                  message: 'Opps! No data found', onTap: () => ref.read(contactProvider.notifier).getContact());
-            }
+          return asyncData.when(
+            data: (data) {
+              if (data.isEmpty) {
+                return LzNoData(
+                    message: 'Opps! No data found', onTap: () => ref.read(contactProvider.notifier).getContact());
+              }
 
-            return Refreshtor(
-              onRefresh: () async {
-                await ref.read(contactProvider.notifier).getContact();
-              },
-              child: ListView.separated(
-                padding: Ei.sym(h: 10),
-                physics: BounceScroll(),
-                itemBuilder: (context, index) {
-                  ContactModel datas = data[index];
+              return Refreshtor(
+                onRefresh: () => ref.read(contactProvider.notifier).getContact(),
+                child: ListView.separated(
+                  padding: Ei.only(t: 10, h: 10, b: 50),
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final key = GlobalKey();
 
-                  int id = datas.id ?? 0;
-                  String firstName = datas.firstName ?? '';
-                  String phoneNumber = datas.phoneNumber ?? '';
+                    ContactModel datas = data[index];
+                    int id = datas.id ?? 0;
+                    String firsName = datas.firstName ?? '';
+                    String phoneNumber = datas.phoneNumber ?? '';
 
-                  final String imagePath = 'poto.jpg';
-
-                  return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
+                    return InkTouch(
+                      elevation: 1,
+                      key: key,
                       color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: Offset(0, 1),
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => ContactDetailView(contact: datas),
-                          ),
-                        );
+                        final options =
+                            ['Lihat Detail', 'Edit', 'Hapus'].options(icons: [Ti.infoCircle, Ti.edit, Ti.trash]);
+                        DropX.show(key.currentContext, options: options, onSelect: (val) {
+                          if (val.index == 0) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => ContactDetailView(contact: datas),
+                              ),
+                            );
+                          }
+
+                          if (val.index == 1) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => FormContactView(
+                                  data: datas,
+                                ),
+                              ),
+                            );
+                          }
+
+                          if (val.index == 2) {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LzConfirm(
+                                    title: "Apakah Anda Yakin Untuk Menghapus Data Ini?",
+                                    titleSize: 15,
+                                    onConfirm: () {
+                                      ref.read(contactProvider.notifier).delContact(id);
+                                    },
+                                  );
+                                });
+                          }
+                        });
                       },
-                      dense: true,
-                      tileColor: Colors.white,
-                      style: ListTileStyle.list,
-                      contentPadding: Ei.sym(h: 10, v: 10),
-                      leading: LzImage(
-                        imagePath,
-                        radius: 50,
-                        width: 40,
-                        height: 40,
+                      padding: Ei.all(5),
+                      child: ListTile(
+                        dense: true,
+                        minLeadingWidth: 0,
+                        leading: Icon(
+                          Ti.userCircle,
+                          color: ColorConstants.primaryColor,
+                          size: 30,
+                        ),
+                        title: Text(
+                          firsName.ucwords,
+                          style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize()),
+                          maxLines: 3,
+                        ),
+                        subtitle:
+                            Text(phoneNumber, style: Gfont.autoSizeText(context, FontSizeManager.getCaptionFontSize())),
+                        trailing: Icon(Icons.more_vert, color: ColorConstants.primaryColor),
                       ),
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            firstName,
-                            style: Gfont.fs(16),
-                          ),
-                          Text(
-                            phoneNumber,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            child: IconButton(
-                              icon: Icon(
-                                Ti.trash,
-                                color: ColorConstants.errorColor,
-                                size: 20,
-                              ),
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return LzConfirm(
-                                        title: "Apakah Anda Yakin Untuk Menghapus Data Ini",
-                                        onConfirm: () {
-                                          // logg(id);
-                                          logg('Tekan Hapus');
-                                          ref.read(contactProvider.notifier).delContact(id);
-                                        },
-                                      );
-                                    });
-                              },
-                            ),
-                          ),
-                          Container(
-                            child: IconButton(
-                              icon: Icon(
-                                Ti.edit,
-                                color: ColorConstants.successColor,
-                                size: 20,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => FormContactView(
-                                      data: datas,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: 10);
-                },
-                itemCount: data.length,
-              ),
-            );
-          },
-          error: (error, _) {
-            return LzNoData(message: 'Opps! $error');
-          },
-          loading: () {
-            return ListView.builder(
-              itemCount: 10,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
-              },
-            );
-          },
-        );
-      }),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return SizedBox(height: 10);
+                  },
+                  itemCount: data.length,
+                ),
+              );
+            },
+            error: (error, _) {
+              return LzNoData(message: 'Opps! $error');
+            },
+            loading: () {
+              return SizedBox(
+                height: 90,
+                child: ListView.builder(
+                  itemCount: 10,
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
+                  },
+                ),
+              );
+            },
+          );
+        },
+      ),
 
       floatingActionButton: Poslign(
         alignment: Alignment.bottomRight,
@@ -182,9 +149,11 @@ class ContactView extends ConsumerWidget {
             size: 40,
           ),
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => FormContactView(),
-            ));
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => FormContactView(),
+              ),
+            );
           },
         ),
       ),

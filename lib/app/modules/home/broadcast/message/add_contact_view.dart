@@ -4,15 +4,24 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
+import '../../../../data/models/message_model.dart';
+import '../../../../providers/message/post_message_provider.dart';
+
 class AddContact extends ConsumerWidget {
-  const AddContact({Key? key}) : super(key: key);
+  final MessageModel? data;
+  const AddContact({Key? key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final provider = ref.watch(phoneBookPostProvider);
+    final provider = ref.watch(postMessageProvider);
+
+    if (data != null) {
+      provider.fillForm(data ?? null);
+    }
+
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Tambah Kontak',
+        title: data != null ? 'Edit Contact' : 'Tambah Kontak',
         canBack: true,
       ),
       body: Stack(
@@ -23,15 +32,14 @@ class AddContact extends ConsumerWidget {
                 type: FormType.topInner,
                 inputBorderColor: ColorConstants.softBlack),
             children: [
+              LzForm.input(label: 'Name', hint: 'Masukkan nama', model: provider.forms['name'], maxLines: 3),
               LzForm.input(
-                label: 'Nama Kontak',
-                hint: 'Masukkan nama kontak',
-                // model: provider.forms['name'],
-              ),
+                  label: 'Phone Number',
+                  hint: 'Masukkan Nomor Telephone',
+                  model: provider.forms['phone_number'],
+                  maxLines: 3),
               LzForm.input(
-                label: 'No Telepon',
-                hint: ' Masukkan no telpon',
-              ),
+                  label: 'Keterangan', hint: 'Masukkan Keterangan', model: provider.forms['message'], maxLines: 3),
             ],
           ),
         ],
@@ -39,9 +47,14 @@ class AddContact extends ConsumerWidget {
       bottomNavigationBar: LzButton(
         text: 'Tambah Kontak',
         color: ColorConstants.softBlack,
-        // onTap: (val) {
-        //   provider.post(context);
-        // },
+        onTap: (val) {
+          if (data != null) {
+            provider.editMessage(context, data!.id!);
+          } else {
+            logg('tmbah');
+            provider.post(context);
+          }
+        },
       ).dark(Colors.white).theme1(),
     );
   }
