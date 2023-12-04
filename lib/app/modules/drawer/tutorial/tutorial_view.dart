@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lazyui/lazyui.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
 import '../../../constants/color_constants.dart';
 import '../../../data/models/model.dart';
 
@@ -19,24 +20,26 @@ class TutorialView extends ConsumerWidget {
       body: Column(
         children: [
           Padding(
-            padding: Ei.sym(v: 5),
+            padding: EdgeInsets.symmetric(vertical: 5),
           ),
           Container(
             width: double.infinity,
             height: 200,
-            margin: Ei.all(10),
+            margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
-            child: LzImage(
-              tutorial.videoUrl,
+            child: WebView(
+              // Replace LzImage with WebView
+              initialUrl: tutorial.videoUrl,
+              javascriptMode: JavascriptMode.unrestricted,
             ),
           ),
           Container(
             width: double.infinity,
             height: 220,
-            padding: Ei.only(t: 5),
-            margin: Ei.sym(h: 10),
+            padding: EdgeInsets.only(top: 5),
+            margin: EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               color: ColorConstants.secondaryColor,
               borderRadius: BorderRadius.only(
@@ -53,10 +56,10 @@ class TutorialView extends ConsumerWidget {
               ],
             ),
             child: Container(
-              padding: Ei.only(b: 10),
-              margin: Ei.only(l: 20, r: 20),
+              padding: EdgeInsets.only(bottom: 10),
+              margin: EdgeInsets.only(left: 20, right: 20),
               child: Column(
-                mainAxisAlignment: Maa.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     ' ${tutorial.title}',
