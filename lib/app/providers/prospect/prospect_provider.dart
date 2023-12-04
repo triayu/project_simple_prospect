@@ -12,6 +12,8 @@ class ProspectProvider extends StateNotifier<AsyncValue<List<ProspectModel>>> wi
     getProspect();
   }
 
+  int activeIndex = 0;
+
   Future getProspect() async {
     try {
       state = const AsyncValue.loading();
@@ -39,4 +41,3 @@ final prospectProvider = StateNotifierProvider.autoDispose<ProspectProvider, Asy
     ref,
   );
 });
-

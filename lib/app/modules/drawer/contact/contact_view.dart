@@ -3,27 +3,24 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/modules/drawer/contact/contact_detail_view.dart';
-
 import 'package:simple_prospect/app/modules/drawer/contact/form_contact_view.dart';
 import 'package:simple_prospect/app/providers/contact/contact_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
-
 import '../../../core/text_theme.dart';
 import '../../../data/models/model.dart';
 
 class ContactView extends ConsumerWidget {
-  const ContactView({Key? key}) : super(key: key);
+  const ContactView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Contact',
-        centerTitle: true,
-      ),
-
       // ============
       // LIST CONTACT
+      appBar: CustomAppBar(
+        title: 'Contact',
+        canBack: false,
+      ),
       body: Consumer(
         builder: (context, ref, _) {
           final asyncData = ref.watch(contactProvider);
@@ -37,82 +34,96 @@ class ContactView extends ConsumerWidget {
 
               return Refreshtor(
                 onRefresh: () => ref.read(contactProvider.notifier).getContact(),
-                child: ListView.separated(
-                  padding: Ei.only(t: 10, h: 10, b: 50),
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    final key = GlobalKey();
+                child: NotificationListener<ScrollNotification>(
+                  onNotification: (notification) {
+                    if (notification is ScrollEndNotification) {
+                      final metrics = notification.metrics;
+                      final maxScroll = metrics.maxScrollExtent;
+                      final pixel = metrics.pixels;
 
-                    ContactModel datas = data[index];
-                    int id = datas.id ?? 0;
-                    String firsName = datas.firstName ?? '';
-                    String phoneNumber = datas.phoneNumber ?? '';
+                      if (maxScroll == pixel) {
+                        ref.read(contactProvider.notifier).getPaginateContact();
+                      }
+                    }
+                    return false;
+                  },
+                  child: ListView.separated(
+                    padding: Ei.only(t: 10, h: 10, b: 50),
+                    physics: BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final key = GlobalKey();
 
-                    return InkTouch(
-                      elevation: 1,
-                      key: key,
-                      color: Colors.white,
-                      onTap: () {
-                        final options =
-                            ['Lihat Detail', 'Edit', 'Hapus'].options(icons: [Ti.infoCircle, Ti.edit, Ti.trash]);
-                        DropX.show(key.currentContext, options: options, onSelect: (val) {
-                          if (val.index == 0) {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => ContactDetailView(contact: datas),
-                              ),
-                            );
-                          }
+                      ContactModel datas = data[index];
+                      int id = datas.id ?? 0;
+                      String firsName = datas.firstName ?? '';
+                      String phoneNumber = datas.phoneNumber ?? '';
 
-                          if (val.index == 1) {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => FormContactView(
-                                  data: datas,
+                      return InkTouch(
+                        elevation: 1,
+                        key: key,
+                        color: Colors.white,
+                        onTap: () {
+                          final options =
+                              ['Lihat Detail', 'Edit', 'Hapus'].options(icons: [Ti.infoCircle, Ti.edit, Ti.trash]);
+                          DropX.show(key.currentContext, options: options, onSelect: (val) {
+                            if (val.index == 0) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ContactDetailView(contact: datas),
                                 ),
-                              ),
-                            );
-                          }
+                              );
+                            }
 
-                          if (val.index == 2) {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return LzConfirm(
-                                    title: "Apakah Anda Yakin Untuk Menghapus Data Ini?",
-                                    titleSize: 15,
-                                    onConfirm: () {
-                                      ref.read(contactProvider.notifier).delContact(id);
-                                    },
-                                  );
-                                });
-                          }
-                        });
-                      },
-                      padding: Ei.all(5),
-                      child: ListTile(
-                        dense: true,
-                        minLeadingWidth: 0,
-                        leading: Icon(
-                          Ti.userCircle,
-                          color: ColorConstants.primaryColor,
-                          size: 30,
+                            if (val.index == 1) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => FormContactView(
+                                    data: datas,
+                                  ),
+                                ),
+                              );
+                            }
+
+                            if (val.index == 2) {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return LzConfirm(
+                                      title: "Apakah Anda Yakin Untuk Menghapus Data Ini?",
+                                      titleSize: 15,
+                                      onConfirm: () {
+                                        ref.read(contactProvider.notifier).delContact(id);
+                                      },
+                                    );
+                                  });
+                            }
+                          });
+                        },
+                        padding: Ei.all(5),
+                        child: ListTile(
+                          dense: true,
+                          minLeadingWidth: 0,
+                          leading: Icon(
+                            Ti.userCircle,
+                            color: ColorConstants.primaryColor,
+                            size: 30,
+                          ),
+                          title: Text(
+                            firsName.ucwords,
+                            style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize()),
+                            maxLines: 3,
+                          ),
+                          subtitle: Text(phoneNumber,
+                              style: Gfont.autoSizeText(context, FontSizeManager.getCaptionFontSize())),
+                          trailing: Icon(Icons.more_vert, color: ColorConstants.primaryColor),
                         ),
-                        title: Text(
-                          firsName.ucwords,
-                          style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize()),
-                          maxLines: 3,
-                        ),
-                        subtitle:
-                            Text(phoneNumber, style: Gfont.autoSizeText(context, FontSizeManager.getCaptionFontSize())),
-                        trailing: Icon(Icons.more_vert, color: ColorConstants.primaryColor),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return SizedBox(height: 10);
-                  },
-                  itemCount: data.length,
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: 10);
+                    },
+                    itemCount: data.length,
+                  ),
                 ),
               );
             },
@@ -120,42 +131,64 @@ class ContactView extends ConsumerWidget {
               return LzNoData(message: 'Opps! $error');
             },
             loading: () {
-              return SizedBox(
-                height: 90,
-                child: ListView.builder(
-                  itemCount: 10,
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
-                  },
-                ),
+              return ListView.builder(
+                itemCount: 10,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) {
+                  return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
+                },
               );
             },
           );
         },
       ),
+      bottomNavigationBar: Consumer(builder: (context, ref, _) {
+        final asyncData = ref.watch(contactProvider);
 
-      floatingActionButton: Poslign(
-        alignment: Alignment.bottomRight,
-        child: InkTouch(
-          padding: Ei.all(10),
-          margin: Ei.all(10),
-          radius: Br.circle,
-          color: ColorConstants.primaryColor,
-          child: Icon(
-            Ti.plus,
-            color: Colors.white,
-            size: 40,
-          ),
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => FormContactView(),
-              ),
-            );
+        return asyncData.when(
+          data: (data) {
+            if (data.isEmpty) {
+              return SizedBox();
+            }
+
+            return ref.watch(contactProvider.notifier).isLoadMore == true
+                ? Container(
+                    height: 50,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : Text(
+                    'No More Data',
+                    textAlign: TextAlign.center,
+                    style: Gfont.autoSizeText(context, FontSizeManager.getCaptionFontSize()),
+                  );
           },
+          error: (error, _) {
+            return SizedBox();
+          },
+          loading: () {
+            return SizedBox();
+          },
+        );
+      }),
+      floatingActionButton: InkTouch(
+        padding: Ei.all(10),
+        margin: Ei.all(10),
+        radius: Br.circle,
+        color: ColorConstants.primaryColor,
+        child: Icon(
+          Ti.plus,
+          color: Colors.white,
+          size: 40,
         ),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => FormContactView(),
+            ),
+          );
+        },
       ),
     );
   }

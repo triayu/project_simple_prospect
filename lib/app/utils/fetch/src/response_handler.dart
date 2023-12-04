@@ -80,7 +80,7 @@ class ResHandler {
       // print request information
 
       logg('\n== BASE URL : $baseUrl');
-      logg(debugMessage, color: LogColor.cyan, limit: dio.logLimit);
+      logg(debugMessage, color: LogColor.cyan, limit: 5000000);
     }
 
     List<int> okStatus = [200, 201, 202];

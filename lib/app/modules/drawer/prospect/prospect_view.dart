@@ -18,10 +18,51 @@ class _ProspectViewState extends State<ProspectView> {
   @override
   void initState() {
     super.initState();
-    logg('ProspectView');
+    initKey();
   }
 
-  @override
+  Map gkey = {};
+
+  void initKey() {
+    List.generate(100, (i) {
+      gkey[i] = GlobalKey();
+    });
+  }
+
+  // TabController tabController;
+  final ScrollController tabBarController = ScrollController();
+  int activeIndex = 0;
+  int clickMoretThanOne = 0;
+  // Function untuk mengatur scroll tab ke tengah
+
+  void centerScrollTab(int i) {
+    GlobalKey key = gkey[i];
+
+    RenderBox box = key.currentContext?.findRenderObject() as RenderBox;
+    double tabWidth = box.size.width;
+    double tabPosition = box.localToGlobal(Offset.zero).dx;
+
+    ScrollController scroll = tabBarController;
+    double maxScroll = scroll.position.maxScrollExtent;
+    double currentScroll = scroll.position.pixels;
+    double screenWidth = context.width;
+
+    // get result scroll tab position to center of screen width by index
+    double scrollTo = (currentScroll + tabPosition) - (screenWidth / 2) + (tabWidth / 2);
+
+    // scroll tab to center of listview
+    double pos = scrollTo;
+
+    tabBarController.animateTo(
+        pos < 0
+            ? 0
+            : pos > maxScroll
+                ? maxScroll
+                : pos,
+        duration: Duration(milliseconds: 250),
+        curve: Curves.ease);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,12 +129,12 @@ class _ProspectViewState extends State<ProspectView> {
                     onTap: () => ref.read(prospectProvider.notifier).getProspect(),
                   );
                 }
-
                 return SizedBox(
                   height: context.height * 0.08,
                   child: ListView.separated(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+                    controller: tabBarController,
                     itemCount: data.length,
                     padding: Ei.all(10),
                     separatorBuilder: (context, index) {
@@ -107,14 +148,27 @@ class _ProspectViewState extends State<ProspectView> {
                       // int contactCategoryId = datas.contactCategoryId ?? 0;
                       String categoryName = datas.categoryName?.toString() ?? '';
 
-                      return Container(
-                        padding: Ei.all(10),
-                        decoration: BoxDecoration(
-                          color: ColorConstants.primaryColor,
-                          borderRadius: BorderRadius.circular(5),
+                      return AnimatedContainer(
+                        key: gkey[index],
+                        duration: Duration(milliseconds: 250),
+                        child: InkTouch(
+                          onTap: () {
+                            centerScrollTab(index);
+                            setState(() {
+                              activeIndex = index;
+                            });
+                          },
+                          child: Container(
+                            padding: Ei.all(10),
+                            decoration: BoxDecoration(
+                              color: activeIndex == index ? ColorConstants.primaryColor : Colors.grey[300],
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Text(categoryName,
+                                style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize(),
+                                    color: Colors.white)),
+                          ),
                         ),
-                        child: Text(categoryName,
-                            style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize(), color: Colors.white)),
                       );
                     },
                   ),

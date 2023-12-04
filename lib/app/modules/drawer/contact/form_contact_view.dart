@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/models/model.dart';
-import 'package:simple_prospect/app/providers/contact/contact_post_provider.dart';
+import 'package:simple_prospect/app/providers/contact/contact_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
 import '../../../constants/color_constants.dart';
@@ -13,10 +13,12 @@ class FormContactView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(contactPostProvider);
+    final provider = ref.watch(contactProvider.notifier);
 
     if (data != null) {
       provider.fillForm(data ?? null);
+    } else {
+      provider.forms.reset();
     }
 
     return Scaffold(
@@ -79,9 +81,10 @@ class FormContactView extends ConsumerWidget {
         onTap: (val) {
           if (data != null) {
             provider.editContact(context, data!.id!);
+            provider.forms.reset();
           } else {
-            logg('tmbah');
             provider.post(context);
+            provider.forms.reset();
           }
         },
       ).dark(Colors.white).theme1(),
