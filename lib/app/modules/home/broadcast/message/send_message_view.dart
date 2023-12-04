@@ -39,7 +39,7 @@ class SendMessage extends ConsumerWidget {
             ),
             onTap: () {
               final options =
-                  ['Tambah Kontak', 'Import Kontak', 'Import From Excel'].options(icons: [Ti.send, Ti.edit, Ti.trash]);
+                  ['Tambah Kontak', 'Import Kontak', 'Import From Excel'].options(icons: [Ti.send, Ti.edit, Ti.fileSpreadsheet]);
               DropX.show(_inkTouchKey.currentContext, options: options, onSelect: (val) {
                 if (val.index == 0) {
                   Navigator.of(context).push(

@@ -48,7 +48,9 @@ class FormEvent extends ConsumerWidget {
               hint: 'Select category',
               model: provider.forms['meeting_type'],
               options: List.generate(4, (i) {
-                return Option(option: 'test');
+                List<String> priority = ['Presentation', 'Follow Up', 'Call', 'Other'];
+
+                return Option(option: priority[i], value: priority[i]);
               }),
             ),
             Row(
