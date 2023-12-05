@@ -3,16 +3,18 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/providers/feedback/feedback_post_provider.dart';
+
+import '../../../providers/feedback/feedback_provider.dart';
 
 class FeedbackView extends ConsumerWidget {
   const FeedbackView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(FeedbackPostProvider);
+    final provider = ref.read(feedbackProvider.notifier);
 
     double rating = 3;
+    provider.forms['rating']?.controller.text = rating.toStringAsFixed(0);
     return Scaffold(
       appBar: AppBar(
         title: Text('Feedback'),
@@ -46,7 +48,7 @@ class FeedbackView extends ConsumerWidget {
                   children: [
                     RatingBar.builder(
                       initialRating: rating,
-                      minRating: 1,
+                      minRating: 0,
                       direction: Axis.horizontal,
                       allowHalfRating: false,
                       itemCount: 5,
@@ -58,7 +60,7 @@ class FeedbackView extends ConsumerWidget {
                       ),
                       onRatingUpdate: (newRating) {
                         rating = newRating;
-                        print(rating);
+                        provider.forms['rating']?.controller.text = rating.toStringAsFixed(0);
                       },
                     ),
                     SizedBox(height: 10),

@@ -170,6 +170,9 @@ class TaskProvider extends StateNotifier<AsyncValue<List<TaskModel>>> with UseAp
         map['priority'] = map['priority'].toString().toLowerCase();
         map['contact_id'] = contactSelected!.id;
         map['relate_to'] = contactSelected!.id;
+        map['reminder'] = "${map['start_date']} ${map['reminder']} ";
+
+        logg(map);
 
         LzToast.overlay('Sedang Menambah Task...');
         ResHandler res = await taskApi.postTask(map);
@@ -177,9 +180,11 @@ class TaskProvider extends StateNotifier<AsyncValue<List<TaskModel>>> with UseAp
 
         if (!res.status) {
           LzToast.show(res.message);
+          forms.reset();
         } else {
           LzToast.show(res.message);
           Navigator.pop(context);
+          forms.reset();
         }
         await getTask();
       }

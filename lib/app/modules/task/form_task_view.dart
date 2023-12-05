@@ -36,12 +36,7 @@ class FormTask extends ConsumerWidget {
             children: [
               LzForm.input(label: 'Title', hint: 'Enter your title', model: provider.forms['title']),
               LzForm.input(
-                  maxLength: 1000,
-                  maxLines: 2,
-                  indicator: true,
-                  label: 'Note',
-                  hint: 'Enter your note',
-                  model: provider.forms['note']),
+                  maxLength: 1000, maxLines: 2, label: 'Note', hint: 'Enter your note', model: provider.forms['note']),
               LzForm.select(
                 label: 'Relate To',
                 hint: 'Select category',

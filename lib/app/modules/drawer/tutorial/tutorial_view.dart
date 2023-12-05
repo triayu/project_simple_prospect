@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lazyui/lazyui.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../constants/color_constants.dart';
@@ -20,17 +21,16 @@ class TutorialView extends ConsumerWidget {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 5),
+            padding: Ei.sym(v: 5),
           ),
           Container(
-            width: double.infinity,
-            height: 200,
-            margin: EdgeInsets.all(10),
+            width: 340,
+            height: 150,
+            // margin: Ei.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
             child: WebView(
-              // Replace LzImage with WebView
               initialUrl: tutorial.videoUrl,
               javascriptMode: JavascriptMode.unrestricted,
             ),
@@ -38,8 +38,8 @@ class TutorialView extends ConsumerWidget {
           Container(
             width: double.infinity,
             height: 220,
-            padding: EdgeInsets.only(top: 5),
-            margin: EdgeInsets.symmetric(horizontal: 10),
+            padding: Ei.only(t: 5),
+            margin: Ei.sym(h: 10),
             decoration: BoxDecoration(
               color: ColorConstants.secondaryColor,
               borderRadius: BorderRadius.only(
@@ -56,16 +56,18 @@ class TutorialView extends ConsumerWidget {
               ],
             ),
             child: Container(
-              padding: EdgeInsets.only(bottom: 10),
-              margin: EdgeInsets.only(left: 20, right: 20),
+              padding: Ei.only(b: 10),
+              margin: Ei.only(l: 20, r: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     ' ${tutorial.title}',
                     style: TextStyle(
+
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                 
                       color: ColorConstants.textPrimaryColor,
                     ),
                   ),
