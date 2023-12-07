@@ -10,7 +10,8 @@ import '../../../core/text_theme.dart';
 import '../../../data/models/model.dart';
 
 class ContactView extends ConsumerWidget {
-  const ContactView({super.key});
+  final CategoryContactModel categoryContact;
+  const ContactView({super.key, required this.categoryContact});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,96 +35,84 @@ class ContactView extends ConsumerWidget {
 
               return Refreshtor(
                 onRefresh: () => ref.read(contactProvider.notifier).getContact(),
-                child: NotificationListener<ScrollNotification>(
-                  onNotification: (notification) {
-                    if (notification is ScrollEndNotification) {
-                      final metrics = notification.metrics;
-                      final maxScroll = metrics.maxScrollExtent;
-                      final pixel = metrics.pixels;
+                child: ListView.separated(
+                  padding: Ei.only(t: 10, h: 10, b: 50),
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final key = GlobalKey();
 
-                      if (maxScroll == pixel) {
-                        ref.read(contactProvider.notifier).getPaginateContact();
-                      }
-                    }
-                    return false;
-                  },
-                  child: ListView.separated(
-                    padding: Ei.only(t: 10, h: 10, b: 50),
-                    physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final key = GlobalKey();
+                    ContactModel datas = data[index];
+                    int id = datas.id ?? 0;
+                    String firstName = datas.firstName ?? '';
+                    String phoneNumber = datas.phoneNumber ?? '';
 
-                      ContactModel datas = data[index];
-                      int id = datas.id ?? 0;
-                      String firsName = datas.firstName ?? '';
-                      String phoneNumber = datas.phoneNumber ?? '';
+                    logg(firstName);
 
-                      return InkTouch(
-                        elevation: 1,
-                        key: key,
-                        color: Colors.white,
-                        onTap: () {
-                          final options =
-                              ['Lihat Detail', 'Edit', 'Hapus'].options(icons: [Ti.infoCircle, Ti.edit, Ti.trash]);
-                          DropX.show(key.currentContext, options: options, onSelect: (val) {
-                            if (val.index == 0) {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => ContactDetailView(contact: datas),
+                    return InkTouch(
+                      elevation: 1,
+                      key: key,
+                      color: Colors.white,
+                      onTap: () {
+                        final options =
+                            ['Lihat Detail', 'Edit', 'Hapus'].options(icons: [Ti.infoCircle, Ti.edit, Ti.trash]);
+                        DropX.show(key.currentContext, options: options, onSelect: (val) {
+                          if (val.index == 0) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => ContactDetailView(contact: datas),
+                              ),
+                            );
+                          }
+
+                          if (val.index == 1) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => FormContactView(
+                                  data: datas,
                                 ),
-                              );
-                            }
+                              ),
+                            );
+                          }
 
-                            if (val.index == 1) {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => FormContactView(
-                                    data: datas,
-                                  ),
-                                ),
-                              );
-                            }
-
-                            if (val.index == 2) {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return LzConfirm(
-                                      title: "Apakah Anda Yakin Untuk Menghapus Data Ini?",
-                                      titleSize: 15,
-                                      onConfirm: () {
-                                        ref.read(contactProvider.notifier).delContact(id);
-                                      },
-                                    );
-                                  });
-                            }
-                          });
-                        },
-                        padding: Ei.all(5),
-                        child: ListTile(
-                          dense: true,
-                          minLeadingWidth: 0,
-                          leading: Icon(
-                            Ti.userCircle,
-                            color: ColorConstants.primaryColor,
-                            size: 30,
-                          ),
-                          title: Text(
-                            firsName.ucwords,
-                            style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize()),
-                            maxLines: 3,
-                          ),
-                          subtitle: Text(phoneNumber,
-                              style: Gfont.autoSizeText(context, FontSizeManager.getCaptionFontSize())),
-                          trailing: Icon(Icons.more_vert, color: ColorConstants.primaryColor),
+                          if (val.index == 2) {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return LzConfirm(
+                                    title: "Apakah Anda Yakin Untuk Menghapus Data Ini?",
+                                    titleSize: 15,
+                                    onConfirm: () {
+                                      ref.read(contactProvider.notifier).delContact(id);
+                                    },
+                                  );
+                                });
+                          }
+                        });
+                      },
+                      padding: Ei.all(5),
+                      child: ListTile(
+                        dense: true,
+                        minLeadingWidth: 0,
+                        leading: Icon(
+                          Ti.userCircle,
+                          color: ColorConstants.primaryColor,
+                          size: 30,
                         ),
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return SizedBox(height: 10);
-                    },
-                    itemCount: data.length,
-                  ),
+                        title: Text(
+                          firstName.ucwords,
+                          style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize()),
+                          maxLines: 3,
+                        ),
+                        subtitle:
+                            Text(phoneNumber, style: Gfont.autoSizeText(context, FontSizeManager.getCaptionFontSize())),
+                        trailing: Icon(Icons.more_vert, color: ColorConstants.primaryColor),
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return SizedBox(height: 10);
+                  },
+                  itemCount: data.length,
                 ),
               );
             },
@@ -158,11 +147,7 @@ class ContactView extends ConsumerWidget {
                       child: CircularProgressIndicator(),
                     ),
                   )
-                : Text(
-                    'No More Data',
-                    textAlign: TextAlign.center,
-                    style: Gfont.autoSizeText(context, FontSizeManager.getCaptionFontSize()),
-                  );
+                : None();
           },
           error: (error, _) {
             return SizedBox();

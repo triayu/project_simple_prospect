@@ -31,23 +31,21 @@ class FeedbackProvider extends StateNotifier<AsyncValue<List<FeedbackModel>>> wi
           email: ['email']);
       if (validate.ok) {
         final map = forms.toMap();
-        logg(
-          map,
-        );
         LzToast.overlay('Menambah Feedback ...');
         ResHandler res = await feedbackApi.postFeedback(map);
         LzToast.dismiss();
 
         if (!res.status) {
           LzToast.show(res.message);
-          forms.reset();
-          Navigator.of(context).pop;
+
+          Navigator.pop(context);
           await getFeedback();
+          forms.reset();
         } else {
-          LzToast.show('Berhasil Menambahkan Feedback');
-          Navigator.of(context).pop;
-          await getFeedback();
           forms.reset();
+          LzToast.show('Berhasil Menambahkan Feedback');
+          await getFeedback();
+          Navigator.pop(context);
         }
       }
     } catch (e, s) {

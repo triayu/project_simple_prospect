@@ -77,11 +77,7 @@ class FeedbackView extends ConsumerWidget {
                     // SizedBox(height: 25),
                     ElevatedButton(
                       onPressed: () {
-                        if (rating < 1 || rating > 5) {
-                          print('Error: Rating must be between 1 and 5');
-                        } else {
-                          provider.postFeedback(context);
-                        }
+                        provider.postFeedback(context);
                       },
                       child: Text('Submit'),
                       style: ElevatedButton.styleFrom(

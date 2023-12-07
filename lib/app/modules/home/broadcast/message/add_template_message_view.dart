@@ -51,7 +51,7 @@ class AddTemplateMessage extends ConsumerWidget {
               } else {}
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.white,
+              backgroundColor: Colors.white,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,

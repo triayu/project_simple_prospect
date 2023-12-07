@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 
-import '../../../providers/user/user_provider.dart';
-
 class FormUser extends ConsumerWidget {
   final String? name;
   final int index;
@@ -11,7 +9,6 @@ class FormUser extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.read(userProvider.notifier);
     // notifier.forms.fill({'name': name});
 
     return Wrapper(

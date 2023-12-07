@@ -54,3 +54,74 @@ class LzSlidebar extends StatelessWidget {
     );
   }
 }
+
+//Wi Dialog Form (Form) ========================================================
+class WiDialogForm extends StatelessWidget {
+  final double padding;
+  final List<Widget> children;
+  final String cancelLabel;
+  final Function()? onSubmit;
+  final String? tittle;
+  const WiDialogForm(
+      {Key? key, this.children = const [], this.padding = 25, this.tittle, this.cancelLabel = 'Batal', this.onSubmit})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CenterDialog(
+        child: Column(children: [
+      SlideUp(
+        child: ClipRRect(
+            borderRadius: Br.radius(5),
+            child: Container(
+              color: Colors.white,
+              child: Column(
+                crossAxisAlignment: Caa.start,
+                children: [
+                  tittle != null
+                      ? Textr(
+                          tittle!.ucwords,
+                          padding: Ei.only(t: 20, l: 15, r: 15, b: 15),
+                          style: Gfont.autoSizeText(context, FontSizeManager.getSublineFontSize()),
+                        )
+                      : None(),
+                  Padding(
+                    padding: Ei.only(l: 15, r: 15, b: 10),
+                    child: Column(
+                      children: children,
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(border: Border(top: Br.side(Colors.black.withOpacity(0.1)))),
+                    child: Intrinsic(
+                      children: List.generate(
+                        2,
+                        (i) {
+                          return Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border(left: Br.side(i == 0 ? Colors.transparent : Colors.black12))),
+                              child: InkTouch(
+                                  onTap: i == 0 ? () => Navigator.pop(context, i) : onSubmit,
+                                  padding: Ei.all(15),
+                                  color: i == 0 ? Colors.white : Colors.black12,
+                                  child: Text(i == 0 ? cancelLabel : 'Simpan',
+                                      style: i == 0
+                                          ? Gfont.autoSizeText(context, FontSizeManager.getTittleFontSize(),
+                                              color: Colors.black)
+                                          : Gfont.autoSizeText(context, FontSizeManager.getTittleFontSize(),
+                                              color: Colors.black),
+                                      textAlign: Ta.center)),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )),
+      ),
+    ]));
+  }
+}

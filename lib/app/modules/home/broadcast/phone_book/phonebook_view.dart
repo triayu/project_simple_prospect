@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/modules/drawer/contact/contact_view.dart';
 import 'package:simple_prospect/app/modules/home/broadcast/phone_book/manage_contact_view.dart';
 import 'package:simple_prospect/app/modules/home/broadcast/phone_book/add_phone_book_view.dart';
 
@@ -29,7 +28,7 @@ class PhonebookView extends StatelessWidget {
                       // PHONE BOOK
                       InkWell(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView()));
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView()));
                         },
                         child: Container(
                           margin: Ei.only(h: 10, t: 20, b: 10),

@@ -98,48 +98,48 @@ class TaskProvider extends StateNotifier<AsyncValue<List<TaskModel>>> with UseAp
     }
   }
 
-  // Ini untuk category contact
-  List<ContactModel> contacts = [];
-  ContactModel? contactSelected;
+  // // Ini untuk category contact
+  // List<ContactModel> contacts = [];
+  // ContactModel? contactSelected;
 
-  Future getContact() async {
-    try {
-      LzToast.overlay('Sedang Mengambil Data..');
-      ResHandler res = await contactApi.getListContact();
-      LzToast.dismiss();
-      if (res.status) {
-        List data = res.data ?? [];
+  // Future getContact() async {
+  //   try {
+  //     LzToast.overlay('Sedang Mengambil Data..');
+  //     ResHandler res = await contactApi.getListContact();
+  //     LzToast.dismiss();
+  //     if (res.status) {
+  //       List data = res.data ?? [];
 
-        contacts = data.map((e) => ContactModel.fromJson(e)).toList();
-      } else {
-        LzToast.show(res.message);
-      }
-    } catch (e, s) {
-      Errors.check(e, s);
-    }
-  }
+  //       contacts = data.map((e) => ContactModel.fromJson(e)).toList();
+  //     } else {
+  //       LzToast.show(res.message);
+  //     }
+  //   } catch (e, s) {
+  //     Errors.check(e, s);
+  //   }
+  // }
 
-  void setContact() async {
-    // Ini variable yang merepresentasikan model dari formnya
-    final form = forms['relate_to']?.notifier;
-    // trus di set null jadi option nya tu isinya kosong
-    form?.setOption(null);
-    // lalu kita get catgory nya dari api
+  // void setContact() async {
+  //   // Ini variable yang merepresentasikan model dari formnya
+  //   final form = forms['relate_to']?.notifier;
+  //   // trus di set null jadi option nya tu isinya kosong
+  //   form?.setOption(null);
+  //   // lalu kita get catgory nya dari api
 
-    // kemudian kita tangkap datanya ubah jadikan variable yang return nya List Of Option
-    // Biar mau tampil dia di Lzform.select value nya, harus pake option
-    List<Option> options = List.generate(contacts.length, (i) {
-      return Option(
-        option: contacts[i].userFirstName ?? '',
-        value: contacts[i].id ?? '',
-      );
-    });
+  //   // kemudian kita tangkap datanya ubah jadikan variable yang return nya List Of Option
+  //   // Biar mau tampil dia di Lzform.select value nya, harus pake option
+  //   List<Option> options = List.generate(contacts.length, (i) {
+  //     return Option(
+  //       option: contacts[i].userFirstName ?? '',
+  //       value: contacts[i].id ?? '',
+  //     );
+  //   });
 
-    if (options.isNotEmpty) {
-      // Lalu terakhir tinggal setIsi dari LzFormSelectnya
-      form?.setOptions(options);
-    }
-  }
+  //   if (options.isNotEmpty) {
+  //     // Lalu terakhir tinggal setIsi dari LzFormSelectnya
+  //     form?.setOptions(options);
+  //   }
+  // }
 
   Future post(BuildContext context) async {
     try {
@@ -168,8 +168,8 @@ class TaskProvider extends StateNotifier<AsyncValue<List<TaskModel>>> with UseAp
         final map = forms.toMap(except: ['relate_to']);
 
         map['priority'] = map['priority'].toString().toLowerCase();
-        map['contact_id'] = contactSelected!.id;
-        map['relate_to'] = contactSelected!.id;
+        // map['contact_id'] = contactSelected!.id;
+        // map['relate_to'] = contactSelected!.id;
         map['reminder'] = "${map['start_date']} ${map['reminder']} ";
 
         logg(map);
@@ -187,8 +187,6 @@ class TaskProvider extends StateNotifier<AsyncValue<List<TaskModel>>> with UseAp
           forms.reset();
         }
         await getTask();
-      
-      
       }
     } catch (e, s) {
       Errors.check(e, s);

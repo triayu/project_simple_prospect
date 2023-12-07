@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/models/model.dart';
-import 'package:simple_prospect/app/modules/drawer/contact/contact_view.dart';
+import 'package:simple_prospect/app/modules/drawer/category_contact/category_contact_view.dart';
 import 'package:simple_prospect/app/modules/drawer/prospect/prospect_view.dart';
 import 'package:simple_prospect/app/modules/drawer/provide_feedback/list_feedback_view.dart';
-import 'package:simple_prospect/app/modules/home/broadcast/message/message_template_view.dart';
-import 'package:simple_prospect/app/modules/home/broadcast/phone_book/phonebook_view.dart';
 import 'package:simple_prospect/app/providers/auth/auth_provider.dart';
 
 import '../../constants/color_constants.dart';
@@ -83,7 +81,7 @@ class WiDrawer extends ConsumerWidget {
                             Navigator.pop(context);
                             switch (index) {
                               case 0:
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryContactView()));
                                 break;
                               case 1:
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => ProspectView()));

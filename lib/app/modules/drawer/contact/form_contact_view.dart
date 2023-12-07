@@ -81,10 +81,8 @@ class FormContactView extends ConsumerWidget {
         onTap: (val) {
           if (data != null) {
             provider.editContact(context, data!.id!);
-            provider.forms.reset();
           } else {
             provider.post(context);
-            provider.forms.reset();
           }
         },
       ).dark(Colors.white).theme1(),

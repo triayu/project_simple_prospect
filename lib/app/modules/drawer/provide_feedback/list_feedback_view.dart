@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lazyui/lazyui.dart';
+import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
+import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/data/models/feedback_model.dart';
 import 'package:simple_prospect/app/modules/drawer/provide_feedback/form_feedback_view.dart';
 import 'package:simple_prospect/app/providers/feedback/feedback_provider.dart';
@@ -63,33 +64,41 @@ class ListFeedbackView extends ConsumerWidget {
                         fontSize: 14,
                       ),
                     ),
-                    subtitle: Row(
+                    subtitle: Column(
                       children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Rating: ',
+                              style: TextStyle(
+                                color: ColorConstants.textSecondaryColor,
+                                fontSize: 12,
+                              ),
+                            ),
+                            // Display the rating as text
+                            Text(
+                              rating.toString(),
+                              style: TextStyle(
+                                color: ColorConstants.textSecondaryColor,
+                                fontSize: 12,
+                              ),
+                            ),
+                            // Alternatively, you can use a widget to display the rating as stars
+                            RatingBarIndicator(
+                              rating: rating is double ? rating : 0.0,
+                              itemBuilder: (context, index) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              itemCount: 5,
+                              itemSize: 12.0,
+                            ),
+                          ],
+                        ),
                         Text(
-                          'Rating: ',
-                          style: TextStyle(
-                            color: ColorConstants.textSecondaryColor,
-                            fontSize: 12,
-                          ),
-                        ),
-                        // Display the rating as text
-                        Text(
-                          rating.toString(),
-                          style: TextStyle(
-                            color: ColorConstants.textSecondaryColor,
-                            fontSize: 12,
-                          ),
-                        ),
-                        // Alternatively, you can use a widget to display the rating as stars
-                        RatingBarIndicator(
-                          rating: rating is double ? rating : 0.0,
-                          itemBuilder: (context, index) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          itemCount: 5,
-                          itemSize: 12.0,
-                        ),
+                          datas.feedbackMessage ?? '',
+                          style: Gfont.autoSizeText(context, FontSizeManager.getSublineFontSize()),
+                        )
                       ],
                     ),
                     trailing: IconButton(
@@ -100,24 +109,13 @@ class ListFeedbackView extends ConsumerWidget {
                       onPressed: () {
                         showDialog(
                           context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text("Are you sure you want to delete this feedback?"),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text("Cancel"),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    ref.read(feedbackProvider.notifier).delFeedback(id);
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text("Delete"),
-                                ),
-                              ],
+                          builder: (context) {
+                            return LzConfirm(
+                              title: 'Konfirmasi Penghapusan Data',
+                              message: 'Apakah anda yakin ingin menghapus feedback ini ?',
+                              onConfirm: () {
+                                ref.read(feedbackProvider.notifier).delFeedback(id);
+                              },
                             );
                           },
                         );
@@ -136,16 +134,11 @@ class ListFeedbackView extends ConsumerWidget {
             return LzNoData(message: 'Oops! $error');
           },
           loading: () {
-            return SizedBox(
-              height: 90,
-              child: ListView.builder(
-                itemCount: 10,
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
-                },
-              ),
+            return ListView.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
+              },
             );
           },
         );

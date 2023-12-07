@@ -8,8 +8,8 @@ import 'package:simple_prospect/app/data/local/auth_storage.dart';
 import 'package:simple_prospect/app/data/models/coming_event_model.dart';
 import 'package:simple_prospect/app/data/models/model.dart';
 import 'package:simple_prospect/app/data/models/up_daily_task_model.dart';
-import 'package:simple_prospect/app/providers/dashboard/banner_intro_provider.dart';
-import 'package:simple_prospect/app/providers/dashboard/dashboar_up_daily_task_provider.dart';
+import 'package:simple_prospect/app/providers/dashboard/banner_provider.dart';
+import 'package:simple_prospect/app/providers/dashboard/dashboard_up_daily_task_provider.dart';
 import 'package:simple_prospect/app/providers/dashboard/dashboard_coming_event_provider.dart';
 
 class DashBoardView extends ConsumerWidget {
@@ -36,8 +36,9 @@ class DashBoardView extends ConsumerWidget {
 
     return RefreshIndicator(
       onRefresh: () async {
-        await ref.read(introProvider.notifier).getIntro();
-        await ref.read(comingeventProvider.notifier).getComing();
+        await ref.read(introProvider.notifier).getGoal();
+        await ref.read(comingeventProvider.notifier).getUpComingEvent();
+        await ref.read(upTaskProvider.notifier).getUpDailyTask();
       },
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -74,7 +75,7 @@ class DashBoardView extends ConsumerWidget {
                         if (data.isEmpty) {
                           return LzNoData(
                             message: 'Opps! No data found',
-                            onTap: () => ref.read(introProvider.notifier).getIntro(),
+                            onTap: () => ref.read(introProvider.notifier).getGoal(),
                           );
                         }
 
@@ -188,7 +189,7 @@ class DashBoardView extends ConsumerWidget {
                         if (data.isEmpty) {
                           return LzNoData(
                             message: 'Opps! No data found',
-                            onTap: () => ref.read(comingeventProvider.notifier).getComing(),
+                            onTap: () => ref.read(comingeventProvider.notifier).getUpComingEvent(),
                           );
                         }
 
@@ -201,7 +202,8 @@ class DashBoardView extends ConsumerWidget {
                             itemCount: data.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              final event = data[index];
+                              ComingEventModel event = data[index];
+
                               return Container(
                                 decoration: BoxDecoration(
                                   color: ColorConstants.softBlack,
@@ -232,7 +234,7 @@ class DashBoardView extends ConsumerWidget {
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                '${event.date}',
+                                                '${event.date.format('dd MMM')}',
                                                 style: Gfont.fs(14).copyWith(color: ColorConstants.secondaryColor),
                                               ),
                                             ],
@@ -299,11 +301,11 @@ class DashBoardView extends ConsumerWidget {
                         ),
                       ),
                       Spacer(),
-                      Text(
-                        'Lihat Semua',
-                        style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize(),
-                            color: ColorConstants.textSecondaryColor),
-                      ),
+                      // Text(
+                      //   'Lihat Semua',
+                      //   style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize(),
+                      //       color: ColorConstants.textSecondaryColor),
+                      // ),
                     ],
                   ),
                 ),
@@ -343,7 +345,7 @@ class DashBoardView extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${task.fullName}',
+                                    '${task.fullName!.ucwords}',
                                     style: Gfont.autoSizeText(
                                       context,
                                       FontSizeManager.getBodyFontSize(),
@@ -358,7 +360,7 @@ class DashBoardView extends ConsumerWidget {
                                           Icon(Ti.calendar, color: ColorConstants.textPrimaryColor, size: 20),
                                           SizedBox(width: 5),
                                           Text(
-                                            '${task.reminder}',
+                                            '${task.reminder.format('dd MMM yyyy')}',
                                             style: Gfont.autoSizeText(
                                               context,
                                               FontSizeManager.getBodyFontSize(),
@@ -394,16 +396,13 @@ class DashBoardView extends ConsumerWidget {
                         return LzNoData(message: 'Opps! $error');
                       },
                       loading: () {
-                        return SizedBox(
-                          height: 90,
-                          child: ListView.builder(
-                            itemCount: 10,
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return Skeleton(radius: 10, margin: Ei.all(10), size: [250, 20]);
-                            },
-                          ),
+                        return ListView.builder(
+                          itemCount: 10,
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return Skeleton(radius: 10, margin: Ei.all(10), size: [250, 20]);
+                          },
                         );
                       },
                     );

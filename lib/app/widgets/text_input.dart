@@ -118,7 +118,7 @@ class TextInputTransparent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget textField = TextField(
-      style: textStyle ?? Gfont.black,
+      style: textStyle ?? Gfont.fs16,
       keyboardType: keyboard,
       textInputAction: inputAction,
       onSubmitted: onSubmit,
@@ -135,7 +135,7 @@ class TextInputTransparent extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding: contentPadding ?? Ei.sym(v: 5),
         hintText: hint,
-        hintStyle: hintStyle ?? Gfont.black,
+        hintStyle: hintStyle ?? Gfont.fs16,
         border: InputBorder.none,
         focusedBorder: InputBorder.none,
         enabledBorder: InputBorder.none,

@@ -42,15 +42,15 @@ class FormTask extends ConsumerWidget {
                 hint: 'Select category',
                 model: provider.forms['relate_to'],
                 onTap: (model) async {
-                  await provider.getContact();
-                  provider.setContact();
+                  // await provider.getContact();
+                  // provider.setContact();
                 },
                 onSelect: (selector) {
                   if (selector.option?.option != null) {
-                    provider.contactSelected =
-                        provider.contacts.firstWhere((e) => e.userFirstName == selector.option!.option);
+                    // provider.contactSelected =
+                    //     provider.contacts.firstWhere((e) => e.userFirstName == selector.option!.option);
 
-                    logg(provider.contactSelected!.userFirstName);
+                    // logg(provider.contactSelected!.userFirstName);
                   }
                 },
               ),

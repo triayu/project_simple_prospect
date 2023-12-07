@@ -4,21 +4,20 @@ import 'package:simple_prospect/app/data/models/banner_intro_model.dart';
 import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 import '../../data/api/api.dart';
 
-class BannerIntroProvider extends StateNotifier<AsyncValue<List<BannerIntroModel>>> with UseApi {
+class BannerProvider extends StateNotifier<AsyncValue<List<BannerModel>>> with UseApi {
   final AutoDisposeStateNotifierProviderRef? ref; // if you want to use ref inside this provider
 
-  BannerIntroProvider(this.ref) : super(const AsyncValue.loading()) {
-    getIntro();
+  BannerProvider(this.ref) : super(const AsyncValue.loading()) {
+    getGoal();
   }
 
-  Future getIntro() async {
+  Future getGoal() async {
     try {
       // Kita akan mengubah state dari provider ini menjadi loading
       state = const AsyncValue.loading();
 
       // Koneksi Ke api untuk mendapatkan data
       ResHandler res = await goalApi.getGoal();
-
 
       // Kemudian variable respon diatas akan mengembalikan sejumlah nilai, diantaranya:
       // res.status  --> Status dari respon (true atau false)
@@ -30,7 +29,7 @@ class BannerIntroProvider extends StateNotifier<AsyncValue<List<BannerIntroModel
         List data = res.data ?? [];
 
         // Jika status dari respon adalah true, maka kita akan mengubah state dari provider ini menjadi data
-        state = AsyncValue.data(data.map((e) => BannerIntroModel.fromJson(e)).toList());
+        state = AsyncValue.data(data.map((e) => BannerModel.fromJson(e)).toList());
       } else {
         // Jika status dari respon adalah false, maka kita akan menampilkan pesan error
         LzToast.show(res.message);
@@ -43,8 +42,8 @@ class BannerIntroProvider extends StateNotifier<AsyncValue<List<BannerIntroModel
   }
 }
 
-final introProvider = StateNotifierProvider.autoDispose<BannerIntroProvider, AsyncValue<List<BannerIntroModel>>>((ref) {
-  return BannerIntroProvider(
+final introProvider = StateNotifierProvider.autoDispose<BannerProvider, AsyncValue<List<BannerModel>>>((ref) {
+  return BannerProvider(
     ref,
   );
 });

@@ -9,16 +9,16 @@ class ProspectProvider extends StateNotifier<AsyncValue<List<ProspectModel>>> wi
   final AutoDisposeStateNotifierProviderRef? ref;
 
   ProspectProvider(this.ref) : super(const AsyncValue.loading()) {
-    getProspect();
+    getCatProspect();
   }
 
   int activeIndex = 0;
 
-  Future getProspect() async {
+  Future getCatProspect() async {
     try {
       state = const AsyncValue.loading();
 
-      ResHandler res = await prospectAPi.getProspect();
+      ResHandler res = await prospectAPi.getCatProspect();
 
       logg(res.status);
 

@@ -26,7 +26,7 @@ mixin UseApi {
   ComingApi comingEvent = ComingApi();
   EventApi eventApi = EventApi();
   TaskApi taskApi = TaskApi();
-  UpDailyTaskeApi upDailyTaskApi = UpDailyTaskeApi();
+  UpDailyTaskApi upDailyTaskApi = UpDailyTaskApi();
   PhoneBookApi phoneBookApi = PhoneBookApi();
   MessageTemplateApi messageTemplateApi = MessageTemplateApi();
   TutorialVideoApi tutorialApi = TutorialVideoApi();

@@ -1,15 +1,15 @@
-class BannerIntroModel {
+class BannerModel {
   String name;
   int count;
   int total;
 
-  BannerIntroModel({
+  BannerModel({
     required this.name,
     required this.count,
     required this.total,
   });
 
-  factory BannerIntroModel.fromJson(Map<String, dynamic> json) => BannerIntroModel(
+  factory BannerModel.fromJson(Map<String, dynamic> json) => BannerModel(
         name: json["name"],
         count: json["count"],
         total: json["total"],
@@ -26,6 +26,3 @@ class BannerIntroModel {
     return super.toString();
   }
 }
-
-
-

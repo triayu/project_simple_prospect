@@ -13,8 +13,6 @@ class EditProfileView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.read(profileProvider);
-
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Edit Profile',
@@ -44,7 +42,7 @@ class EditProfileView extends ConsumerWidget {
               } else {}
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.white,
+              backgroundColor: Colors.white,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,

@@ -6,32 +6,33 @@ import 'package:simple_prospect/app/data/models/model.dart';
 import '../../utils/fetch/src/fetch.dart';
 import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 
+import 'category_contact_provider.dart';
+
 class ContactProvider extends StateNotifier<AsyncValue<List<ContactModel>>> with UseApi {
   final AutoDisposeStateNotifierProviderRef? ref;
-
-  ContactProvider(this.ref) : super(const AsyncValue.loading()) {
+  final CategoryContactProvider? categoryContactProvider;
+  ContactProvider({this.ref, required this.categoryContactProvider}) : super(const AsyncValue.loading()) {
     getContact();
   }
 
-  bool isLoadMore = false;
-
   Future getContact() async {
+    logg(categoryContactProvider!.state.id);
     try {
       state = const AsyncValue.loading();
 
-      ResHandler res = await contactApi.getListContact();
+      ResHandler res = await contactApi.getListContactById(categoryContactProvider!.state.id ?? 0);
 
       if (res.status) {
         List data = res.data ?? [];
 
         state = AsyncValue.data(data.map((e) => ContactModel.fromJson(e)).toList());
 
-        //DeCode ResBody
-        Map<String, dynamic> body = res.body;
-        //Declare Respon Total To Variables
-        total = body['meta']['total'] ?? 0;
-        // Set Page To 1
-        page = 1;
+        // //DeCode ResBody
+        // Map<String, dynamic> body = res.body;
+        // //Declare Respon Total To Variables
+        // total = body['meta']['total'] ?? 0;
+        // // Set Page To 1
+        // page = 1;
 
         logg(total);
       } else {
@@ -45,8 +46,7 @@ class ContactProvider extends StateNotifier<AsyncValue<List<ContactModel>>> with
 
   // Pagination
   int page = 1, total = 0;
-  // Function Load More
-
+  bool isLoadMore = false;
   // Function Load More
   Future getPaginateContact() async {
     if (state.value != null && state.value!.isNotEmpty) {
@@ -65,7 +65,7 @@ class ContactProvider extends StateNotifier<AsyncValue<List<ContactModel>>> with
     page += 1;
     isLoadMore = true;
     try {
-      ResHandler res = await contactApi.getListContact(page: page);
+      ResHandler res = await contactApi.getListContactById(categoryContactProvider!.state.id ?? 0, page: page);
       if (!res.status && res.message != null) {
         LzToast.show(res.message);
       }
@@ -136,10 +136,15 @@ class ContactProvider extends StateNotifier<AsyncValue<List<ContactModel>>> with
         LzToast.dismiss();
 
         if (!res.status) {
+          forms.reset();
           LzToast.show(res.message);
+          await getContact();
+          Navigator.pop(context);
         } else {
+          forms.reset();
           LzToast.show('Berhasil Menambahkan Contact');
           await getContact();
+          Navigator.pop(context);
         }
 
         Navigator.of(context).pop;
@@ -228,7 +233,5 @@ class ContactProvider extends StateNotifier<AsyncValue<List<ContactModel>>> with
 }
 
 final contactProvider = StateNotifierProvider.autoDispose<ContactProvider, AsyncValue<List<ContactModel>>>((ref) {
-  return ContactProvider(
-    ref,
-  );
+  return ContactProvider(ref: ref, categoryContactProvider: ref.read(categoryContactProvider.notifier));
 });

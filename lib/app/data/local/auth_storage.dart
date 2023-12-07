@@ -1,4 +1,3 @@
-import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/local/shared_preferences.dart';
 import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
 import '../models/model.dart';

@@ -9,14 +9,14 @@ class DashboardComingEvent extends StateNotifier<AsyncValue<List<ComingEventMode
   final AutoDisposeStateNotifierProviderRef? ref; // if you want to use ref inside this provider
 
   DashboardComingEvent(this.ref) : super(const AsyncValue.loading()) {
-    getComing();
+    getUpComingEvent();
   }
 
-  Future getComing() async {
+  Future getUpComingEvent() async {
     try {
       state = const AsyncValue.loading();
 
-      ResHandler res = await comingEvent.getComingevent();
+      ResHandler res = await comingEvent.getUpComingEvent();
 
       if (res.status) {
         List data = res.data ?? [];

@@ -126,7 +126,7 @@ class _ProspectViewState extends State<ProspectView> {
                 if (data.isEmpty) {
                   return LzNoData(
                     message: 'Oops! No data found',
-                    onTap: () => ref.read(prospectProvider.notifier).getProspect(),
+                    onTap: () => ref.read(prospectProvider.notifier).getCatProspect(),
                   );
                 }
                 return SizedBox(
