@@ -8,7 +8,7 @@ class AuthStorage {
   /// await Auth.login();
   /// ```
   ///
-  static User user() {
+  static Future<User> user() async {
     User user = User();
     Map<String, dynamic>? data = SharedPreferencesHelper.getMap('user');
     user = User.fromJson(data);

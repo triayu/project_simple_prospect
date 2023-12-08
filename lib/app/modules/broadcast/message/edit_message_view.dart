@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-import '../../../../constants/color_constants.dart';
+import '../../../constants/color_constants.dart';
 
 class EditMessage extends ConsumerWidget {
   const EditMessage({Key? key}) : super(key: key);

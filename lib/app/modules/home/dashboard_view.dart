@@ -6,7 +6,6 @@ import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/data/local/auth_storage.dart';
 import 'package:simple_prospect/app/data/models/coming_event_model.dart';
-import 'package:simple_prospect/app/data/models/model.dart';
 import 'package:simple_prospect/app/data/models/up_daily_task_model.dart';
 import 'package:simple_prospect/app/providers/dashboard/banner_provider.dart';
 import 'package:simple_prospect/app/providers/dashboard/dashboard_up_daily_task_provider.dart';
@@ -32,9 +31,9 @@ class DashBoardView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Variable Data User didapatkan dari penyimpanan local storage
-    User userData = AuthStorage.user();
+    // User userData = AuthStorage.user();
 
-    return RefreshIndicator(
+    return Refreshtor(
       onRefresh: () async {
         await ref.read(introProvider.notifier).getGoal();
         await ref.read(comingeventProvider.notifier).getUpComingEvent();
@@ -47,21 +46,48 @@ class DashBoardView extends ConsumerWidget {
           crossAxisAlignment: Caa.start,
           children: [
             // // HEADER
-            Container(
-              padding: Ei.sym(h: 20, v: 20),
-              child: Column(
-                mainAxisAlignment: Maa.start,
-                crossAxisAlignment: Caa.start,
-                children: [
-                  Text(
-                    'Halo, Selamat Datang ${userData.fullName!.ucwords}',
-                    style: Gfont.autoSizeText(context, FontSizeManager.getSublineFontSize(), fontWeight: Fw.bold),
-                    maxLines: 2,
-                    overflow: Tof.ellipsis,
-                  ),
-                ],
-              ),
-            ),
+            FutureBuilder(
+                future: AuthStorage.user(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Skeleton(
+                      size: [MediaQuery.of(context).size.width, 100],
+                    );
+                  }
+
+                  if (snapshot.hasError) {
+                    return LzNoData(
+                      icon: Icons.error,
+                      message: 'Error',
+                    );
+                  }
+                  String fullName = '${snapshot.data!.firstName} ${snapshot.data!.lastName}';
+
+                  return Container(
+                    padding: Ei.sym(h: 20, v: 20),
+                    margin: Ei.all(10),
+                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: Offset(0, 1),
+                      ),
+                    ]),
+                    child: Column(
+                      mainAxisAlignment: Maa.start,
+                      crossAxisAlignment: Caa.start,
+                      children: [
+                        Text(
+                          'Halo, Selamat Datang ${fullName.ucwords}',
+                          style: Gfont.autoSizeText(context, FontSizeManager.getSublineFontSize(), fontWeight: Fw.bold),
+                          maxLines: 2,
+                          overflow: Tof.ellipsis,
+                        ),
+                      ],
+                    ),
+                  );
+                }),
 
             Column(
               children: [

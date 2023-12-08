@@ -3,7 +3,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
+import 'package:simple_prospect/app/data/models/model.dart';
 import 'package:simple_prospect/app/data/models/prospect_model.dart';
+import 'package:simple_prospect/app/providers/contact/category_contact_provider.dart';
+import 'package:simple_prospect/app/providers/contact/category_contacts_provider.dart';
+import 'package:simple_prospect/app/providers/contact/contact_provider.dart';
 import 'package:simple_prospect/app/providers/prospect/prospect_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
@@ -71,6 +75,7 @@ class _ProspectViewState extends State<ProspectView> {
         centerTitle: true,
       ),
       body: Column(
+        crossAxisAlignment: Caa.start,
         children: [
           Container(
             height: 100,
@@ -119,7 +124,7 @@ class _ProspectViewState extends State<ProspectView> {
           // ===========
           // CATEGORY
           Consumer(builder: (context, ref, _) {
-            final asyncData = ref.watch(prospectProvider);
+            final asyncData = ref.watch(categoryContactsProvider);
 
             return asyncData.when(
               data: (data) {
@@ -129,6 +134,8 @@ class _ProspectViewState extends State<ProspectView> {
                     onTap: () => ref.read(prospectProvider.notifier).getCatProspect(),
                   );
                 }
+
+                // ref.read(categoryContactProvider.notifier).setCategoryContact(data[0]);
                 return SizedBox(
                   height: context.height * 0.08,
                   child: ListView.separated(
@@ -141,11 +148,7 @@ class _ProspectViewState extends State<ProspectView> {
                       return SizedBox(width: 5);
                     },
                     itemBuilder: (BuildContext context, int index) {
-                      ProspectModel datas = data[index];
-
-                      // int contactId = datas.contactId ?? 0;
-                      // String contactName = datas.contactName ?? '';
-                      // int contactCategoryId = datas.contactCategoryId ?? 0;
+                      CategoryContactModel datas = data[index];
                       String categoryName = datas.categoryName?.toString() ?? '';
 
                       return AnimatedContainer(
@@ -157,6 +160,9 @@ class _ProspectViewState extends State<ProspectView> {
                             setState(() {
                               activeIndex = index;
                             });
+
+                            ref.read(categoryContactProvider.notifier).setCategoryContact(data[index]);
+                            ref.read(contactProvider.notifier).getContact(data[index].id ?? 0);
                           },
                           child: Container(
                             padding: Ei.all(10),
@@ -192,6 +198,53 @@ class _ProspectViewState extends State<ProspectView> {
               },
             );
           }),
+
+          // ===========
+          // LIST CONTACT
+          Consumer(builder: (context, ref, _) {
+            final asyncData = ref.watch(contactProvider);
+
+            return asyncData.when(data: (data) {
+              if (data.isEmpty) {
+                return LzNoData(
+                  message: 'Oops! No data found',
+                  onTap: () async {
+                    await ref.read(prospectProvider.notifier).getCatProspect();
+                  },
+                );
+              }
+
+              return Expanded(
+                child: ListView.separated(
+                  itemCount: data.length,
+                  separatorBuilder: (context, index) {
+                    return SizedBox(height: 10);
+                  },
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                        data[index].fullName ?? '',
+                        style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize()),
+                      ),
+                    );
+                  },
+                ),
+              );
+            }, error: (error, _) {
+              return LzNoData(message: 'Oops! $error');
+            }, loading: () {
+              return Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
+                  },
+                ),
+              );
+            });
+          })
         ],
       ),
     );

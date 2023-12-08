@@ -16,7 +16,6 @@ part 'tutorial_api.dart';
 part 'contact_api.dart';
 part 'profile_api.dart';
 part 'feedback_api.dart';
-part 'prospect_api.dart';
 part 'message_api.dart';
 
 mixin UseApi {
@@ -33,6 +32,5 @@ mixin UseApi {
   ContactApi contactApi = ContactApi();
   ProfileApi profileApi = ProfileApi();
   FeedbackApi feedbackApi = FeedbackApi();
-  ProspectApi prospectAPi = ProspectApi();
   MessageApi messageApi = MessageApi();
 }

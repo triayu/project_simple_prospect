@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
-import 'package:simple_prospect/app/modules/home/broadcast/phone_book/manage_contact_view.dart';
-import 'package:simple_prospect/app/modules/home/broadcast/phone_book/add_phone_book_view.dart';
+import 'package:simple_prospect/app/modules/broadcast/phone_book/manage_contact_view.dart';
+import 'package:simple_prospect/app/modules/broadcast/phone_book/add_phone_book_view.dart';
 
 class PhonebookView extends StatelessWidget {
   const PhonebookView({Key? key}) : super(key: key);

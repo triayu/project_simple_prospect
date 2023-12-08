@@ -18,7 +18,7 @@ class ProspectProvider extends StateNotifier<AsyncValue<List<ProspectModel>>> wi
     try {
       state = const AsyncValue.loading();
 
-      ResHandler res = await prospectAPi.getCatProspect();
+      ResHandler res = await contactApi.getCategoryContact();
 
       logg(res.status);
 

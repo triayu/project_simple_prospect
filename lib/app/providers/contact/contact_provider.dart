@@ -12,11 +12,11 @@ class ContactProvider extends StateNotifier<AsyncValue<List<ContactModel>>> with
   final AutoDisposeStateNotifierProviderRef? ref;
   final CategoryContactProvider? categoryContactProvider;
   ContactProvider({this.ref, required this.categoryContactProvider}) : super(const AsyncValue.loading()) {
-    getContact();
+    getContact(categoryContactProvider!.state.id ?? 0);
   }
 
-  Future getContact() async {
-    logg(categoryContactProvider!.state.id);
+  Future getContact(int id) async {
+    logg(categoryContactProvider!.state.id, color: LogColor.red);
     try {
       state = const AsyncValue.loading();
 
@@ -89,7 +89,7 @@ class ContactProvider extends StateNotifier<AsyncValue<List<ContactModel>>> with
 
       if (res.status) {
         LzToast.show(res.message);
-        getContact();
+        getContact(categoryContactsSelected!.id ?? 0);
       } else {
         LzToast.show(res.message);
       }
@@ -138,12 +138,12 @@ class ContactProvider extends StateNotifier<AsyncValue<List<ContactModel>>> with
         if (!res.status) {
           forms.reset();
           LzToast.show(res.message);
-          await getContact();
+          await getContact(categoryContactProvider!.state.id ?? 0);
           Navigator.pop(context);
         } else {
           forms.reset();
           LzToast.show('Berhasil Menambahkan Contact');
-          await getContact();
+          await getContact(categoryContactProvider!.state.id ?? 0);
           Navigator.pop(context);
         }
 
@@ -220,7 +220,7 @@ class ContactProvider extends StateNotifier<AsyncValue<List<ContactModel>>> with
       LzToast.dismiss();
       if (res.status) {
         LzToast.show('Berhasil Mengupdate Data');
-        await getContact();
+        await getContact(categoryContactProvider!.state.id ?? 0);
       } else if (res.message != null) {
         LzToast.show(res.message);
       }

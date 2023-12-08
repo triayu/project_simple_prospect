@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/modules/home/broadcast/broadcast_view.dart';
-import 'package:simple_prospect/app/modules/home/drawer_widget.dart';
+import 'package:simple_prospect/app/data/local/auth_storage.dart';
+import 'package:simple_prospect/app/modules/broadcast/broadcast_view.dart';
+import 'package:simple_prospect/app/modules/home/widgets/wi_dashboard/drawer_widget.dart';
 import '../../constants/color_constants.dart';
 import '../../providers/home/home_state_provider.dart';
 
@@ -52,29 +53,51 @@ class HomeView extends ConsumerWidget {
             Row(
               children: [
                 InkTouch(
-                  margin: Ei.all(10),
+                  margin: Ei.only(l: 10),
                   child: Icon(
                     Ti.bellFilled,
                     size: 25,
                     color: ColorConstants.softBlack,
                   ),
                 ),
-                InkTouch(
-                  onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileView()));
-                  },
-                  margin: Ei.only(r: 10),
-                  child: SizedBox(
-                    width: 45,
-                    height: 45,
-                    child: ClipOval(
-                      child: LzImage(
-                        'poto.jpg',
-                        size: context.width,
-                      ),
-                    ),
-                  ),
-                ),
+                FutureBuilder(
+                    future: AuthStorage.user(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        if (snapshot.data!.fotoProfile == null) {
+                          return Container(
+                            margin: Ei.all(10),
+                            padding: Ei.all(5),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: Br.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 10,
+                                ),
+                              ],
+                            ),
+                            child: Iconr(
+                              Icons.person,
+                              size: 40,
+                              color: Colors.black12,
+                            ),
+                          );
+                        }
+
+                        return InkTouch(
+                          margin: Ei.all(10),
+                          child: LzImage(
+                            snapshot.data!.fotoProfile,
+                            size: 40,
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      } else {
+                        return None();
+                      }
+                    }),
               ],
             ),
         ],

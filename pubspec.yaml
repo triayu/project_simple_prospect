@@ -42,13 +42,12 @@ dependencies:
   riverpod: ^2.3.6
   shared_preferences: ^2.2.0
   table_calendar: ^3.0.9
-  youtube_player_flutter: ^8.1.2
-  video_player: ^2.4.6
   google_maps_flutter: ^2.5.0
   flutter_google_places: ^0.3.0
   google_api_headers: ^1.6.0
   webview_flutter: ^3.0.0
   flutter_inappwebview: ^5.3.2
+  image_picker: ^1.0.4
 
 flutter_native_splash:
   android: true

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
-import '../../../../constants/color_constants.dart';
-import '../../../../core/text_theme.dart';
-import '../../../../data/models/message_template_model.dart';
-import '../../../../providers/message_template/message_template_provider.dart';
+import '../../../constants/color_constants.dart';
+import '../../../core/text_theme.dart';
+import '../../../data/models/message_template_model.dart';
+import '../../../providers/message_template/message_template_provider.dart';
 import 'add_template_message_view.dart';
 import 'send_message_view.dart';
 

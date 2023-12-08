@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simple_prospect/app/modules/home/broadcast/message/message_template_view.dart';
+import 'package:simple_prospect/app/modules/broadcast/message/message_template_view.dart';
 
 class BroadcastView extends ConsumerWidget {
   const BroadcastView({Key? key}) : super(key: key);
@@ -68,12 +68,8 @@ class BroadcastView extends ConsumerWidget {
                       )
                     ],
                   ),
-              
-              
-              
                 ),
-                
-                
+
                 //  ============
                 //  MESSAGE
                 Stack(

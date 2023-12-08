@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
-import '../../../../constants/color_constants.dart';
-import '../../../../core/text_theme.dart';
-import '../../../../data/models/message_template_model.dart';
-import '../../../../widgets/custom_appbar.dart';
+import '../../../constants/color_constants.dart';
+import '../../../core/text_theme.dart';
+import '../../../data/models/message_template_model.dart';
+import '../../../widgets/custom_appbar.dart';
 import 'add_contact_view.dart';
 
 class SendMessage extends ConsumerWidget {
@@ -37,8 +36,8 @@ class SendMessage extends ConsumerWidget {
               ),
             ),
             onTap: () {
-              final options =
-                  ['Tambah Kontak', 'Import Kontak', 'Import From Excel'].options(icons: [Ti.send, Ti.edit, Ti.fileSpreadsheet]);
+              final options = ['Tambah Kontak', 'Import Kontak', 'Import From Excel']
+                  .options(icons: [Ti.send, Ti.edit, Ti.fileSpreadsheet]);
               DropX.show(_inkTouchKey.currentContext, options: options, onSelect: (val) {
                 if (val.index == 0) {
                   Navigator.of(context).push(

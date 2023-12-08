@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/api/api.dart';
@@ -12,7 +13,7 @@ class TutorialProvider extends StateNotifier<AsyncValue<List<TutorialModel>>> wi
   TutorialProvider(this.ref) : super(const AsyncValue.loading()) {
     getTutorial();
   }
-
+  final GlobalKey scaffoldKey = GlobalKey();
   Future getTutorial() async {
     try {
       state = const AsyncValue.loading();
@@ -23,8 +24,9 @@ class TutorialProvider extends StateNotifier<AsyncValue<List<TutorialModel>>> wi
         List data = res.data ?? [];
 
         state = AsyncValue.data(data.map((e) => TutorialModel.fromJson(e)).toList());
-      } else {
+      } else if (res.message != null) {
         LzToast.show(res.message);
+        Navigator.of(scaffoldKey.currentContext!).pop();
       }
     } catch (e, s) {
       Errors.check(e, s);

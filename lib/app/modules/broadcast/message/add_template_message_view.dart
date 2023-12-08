@@ -6,7 +6,7 @@ import 'package:simple_prospect/app/data/models/message_template_model.dart';
 import 'package:simple_prospect/app/providers/message_template/post_message_template_provider.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-import '../../../../constants/color_constants.dart';
+import '../../../constants/color_constants.dart';
 
 class AddTemplateMessage extends ConsumerWidget {
   final MessageTemplateModel? data;

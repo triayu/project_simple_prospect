@@ -93,15 +93,14 @@ class Auth with ChangeNotifier, UseApi {
       prefs.remove('token');
 
       // lalu navigate ke halaman login
-      Utils.timer(() {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => LoginView(),
-          ),
-        );
 
-        LzToast.show('Berhasil Logout');
-      }, 5.s);
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => LoginView(),
+        ),
+      );
+
+      LzToast.show('Berhasil Logout');
 
       LzToast.dismiss();
     } catch (e, s) {

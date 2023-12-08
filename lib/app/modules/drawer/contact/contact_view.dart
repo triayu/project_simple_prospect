@@ -30,11 +30,12 @@ class ContactView extends ConsumerWidget {
             data: (data) {
               if (data.isEmpty) {
                 return LzNoData(
-                    message: 'Opps! No data found', onTap: () => ref.read(contactProvider.notifier).getContact());
+                    message: 'Opps! No data found',
+                    onTap: () => ref.read(contactProvider.notifier).getContact(categoryContact.id ?? 0));
               }
 
               return Refreshtor(
-                onRefresh: () => ref.read(contactProvider.notifier).getContact(),
+                onRefresh: () => ref.read(contactProvider.notifier).getContact(categoryContact.id ?? 0),
                 child: ListView.separated(
                   padding: Ei.only(t: 10, h: 10, b: 50),
                   physics: BouncingScrollPhysics(),

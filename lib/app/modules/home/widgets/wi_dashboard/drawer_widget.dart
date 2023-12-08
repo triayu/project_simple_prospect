@@ -6,19 +6,17 @@ import 'package:simple_prospect/app/modules/drawer/category_contact/category_con
 import 'package:simple_prospect/app/modules/drawer/prospect/prospect_view.dart';
 import 'package:simple_prospect/app/modules/drawer/provide_feedback/list_feedback_view.dart';
 import 'package:simple_prospect/app/providers/auth/auth_provider.dart';
-
-import '../../constants/color_constants.dart';
-import '../../data/local/auth_storage.dart';
-import '../drawer/tutorial/list_tutorial.dart';
+import '../../../../constants/color_constants.dart';
+import '../../../../data/local/auth_storage.dart';
+import '../../../drawer/tutorial/list_tutorial.dart';
 
 class WiDrawer extends ConsumerWidget {
   const WiDrawer({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.watch(authProvider.notifier);
+    final authNotifier = ref.watch(authProvider.notifier);
 
-    User userData = AuthStorage.user();
     return SafeArea(
       child: Drawer(
         child: Container(
@@ -26,26 +24,63 @@ class WiDrawer extends ConsumerWidget {
           decoration: BoxDecoration(color: ColorConstants.secondaryColor),
           child: Column(
             children: [
-              UserAccountsDrawerHeader(
-                accountName: Text(
-                  '${userData.fullName!.ucwords}',
-                  style: TextStyle(fontSize: 18, color: ColorConstants.secondaryColor, fontWeight: FontWeight.bold),
-                ),
-                accountEmail: Text(
-                  '${userData.email}',
-                  style: TextStyle(color: ColorConstants.secondaryColor, fontSize: 16),
-                ),
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/poto.jpg'),
-                ),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomLeft,
-                    end: Alignment.topRight,
-                    colors: [ColorConstants.primaryColor, ColorConstants.secondaryColor],
-                  ),
-                ),
-              ),
+              FutureBuilder(
+                  future: AuthStorage.user(),
+                  builder: ((context, snapshot) {
+                    // Variable
+
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Skeleton(
+                        size: [MediaQuery.of(context).size.width * 0.8, 100],
+                      );
+                    }
+
+                    if (snapshot.hasError) {
+                      return LzNoData(
+                        icon: Icons.error,
+                        message: 'Error',
+                      );
+                    }
+
+                    if (!snapshot.hasData) {
+                      return LzNoData(
+                        icon: Icons.error,
+                        message: 'Error',
+                      );
+                    }
+
+                    User data = snapshot.data as User;
+                    String fullName = '${data.firstName} ${data.lastName}';
+                    String email = data.email ?? '';
+                    return UserAccountsDrawerHeader(
+                      accountName: Text(
+                        fullName.ucwords,
+                        style:
+                            TextStyle(fontSize: 18, color: ColorConstants.secondaryColor, fontWeight: FontWeight.bold),
+                      ),
+                      accountEmail: Text(
+                        email,
+                        style: TextStyle(color: ColorConstants.secondaryColor, fontSize: 16),
+                      ),
+                      currentAccountPicture: data.fotoProfile != null
+                          ? CircleAvatar(backgroundImage: NetworkImage(data.fotoProfile ?? ''))
+                          : CircleAvatar(
+                              backgroundColor: ColorConstants.secondaryColor,
+                              child: Iconr(
+                                Icons.person,
+                                size: 50,
+                                color: Colors.black12,
+                              ),
+                            ),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [ColorConstants.primaryColor, ColorConstants.secondaryColor],
+                        ),
+                      ),
+                    );
+                  })),
               Expanded(
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.6,
@@ -104,7 +139,7 @@ class WiDrawer extends ConsumerWidget {
                 height: 80,
                 child: InkTouch(
                   onTap: () {
-                    notifier.logOut(context);
+                    authNotifier.logOut(context);
                   },
                   margin: Ei.all(20),
                   padding: Ei.only(l: 20),

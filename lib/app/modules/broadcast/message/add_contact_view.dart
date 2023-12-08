@@ -4,8 +4,8 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/widgets/custom_appbar.dart';
 
-import '../../../../data/models/message_model.dart';
-import '../../../../providers/message/post_message_provider.dart';
+import '../../../data/models/message_model.dart';
+import '../../../providers/message/post_message_provider.dart';
 
 class AddContact extends ConsumerWidget {
   final MessageModel? data;

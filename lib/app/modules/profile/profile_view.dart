@@ -19,7 +19,7 @@ class ProfileView extends ConsumerWidget {
             String referralCode = data?.referralCode ?? '';
             String email = data?.email ?? '';
             int id = data?.id ?? 0;
-            String image = data?.fotoProfile ?? 'poto.jpg';
+            String image = data?.fotoProfile != null ? data?.fotoProfile : 'poto.jpg';
 
             return Stack(
               children: [
@@ -42,19 +42,29 @@ class ProfileView extends ConsumerWidget {
                               children: [
                                 Stack(
                                   children: [
-                                    LzImage(
-                                      image,
-                                      radius: 60,
-                                      size: 120,
-                                    ),
+                                    data?.fotoProfile != null
+                                        ? LzImage(
+                                            image,
+                                            size: 120,
+                                            radius: 9999,
+                                          )
+                                        : Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: Br.circle,
+                                            ),
+                                            child: Iconr(
+                                              Icons.person,
+                                              margin: Ei.all(10),
+                                              size: 80,
+                                              color: Colors.black12,
+                                            ),
+                                          ),
                                     Poslign(
                                       alignment: Alignment.bottomRight,
                                       child: GestureDetector(
                                         onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => EditProfileView()),
-                                          );
+                                          ref.read(profileProvider.notifier).pickImage(context);
                                         },
                                         child: InkTouch(
                                           color: Colors.white,
