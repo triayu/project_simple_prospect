@@ -116,6 +116,7 @@ class ContactView extends ConsumerWidget {
                   itemCount: data.length,
                 ),
               );
+           
             },
             error: (error, _) {
               return LzNoData(message: 'Opps! $error');

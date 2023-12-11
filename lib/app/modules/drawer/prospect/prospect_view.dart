@@ -4,7 +4,6 @@ import 'package:lazyui/lazyui.dart' hide Gfont, gfont;
 import 'package:simple_prospect/app/constants/color_constants.dart';
 import 'package:simple_prospect/app/core/text_theme.dart';
 import 'package:simple_prospect/app/data/models/model.dart';
-import 'package:simple_prospect/app/data/models/prospect_model.dart';
 import 'package:simple_prospect/app/providers/contact/category_contact_provider.dart';
 import 'package:simple_prospect/app/providers/contact/category_contacts_provider.dart';
 import 'package:simple_prospect/app/providers/contact/contact_provider.dart';
@@ -33,11 +32,9 @@ class _ProspectViewState extends State<ProspectView> {
     });
   }
 
-  // TabController tabController;
   final ScrollController tabBarController = ScrollController();
   int activeIndex = 0;
-  int clickMoretThanOne = 0;
-  // Function untuk mengatur scroll tab ke tengah
+  int clickMoreThanOne = 0;
 
   void centerScrollTab(int i) {
     GlobalKey key = gkey[i];
@@ -51,20 +48,18 @@ class _ProspectViewState extends State<ProspectView> {
     double currentScroll = scroll.position.pixels;
     double screenWidth = context.width;
 
-    // get result scroll tab position to center of screen width by index
     double scrollTo = (currentScroll + tabPosition) - (screenWidth / 2) + (tabWidth / 2);
-
-    // scroll tab to center of listview
     double pos = scrollTo;
 
     tabBarController.animateTo(
-        pos < 0
-            ? 0
-            : pos > maxScroll
-                ? maxScroll
-                : pos,
-        duration: Duration(milliseconds: 250),
-        curve: Curves.ease);
+      pos < 0
+          ? 0
+          : pos > maxScroll
+              ? maxScroll
+              : pos,
+      duration: Duration(milliseconds: 250),
+      curve: Curves.ease,
+    );
   }
 
   @override
@@ -75,12 +70,12 @@ class _ProspectViewState extends State<ProspectView> {
         centerTitle: true,
       ),
       body: Column(
-        crossAxisAlignment: Caa.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             height: 100,
-            margin: Ei.only(l: 10, r: 10, t: 20),
-            padding: Ei.sym(h: 20, v: 10),
+            margin: EdgeInsets.only(left: 10, right: 10, top: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
               color: ColorConstants.primaryColor,
               borderRadius: BorderRadius.circular(10),
@@ -120,7 +115,6 @@ class _ProspectViewState extends State<ProspectView> {
               ],
             ),
           ),
-
           // ===========
           // CATEGORY
           Consumer(builder: (context, ref, _) {
@@ -135,7 +129,6 @@ class _ProspectViewState extends State<ProspectView> {
                   );
                 }
 
-                // ref.read(categoryContactProvider.notifier).setCategoryContact(data[0]);
                 return SizedBox(
                   height: context.height * 0.08,
                   child: ListView.separated(
@@ -143,7 +136,7 @@ class _ProspectViewState extends State<ProspectView> {
                     scrollDirection: Axis.horizontal,
                     controller: tabBarController,
                     itemCount: data.length,
-                    padding: Ei.all(10),
+                    padding: EdgeInsets.all(10),
                     separatorBuilder: (context, index) {
                       return SizedBox(width: 5);
                     },
@@ -165,14 +158,19 @@ class _ProspectViewState extends State<ProspectView> {
                             ref.read(contactProvider.notifier).getContact(data[index].id ?? 0);
                           },
                           child: Container(
-                            padding: Ei.all(10),
+                            padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               color: activeIndex == index ? ColorConstants.primaryColor : Colors.grey[300],
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            child: Text(categoryName,
-                                style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize(),
-                                    color: Colors.white)),
+                            child: Text(
+                              categoryName,
+                              style: Gfont.autoSizeText(
+                                context,
+                                FontSizeManager.getBodyFontSize(),
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
                       );
@@ -191,14 +189,13 @@ class _ProspectViewState extends State<ProspectView> {
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
+                      return Skeleton(radius: 10, margin: EdgeInsets.all(10), size: [100, 50]);
                     },
                   ),
                 );
               },
             );
           }),
-
           // ===========
           // LIST CONTACT
           Consumer(builder: (context, ref, _) {
@@ -213,19 +210,28 @@ class _ProspectViewState extends State<ProspectView> {
                   },
                 );
               }
-
               return Expanded(
                 child: ListView.separated(
                   itemCount: data.length,
                   separatorBuilder: (context, index) {
-                    return SizedBox(height: 10);
+                    return SizedBox(height: 5);
                   },
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(
-                        data[index].fullName ?? '',
-                        style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize()),
+                    return Card(
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ListTile(
+                        leading: Icon(
+                          Ti.userCircle,
+                          color: ColorConstants.primaryColor,
+                        ),
+                        title: Text(
+                          data[index].fullName ?? '',
+                          style: Gfont.autoSizeText(context, FontSizeManager.getBodyFontSize()),
+                        ),
                       ),
                     );
                   },
@@ -239,12 +245,12 @@ class _ProspectViewState extends State<ProspectView> {
                   shrinkWrap: true,
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    return Skeleton(radius: 10, margin: Ei.all(10), size: [100, 50]);
+                    return Skeleton(radius: 10, margin: EdgeInsets.all(10), size: [100, 50]);
                   },
                 ),
               );
             });
-          })
+          }),
         ],
       ),
     );
