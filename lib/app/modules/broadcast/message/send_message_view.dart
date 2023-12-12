@@ -206,7 +206,6 @@ class _dataTableSource extends DataTableSource {
     //         : _ctrl.queues[index].status == 'progress'
     //             ? C.blue
     //             : C.green2;
-
     return DataRow(cells: [
       DataCell(Text(_datas[index]['Id'].toString())),
       DataCell(Text(_datas[index]['Nama Kontak'].toString())),
