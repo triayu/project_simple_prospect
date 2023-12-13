@@ -56,7 +56,6 @@ class EventModel {
         "title": title,
         "meeting_with": meetingWith,
         "meeting_type": meetingType,
-        // buat yg bwahnya samaain
         "start_date": startDate != null ? startDate!.toIso8601String() : null,
         "end_date": endDate != null ? endDate!.toIso8601String() : null,
         "latitude": latitude,
