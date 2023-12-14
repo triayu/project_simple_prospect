@@ -149,7 +149,10 @@ class _GmapsLocationState extends State<GmapsLocation> {
             ? FloatingActionButton.extended(
                 icon: Icon(Icons.location_on),
                 onPressed: () {
-                  Navigator.pop(context, markers.first.position);
+                  if (markers.isNotEmpty) {
+                   
+                    Navigator.pop(context, markers.first.position);
+                  }
                 },
                 label: Text('Pilih Lokasi Ini'),
               )

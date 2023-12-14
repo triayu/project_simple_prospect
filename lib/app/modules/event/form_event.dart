@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/modules/event/widget/gmaps.dart';
@@ -8,7 +9,6 @@ import '../../constants/color_constants.dart';
 import '../../data/models/event_model.dart';
 
 class FormEvent extends ConsumerWidget {
-  // data yang diterima dari list bentuk nya event model
   final EventModel? data;
   const FormEvent({Key? key, this.data}) : super(key: key);
 
@@ -91,15 +91,17 @@ class FormEvent extends ConsumerWidget {
             ),
             LzForm.select(
               onTap: (selector) async {
-                await showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return GmapsLocation();
-                    }).then((value) {
-                  if (value != null) {
-                    logg(value, color: LogColor.red);
-                  }
-                });
+                LatLng? selectedLocation = await showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return GmapsLocation();
+                  },
+                );
+
+                if (selectedLocation != null) {
+                  provider.forms['location']?.notifier
+                      .setText('${selectedLocation.latitude}, ${selectedLocation.longitude}');
+                }
               },
               label: 'Location',
               hint: 'Enter location',

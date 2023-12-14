@@ -67,31 +67,24 @@ class EventProvider extends StateNotifier<AsyncValue<List<EventModel>>> with Use
     }
   }
 
-  // Function ini dipergunakan untuk mengisi data yng mau diubah / diedit ke dalam form
   void fillForm(EventModel? data) {
     try {
       if (data != null) {
         logg(data, limit: 20000);
 
-        final map = data.toJson();
+        forms['title']?.controller.text = data.title ?? '';
+        forms['meeting_with']?.controller.text = data.meetingWith ?? '';
+        forms['meeting_type']?.controller.text = data.meetingType ?? '';
+        forms['location']?.controller.text = data.location ?? '';
+        forms['note']?.controller.text = data.note ?? '';
 
-        // Nah nanti kan udah dapat data detail nya dia ketika kita mencet edit tu
-        // nah nanti tinggal nyocokin aja key nya sama forms key nya
-        // ini kan masih ada yg belum sesuai tu, tinggal format aja skrang
-        logg(map, color: LogColor.blue);
-        map.forEach((key, value) {
-          if (forms.containsKey(key) && value != null) {
-            forms[key]!.controller.text = value.toString();
+        void setDateTime(String key, String? value, String format) {
+          forms[key]?.controller.text = value != null ? DateTime.parse(value).format(format) : '';
+        }
 
-            if (key == 'start_date' || key == 'end_date') {
-              forms[key]!.controller.text = DateTime.parse(value).format('yyyy-MM-dd');
-            }
-
-            if (key == 'reminder') {
-              forms[key]!.controller.text = DateTime.parse(value).format('HH:mm:ss');
-            }
-          }
-        });
+        // setDateTime('start_date', data.startDate, 'yyyy-MM-dd');
+        // setDateTime('end_date', data.endDate, 'yyyy-MM-dd');
+        setDateTime('reminder', data.reminder, 'HH:mm:ss');
       }
     } catch (e, s) {
       Errors.check(e, s);
@@ -99,16 +92,33 @@ class EventProvider extends StateNotifier<AsyncValue<List<EventModel>>> with Use
   }
 
   Future editEvent(BuildContext context, int id) async {
-    // Logg
-    logg('Update Data');
     try {
       LzToast.overlay('Sedang Mengupdate Data..');
-      ResHandler res = await eventApi.updateEvent(forms, id);
+
+      final validate = LzForm.validate(forms, required: [
+        'title',
+        'meeting_with',
+        'start_date',
+        'end_date',
+        'latitude',
+        'longitude',
+        'location',
+        'reminder',
+        'note'
+      ]);
+      if (!validate.ok) {
+        LzToast.dismiss();
+        return;
+      }
+
+      final map = forms.toMap();
+      ResHandler res = await eventApi.updateEvent(map, id);
+
       LzToast.dismiss();
       if (res.status) {
         LzToast.show('Berhasil Mengupdate Data');
-        Navigator.of(context).pop;
-        getEvent();
+        Navigator.of(context).pop();
+        await getEvent();
       } else if (res.message != null) {
         LzToast.show(res.message);
       }
@@ -133,6 +143,21 @@ class EventProvider extends StateNotifier<AsyncValue<List<EventModel>>> with Use
     } catch (e, s) {
       Errors.check(e, s);
       state = AsyncValue.data([]);
+    }
+  }
+
+  void setDateTime(String key, String? value, String format) {
+    try {
+      if (value != null && value.isNotEmpty) {
+        DateTime parsedDate = DateTime.parse(value);
+        forms[key]?.controller.text = parsedDate.format(format);
+      } else {
+        forms[key]?.controller.text = '';
+      }
+    } catch (e, stackTrace) {
+      print('Error parsing date: $value');
+      print('Stack Trace: $stackTrace');
+      forms[key]?.controller.text = '';
     }
   }
 
