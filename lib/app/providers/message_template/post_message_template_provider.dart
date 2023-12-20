@@ -1,11 +1,14 @@
+import 'dart:io'; 
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/models/message_template_model.dart';
 import 'package:simple_prospect/app/utils/fetch/src/fetch.dart';
 import '../../data/api/api.dart';
+import '../../modules/profile/widget/wi_image_preview.dart';
 
-// Auto Dispose digunakan untuk menghapus provider ketika tidak digunakan lagi
 final postMessageTemplateProvider = AutoDisposeChangeNotifierProvider((ref) => PostMessage());
 
 class PostMessage with ChangeNotifier, UseApi {
@@ -34,23 +37,19 @@ class PostMessage with ChangeNotifier, UseApi {
       );
 
       if (validate.ok) {
-        // ini data Form Body yg dikirim dari inputan, data yg dikitim berupa json, / atau dalam dart itu map
-        // string dynamic
         final map = forms.toMap();
 
         logg(map);
 
-        // Kemudian Munculkan overlay loading,
         LzToast.overlay('Menambahkan template pesan...');
 
-        // lalu fungsi ini yg digunakan untuk koneksi api, kenapa harus menggunakan await, karena ini proses nya
-        // menunggu respon dari api, jadi proses ini akan ditunggu smpai proses ini selesai, maka dia akan melanjutkan
-        // ke proses bwahnya
+        //  digunakan untuk koneksi api - menggunakan await karena ini proses nya respon dari api,
+
         ResHandler res = await messageTemplateApi.createMessageTemplate(map);
 
-        // Nah ketika proses di atas berjalan , variable res diata akan mereturn beberapa nilai, salah satunya
+        // ketika proses di atas berjalan , variable res diatas akan mereturn beberapa nilai, salah satunya
         // res.status, yang nilainya beruba boolean, true or false,
-        // nah kondisi dibwah menjunkkan jika kondisi api tersebut hasilnya false, maka dia akan memunculkan toast
+        // kondisi dibwah menjunkkan jika kondisi api tersebut hasilnya false, maka dia akan memunculkan toast
         // yg ada di dalam if
         if (!res.status) {
           LzToast.show(res.message);
@@ -64,6 +63,28 @@ class PostMessage with ChangeNotifier, UseApi {
       Errors.check(e, s);
     } finally {
       LzToast.dismiss();
+    }
+  }
+
+  final ImagePicker _picker = ImagePicker();
+  File image = File('');
+  String filePath = '';
+
+  void pickImage(BuildContext context) async {
+    final pickedFile = await _picker.pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1500,
+      maxHeight: 1500,
+      imageQuality: 90,
+    );
+
+    if (pickedFile != null) {
+      showDialog(context: context, builder: (context) => WidImagePreview(file: File(pickedFile.path))).then((value) {
+        if (value != null) {
+          image = File(pickedFile.path);
+        }
+      });
+      filePath = pickedFile.path;
     }
   }
 
@@ -88,15 +109,15 @@ class PostMessage with ChangeNotifier, UseApi {
   }
 
   Future editMessageTemplate(BuildContext context, int id) async {
-    // Logg
     logg('Update Data');
     try {
       LzToast.overlay('Sedang Mengupdate Data..');
-      ResHandler res = await messageTemplateApi.updateMessageTemplate(forms, id);
+      final map = forms.toMap();
+      ResHandler res = await messageTemplateApi.updateMessageTemplate(map, id);
       LzToast.dismiss();
       if (res.status) {
         LzToast.show('Berhasil Mengupdate Data');
-        Navigator.of(context).pop;
+        Navigator.of(context).pop();
       } else if (res.message != null) {
         LzToast.show(res.message);
       }
@@ -104,5 +125,4 @@ class PostMessage with ChangeNotifier, UseApi {
       Errors.check(e, s);
     }
   }
-
 }

@@ -8,11 +8,12 @@ import 'package:simple_prospect/app/data/local/auth_storage.dart';
 import 'package:simple_prospect/app/data/models/coming_event_model.dart';
 import 'package:simple_prospect/app/data/models/up_daily_task_model.dart';
 import 'package:simple_prospect/app/providers/dashboard/banner_provider.dart';
-import 'package:simple_prospect/app/providers/dashboard/dashboard_up_daily_task_provider.dart';
-import 'package:simple_prospect/app/providers/dashboard/dashboard_coming_event_provider.dart';
+
+import '../../providers/dashboard/dashboard_coming_event_provider.dart';
+import '../../providers/dashboard/dashboard_up_daily_task_provider.dart';
 
 class DashBoardView extends ConsumerWidget {
-  DashBoardView({super.key});
+  DashBoardView({Key? key}) : super(key: key);
 
   final List<Color> customColors = [
     ColorConstants.bgcolor1,
@@ -30,9 +31,6 @@ class DashBoardView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Variable Data User didapatkan dari penyimpanan local storage
-    // User userData = AuthStorage.user();
-
     return Refreshtor(
       onRefresh: () async {
         await ref.read(introProvider.notifier).getGoal();
@@ -42,52 +40,57 @@ class DashBoardView extends ConsumerWidget {
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
-          mainAxisAlignment: Maa.start,
-          crossAxisAlignment: Caa.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // // HEADER
             FutureBuilder(
-                future: AuthStorage.user(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Skeleton(
-                      size: [MediaQuery.of(context).size.width, 100],
-                    );
-                  }
+              future: AuthStorage.user(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Skeleton(
+                    size: [MediaQuery.of(context).size.width, 100],
+                  );
+                }
 
-                  if (snapshot.hasError) {
-                    return LzNoData(
-                      icon: Icons.error,
-                      message: 'Error',
-                    );
-                  }
-                  String fullName = '${snapshot.data!.firstName} ${snapshot.data!.lastName}';
+                if (snapshot.hasError) {
+                  return LzNoData(
+                    icon: Icons.error,
+                    message: 'Error',
+                  );
+                }
+                String fullName = '${snapshot.data!.firstName} ${snapshot.data!.lastName}';
 
-                  return Container(
-                    padding: Ei.sym(h: 20, v: 20),
-                    margin: Ei.all(10),
-                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), boxShadow: [
+                return Container(
+                  padding: Ei.sym(h: 20, v: 20),
+                  margin: Ei.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 1,
                         offset: Offset(0, 1),
                       ),
-                    ]),
-                    child: Column(
-                      mainAxisAlignment: Maa.start,
-                      crossAxisAlignment: Caa.start,
-                      children: [
-                        Text(
-                          'Halo, Selamat Datang ${fullName.ucwords}',
-                          style: Gfont.autoSizeText(context, FontSizeManager.getSublineFontSize(), fontWeight: Fw.bold),
-                          maxLines: 2,
-                          overflow: Tof.ellipsis,
-                        ),
-                      ],
-                    ),
-                  );
-                }),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Halo, Selamat Datang ${fullName.ucwords}',
+                        style: Gfont.autoSizeText(context, FontSizeManager.getSublineFontSize(), fontWeight: Fw.bold),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
 
             Column(
               children: [
@@ -108,62 +111,77 @@ class DashBoardView extends ConsumerWidget {
                         return Stack(
                           children: [
                             CarouselSlider(
-                              options: CarouselOptions(
-                                viewportFraction: 0.9,
-                                height: context.height * 0.26,
-                              ),
-                              items: data.map((i) {
-                                String tittle = i.name;
-                                String total = i.total.toString();
+                                options: CarouselOptions(
+                                  viewportFraction: 0.9,
+                                  height: context.height * 0.26,
+                                ),
+                                items: List.generate(data.length, (i) {
+// Memisahkan string dengan underscore
+                                  List<String> parts = data[i].goalName.split('_');
 
-                                return Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  margin: Ei.sym(h: 5.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: customColors[data.indexOf(i)],
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      Positioned.fill(
-                                        bottom: -50,
-                                        child: Align(
-                                          alignment: Alignment.bottomRight,
-                                          child:
-                                              LzImage('banner_ornament.svg', size: context.height, fit: BoxFit.contain),
-                                        ),
-                                      ),
-                                      Poslign(
-                                        margin: Ei.only(t: context.viewPadding.top + 30),
-                                        alignment: Alignment.topCenter,
-                                        child: RichText(
-                                          textAlign: TextAlign.center,
-                                          strutStyle: StrutStyle(fontSize: 50.0),
-                                          text: TextSpan(
-                                            children: <TextSpan>[
-                                              TextSpan(
-                                                text: total,
-                                                style: Gfont.fs(65).copyWith(color: ColorConstants.secondaryColor),
-                                              ),
-                                            ],
+                                  // Mengambil elemen terakhir dari array
+                                  String result = parts.isNotEmpty ? parts.last : '';
+
+                                  String tittle = result;
+                                  int total = i == 0
+                                      ? data[i].totalContact!
+                                      : i == 1
+                                          ? data[i].totalMessageTemplate!
+                                          : i == 2
+                                              ? data[i].totalTask!
+                                              : i == 3
+                                                  ? data[i].totalEvent!
+                                                  : 0;
+
+                                  return Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    margin: Ei.sym(h: 5),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: customColors[i],
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        Positioned.fill(
+                                          bottom: -50,
+                                          child: Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: LzImage('banner_ornament.svg',
+                                                size: context.height, fit: BoxFit.contain),
                                           ),
                                         ),
-                                      ),
-                                      Align(
-                                        alignment: Alignment.bottomLeft,
-                                        child: Padding(
-                                          padding: Ei.only(l: 10, b: 10),
-                                          child: Text(
-                                            'Total ${tittle.ucwords}',
-                                            style: Gfont.fs(18).copyWith(color: ColorConstants.secondaryColor),
+                                        Positioned(
+                                          top: context.viewPadding.top + 30,
+                                          left: 50,
+                                          right: 50,
+                                          child: RichText(
+                                            textAlign: TextAlign.center,
+                                            strutStyle: StrutStyle(fontSize: 20),
+                                            text: TextSpan(
+                                              onEnter: (event) {},
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text: total.toString(),
+                                                  style: Gfont.fs(65).copyWith(color: ColorConstants.secondaryColor),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }).toList(),
-                            ),
+                                        Align(
+                                          alignment: Alignment.bottomLeft,
+                                          child: Padding(
+                                            padding: Ei.only(l: 10, b: 10),
+                                            child: Text(
+                                              'Total ${tittle.ucwords}',
+                                              style: Gfont.fs(16).copyWith(color: ColorConstants.secondaryColor),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                })),
                           ],
                         );
                       },
@@ -198,7 +216,7 @@ class DashBoardView extends ConsumerWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: Ei.only(h: 20, t: 15, b: 5),
+                    padding: Ei.only(l: 20, t: 15, b: 5),
                     child: Text(
                       'Aktifitas yang akan datang',
                       style: Gfont.autoSizeText(context, FontSizeManager.getTittleFontSize(), fontWeight: Fw.bold),
@@ -211,10 +229,10 @@ class DashBoardView extends ConsumerWidget {
                     final asyncData = ref.watch(comingeventProvider);
 
                     return asyncData.when(
-                      data: (List<ComingEventModel> data) {
+                      data: (List<UpcomingEventModel> data) {
                         if (data.isEmpty) {
                           return LzNoData(
-                            message: 'Opps! No data found',
+                            message: 'Oops! No data found',
                             onTap: () => ref.read(comingeventProvider.notifier).getUpComingEvent(),
                           );
                         }
@@ -223,12 +241,12 @@ class DashBoardView extends ConsumerWidget {
                           height: 90,
                           child: ListView.separated(
                             shrinkWrap: true,
-                            padding: Ei.only(t: 10, b: 5, h: 20),
+                            padding: EdgeInsets.only(top: 10, bottom: 5, left: 20),
                             separatorBuilder: (context, index) => SizedBox(width: 10),
                             itemCount: data.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              ComingEventModel event = data[index];
+                              UpcomingEventModel event = data[index];
 
                               return Container(
                                 decoration: BoxDecoration(
@@ -250,7 +268,7 @@ class DashBoardView extends ConsumerWidget {
                                       ),
                                     ),
                                     Container(
-                                      margin: Ei.only(h: 20),
+                                      margin: Ei.only(l: 20),
                                       padding: Ei.all(5),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -291,7 +309,7 @@ class DashBoardView extends ConsumerWidget {
                         );
                       },
                       error: (error, _) {
-                        return LzNoData(message: 'Opps! $error');
+                        return LzNoData(message: 'Oops! $error');
                       },
                       loading: () {
                         return SizedBox(
@@ -301,7 +319,7 @@ class DashBoardView extends ConsumerWidget {
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              return Skeleton(radius: 10, margin: Ei.all(10), size: [250, 20]);
+                              return Skeleton(radius: 10, margin: EdgeInsets.all(10), size: [250, 20]);
                             },
                           ),
                         );
@@ -315,7 +333,7 @@ class DashBoardView extends ConsumerWidget {
                 // ======================
 
                 Padding(
-                  padding: Ei.only(h: 20, b: 10, t: 15),
+                  padding: Ei.only(l: 20, b: 10, t: 15),
                   child: Row(
                     children: [
                       Text(
@@ -353,7 +371,7 @@ class DashBoardView extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: data.map((task) {
                             return Container(
-                              margin: Ei.only(h: 20, b: 10),
+                              margin: Ei.only(l: 20, b: 10),
                               padding: Ei.all(15),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
@@ -398,7 +416,7 @@ class DashBoardView extends ConsumerWidget {
                                       SizedBox(width: 10),
                                       // Row(
                                       //   children: [
-                                      //     Icon(Ti.clock, color: ColorConstants.textPrimaryColor, size: 20),
+                                      //     Icon(Icons.access_time, color: ColorConstants.textPrimaryColor, size: 20),
                                       //     SizedBox(width: 5),
                                       //     Text(
                                       //       ' ${task.dueTime}',
@@ -435,7 +453,7 @@ class DashBoardView extends ConsumerWidget {
                   },
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

@@ -36,17 +36,17 @@ class HomeView extends ConsumerWidget {
         actions: [
           if (ref.watch(homeProvider).activeIndex == 3)
             InkTouch(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return DialogTaskView();
-                  },
-                );
-              },
+              // onTap: () {
+              //   showDialog(
+              //     context: context,
+              //     builder: (context) {
+              //       return DialogTaskView();
+              //     },
+              //   );
+              // },
               child: Padding(
                 padding: Ei.all(15),
-                child: Icon(Ti.filterPlus),
+                // child: Icon(Ti.filterPlus),
               ),
             ),
           if (ref.watch(homeProvider).activeIndex == 0)

@@ -30,6 +30,7 @@ class BannerProvider extends StateNotifier<AsyncValue<List<BannerModel>>> with U
 
         // Jika status dari respon adalah true, maka kita akan mengubah state dari provider ini menjadi data
         state = AsyncValue.data(data.map((e) => BannerModel.fromJson(e)).toList());
+        
       } else {
         // Jika status dari respon adalah false, maka kita akan menampilkan pesan error
         LzToast.show(res.message);

@@ -124,7 +124,7 @@ class TaskProvider extends StateNotifier<AsyncValue<List<TaskModel>>> with UseAp
     final form = forms['relate_to']?.notifier;
     // trus di set null jadi option nya tu isinya kosong
     form?.setOption(null);
-    
+
     // lalu kita get catgory nya dari api
 
     // kemudian kita tangkap datanya ubah jadikan variable yang return nya List Of Option
@@ -152,7 +152,7 @@ class TaskProvider extends StateNotifier<AsyncValue<List<TaskModel>>> with UseAp
             required: {
               'title': 'Title Tidak Boleh Kosong',
               'note': 'Note Tidak Boleh Kosong',
-              'relate_to': 'Relate To Tidak Boleh Kosong',
+              'relate_to': 'Contact Id Tidak Boleh Kosong',
               'start_date': '-',
               'end_date': '-',
               'priority': 'Priority Tidak Boleh Kosong',

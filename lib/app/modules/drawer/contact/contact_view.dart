@@ -20,7 +20,7 @@ class ContactView extends ConsumerWidget {
       // LIST CONTACT
       appBar: CustomAppBar(
         title: 'Contact',
-        canBack: false,
+        canBack: true,
       ),
       body: Consumer(
         builder: (context, ref, _) {
@@ -116,7 +116,6 @@ class ContactView extends ConsumerWidget {
                   itemCount: data.length,
                 ),
               );
-           
             },
             error: (error, _) {
               return LzNoData(message: 'Opps! $error');

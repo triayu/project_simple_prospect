@@ -77,7 +77,7 @@ class FormContactView extends ConsumerWidget {
       ),
       bottomNavigationBar: LzButton(
         text: 'Tambah Kontak',
-        color: ColorConstants.softBlack,
+        color: ColorConstants.primaryColor,
         onTap: (val) {
           if (data != null) {
             provider.editContact(context, data!.id!);

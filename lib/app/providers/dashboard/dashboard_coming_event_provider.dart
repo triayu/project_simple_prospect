@@ -1,27 +1,36 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simple_prospect/app/data/models/coming_event_model.dart';
-
 import 'package:simple_prospect/app/utils/fetch/fetch.dart';
 import '../../data/api/api.dart';
 
-class DashboardComingEvent extends StateNotifier<AsyncValue<List<ComingEventModel>>> with UseApi {
-  final AutoDisposeStateNotifierProviderRef? ref; // if you want to use ref inside this provider
-
-  DashboardComingEvent(this.ref) : super(const AsyncValue.loading()) {
+class DashboardComingEvent extends StateNotifier<AsyncValue<List<UpcomingEventModel>>> with UseApi {
+  DashboardComingEvent() : super(const AsyncValue.loading()) {
     getUpComingEvent();
   }
 
-  Future getUpComingEvent() async {
+  Future<void> getUpComingEvent() async {
     try {
       state = const AsyncValue.loading();
 
       ResHandler res = await comingEvent.getUpComingEvent();
 
       if (res.status) {
-        List data = res.data ?? [];
+        final Map<String, dynamic>? responseData = res.data;
 
-        state = AsyncValue.data(data.map((e) => ComingEventModel.fromJson(e)).toList());
+        if (responseData != null) {
+          final List<dynamic>? upcomingEventsData = responseData['upcomingEvents'];
+
+          if (upcomingEventsData != null) {
+            state = AsyncValue.data(upcomingEventsData.map((e) => UpcomingEventModel.fromJson(e)).toList());
+          } else {
+            // Handle the case where 'upcomingEvents' key is not found in the response
+            LzToast.show('Upcoming events data not found in the response');
+          }
+        } else {
+          // Handle the case where 'data' key is not found in the response
+          LzToast.show('Data key not found in the response');
+        }
       } else {
         LzToast.show(res.message);
       }
@@ -33,8 +42,8 @@ class DashboardComingEvent extends StateNotifier<AsyncValue<List<ComingEventMode
 }
 
 final comingeventProvider =
-    StateNotifierProvider.autoDispose<DashboardComingEvent, AsyncValue<List<ComingEventModel>>>((ref) {
-  return DashboardComingEvent(
-    ref,
-  );
-});
+    StateNotifierProvider.autoDispose<DashboardComingEvent, AsyncValue<List<UpcomingEventModel>>>(
+  (ref) {
+    return DashboardComingEvent();
+  },
+);

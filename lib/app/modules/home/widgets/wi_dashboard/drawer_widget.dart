@@ -27,7 +27,7 @@ class WiDrawer extends ConsumerWidget {
               FutureBuilder(
                   future: AuthStorage.user(),
                   builder: ((context, snapshot) {
-                    // Variable
+                
 
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Skeleton(
